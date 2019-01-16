@@ -3,7 +3,34 @@ import {SubmissionError} from 'redux-form';
 import {API_BASE_URL} from '../config';
 import {normalizeResponseErrors} from './utils';
 
-export const
+export const fetchUserFriendlist = user => (dispatch, getState) => {
+    const authToken = getState().auth.authToken;
+    return fetch(`${API_BASE_URL}/users/${user}`, {
+        method: 'GET',
+        headers: {
+            'content-type': 'application/json',
+            Authorization: `Bearer ${authToken}`
+        }
+    })
+    .then(res => normalizeResponseErrors(res))
+    .then(res => res.json())
+    .catch(err => console.log(err))
+}
+
+//SUGGESTED FRIENDS LIST?
+export const fetchUserSuggestedlist = user => (dispatch, getState) => {
+    const authToken = getState().auth.authToken;
+    return fetch(`${API_BASE_URL}/users/${user}`, {
+        method: 'GET',
+        headers: {
+            'content-type': 'application/json',
+            Authorization: `Bearer ${authToken}`
+        }
+    })
+    .then(res => normalizeResponseErrors(res))
+    .then(res => res.json())
+    .catch(err => console.log(err))
+}
 
 
 export const registerUser = user => dispatch => {

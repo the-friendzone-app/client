@@ -59,10 +59,10 @@ export const fetchAllMeetups = () => (dispatch, getState) => {
 }
 
 //CREATED EVENTS OR GOING TO EVENTS
-export const fetchUserMeetups = userID => (dispatch, getState) => {
+export const fetchUserMeetups = user => (dispatch, getState) => {
   dispatch(meetupsRequest());
   const authToken = getState().auth.authToken;
-  return fetch(`${API_BASE_URL}/user/${userID}`, {
+  return fetch(`${API_BASE_URL}/user/${user.id}`, {
     method: 'GET',
     headers: {
       Accept: 'application/json',
