@@ -1,43 +1,43 @@
 import {API_BASE_URL} from '../config';
 import {normalizeResponseErrors} from '../utils';
 
-const MEETUPS_REQUEST = 'MEETUPS_REQUEST';
-const meetupsRequest = () =>({
+export const MEETUPS_REQUEST = 'MEETUPS_REQUEST';
+export const meetupsRequest = () =>({
   type: MEETUPS_REQUEST
 });
 
-const MEETUPS_SUCCESS = 'MEETUPS_SUCCESS';
-const meetupsSuccess = meetups => ({
+export const MEETUPS_SUCCESS = 'MEETUPS_SUCCESS';
+export const meetupsSuccess = meetups => ({
   type: MEETUPS_SUCCESS,
   meetups
 });
 
-const MEETUPS_ERROR = 'MEETUPS_ERROR';
-const meetupsError = error => ({
+export const MEETUPS_ERROR = 'MEETUPS_ERROR';
+export const meetupsError = error => ({
   type: MEETUPS_ERROR,
   error
 });
 
-const CREATE_MEETUP_SUCCESS = 'CREATE_MEETUP_SUCCESS';
-const createMeetupSuccess = event => ({
+export const CREATE_MEETUP_SUCCESS = 'CREATE_MEETUP_SUCCESS';
+export const createMeetupSuccess = event => ({
   type:CREATE_MEETUP_SUCCESS,
   event
 });
 
-const CREATE_MEETUP_ERROR = 'CREATE_MEETUP_ERROR';
-const createMeetupError = error => ({
+export const CREATE_MEETUP_ERROR = 'CREATE_MEETUP_ERROR';
+export const createMeetupError = error => ({
   type: CREATE_MEETUP_ERROR,
   error
 });
 
-const USER_MEETUPS_SUCCESS = 'USER_MEETUP_SUCCESS';
-const userMeetupsSuccess = meetups => ({
+export const USER_MEETUPS_SUCCESS = 'USER_MEETUP_SUCCESS';
+export const userMeetupsSuccess = meetups => ({
   type: USER_MEETUPS_SUCCESS,
   meetups
 });
 
-const USER_MEETUPS_ERROR = 'USER_MEETUP_ERROR';
-const userMeetupsError = error => ({
+export const USER_MEETUPS_ERROR = 'USER_MEETUP_ERROR';
+export const userMeetupsError = error => ({
   type: USER_MEETUPS_ERROR,
   error
 });
@@ -58,10 +58,11 @@ export const fetchAllMeetups = () => (dispatch, getState) => {
   .catch(err => dispatch(meetupsError(err)))
 }
 
-export const fetchUserMeetups = meetup => (dispatch, getState) => {
+//CREATED EVENTS OR GOING TO EVENTS
+export const fetchUserMeetups = userID => (dispatch, getState) => {
   dispatch(meetupsRequest());
   const authToken = getState().auth.authToken;
-  return fetch(`${API_BASE_URL}/meetups/${meetup.id}`, {
+  return fetch(`${API_BASE_URL}/user/${userID}`, {
     method: 'GET',
     headers: {
       Accept: 'application/json',

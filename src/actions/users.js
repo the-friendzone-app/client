@@ -3,6 +3,9 @@ import {SubmissionError} from 'redux-form';
 import {API_BASE_URL} from '../config';
 import {normalizeResponseErrors} from './utils';
 
+export const
+
+
 export const registerUser = user => dispatch => {
     return fetch(`${API_BASE_URL}/users`, {
         method: 'POST',
@@ -24,4 +27,8 @@ export const registerUser = user => dispatch => {
                 );
             }
         });
+};
+
+export const fetchUserFriendlist = () = (dispatch, getState) => {
+
 };
