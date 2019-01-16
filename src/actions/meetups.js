@@ -30,6 +30,18 @@ const createMeetupError = error => ({
   error
 });
 
+const USER_MEETUPS_SUCCESS = 'USER_MEETUP_SUCCESS';
+const userMeetupsSuccess = meetups => ({
+  type: USER_MEETUPS_SUCCESS,
+  meetups
+});
+
+const USER_MEETUPS_ERROR = 'USER_MEETUP_ERROR';
+const userMeetupsError = error => ({
+  type: USER_MEETUPS_ERROR,
+  error
+});
+
 export const fetchAllMeetups = () => (dispatch, getState) => {
   dispatch(meetupsRequest());
   const authToken = getState().auth.authToken;
@@ -58,8 +70,8 @@ export const fetchUserMeetups = meetup => (dispatch, getState) => {
   })
   .then(res => normalizeResponseErrors(res))
   .then(res => res.json())
-  .then(data => dispatch(meetupsSuccess(data)))
-  .catch(err => dispatch(meetupsError(err)))
+  .then(data => dispatch(userMeetupsSuccess(data)))
+  .catch(err => dispatch(userMeetupsError(err)))
 }
 
 export const createUserMeetup = meetup => (dispatch, getState) => {
