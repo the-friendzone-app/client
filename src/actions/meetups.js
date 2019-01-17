@@ -1,5 +1,5 @@
 import {API_BASE_URL} from '../config';
-import {normalizeResponseErrors} from '../utils';
+import {normalizeResponseErrors} from './utils';
 
 export const MEETUPS_REQUEST = 'MEETUPS_REQUEST';
 export const meetupsRequest = () =>({
