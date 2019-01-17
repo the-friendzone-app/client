@@ -2,6 +2,8 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {clearAuth} from '../actions/auth';
 import {clearAuthToken} from '../local-storage';
+import requiresLogin from './requires-login';
+
 
 export class HeaderBar extends React.Component {
     logOut() {
@@ -30,4 +32,4 @@ const mapStateToProps = state => ({
     loggedIn: state.auth.currentUser !== null
 });
 
-export default connect(mapStateToProps)(HeaderBar);
+export default requiresLogin()(connect(mapStateToProps)(HeaderBar));

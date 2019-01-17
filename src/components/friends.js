@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import requiresLogin from './requires-login';
 
 export class Friends extends React.Component {
 
@@ -13,4 +14,4 @@ export class Friends extends React.Component {
   }
 }
 
-export default connect()(Friends);
+export default requiresLogin()(connect()(Friends));

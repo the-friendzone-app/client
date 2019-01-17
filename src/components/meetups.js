@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import requiresLogin from './requires-login';
 
 export class Meetups extends React.Component {
 
@@ -12,4 +13,4 @@ export class Meetups extends React.Component {
   }
 }
 
-export default connect()(Meetups);
+export default requiresLogin()(connect()(Meetups));
