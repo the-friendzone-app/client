@@ -1,5 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import {Link, Redirect} from 'react-router-dom';
 import {clearAuth} from '../actions/auth';
 import {clearAuthToken} from '../local-storage';
 import requiresLogin from './requires-login';
@@ -12,16 +13,22 @@ export class HeaderBar extends React.Component {
     }
 
     render() {
+        if(!this.props.loggedIn){
+            return(
+              <Redirect to='/landing-page' />
+            )
+        }
         // Only render the log out button if we are logged in
         let logOutButton;
-        if (this.props.loggedIn) {
-            logOutButton = (
-                <button onClick={() => this.logOut()}>Log out</button>
-            );
-        }
+            logOutButton = ( <Link to='/' onClick={() => this.logOut()}><div className='navbar-logout'>Log out</div></Link>);
         return (
             <div className="header-bar">
-                <h1>Foo App</h1>
+                <h1>The FriendZone</h1>
+                <Link to ='/friends'><div className='navbar-tab'>Friends List</div></Link>
+                <Link to ='/meetups'><div className='navbar-tab'>My Meetups</div></Link>
+                <Link to ='/community'><div className='navbar-tab'>Community Guidelines</div></Link>
+                <div className='navbar-tab'>Report</div>
+                <div className='navbar-tab'>Settings</div>
                 {logOutButton}
             </div>
         );
