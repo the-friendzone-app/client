@@ -22,6 +22,8 @@ export const registerUser = user => dispatch => {
                         [location]: message
                     })
                 );
+            } else {
+                return err;
             }
         });
 };
