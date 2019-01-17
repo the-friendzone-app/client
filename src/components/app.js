@@ -1,12 +1,18 @@
 import React from 'react';
-import {connect} from 'react-redux';
-import {Route, withRouter} from 'react-router-dom';
+import { connect } from 'react-redux';
+import { Route, withRouter } from 'react-router-dom';
 
 import HeaderBar from './header-bar';
 import LandingPage from './landing-page';
 import Dashboard from './dashboard';
+
+import Community from './community';
+import Friends from './friends';
+import Meetups from './meetups';
+import PersonalityPoll from './personalitypoll';
+
 import RegistrationPage from './registration-page';
-import {refreshAuthToken} from '../actions/auth';
+import { refreshAuthToken } from '../actions/auth';
 
 export class App extends React.Component {
     componentDidUpdate(prevProps) {
@@ -45,6 +51,10 @@ export class App extends React.Component {
                 <Route exact path="/" component={LandingPage} />
                 <Route exact path="/dashboard" component={Dashboard} />
                 <Route exact path="/register" component={RegistrationPage} />
+                <Route exact path="/friends" component={Friends} />
+                <Route exact path="/community" component={Community} />
+                <Route exact path="/personalitypoll" component={PersonalityPoll} />
+                <Route exact path="/meetups" component={Meetups} />
             </div>
         );
     }
