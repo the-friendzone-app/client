@@ -6,7 +6,6 @@ const initialState = {
     question: null,
     answers: null,
     category: null
-
   },
   error: null,
   loading: false
