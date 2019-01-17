@@ -24,6 +24,7 @@ export class HeaderBar extends React.Component {
         return (
             <div className="header-bar">
                 <h1>The FriendZone</h1>
+                <Link to ='/'><div className='navbar-tab'>Home</div></Link>
                 <Link to ='/friends'><div className='navbar-tab'>Friends List</div></Link>
                 <Link to ='/meetups'><div className='navbar-tab'>My Meetups</div></Link>
                 <Link to ='/community'><div className='navbar-tab'>Community Guidelines</div></Link>
