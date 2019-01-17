@@ -25,7 +25,7 @@ export class Dashboard extends React.Component {
                     <div className="dashboard-friends">Friends</div>
                     <div className="dashboard-meetups">Meetups</div>
                     <div className="dashboard-polls">Personality Polls</div>
-                    <div className="dashboard-communities"></div>
+                    <div className="dashboard-communities">Community</div>
                 </section>
             </div>
         );
