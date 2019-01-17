@@ -62,7 +62,7 @@ export const fetchAllMeetups = () => (dispatch, getState) => {
 export const fetchUserMeetups = user => (dispatch, getState) => {
   dispatch(meetupsRequest());
   const authToken = getState().auth.authToken;
-  return fetch(`${API_BASE_URL}/user/${user.id}`, {
+  return fetch(`${API_BASE_URL}/meetups`, {
     method: 'GET',
     headers: {
       Accept: 'application/json',
