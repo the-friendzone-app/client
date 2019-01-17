@@ -16,7 +16,7 @@ const initialState ={
 }
 
 
-export default function reducer(state=intialState, action){
+export default function reducer(state=initialState, action){
   if(action.type === MEETUPS_REQUEST){
     return{
       ...state,

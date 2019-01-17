@@ -10,7 +10,7 @@ const initialState ={
   error: null
 };
 
-export default function reducer(state=intialState, action){
+export default function reducer(state=initialState, action){
   if(action.type === FETCH_USER_FRIENDS_REQUEST){
     return{
       ...state,
