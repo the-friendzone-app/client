@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import requiresLogin from './requires-login';
 
 export class PersonalityPoll extends React.Component {
 
@@ -12,4 +13,4 @@ export class PersonalityPoll extends React.Component {
   }
 }
 
-export default connect()(PersonalityPoll);
+export default requiresLogin()(connect()(PersonalityPoll));
