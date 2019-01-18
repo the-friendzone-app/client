@@ -54,7 +54,7 @@ export class App extends React.Component {
                     <Route exact path="/register" component={RegistrationPage} />
                     <Route exact path="/friends" component={Friends} />
                     <Route exact path="/community" component={Community} />
-                    <Route exact path="/personalitypoll" component={PersonalityPoll} />
+                    <Route exact path="/personality-polls" component={PersonalityPoll} />
                     <Route exact path="/meetups" component={Meetups} />
                 </Switch>
             </div>
