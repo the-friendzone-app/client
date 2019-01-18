@@ -22,10 +22,10 @@ export class Dashboard extends React.Component {
                     Welcome to FriendZone {this.props.username}!
                 </div>
                 <section className='dashboard-menu'>
-                    <Link to='/friends'><div className="dashboard-friends">Friends</div></Link>
-                    <Link to='/meetups'><div className="dashboard-meetups">Meetups</div></Link>
-                    <Link to='/perosonality-polls'><div className="dashboard-polls">Personality Polls</div></Link>
-                    <Link to='/communities'></Link><div className="dashboard-communities">Community</div>
+                    <Link to ='/friends'><div className="dashboard-friends">Friends</div></Link>
+                    <Link to ='/meetups'><div className="dashboard-meetups">Meetups</div></Link>
+                    <Link to ='/personality-polls'><div className="dashboard-polls">Personality Polls</div></Link>
+                    <Link to ='/communities'></Link><div className="dashboard-communities">Community</div>
                 </section>
             </div>
         );
