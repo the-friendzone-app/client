@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import requiresLogin from './requires-login';
 import { Link } from 'react-router-dom';
-export class PersonalityPoll extends React.Component {
+export class PersonalityPolls extends React.Component {
 
   render() {
     return (
@@ -24,4 +24,4 @@ export class PersonalityPoll extends React.Component {
   }
 }
 
-export default requiresLogin()(connect()(PersonalityPoll));
+export default requiresLogin()(connect()(PersonalityPolls));
