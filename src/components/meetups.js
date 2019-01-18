@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import requiresLogin from './requires-login';
-import EventForm from './event-form';
+import MeetupForm from './meetup-form';
 
 export class Meetups extends React.Component {
 
@@ -9,7 +9,7 @@ export class Meetups extends React.Component {
     return (
       <section className="meetups">
         <h1>Meetups!!</h1>
-        <EventForm />
+        <MeetupForm />
       </section>
     )
   }
