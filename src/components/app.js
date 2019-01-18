@@ -9,9 +9,11 @@ import Dashboard from './dashboard';
 import Community from './community';
 import Friends from './friends';
 import Meetups from './meetups';
-import PersonalityPoll from './personalitypoll';
+import PersonalityPolls from './personalitypolls';
 import Topic from './topic';
 import Comment from './comment';
+import Chat from './chat';
+
 
 import RegistrationPage from './registration-page';
 import { refreshAuthToken } from '../actions/auth';
@@ -49,7 +51,7 @@ export class App extends React.Component {
     render() {
         return (
             <div className="app">
-                <Route path ="/" component={HeaderBar} />
+                <Route path="/" component={HeaderBar} />
                 <Switch>
                     <Route exact path="/" component={LandingPage} />
                     <Route exact path="/dashboard" component={Dashboard} />
@@ -58,8 +60,10 @@ export class App extends React.Component {
                     <Route exact path="/community" component={Community} />
                     <Route exact path="/community/:communityId" component={Topic} />
                     <Route exact path="/community/:communityId/:topicId" component={Comment} />
-                    <Route exact path="/personalitypoll" component={PersonalityPoll} />
+                    <Route exact path="/personality-polls" component={PersonalityPolls} />
+
                     <Route exact path="/meetups" component={Meetups} />
+                    <Route exact path="/chat" component={Chat} />
                 </Switch>
             </div>
         );
