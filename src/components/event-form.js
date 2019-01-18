@@ -1,104 +1,87 @@
 import React from 'react';
-import {Field, reduxForm, focus} from 'redux-form';
+import { Field, reduxForm, focus } from 'redux-form';
 import Input from './input';
-import {required, nonEmpty, isTrimmed} from '../validators';
-
+import { required, nonEmpty, isTrimmed } from '../validators';
 import 'react-widgets/dist/css/react-widgets.css';
-import { DropdownList, DateTimePicker } from 'react-widgets';
+import { DateTimePicker } from 'react-widgets';
 import moment from 'moment'
 import momentLocalizer from 'react-widgets-moment';
+import { createUserMeetup } from '../actions/meetups';
 
 momentLocalizer(moment);
 
-const renderDropdownList = ({ input, data, valueField, textField }) =>
-  <DropdownList {...input}
-    data={data}
-    valueField={valueField}
-    textField={textField}
-    onChange={input.onChange} />
-
 const renderDateTimePicker = ({ input: { onChange, value }, showTime }) =>
-<DateTimePicker
-  onChange={onChange}
-  time={showTime}
-  value={!value ? null : new Date(value)}
-/>
+    <DateTimePicker
+        onChange={onChange}
+        time={showTime}
+        value={!value ? null : new Date(value)}
+    />
 
-const meetupType = [ { meetupType: 'In Person' }, { meetupType: 'Online' }]
-
-export class EventForm extends React.Component {
+export class MeetupForm extends React.Component {
     onSubmit(values) {
         console.log(values);
+        this.props.dispatch(createUserMeetup(values));
     }
 
     render() {
         return (
             <form
-                className="event-form"
+                className="meetup-form"
                 onSubmit={this.props.handleSubmit(values =>
                     this.onSubmit(values)
                 )}>
                 <div>
-                  <label htmlFor="eventName">Event Name</label>
-                  <Field
-                      component={Input}
-                      type="text"
-                      name="eventName"
-                      id="eventName"
-                      validate={[required, nonEmpty, isTrimmed]}
-                  />
-                </div>
-                <div>
-                  <label htmlFor="location">Location</label>
-                  <Field
-                      component={Input}
-                      type="text"
-                      name="location"
-                      id="location"
-                      validate={[required, nonEmpty, isTrimmed]}
-                  />
-                </div>
-                <div>
-                  <label>Meetup Type</label>
-                  <Field
-                    name="meetupType"
-                    component={renderDropdownList}
-                    data={meetupType}
-                    valueField="value"
-                    textField="meetupType"
-                    validate={[required]}
+                    <label htmlFor="name">Meetup Name</label>
+                    <Field
+                        component={Input}
+                        type="text"
+                        name="name"
+                        id="name"
+                        validate={[required, nonEmpty, isTrimmed]}
                     />
                 </div>
                 <div>
-                  <label htmlFor="eventDescription">Event Description</label>
-                  <Field
-                      component="textarea"
-                      type="text"
-                      name="eventDescription"
-                      id="eventDescription"
-                      validate={[required, nonEmpty]}
-                  />
+                    <label htmlFor="location">Location</label>
+                    <Field
+                        component={Input}
+                        type="text"
+                        name="location"
+                        id="location"
+                        validate={[required, nonEmpty, isTrimmed]}
+                    />
                 </div>
                 <div>
-                  <label>Event Start Time</label>
-                  <Field
-                    name="eventStartTime"
-                    id="eventStartTime"
-                    component={renderDateTimePicker}
-                  />
+                    <label htmlFor="description">Meetup Description</label>
+                    <Field
+                        component="textarea"
+                        type="text"
+                        name="description"
+                        id="description"
+                        validate={[required, nonEmpty]}
+                    />
                 </div>
                 <div>
-                  <label>Event End Time</label>
-                  <Field
-                    name="eventEndTime"
-                    id="eventStartTime"
-                    component={renderDateTimePicker}
-                  />
+                    <label>Meetup Start Time</label>
+                    <Field
+                        name="startTime"
+                        id="startTime"
+                        component={renderDateTimePicker}
+                        validate={[required]}
+                    />
+                </div>
+                <div>
+                    <label>Meetup End Time</label>
+                    <Field
+                        name="endTime"
+                        id="endTime"
+                        component={renderDateTimePicker}
+                        validate={[required]}
+                    />
                 </div>
                 <button
                     type="submit"
                     disabled={this.props.pristine || this.props.submitting}>
-                    Create Event
+                    Create Meetup
                 </button>
             </form>
         );
@@ -106,7 +89,7 @@ export class EventForm extends React.Component {
 }
 
 export default reduxForm({
-    form: 'event',
+    form: 'meetup',
     onSubmitFail: (errors, dispatch) =>
-        dispatch(focus('event', Object.keys(errors)[0]))
-})(EventForm);
+        dispatch(focus('meetup', Object.keys(errors)[0]))
+})(MeetupForm);

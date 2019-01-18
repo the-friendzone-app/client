@@ -11,8 +11,6 @@ export class RegistrationForm extends React.Component {
     onSubmit(values) {
         const {username, password, firstName, lastName, selfType, preferenceType } = values;
         const user = {username, password, firstName, lastName, selfType, preferenceType};
-        console.log('self type:', selfType)
-        console.log('preference type:', preferenceType)
         return this.props
             .dispatch(registerUser(user))
             .then((res) => {
