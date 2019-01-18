@@ -18,9 +18,13 @@ const renderDateTimePicker = ({ input: { onChange, value }, showTime }) =>
     />
 
 export class MeetupForm extends React.Component {
+
+    
     onSubmit(values) {
-        console.log(values);
-        this.props.dispatch(createUserMeetup(values));
+        let createdBy = this.props.currentUsername;
+        const { name, location, description, startTime, endTime } = values;
+        const newMeetup = { name, location, description, startTime, endTime, createdBy };
+        this.props.dispatch(createUserMeetup(newMeetup));
         this.props.dispatch(fetchAllMeetups());
     }
 

@@ -10,11 +10,21 @@ export class Meetups extends React.Component {
     return (
       <section className="meetups">
         <h1>Meetups!!</h1>
-        <MeetupForm />
+        <MeetupForm currentUsername={this.props.username}/>
         <MeetupsList />
       </section>
     )
   }
 }
 
-export default requiresLogin()(connect()(Meetups));
+const mapStateToProps = state => {
+  const {currentUser} = state.auth;
+  return {
+      username: state.auth.currentUser.username,
+      name: `${currentUser.firstName} ${currentUser.lastName}`,
+      loggedIn: state.auth.currentUser !== null,
+      meetups: state.meetups.meetups,
+  };
+};
+
+export default requiresLogin()(connect(mapStateToProps)(Meetups));

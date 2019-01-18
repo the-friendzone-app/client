@@ -78,7 +78,7 @@ export const fetchUserMeetups = user => (dispatch, getState) => {
 export const createUserMeetup = meetup => (dispatch, getState) => {
   dispatch(meetupsRequest());
   console.log('meetup', meetup);
-  const { name, location, description, startTime, endTime } = meetup;
+  const { name, location, description, startTime, endTime, createdBy } = meetup;
   console.log(JSON.stringify(startTime));
   const authToken = getState().auth.authToken;
   return fetch(`${API_BASE_URL}/meetups`, {
@@ -94,6 +94,7 @@ export const createUserMeetup = meetup => (dispatch, getState) => {
       location,
       startTime,
       endTime,
+      createdBy,
     })
   })
   .then(res => normalizeResponseErrors(res))
