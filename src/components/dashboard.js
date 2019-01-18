@@ -1,6 +1,6 @@
 import React from 'react';
-import {connect} from 'react-redux';
-import {Redirect, Link} from 'react-router-dom';
+import { connect } from 'react-redux';
+import { Redirect, Link } from 'react-router-dom';
 import requiresLogin from './requires-login';
 
 export class Dashboard extends React.Component {
@@ -9,13 +9,13 @@ export class Dashboard extends React.Component {
     }
 
     render() {
-        
-        if(!this.props.loggedIn){
-            return(
-              <Redirect to='/landing-page' />
+
+        if (!this.props.loggedIn) {
+            return (
+                <Redirect to='/landing-page' />
             )
         }
-        
+
         return (
             <div className="dashboard">
                 <div className="dashboard-username">
@@ -33,7 +33,7 @@ export class Dashboard extends React.Component {
 }
 
 const mapStateToProps = state => {
-    const {currentUser} = state.auth;
+    const { currentUser } = state.auth;
     return {
         username: state.auth.currentUser.username,
         name: `${currentUser.firstName} ${currentUser.lastName}`,
