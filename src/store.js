@@ -5,6 +5,7 @@ import {loadAuthToken} from './local-storage';
 import authReducer from './reducers/auth';
 import meetupsReducer from './reducers/meetups';
 import friendsReducer from './reducers/friends';
+import forumsReducer from './reducers/community';
 import {setAuthToken, refreshAuthToken} from './actions/auth';
 
 const store = createStore(
@@ -13,6 +14,7 @@ const store = createStore(
         auth: authReducer,
         meetups: meetupsReducer,
         friends: friendsReducer,
+        community: forumsReducer,
     }),
     applyMiddleware(thunk)
 );

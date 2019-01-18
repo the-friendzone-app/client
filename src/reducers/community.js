@@ -1,7 +1,30 @@
 import * as actions from '../actions/community';
 
 const initialState = {
-  community: null,
+  community: [{
+    id: 654321,
+    topics: [{
+      id: 123456,
+      title: 'Horror',
+      creatorUser: 'megatonLizard114',
+      tags: ['#slasher', '#psychological'],
+      description: 'I want to talk about Friday the 13th Part CVII! What are people\'s thoughts?',
+      comments: [
+        { 
+          id: 1111,
+          user: 'KingGizardTheLizardWizard',
+          comment: 'This movie was terrifiying!'
+        },
+        {
+          id: 2222,
+          user: 'YourMomIsMothra',
+          comment: 'I wish this movie was scarier, just a boring gorehound flick...'
+        },
+      ]
+    }],
+    mainTitle: 'Movies',
+    description: 'Discussions around movies',
+  }],
   error: null,
   loading: false
 };

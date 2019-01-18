@@ -10,6 +10,8 @@ import Community from './community';
 import Friends from './friends';
 import Meetups from './meetups';
 import PersonalityPoll from './personalitypoll';
+import Topic from './topic';
+import Comment from './comment';
 
 import RegistrationPage from './registration-page';
 import { refreshAuthToken } from '../actions/auth';
@@ -54,6 +56,8 @@ export class App extends React.Component {
                     <Route exact path="/register" component={RegistrationPage} />
                     <Route exact path="/friends" component={Friends} />
                     <Route exact path="/community" component={Community} />
+                    <Route exact path="/community/:communityId" component={Topic} />
+                    <Route exact path="/community/:communityId/:topicId" component={Comment} />
                     <Route exact path="/personalitypoll" component={PersonalityPoll} />
                     <Route exact path="/meetups" component={Meetups} />
                 </Switch>

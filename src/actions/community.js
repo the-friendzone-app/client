@@ -17,7 +17,7 @@ export const fetchForumSuccess = (forum) => ({
 });
 
 export const FETCH_FORUM_ERROR = 'FETCH_FORUM_ERROR';
-export const fetchQuestionError = (error) => ({
+export const fetchForumError = (error) => ({
   type: FETCH_FORUM_ERROR,
   error
 });
@@ -25,7 +25,7 @@ export const fetchQuestionError = (error) => ({
 
 
 export const fetchForum = () => (dispatch, getState) => {
-  dispatch(fetchQuestionRequest());
+  dispatch(fetchForumRequest());
   const authToken = getState().auth.authToken;
   return fetch(`${API_BASE_URL}/forum`, {
     method: 'GET',
@@ -40,9 +40,9 @@ export const fetchForum = () => (dispatch, getState) => {
       }
       return res.json();
     }).then(forum => {
-      dispatch(fetchQuestionSuccess(forum));
+      dispatch(fetchForumSuccess(forum));
     }).catch(err => {
-      dispatch(fetchQuestionError(err));
+      dispatch(fetchForumError(err));
     });
 };
 
@@ -66,7 +66,7 @@ export const postForumError = (error) => ({
 });
 
 export const searchForum = (searchTermForum) => (dispatch, getState) => {
-  dispatch(postAnswerRequest());
+  dispatch(postForumRequest());
   const authToken = getState().auth.authToken;
   const data = { searchTermForum };
   return fetch(`${API_BASE_URL}/forum`, {
@@ -77,9 +77,9 @@ export const searchForum = (searchTermForum) => (dispatch, getState) => {
     },
     body: JSON.stringify(data),
   }).then(() => {
-    dispatch(postAnswerSuccess());
+    dispatch(postForumSuccess());
   }).catch(err => {
-    dispatch(postAnswerError(err));
+    dispatch(postForumError(err));
   });
 };
 
