@@ -6,7 +6,7 @@ import 'react-widgets/dist/css/react-widgets.css';
 import { DateTimePicker } from 'react-widgets';
 import moment from 'moment'
 import momentLocalizer from 'react-widgets-moment';
-import { createUserMeetup } from '../actions/meetups';
+import { createUserMeetup, fetchAllMeetups } from '../actions/meetups';
 
 momentLocalizer(moment);
 
@@ -21,6 +21,7 @@ export class MeetupForm extends React.Component {
     onSubmit(values) {
         console.log(values);
         this.props.dispatch(createUserMeetup(values));
+        this.props.dispatch(fetchAllMeetups());
     }
 
     render() {
