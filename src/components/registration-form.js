@@ -11,8 +11,6 @@ export class RegistrationForm extends React.Component {
     onSubmit(values) {
         const {username, password, firstName, lastName, selfType, preferenceType } = values;
         const user = {username, password, firstName, lastName, selfType, preferenceType};
-        console.log('self type:', selfType)
-        console.log('preference type:', preferenceType)
         return this.props
             .dispatch(registerUser(user))
             .then((res) => {
@@ -57,15 +55,15 @@ export class RegistrationForm extends React.Component {
                 />
                 <label htmlFor="selfType">Please identify the type of user you would like to be identified as:</label>
                 <div>
-                    <label><Field name="selfType" id="selfTypeTalker" component={Input} type="radio" value="talker"/> Talker</label>
-                    <label><Field name="selfType" id="selfTypeListener" component={Input} type="radio" value="listener"/> Listener</label>
-                    <label><Field name="selfType" id="selfTypeBoth" component={Input} type="radio" value="both"/> Both</label>
+                    <label><Field name="selfType" validate={[required]} id="selfTypeTalker" component={Input} type="radio" value="talker"/> Talker</label>
+                    <label><Field name="selfType" validate={[required]} id="selfTypeListener" component={Input} type="radio" value="listener"/> Listener</label>
+                    <label><Field name="selfType" validate={[required]} id="selfTypeBoth" component={Input} type="radio" value="both"/> Both</label>
                 </div>
                 <label htmlFor="preferredType">Please identify that type of user you would prefer to interact with:</label>
                 <div>
-                    <label><Field name="preferenceType" id="preferenceTypeTalker" component={Input} type="radio" value="talker"/> Talker</label>
-                    <label><Field name="preferenceType" id="preferenceTypeListener" component={Input} type="radio" value="listener"/> Listener</label>
-                    <label><Field name="preferenceType" id="preferenceTypeBoth" component={Input} type="radio" value="both"/> Both</label>
+                    <label><Field name="preferenceType" validate={[required]} id="preferenceTypeTalker" component={Input} type="radio" value="talker"/> Talker</label>
+                    <label><Field name="preferenceType" validate={[required]} id="preferenceTypeListener" component={Input} type="radio" value="listener"/> Listener</label>
+                    <label><Field name="preferenceType" validate={[required]} id="preferenceTypeBoth" component={Input} type="radio" value="both"/> Both</label>
                 </div>
                 <button
                     type="submit"

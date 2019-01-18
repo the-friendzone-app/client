@@ -1,0 +1,26 @@
+.meetups {
+  margin: 50px;
+}
+
+.meetups h2 {
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+.meetups ul, .meetups li {
+  list-style-type: none;
+}
+
+.meetup-list-results {
+  border-bottom: 1px solid lightgray;
+}
+
+.meetups-list-container {
+  border-top: 1px solid lightgray;
+  border-bottom: 1px solid lightgray;
+  margin: 20px;
+}
+
+.join-meetup-btn {
+  float: right;
+}

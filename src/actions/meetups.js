@@ -77,14 +77,25 @@ export const fetchUserMeetups = user => (dispatch, getState) => {
 
 export const createUserMeetup = meetup => (dispatch, getState) => {
   dispatch(meetupsRequest());
+  console.log('meetup', meetup);
+  const { name, location, description, startTime, endTime, createdBy } = meetup;
+  console.log(JSON.stringify(startTime));
   const authToken = getState().auth.authToken;
   return fetch(`${API_BASE_URL}/meetups`, {
     method: 'POST',
     headers: {
-      Accept: 'application/json',
-      Authorization: `Bearer ${authToken}`
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${authToken}`
     },
-    body: JSON.stringify(meetup)
+    body: JSON.stringify({
+      name,
+      description,
+      location,
+      startTime,
+      endTime,
+      createdBy,
+    })
   })
   .then(res => normalizeResponseErrors(res))
   .then(res => res.json())
