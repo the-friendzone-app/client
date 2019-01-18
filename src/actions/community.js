@@ -22,12 +22,45 @@ export const fetchForumError = (error) => ({
   error
 });
 
+export const FETCH_TOPIC_SUCCESS = 'FETCH_TOPIC_SUCCESS';
+export const fetchTopicSuccess = (topic) => ({
+  type: FETCH_TOPIC_SUCCESS,
+  topic
+});
 
+export const FETCH_TOPIC_ERROR = 'FETCH_TOPIC_ERROR';
+export const fetchTopicError = (error) => ({
+  type: FETCH_TOPIC_ERROR,
+  error
+});
 
 export const fetchForum = () => (dispatch, getState) => {
   dispatch(fetchForumRequest());
   const authToken = getState().auth.authToken;
-  return fetch(`${API_BASE_URL}/forum`, {
+  return fetch(`${API_BASE_URL}/community`, {
+    method: 'GET',
+    headers: {
+      Authorization: `Bearer ${authToken}`
+    }
+  })
+    .then(res => normalizeResponseErrors(res))
+    .then(res => {
+      if (!res.ok) {
+        return Promise.reject(res.statusText);
+      }
+      return res.json();
+    }).then(forum => {
+      dispatch(fetchForumSuccess(forum));
+    }).catch(err => {
+      dispatch(fetchForumError(err));
+    });
+};
+
+//retrieve topic
+export const fetchTopic = () => (dispatch, getState) => {
+  dispatch(fetchForumRequest());
+  const authToken = getState().auth.authToken;
+  return fetch(`${API_BASE_URL}/community`, {
     method: 'GET',
     headers: {
       Authorization: `Bearer ${authToken}`
@@ -69,7 +102,7 @@ export const searchForum = (searchTermForum) => (dispatch, getState) => {
   dispatch(postForumRequest());
   const authToken = getState().auth.authToken;
   const data = { searchTermForum };
-  return fetch(`${API_BASE_URL}/forum`, {
+  return fetch(`${API_BASE_URL}/community`, {
     method: 'POST',
     headers: {
       "Content-Type": "application/json; charset=utf-8",
