@@ -15,7 +15,7 @@ export class HeaderBar extends React.Component {
     render() {
         if(!this.props.loggedIn){
             return(
-              <Redirect to='/landing-page' />
+                <div></div>
             )
         }
         // Only render the log out button if we are logged in
@@ -31,6 +31,8 @@ export class HeaderBar extends React.Component {
                 <div className='navbar-tab'>Report</div>
                 <div className='navbar-tab'>Settings</div>
                 {logOutButton}
+                <br/>
+                <br/>
             </div>
         );
     }
