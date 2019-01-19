@@ -1,0 +1,20 @@
+.meetup-form {
+  margin: auto;
+  max-width: 400px;
+}
+
+#description {
+  display: block;
+  width: 330px;
+  height: 50px;
+  margin-bottom: 10px;
+}
+
+.form-input input {
+  width: 330px;
+  margin-bottom: 10px;
+}
+
+.rw-datetime-picker {
+  margin-bottom: 10px;
+}

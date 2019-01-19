@@ -18,7 +18,6 @@ export class MeetupsList extends React.Component {
     // if user is already joined meetup they can't join again.
     if (meetupAttendence.length !== 0) {
       for (let i = 0; i < meetupAttendence.length; i++) {
-        console.log(i);
         if (meetupAttendence[i].username === username && meetupAttendence[i].meetupId === meetupId) {
           return alert('You have already joined this meetup!');
         }
@@ -44,42 +43,42 @@ export class MeetupsList extends React.Component {
       )
     } 
 
-      const  meetupsList = meetups.map((meetup, index) => {
-        // convert time to users local time
-        let startTime = meetup.startTime;
-        startTime = moment(startTime);
-        let formattedStartTime = startTime.format('llll');
-        
-        let endTime = meetup.endTime;
-        endTime = moment(endTime);
-        let formattedEndTime = endTime.format('llll');
+    const  meetupsList = meetups.map((meetup, index) => {
+      // convert time to users local time
+      let startTime = meetup.startTime;
+      startTime = moment(startTime);
+      let formattedStartTime = startTime.format('llll');
+      
+      let endTime = meetup.endTime;
+      endTime = moment(endTime);
+      let formattedEndTime = endTime.format('llll');
 
-        // duration - diff between start and end times
-        let elapsed = endTime.diff(startTime, 'minutes');
-        // breakdown into hours and minutes for display e.g. 1 hour 30 mins
-        let hours = Math.floor(elapsed / 60);
-        let minutes = (elapsed % 60);
+      // duration - diff between start and end times
+      let elapsed = endTime.diff(startTime, 'minutes');
+      // breakdown into hours and minutes for display e.g. 1 hour 30 mins
+      let hours = Math.floor(elapsed / 60);
+      let minutes = (elapsed % 60);
 
-        return (
-        <li key={index} id={meetup.id} className="meetup-list-results">
-          <button className="join-meetup-btn" id={meetup.id} value={meetup.createdBy} onClick={e => this.onClick(e)}>Join Meetup</button>
-          <ul>
-            <li><b>{meetup.name}</b></li>
-            <li>created by {meetup.createdBy}</li>
-            <li><b>Location:</b> {meetup.location}</li>
-            <li><b>Description:</b> {meetup.description}</li>
-            <li><b>Start Time:</b> {formattedStartTime}</li>
-            <li><b>End Time:</b> {formattedEndTime}</li>
-            <li><b>Duration</b> {hours} hours {minutes} minutes</li>
-          </ul>
-        </li>
-        )
-      })
+      return (
+      <li key={index} id={meetup.id} className="meetup-list-results">
+        <button className="join-meetup-btn" id={meetup.id} value={meetup.createdBy} onClick={e => this.onClick(e)}>Join Meetup</button>
+        <ul>
+          <li><b>{meetup.name}</b></li>
+          <li>created by {meetup.createdBy}</li>
+          <li><b>Location:</b> {meetup.location}</li>
+          <li><b>Description:</b> {meetup.description}</li>
+          <li><b>Start Time:</b> {formattedStartTime}</li>
+          <li><b>End Time:</b> {formattedEndTime}</li>
+          <li><b>Duration</b> {hours} hours {minutes} minutes</li>
+        </ul>
+      </li>
+      )
+    })
     
     return (
-      <section className="meetups">
-        <h2>FriendZone Meetups!</h2>
-        <h3>Browse a list of FriendZone Meetups below created by our members!</h3>
+      <section className="meetups-list-page-container">
+        <h2 className="meetups-list-page-title">FriendZone Meetups!</h2>
+        <h3 className="meetups-h3">Browse a list of FriendZone Meetups below created by our members!</h3>
         <p>Click on the meetup name to see more details about the event. If you find a 
           event that you would like to attend click the 'Join Meetup' button to let other 
           members know you'll be there!</p>

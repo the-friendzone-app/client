@@ -7,6 +7,7 @@ import { DateTimePicker } from 'react-widgets';
 import moment from 'moment'
 import momentLocalizer from 'react-widgets-moment';
 import { createUserMeetup } from '../actions/meetups';
+import './meetup-form.css';
 
 momentLocalizer(moment);
 
@@ -55,7 +56,7 @@ export class MeetupForm extends React.Component {
                     />
                 </div>
                 <div>
-                    <label htmlFor="description">Meetup Description</label>
+                    <label htmlFor="description">Description</label>
                     <Field
                         component="textarea"
                         type="text"
@@ -65,7 +66,7 @@ export class MeetupForm extends React.Component {
                     />
                 </div>
                 <div>
-                    <label>Meetup Start Time</label>
+                    <label>Start Time</label>
                     <Field
                         name="startTime"
                         id="startTime"
@@ -74,7 +75,7 @@ export class MeetupForm extends React.Component {
                     />
                 </div>
                 <div>
-                    <label>Meetup End Time</label>
+                    <label>End Time</label>
                     <Field
                         name="endTime"
                         id="endTime"

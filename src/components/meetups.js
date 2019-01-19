@@ -3,13 +3,14 @@ import { connect } from 'react-redux';
 import requiresLogin from './requires-login';
 import MeetupForm from './meetup-form';
 import MeetupsList from './meetup-list';
+import './meetups.css';
 
 export class Meetups extends React.Component {
 
   render() {
     return (
       <section className="meetups">
-        <h1>Meetups!!</h1>
+        <h1 className="meetups-page-title">Meetups!!</h1>
         <MeetupForm currentUsername={this.props.username}/>
         <MeetupsList />
       </section>

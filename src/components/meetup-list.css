@@ -1,5 +1,11 @@
-.meetups {
-  margin: 50px;
+.meetups-list-page-container {
+  margin: auto;
+  max-width: 900px;
+  margin-top: 100px;
+}
+
+.meetups-list-page-title, .meetups-h3 {
+  text-align: center;
 }
 
 .meetups h2 {
@@ -19,6 +25,7 @@
   border-top: 1px solid lightgray;
   border-bottom: 1px solid lightgray;
   margin: 20px;
+  max-width: 900px;
 }
 
 .join-meetup-btn {
