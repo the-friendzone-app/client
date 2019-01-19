@@ -19,27 +19,46 @@ export const meetupsError = error => ({
 });
 
 export const CREATE_MEETUP_SUCCESS = 'CREATE_MEETUP_SUCCESS';
-export const createMeetupSuccess = event => ({
+export const createMeetupSuccess = meetup => ({
   type:CREATE_MEETUP_SUCCESS,
-  event
+  meetup,
 });
 
 export const CREATE_MEETUP_ERROR = 'CREATE_MEETUP_ERROR';
 export const createMeetupError = error => ({
   type: CREATE_MEETUP_ERROR,
-  error
+  error,
 });
 
 export const USER_MEETUPS_SUCCESS = 'USER_MEETUP_SUCCESS';
 export const userMeetupsSuccess = meetups => ({
   type: USER_MEETUPS_SUCCESS,
-  meetups
+  meetups,
 });
 
 export const USER_MEETUPS_ERROR = 'USER_MEETUP_ERROR';
 export const userMeetupsError = error => ({
   type: USER_MEETUPS_ERROR,
-  error
+  error,
+});
+
+export const JOIN_MEETUPS_REQUEST = 'JOIN_MEETUPS_REQUEST';
+export const joinMeetupsRequest = () => ({
+  type: JOIN_MEETUPS_REQUEST,
+  loading: true, 
+  error: null,
+});
+
+export const JOIN_MEETUPS_SUCCESS = 'JOIN_MEETUPS_SUCCESS';
+export const joinMeetupsSuccess = (userInfo) => ({
+  type: JOIN_MEETUPS_SUCCESS,
+  userInfo,
+});
+
+export const JOIN_MEETUPS_ERROR = 'JOIN_MEETUPS_ERROR';
+export const joinMeetupsError = error => ({
+  type: JOIN_MEETUPS_ERROR,
+  error,
 });
 
 export const fetchAllMeetups = () => (dispatch, getState) => {
@@ -77,9 +96,7 @@ export const fetchUserMeetups = user => (dispatch, getState) => {
 
 export const createUserMeetup = meetup => (dispatch, getState) => {
   dispatch(meetupsRequest());
-  console.log('meetup', meetup);
   const { name, location, description, startTime, endTime, createdBy } = meetup;
-  console.log(JSON.stringify(startTime));
   const authToken = getState().auth.authToken;
   return fetch(`${API_BASE_URL}/meetups`, {
     method: 'POST',
@@ -101,4 +118,26 @@ export const createUserMeetup = meetup => (dispatch, getState) => {
   .then(res => res.json())
   .then(data => dispatch(createMeetupSuccess(data)))
   .catch(err => dispatch(createMeetupError(err)))
+}
+
+export const joinMeetup = userInfo => (dispatch, getState) => {
+  dispatch(joinMeetupsRequest());
+  const { username, meetupId } = userInfo;
+  const authToken = getState().auth.authToken;
+  return fetch(`${API_BASE_URL}/meetup-attendence`, {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${authToken}`
+    },
+    body: JSON.stringify({
+      username,
+      meetupId,
+    })
+  })
+  .then(res => normalizeResponseErrors(res))
+  .then(res => res.json())
+  .then(data => dispatch(joinMeetupsSuccess(data)))
+  .catch(err => dispatch(joinMeetupsError(err)))
 }
