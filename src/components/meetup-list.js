@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import requiresLogin from './requires-login';
 import { fetchAllMeetups } from '../actions/meetups';
 import './meetup-list.css';
+let moment = require('moment');
 
 export class MeetupsList extends React.Component {
   componentDidMount() {
@@ -28,8 +29,18 @@ export class MeetupsList extends React.Component {
       const  meetupsList = meetups.map((meetup, index) => {
         // convert time to users local time
         let startTime = meetup.startTime;
-        startTime = new Date(startTime).toString();
-        // console.log('startime',startTime);
+        startTime = moment(startTime);
+        let formattedStartTime = startTime.format('llll');
+        
+        let endTime = meetup.endTime;
+        endTime = moment(endTime);
+        let formattedEndTime = endTime.format('llll');
+
+        // duration - diff between start and end times
+        let elapsed = endTime.diff(startTime, 'minutes');
+        // breakdown into hours and minutes for display e.g. 1 hour 30 mins
+        let hours = Math.floor(elapsed / 60);
+        let minutes = (elapsed % 60);
 
         return (
         <li key={index} id={meetup.id} className="meetup-list-results">
@@ -38,8 +49,9 @@ export class MeetupsList extends React.Component {
             <li><h3>{meetup.name}</h3></li>
             <li><b>Location:</b> {meetup.location}</li>
             <li><b>Description:</b> {meetup.description}</li>
-            <li><b>Start Time:</b> {startTime}</li>
-            <li><b>End Time:</b> {meetup.endTime}</li>
+            <li><b>Start Time:</b> {formattedStartTime}</li>
+            <li><b>End Time:</b> {formattedEndTime}</li>
+            <li><b>Duration</b> {hours} hours {minutes} minutes</li>
             <li><b>Created By:</b> {meetup.createdBy}</li>
             <li><b>Attendee Count:</b> currently in development!</li>
           </ul>
