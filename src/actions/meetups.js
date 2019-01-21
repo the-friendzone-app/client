@@ -61,6 +61,41 @@ export const joinMeetupsError = error => ({
   error,
 });
 
+export const MEETUP_ATTENDENCE_REQUEST = 'MEETUP_ATTENDENCE_REQUEST';
+export const meetupAttendenceRequest = () => ({
+  type: MEETUP_ATTENDENCE_REQUEST,
+  loading: true,
+  error: null,
+});
+
+export const MEETUP_ATTENDENCE_SUCCESS = 'MEETUP_ATTENDENCE_SUCCESS';
+export const meetupAttendenceSuccess = (meetupAttendence) => ({
+  type: MEETUP_ATTENDENCE_SUCCESS,
+  meetupAttendence,
+});
+
+export const MEETUP_ATTENDENCE_ERROR = 'MEETUP_ATTENDENCE_ERROR';
+export const meetupAttendenceError = (error) => ({
+  type: MEETUP_ATTENDENCE_ERROR,
+  error,
+})
+
+export const fetchMeetupAttendence = () => (dispatch, getState) => {
+  dispatch(meetupAttendenceRequest());
+  const authToken = getState().auth.authToken;
+  return fetch(`${API_BASE_URL}/meetup-attendence`, {
+    method: 'GET',
+    headers: {
+      Accept: 'application/json',
+      Authorization: `Bearer ${authToken}`
+    }
+  })
+  .then(res => normalizeResponseErrors(res))
+  .then(res => res.json())
+  .then(data => dispatch(meetupAttendenceSuccess(data)))
+  .catch(err => dispatch(meetupAttendenceError(err)))
+}
+
 export const fetchAllMeetups = () => (dispatch, getState) => {
   dispatch(meetupsRequest());
   const authToken = getState().auth.authToken;

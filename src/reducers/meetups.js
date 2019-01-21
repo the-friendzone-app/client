@@ -9,6 +9,9 @@ import {
   JOIN_MEETUPS_REQUEST,
   JOIN_MEETUPS_SUCCESS,
   JOIN_MEETUPS_ERROR,
+  MEETUP_ATTENDENCE_REQUEST,
+  MEETUP_ATTENDENCE_SUCCESS,
+  MEETUP_ATTENDENCE_ERROR,
 } from '../actions/meetups';
 
 const initialState ={
@@ -82,6 +85,21 @@ export default function reducer(state=initialState, action) {
         meetupAttendence: [...state.meetupAttendence, action.userInfo],
       }
   } else if(action.type === JOIN_MEETUPS_ERROR) {
+    return {
+      ...state,
+      error: action.error,
+    }
+  } else if(action.type === MEETUP_ATTENDENCE_REQUEST) {
+    return {
+      ...state,
+      loading: true,
+    }
+  } else if (action.type === MEETUP_ATTENDENCE_SUCCESS) {
+    return {
+      ...state,
+      meetupAttendence: action.meetupAttendence,
+    }
+  } else if (action.type === MEETUP_ATTENDENCE_ERROR) {
     return {
       ...state,
       error: action.error,

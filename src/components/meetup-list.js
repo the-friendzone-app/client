@@ -1,17 +1,20 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import requiresLogin from './requires-login';
-import { fetchAllMeetups, joinMeetup } from '../actions/meetups';
+import { fetchAllMeetups, joinMeetup, fetchMeetupAttendence } from '../actions/meetups';
 import './meetup-list.css';
+import { Link } from 'react-router-dom';
 let moment = require('moment');
 
 export class MeetupsList extends React.Component {
   componentDidMount() {
     this.props.dispatch(fetchAllMeetups());
+    this.props.dispatch(fetchMeetupAttendence());
   }
 
   onClick(e) {
     const { meetupAttendence } = this.props;
+    console.log(e.currentTarget);
     let username = e.currentTarget.value;
     let meetupId = e.currentTarget.id;
     let userInfo = {username, meetupId}
@@ -28,7 +31,7 @@ export class MeetupsList extends React.Component {
   }
 
   render() {
-    const { meetups } = this.props;
+    const { meetups, username } = this.props;
 
     if (!meetups) {
       return null;
@@ -58,12 +61,13 @@ export class MeetupsList extends React.Component {
       // breakdown into hours and minutes for display e.g. 1 hour 30 mins
       let hours = Math.floor(elapsed / 60);
       let minutes = (elapsed % 60);
+      let linkTo = `/meetups-${meetup.name}`
 
       return (
       <li key={index} id={meetup.id} className="meetup-list-results">
-        <button className="join-meetup-btn" id={meetup.id} value={meetup.createdBy} onClick={e => this.onClick(e)}>Join Meetup</button>
+        <button className="join-meetup-btn" id={meetup.id} value={username} onClick={e => this.onClick(e)}>Join Meetup</button>
         <ul>
-          <li><b>{meetup.name}</b></li>
+          <Link to ={linkTo}><li><b>{meetup.name}</b></li></Link>
           <li>created by {meetup.createdBy}</li>
           <li><b>Location:</b> {meetup.location}</li>
           <li><b>Description:</b> {meetup.description}</li>
