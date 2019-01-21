@@ -1,9 +1,9 @@
 import * as actions from '../actions/community';
 
 const initialState = {
-  community: '',
-  topic: '',
-  comments:'',
+  community: [],
+  topic: [],
+  comments:[],
   error: null,
   loading: false
 };

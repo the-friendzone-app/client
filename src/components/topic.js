@@ -40,7 +40,8 @@ export class Topic extends React.Component{
 
 function mapStateToProps(state, props){
   return{
-    community: state.community.community
+    community: state.community.community,
+    topics: state.community.topics
   }
 }
 

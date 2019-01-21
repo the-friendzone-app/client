@@ -5,8 +5,7 @@ import requiresLogin from './requires-login';
 export function Comment (props){
   const communityId = props.match.params.communityId;
   const topicId = props.match.params.topicId;
-  const community = props.community.find(community => community.id == communityId);
-  const topic = community.topics.find(topic => topic.id == topicId);
+  const topic = props.topics.find(topic => topic.id == topicId);
   
   const comments = topic.comments.map(comment => {
     return(
@@ -32,7 +31,8 @@ export function Comment (props){
 
 function mapStateToProps(state){
   return{
-    community: state.community.community
+    community: state.community.community,
+    topics: state.community.topics
   }
 }
 

@@ -34,6 +34,20 @@ export const fetchTopicError = (error) => ({
   error
 });
 
+export const FETCH_COMMENTS_SUCCESS = 'FETCH_COMMENTS_SUCCESS';
+export const fetchCommentsSuccess = (topic) => ({
+  type: FETCH_COMMENTS_SUCCESS,
+  topic
+});
+
+export const FETCH_COMMENTS_ERROR = 'FETCH_COMMENTS_ERROR';
+export const fetchCommentsError = (error) => ({
+  type: FETCH_TOPIC_ERROR,
+  error
+});
+
+
+
 export const fetchForum = () => (dispatch, getState) => {
   dispatch(fetchForumRequest());
   const authToken = getState().auth.authToken;
@@ -60,7 +74,7 @@ export const fetchForum = () => (dispatch, getState) => {
 export const fetchTopic = () => (dispatch, getState) => {
   dispatch(fetchForumRequest());
   const authToken = getState().auth.authToken;
-  return fetch(`${API_BASE_URL}/community`, {
+  return fetch(`${API_BASE_URL}/community/topic`, {
     method: 'GET',
     headers: {
       Authorization: `Bearer ${authToken}`
@@ -72,10 +86,10 @@ export const fetchTopic = () => (dispatch, getState) => {
         return Promise.reject(res.statusText);
       }
       return res.json();
-    }).then(forum => {
-      dispatch(fetchForumSuccess(forum));
+    }).then(topic => {
+      dispatch(fetchTopicSuccess(topic));
     }).catch(err => {
-      dispatch(fetchForumError(err));
+      dispatch(fetchTopicError(err));
     });
 };
 
