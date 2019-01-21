@@ -1,14 +1,45 @@
 import { API_BASE_URL } from '../config';
 import { normalizeResponseErrors } from './utils';
 
-
-export const FETCH_QUESTION_SUCCESS = 'FETCH_QUESTION_SUCCESS';
-export const fetchQuestionSuccess = question => ({
-    type: FETCH_QUESTION_SUCCESS,
-    question
+//fetchActivePolls
+export const FETCH_ACTIVE_POLLS_SUCCESS = 'FETCH_ACTIVE_POLLS_SUCCESS';
+export const fetchActivePollsSuccess = polls => ({
+    type: FETCH_ACTIVE_POLLS_SUCCESS,
+    polls
 });
 
-export const FETCH_QUESTION_ERROR = 'FETCH_QUESTION_ERROR';
+export const FETCH_ACTIVE_POLLS_ERROR = 'FETCH_ACTIVE_POLLS_ERROR';
+export const fetchActivePollsError = error => ({
+    type: FETCH_ACTIVE_POLLS_ERROR,
+    error
+});
+
+export const fetchActivePolls = () => (dispatch, getState) => {
+    const authToken = getState().authReducer.authToken;
+    return fetch(`${API_BASE_URL}/personality-polls/`, {
+        method: 'GET',
+        headers: {
+            Authorization: `Bearer ${authToken}`
+        }
+    })
+        .then(res => normalizeResponseErrors(res))
+        .then(res => res.json())
+        .then((polls) => {
+
+            dispatch(fetchActivePollsSuccess(polls))
+        })
+        .catch(err => {
+            dispatch(fetchActivePollsError(err));
+        });
+};
+//fetchQuestion
+export const FETCH_QUESTION_SUCCESS = 'FETCH_QUESTION_SUCCESS';
+export const fetchQuestionSuccess = question =>({
+type: FETCH_QUESTION_SUCCESS,
+question
+})
+
+export const FETCH_QUESTIOM_ERROR = 'FETCH_QUESTION_ERROR';
 export const fetchQuestionError = error => ({
     type: FETCH_QUESTION_ERROR,
     error
@@ -16,20 +47,26 @@ export const fetchQuestionError = error => ({
 
 export const fetchQuestion = (category) => (dispatch, getState) => {
 
-  const authToken = getState().authReducer.authToken;
-  return fetch(`${API_BASE_URL}/personality-polls/${category}`, {
-      method: 'GET',
-      headers: {
-          Authorization: `Bearer ${authToken}`
-      }
-  })
-      .then(res => normalizeResponseErrors(res))
-      .then(res => res.json())
-      .then((data) => dispatch(fetchQuestionSuccess(data)))
-      .catch(err => {
-          dispatch(fetchQuestionError(err));
-      });
+    const authToken = getState().authReducer.authToken;
+    return fetch(`${API_BASE_URL}/personality-polls/${category}`, {
+        method: 'GET',
+        headers: {
+            Authorization: `Bearer ${authToken}`
+        }
+    })
+        .then(res => normalizeResponseErrors(res))
+        .then(res => res.json())
+        .then((question) => dispatch(fetchQuestionSuccess(question)))
+        .catch(err => {
+            dispatch(fetchBrowseError(err));
+        });
 };
+
+//fetchProsAndCons
+//fetchIntroQuiz
+
+
+
 
 // GET '/questions' route
 // Check questions collections and checks users question list
