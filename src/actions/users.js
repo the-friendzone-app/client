@@ -147,7 +147,7 @@ export const fetchMessageRequest = () => ({
 });
 
 export const FETCH_MESSAGE_SUCCESS = 'FETCH_MESSAGE_SUCCESS';
-export const fetchMessageSuccess = () => ({
+export const fetchMessageSuccess = messages => ({
     type: FETCH_MESSAGE_SUCCESS
 });
 
