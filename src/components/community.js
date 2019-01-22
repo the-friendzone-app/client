@@ -10,10 +10,10 @@ export class Community extends React.Component {
   }
 
   render() {
-    const communities = this.props.community.map(community=> {
+    const communities = this.props.community.map((community, index) => {
       let communityId = `/community/${community.id}`;
       return (
-        <li className={'community-'+community.mainTitle}>
+        <li className={'community-'+community.mainTitle} key={index} >
         <Link to ={communityId}>
           <div>
             <h3>{community.mainTitle}</h3>

@@ -23,9 +23,9 @@ export const fetchForumError = (error) => ({
 });
 
 export const FETCH_TOPIC_SUCCESS = 'FETCH_TOPIC_SUCCESS';
-export const fetchTopicSuccess = (topic) => ({
+export const fetchTopicSuccess = (topics) => ({
   type: FETCH_TOPIC_SUCCESS,
-  topic
+  topics
 });
 
 export const FETCH_TOPIC_ERROR = 'FETCH_TOPIC_ERROR';
@@ -35,14 +35,14 @@ export const fetchTopicError = (error) => ({
 });
 
 export const FETCH_COMMENTS_SUCCESS = 'FETCH_COMMENTS_SUCCESS';
-export const fetchCommentsSuccess = (topic) => ({
+export const fetchCommentsSuccess = (comments) => ({
   type: FETCH_COMMENTS_SUCCESS,
-  topic
+  comments
 });
 
 export const FETCH_COMMENTS_ERROR = 'FETCH_COMMENTS_ERROR';
 export const fetchCommentsError = (error) => ({
-  type: FETCH_TOPIC_ERROR,
+  type: FETCH_COMMENTS_ERROR,
   error
 });
 
@@ -71,14 +71,16 @@ export const fetchForum = () => (dispatch, getState) => {
 };
 
 //retrieve topic
-export const fetchTopic = () => (dispatch, getState) => {
+export const fetchTopic = communityId => (dispatch, getState) => {
   dispatch(fetchForumRequest());
   const authToken = getState().auth.authToken;
   return fetch(`${API_BASE_URL}/community/topic`, {
-    method: 'GET',
+    method: 'POST',
     headers: {
+      'content-type': 'application/json',
       Authorization: `Bearer ${authToken}`
-    }
+    },
+    body: JSON.stringify({communityId})
   })
     .then(res => normalizeResponseErrors(res))
     .then(res => {
@@ -93,42 +95,67 @@ export const fetchTopic = () => (dispatch, getState) => {
     });
 };
 
+//retrieves comments
+export const fetchComments = topicId => (dispatch, getState) => {
+  dispatch(fetchForumRequest());
+  const authToken = getState().auth.authToken;
+  return fetch(`${API_BASE_URL}/community/comments`, {
+    method: 'POST',
+    headers: {
+      'content-type': 'application/json',
+      Authorization: `Bearer ${authToken}`
+    },
+    body: JSON.stringify({topicId})
+  })
+    .then(res => normalizeResponseErrors(res))
+    .then(res => {
+      if (!res.ok) {
+        return Promise.reject(res.statusText);
+      }
+      return res.json();
+    }).then(comments => {
+      dispatch(fetchCommentsSuccess(comments));
+    }).catch(err => {
+      dispatch(fetchCommentsError(err));
+    });
+};
+
+
 // POST '/forums' route,
 // Searching for specific topics (#topic)
 
-export const POST_FORUM_REQUEST = 'POST_FORUM_REQUEST';
-export const postForumRequest = () => ({
-  type: POST_FORUM_REQUEST
+export const POST_COMMENT_REQUEST = 'POST_COMMENT_REQUEST';
+export const postCommentRequest = () => ({
+  type: POST_COMMENT_REQUEST
 });
 
-export const POST_FORUM_SUCCESS = 'POST_FORUM_SUCCESS';
-export const postForumSuccess = () => ({
-  type: POST_FORUM_SUCCESS
+export const POST_COMMENT_SUCCESS = 'POST_COMMENT_SUCCESS';
+export const postCommentSuccess = () => ({
+  type: POST_COMMENT_SUCCESS
 });
 
-export const POST_FORUM_ERROR = 'POST_FORUM_ERROR';
-export const postForumError = (error) => ({
-  type: POST_FORUM_ERROR,
+export const POST_COMMENT_ERROR = 'POST_COMMENT_ERROR';
+export const postCommentError = (error) => ({
+  type: POST_COMMENT_ERROR,
   error
 });
 
-export const searchForum = (searchTermForum) => (dispatch, getState) => {
-  dispatch(postForumRequest());
+export const postComment = comment => (dispatch, getState) => {
+  dispatch(postCommentRequest());
   const authToken = getState().auth.authToken;
-  const data = { searchTermForum };
-  return fetch(`${API_BASE_URL}/community`, {
+  return fetch(`${API_BASE_URL}/community/comments/post`, {
     method: 'POST',
     headers: {
       "Content-Type": "application/json; charset=utf-8",
       Authorization: `Bearer ${authToken}`
     },
-    body: JSON.stringify(data),
+    body: JSON.stringify(comment),
   }).then(() => {
-    dispatch(postForumSuccess());
+    dispatch(postCommentSuccess());
   }).catch(err => {
-    dispatch(postForumError(err));
+    dispatch(postCommentError(err));
   });
-};
+}
 
 
 // POST '/forums/:id' route
