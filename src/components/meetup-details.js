@@ -56,7 +56,7 @@ export class MeetupsList extends React.Component {
     let membersJoinedList = meetupAttendence.filter(e => e.meetupId === meetup.id);
     membersJoinedList = membersJoinedList.map((e, index) => {
       return (
-        <li key={index}>{e.username}</li>
+        <li key={index}><button>Chat</button>{e.username}</li>
       )
     });
 
@@ -64,7 +64,7 @@ export class MeetupsList extends React.Component {
     joinedList = joinedList.map(e => e.username);
     let displayJoinBtn;
     if (joinedList.includes(username)) {
-      displayJoinBtn = <button disabled>Meetup Joined!</button>
+      displayJoinBtn = <button className="join-meetup-button" disabled>Meetup Joined!</button>
     } else {
       displayJoinBtn = <button className="join-meetup-button" id={meetup.id} value={username} onClick={e => this.onClick(e)}>Join Meetup</button>
     }
@@ -72,24 +72,30 @@ export class MeetupsList extends React.Component {
     return (
       <div>
         <section className="meetups-details-container">
-          <h1>{meetup.name}</h1>
-          <li>created by {meetup.createdBy} at {formattedCreatedAtTime}</li>
-          <li><b>Location:</b> {meetup.location}</li>
-          <li><b>Description:</b> {meetup.description}</li>
-          <li><b>Start Time:</b> {formattedStartTime}</li>
-          <li><b>End Time:</b> {formattedEndTime}</li>
-          <li><b>Duration:</b> {hours} hours {minutes} minutes</li>
-          {displayJoinBtn}
-        </section>
-        <section className="meetup-members-list">
-          <div>Meetup Members: {membersJoinedList.length}</div>
-          <ul>
-            {membersJoinedList}
+          <h1 className="meetup-details-name">{meetup.name}</h1>
+          <p className="meetup-details-createdby">Meetup created by {meetup.createdBy} on {formattedCreatedAtTime}</p>
+          <ul className="meetup-details-info">
+            <li><b>Location:</b> {meetup.location}</li>
+            <li><b>Description:</b> {meetup.description}</li>
+            <li><b>Start Time:</b> {formattedStartTime}</li>
+            <li><b>End Time:</b> {formattedEndTime}</li>
+            <li><b>Duration:</b> {hours} hours {minutes} minutes</li>
           </ul>
+          <div className="join-meetup-button-container">
+            {displayJoinBtn}
+          </div>
         </section>
-        <section className="meetup-chat">
-          <div>COMING SOON: MEETUP CHAT!</div>
-        </section>
+        <div className="meetup-members-list-chat-container">
+          <section className="meetup-members-list">
+            <div className="members-title"><b>Meetup Members: {membersJoinedList.length}</b></div>
+            <ul>
+              {membersJoinedList}
+            </ul>
+          </section>
+          <section className="meetup-chat">
+            <div className="meetup-chat-placeholder">Meetup chat coming soon! - @TheFriendZoneDevTeam</div>
+          </section>
+        </div>
       </div>
     )
   }

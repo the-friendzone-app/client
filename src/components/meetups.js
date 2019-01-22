@@ -11,8 +11,8 @@ export class Meetups extends React.Component {
     return (
       <section className="meetups">
         <h1 className="meetups-page-title">FriendZone Meetups!</h1>
-        <p>Schedule meetups, get lunch, plan a picnic, meet new FriendZ!</p>
-        <p>Welcome to the FriendZone Meetup section. As a FriendZone member, you can create your 
+        <p className="meetups-user-hook">Schedule meetups, get lunch, plan a picnic, meet new FriendZ!</p>
+        <p className="meetups-user-info">Welcome to the FriendZone Meetup section. As a FriendZone member, you can create your 
           own event or use our built in event search to find upcoming events in your area. The event 
           search will return results based on your location and search criteria. Want to find FriendZ 
           to attend the next big concert or sporting event with you? Simply run a search and hit the 

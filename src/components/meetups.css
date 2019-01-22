@@ -12,3 +12,13 @@
   text-align: center;
   margin-bottom: 25px;
 }
+
+.meetups-user-hook {
+  text-align: center;
+}
+
+.meetups-user-info {
+  margin: auto;
+  margin-bottom: 75px;
+  max-width: 750px;
+}

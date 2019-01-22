@@ -78,7 +78,7 @@ export class MeetupsList extends React.Component {
 
       let endTime = meetup.endTime;
       endTime = moment(endTime);
-      let formattedEndTime = endTime.format('llll');
+      // let formattedEndTime = endTime.format('llll');
 
       // duration - diff between start and end times
       let elapsed = endTime.diff(startTime, 'minutes');
@@ -88,9 +88,9 @@ export class MeetupsList extends React.Component {
 
       return (
         <li key={index} id={meetup.id} className="meetup-list-results">
-          <Link className="join-meetup-link" to={{ pathname: `/meetups/${meetup.name}`, state: { meetup: meetup } }}>View Details!</Link>
+          <Link className="view-details-link" to={{ pathname: `/meetups/${meetup.name}`, state: { meetup: meetup } }}>View Details!</Link>
           <ul>
-            <Link to={{ pathname: `/meetups/${meetup.name}`, state: { meetup: meetup } }}><li className="meetup-name"><b>{meetup.name}</b></li></Link>
+            <Link className="meetup-name-link" to={{ pathname: `/meetups/${meetup.name}`, state: { meetup: meetup } }}><li className="meetup-name"><b>{meetup.name}</b></li></Link>
             <li><b>Location:</b> {meetup.location}</li>
             <li><b>Start Time:</b> {formattedStartTime}</li>
             <li><b>Duration:</b> {hours} hours {minutes} minutes</li>
@@ -103,11 +103,11 @@ export class MeetupsList extends React.Component {
       <section className="meetups-list-page-container">
         <h2 className="meetups-list-page-title">FriendZone Meetups!</h2>
         <h3 className="meetups-h3">Browse a list of FriendZone Meetups below created by our members!</h3>
-        <p>Click on the meetup name to see more details about the event. If you find a
+        <p className="meetups-list-info">Click on the meetup name to see more details about the event. If you find a
           event that you would like to attend click the 'Join Meetup' button to let other
           members know you'll be there!</p>
-        <div>
-          <span>filter display: </span>
+        <div className="meetups-list-dropdown">
+          <span><b>filter display: </b></span>
           <select onChange={e => this.handleDisplayFilter(e)}>
             <option value="all">All Meetups</option>
             <option value="joined">Joined Meetups</option>
