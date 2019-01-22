@@ -1,19 +1,21 @@
-import {createStore, applyMiddleware, combineReducers} from 'redux';
-import {reducer as formReducer} from 'redux-form';
+import { createStore, applyMiddleware, combineReducers } from 'redux';
+import { reducer as formReducer } from 'redux-form';
 import thunk from 'redux-thunk';
-import {loadAuthToken} from './local-storage';
+import { loadAuthToken } from './local-storage';
 import authReducer from './reducers/auth';
 import meetupsReducer from './reducers/meetups';
 import friendsReducer from './reducers/friends';
 import forumsReducer from './reducers/community';
-import {setAuthToken, refreshAuthToken} from './actions/auth';
-import {composeWithDevTools} from 'redux-devtools-extension';
+import userReducer from './reducers/users';
+import { setAuthToken, refreshAuthToken } from './actions/auth';
+import { composeWithDevTools } from 'redux-devtools-extension';
 
 const store = createStore(
     combineReducers({
         form: formReducer,
         auth: authReducer,
         meetups: meetupsReducer,
+        user: userReducer,
         friends: friendsReducer,
         community: forumsReducer,
     }),

@@ -9,63 +9,71 @@ class Chat extends React.Component {
 
     this.state = {
       socket: io(API_BASE_URL),
-      username: '',
       message: '',
-      messages: []
+      messages: [],
+      friend: '',
+      chatroom: ''
     };
 
-    // when clicking send message, sends message to server every time then message input is cleared so another message can be sent
-    this.sendMessage = ev => {
-      ev.preventDefault();
-      this.state.socket.emit('SEND_MESSAGE', {
-        author: this.state.username,
-        message: this.state.message
+    this.state.socket.on('CHAT', data => {
+      console.log(data);
+      this.setState({
+        messages: [...this.state.messages, data]
       });
-      this.setState({ message: '' });
-    };
-
-
-    this.state.socket.on('RECEIVE_MESSAGE', function (data) {
-      addMessage(data);
+      console.log(this.state.messages);
+    });
+  }
+  // when clicking send message, sends message to server every time then message input is cleared so another message can be sent
+  onClick(ev) {
+    this.setState({ message: '' });
+    this.state.socket.emit('CHAT', {
+      handle: this.props.username,
+      message: this.state.message,
+      room: this.state.chatroom
     });
 
-    const addMessage = data => {
-      console.log(data);
-      this.setState({ messages: [...this.state.messages, data] });
-      console.log(this.state.messages);
-    };
   }
+  onChange(ev) {
+    this.setState({
+      message: ev.target.value
+    });
+  }
+
+  componentDidMount() {
+    console.log(this.props.friended);
+    const friended = this.props.friended;
+    let user;
+    let room;
+    if (friended) {
+      user = friended._id;
+      room = friended.chatroom;
+    }
+    const friend = user ? user.username : 'Global chat';
+    const chatroom = room ? room._id : 'Global chat';
+    this.setState({
+      friend, chatroom
+    });
+    this.state.socket.emit('subscribe', chatroom);
+  }
+
   componentWillUnmount() {
     this.state.socket.disconnect();
-  };
+  }
 
   render() {
-
-    const username = this.props.user ? this.props.user.username : '';
-
     return (
       <div className="container">
         <div className="row">
-          <div className="col-4">
-            <div className="card">
-              <div className="card-body">
-                <div className="card-title">CHAT BOX</div>
-                <hr />
-                <div className="messages">
-                  {this.state.messages.map(message => { //loops through all messages and will display author's name and message
-                    return (
-                      <div key={message.message}>{message.author}: {message.message}</div>
-                    )
-                  })}
-                  <div className="footer">
-                    <input type="text" placeholder="Username" value={username} onChange={ev => this.setState({ username: ev.target.value })} className="form-control" />
-                    <br />
-                    <input type="text" placeholder="Message" className="form-control" value={this.state.message} onChange={ev => this.setState({ message: ev.target.value })} />
-                    <br />
-                    <button onClick={this.sendMessage} className="btn btn-primary form-control">Send</button>
-                  </div>
-                </div>
-              </div>
+          <div className="card-title">Connected to: {this.state.friend}</div>
+          <div className="messages">
+            {this.state.messages.map((data, i) => { //loops through all messages and will display author's handle(username) and message
+              return (
+                <div key={i}>{data.handle}: {data.message}</div>
+              )
+            })}
+            <div>
+              <input id="message" type="text" placeholder="Message" onChange={ev => this.onChange(ev)} />
+              <button onClick={ev => this.onClick(ev)}>Send</button>
             </div>
           </div>
         </div>
@@ -74,7 +82,6 @@ class Chat extends React.Component {
   }
 }
 const mapStateToProps = state => ({
-  user: state.auth.currentUser,
-  authToken: state.auth.authToken
+  username: state.auth.currentUser.username,
 })
 export default connect(mapStateToProps)(Chat);
