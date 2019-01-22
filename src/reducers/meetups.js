@@ -12,6 +12,7 @@ import {
   MEETUP_ATTENDENCE_REQUEST,
   MEETUP_ATTENDENCE_SUCCESS,
   MEETUP_ATTENDENCE_ERROR,
+  MEETUP_DISPLAY_FILTER,
 } from '../actions/meetups';
 
 const initialState ={
@@ -104,6 +105,11 @@ export default function reducer(state=initialState, action) {
     return {
       ...state,
       error: action.error,
+    }
+  } else if (action.type === MEETUP_DISPLAY_FILTER) {
+    return {
+      ...state,
+      meetupDisplayFilter: action.meetupDisplayFilter,
     }
   }
   return state;

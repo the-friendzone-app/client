@@ -80,6 +80,12 @@ export const meetupAttendenceError = (error) => ({
   error,
 })
 
+export const MEETUP_DISPLAY_FILTER = 'MEETUP_DISPLAY_FILTER';
+export const meetupDisplayFilter = (meetupDisplayFilter) => ({
+  type: MEETUP_DISPLAY_FILTER,
+  meetupDisplayFilter,
+})
+
 export const fetchMeetupAttendence = () => (dispatch, getState) => {
   dispatch(meetupAttendenceRequest());
   const authToken = getState().auth.authToken;

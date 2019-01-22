@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import requiresLogin from './requires-login';
-import { fetchAllMeetups, joinMeetup, fetchMeetupAttendence } from '../actions/meetups';
+import { fetchAllMeetups, joinMeetup, fetchMeetupAttendence, meetupDisplayFilter } from '../actions/meetups';
 import './meetup-list.css';
 import { Link } from 'react-router-dom';
 let moment = require('moment');
@@ -28,6 +28,11 @@ export class MeetupsList extends React.Component {
     return this.props.dispatch(joinMeetup(userInfo));
     }
     return this.props.dispatch(joinMeetup(userInfo));
+  }
+
+  handleDisplayFilter(e) {
+    console.log(e.currentTarget.value);
+    this.props.dispatch(meetupDisplayFilter(e.currentTarget.value));
   }
 
   render() {
@@ -101,6 +106,14 @@ export class MeetupsList extends React.Component {
         <p>Click on the meetup name to see more details about the event. If you find a 
           event that you would like to attend click the 'Join Meetup' button to let other 
           members know you'll be there!</p>
+          <div>
+          <span>filter display: </span>
+          <select onChange={e => this.handleDisplayFilter(e)}>
+            <option value="all">All Meetups</option>
+            <option value="joined">Joined Meetups</option>
+            <option value="created">Created Meetups</option>
+          </select>
+          </div>
         <div className="meetups-list-container">
           {meetupsList}
         </div>
