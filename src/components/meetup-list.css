@@ -26,8 +26,17 @@
   border-bottom: 1px solid lightgray;
   margin: 20px;
   max-width: 900px;
+  margin-bottom: 100px;
 }
 
-.join-meetup-btn {
+.join-meetup-link {
   float: right;
+}
+
+.no-meetups-display {
+  text-align: center;
+}
+
+.meetup-name {
+  font-size: 18px;
 }
