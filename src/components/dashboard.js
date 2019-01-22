@@ -21,6 +21,7 @@ export class Dashboard extends React.Component {
                 <div className="dashboard-username">
                 <h1>The Friend Zone</h1>
                     Welcome to The Friend Zone!<br />
+                    Your Username is '{this.props.username}'<br />
                     Your Hashed Username is: {this.props.hashedUsername}!
               <br />
                 
@@ -38,6 +39,7 @@ export class Dashboard extends React.Component {
 const mapStateToProps = state => {
     const { currentUser } = state.auth;
     return {
+        username: state.auth.currentUser.username,
         hashedUsername: state.auth.currentUser.hashedUsername,
         name: `${currentUser.firstName} ${currentUser.lastName}`,
         loggedIn: state.auth.currentUser !== null
