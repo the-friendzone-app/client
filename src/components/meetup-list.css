@@ -1,5 +1,17 @@
-.meetups {
-  margin: 50px;
+.meetups-list-page-container {
+  margin: auto;
+  max-width: 800px;
+  margin-top: 100px;
+}
+
+.meetups-list-page-title, .meetups-h3 {
+  text-align: center;
+}
+
+.meetups-list-info {
+  max-width: 700px;
+  margin: auto;
+  margin-bottom: 25px;
 }
 
 .meetups h2 {
@@ -15,12 +27,33 @@
   border-bottom: 1px solid lightgray;
 }
 
+.meetups-list-dropdown {
+  text-align: right;
+}
+
 .meetups-list-container {
   border-top: 1px solid lightgray;
   border-bottom: 1px solid lightgray;
   margin: 20px;
+  max-width: 900px;
+  margin-bottom: 100px;
 }
 
-.join-meetup-btn {
+.view-details-link {
   float: right;
+  padding-right: 40px;
+  text-decoration: none;
+}
+
+.no-meetups-display {
+  text-align: center;
+}
+
+.meetup-name {
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+.meetup-name-link {
+  text-decoration: none;
 }
