@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import requiresLogin from './requires-login';
-import { fetchTopic, fetchComments, postTopic } from '../actions/community';
+import { fetchTopic, postTopic } from '../actions/community';
 
 export class Topic extends React.Component{
   onSubmit(e){
@@ -19,7 +19,6 @@ export class Topic extends React.Component{
 
   
   componentDidMount(){
-    console.log( this.props.match.params.communityId);
     this.props.dispatch(fetchTopic(this.props.match.params.communityId));
   }
 
