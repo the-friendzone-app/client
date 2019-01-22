@@ -17,7 +17,7 @@ class Chat extends React.Component {
     };
 
     this.state.socket.on('CHAT', data => {
-      console.log(data);
+      // console.log(data);
       this.setState({
         messages: [...this.state.messages, data]
       });
@@ -33,7 +33,9 @@ class Chat extends React.Component {
       message: this.state.message,
       room: this.state.chatroom
     });
-
+    this.setState({
+      message: ''
+    });
   }
   onChange(ev) {
     this.setState({
@@ -76,7 +78,7 @@ class Chat extends React.Component {
     })
       .then(res => res.json())
       .then(res => {
-        console.log(res);
+        // console.log(res);
         this.props.dispatch(fetchMessageSuccess(res));
         this.setState({
           messages: res.messages
@@ -103,7 +105,7 @@ class Chat extends React.Component {
             {messages}
           </div>
           <div>
-            <input id="message" type="text" placeholder="Message" onChange={ev => this.onChange(ev)} />
+            <input id="message" type="text" placeholder="Message" value={this.state.message} onChange={ev => this.onChange(ev)} />
             <button onClick={ev => this.onClick(ev)}>Send</button>
           </div>
         </div>
