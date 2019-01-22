@@ -28,6 +28,7 @@ export class Friends extends React.Component {
       })
     }
     return (
+      <div className="dashboard">
       <section className="friends-list">
         <h1>Friends List</h1>
         <ul>
@@ -38,6 +39,7 @@ export class Friends extends React.Component {
           <Chat />
         </div>
       </section>
+      </div>
     )
   }
 }
