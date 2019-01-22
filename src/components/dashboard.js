@@ -26,7 +26,8 @@ export class Dashboard extends React.Component {
                     <Link to ='/friends'><div className="dashboard-friends">Friends</div></Link>
                     <Link to ='/meetups'><div className="dashboard-meetups">Meetups</div></Link>
                     <Link to ='/personality-polls'><div className="dashboard-polls">Personality Polls</div></Link>
-                    <Link to ='/communities'></Link><div className="dashboard-communities">Community</div>
+                    <Link to ='/community'><div className="dashboard-communities">Community</div></Link>
+
                 </section>
             </div>
         );
