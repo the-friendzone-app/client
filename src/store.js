@@ -5,10 +5,14 @@ import { loadAuthToken } from './local-storage';
 import authReducer from './reducers/auth';
 import meetupsReducer from './reducers/meetups';
 import friendsReducer from './reducers/friends';
+
+import questionReducer from './reducers/questions';
+
 import forumsReducer from './reducers/community';
 import userReducer from './reducers/users';
 import { setAuthToken, refreshAuthToken } from './actions/auth';
 import { composeWithDevTools } from 'redux-devtools-extension';
+
 
 const store = createStore(
     combineReducers({
@@ -17,7 +21,9 @@ const store = createStore(
         meetups: meetupsReducer,
         user: userReducer,
         friends: friendsReducer,
+        questions: questionReducer,
         community: forumsReducer,
+
     }),
     composeWithDevTools(applyMiddleware(thunk))
 );
