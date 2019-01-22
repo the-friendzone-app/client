@@ -12,18 +12,25 @@ componentDidMount() {
   return this.props.dispatch(fetchActivePolls());
 }
   render() {
-    //variable here for the maps
-    const activePolls = this.props.polls.map((poll, i) =>
-    <Link className="red-square" to={`/personality-polls/${poll.category}`}>poll.question</Link><br/>;
-
+  
+    const activePolls = this.props.polls.map((poll, i) => {
+      return (
+    <li key={`poll-${i}`}><Link className="red-square" to={`/personality-polls/${poll.category}`}>{poll.question}</Link></li>
+      )})
     return (
+   
       <section className="p-poll">
 
         <p>Please click on a link to polls below</p>
-     {activePolls}
+     <ul>{activePolls ? activePolls : 'Loading.....'}</ul>
       </section>
     )
   }
 }
+const mapStateToProps = state => {
+  return{
+  polls: state.questions.activePolls
+  }
+};
 
-export default requiresLogin()(connect()(PersonalityPolls));
+export default requiresLogin()(connect(mapStateToProps)(PersonalityPolls));

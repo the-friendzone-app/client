@@ -1,72 +1,84 @@
-'use strict';
+
 
 import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import requiresLogin from './requires-login';
-import { userAnswer, fetchQuestion } from '../actions/personalitypolls';
+import {
+    // goToAnswerPage,
+    fetchQuestion
+} from '../actions/questions';
 
-let category = this.props.match.params.category;
+
 
 
 // import './nameofcss.css';
 
 export class Poll extends React.Component {
-    componentDidMount() {
-        this.props.dispatch(fetchQuestion(category));
-    }
-    answerSubmit() {
-        const answer = this.refs.userguess.value;
 
-        return this.props.dispatch(
-            userAnswer(answer)
-        );
+    componentDidMount() {
+
+        this.props.dispatch(fetchQuestion(this.props.match.params.category));
     }
-    createPoll() {
-        const questionOptions = this.props.options.map((option, i) =>
-        <input key={i} type="radio" value={`${option.text}`}>{option.text}</input>
-    );
+    handleOptionChange = changeEvent => {
+        // this.props.dispatch(selectedOption(changeEvent.target.value))
+        console.log('console.log',changeEvent.target.value)
+    }
+handleFormSubmit() {
+    // return this.props.dispatch(goToAnswerPage(this.props.history))
+
+}
+
+    render() {
+
+        const questionOptions = this.props.options.map((option, i) => {
+            return (
+                <div><input key={`option-${i}`} type="radio" name='option' value={`${option._id}`} onChange={this.handleOptionChange} />{option.text}</div>
+            )
+        }
+        );
         const currentQuestion = this.props.currentQuestion;
 
         return (
-            <div className="card-question">
-                <h3 className="question-number-text">Question
-                </h3>
-                <p className="question-text">
-                    {currentQuestion!==undefined
-                        ? currentQuestion.userQuestion
-                        : 'Loading.......'}
-                </p>
-                <hr />
-            </div>
-            <p className="your-answer">Answer What You Would Do
-            </p>
-{questionOptions}
-            <div className="position-button">
-                <button className="answer-button" onClick={() => this.guessSubmit()} type="input">
-                    Submit
+            <div>
+                <div className="card-question">
+                   
+                    <p className="question-text">
+                        {currentQuestion !== undefined
+                            ? currentQuestion
+                            : 'Loading.......'}
+                    </p>
+
+                </div>
+                <div>
+                    <p className="your-answer"> Answer What You Would Do</p>
+                    <form onSubmit={this.handleFormSubmit}>
+                  
+                        {questionOptions}
+                   
+                    </form>
+                </div>
+                <div className="position-button">
+                    <button className="answer-button" onClick={() => this.answerSubmit()} type="submit">
+                        Submit
                 </button>
+                </div>
             </div>
-              
-    );
+
+        );
     }
 
- 
 
-    render() {
-        if (this.props.loading) {
-            return <h2>Loading...</h2>;
-        } else {
-            return (<div className="x">{this.createPoll()}</div>);
-        }
-    }
+
+
 }
 
 
 const mapStateToProps = state => {
     return {
-        currentQuestion: state.questionReducer,
-        questionID: state.questionReducer.questionID
+        currentQuestion: state.questions.currentQuestion,
+        questionID: state.questions.questionID,
+        options: state.questions.options
     };
 };
 

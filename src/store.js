@@ -5,7 +5,9 @@ import {loadAuthToken} from './local-storage';
 import authReducer from './reducers/auth';
 import meetupsReducer from './reducers/meetups';
 import friendsReducer from './reducers/friends';
+import questionReducer from './reducers/questions';
 import {setAuthToken, refreshAuthToken} from './actions/auth';
+import {composeWithDevTools} from 'redux-devtools-extension';
 
 const store = createStore(
     combineReducers({
@@ -13,8 +15,9 @@ const store = createStore(
         auth: authReducer,
         meetups: meetupsReducer,
         friends: friendsReducer,
+        questions: questionReducer
     }),
-    applyMiddleware(thunk)
+    composeWithDevTools(applyMiddleware(thunk))
 );
 
 // Hydrate the authToken from localStorage if it exist

@@ -9,6 +9,8 @@ import Dashboard from './dashboard';
 import Community from './community';
 import Friends from './friends';
 import Meetups from './meetups';
+import Poll from './poll';
+import AnswerPage from './answerpage';
 
 
 
@@ -64,6 +66,7 @@ export class App extends React.Component {
                     <Route exact path="/personality-polls/:category" component={Poll} />
                     <Route exact path="/meetups" component={Meetups} />
                     <Route exact path="/chat" component={Chat} />
+                    <Route exact path="/answerpage" component={AnswerPage} />
                 </Switch>
             </div>
         );
