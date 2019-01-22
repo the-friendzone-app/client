@@ -3,6 +3,31 @@ import { SubmissionError } from 'redux-form';
 import { API_BASE_URL } from '../config';
 import { normalizeResponseErrors } from './utils';
 
+export const registerUser = user => dispatch => {
+    return fetch(`${API_BASE_URL}/users`, {
+        method: 'POST',
+        headers: {
+            'content-type': 'application/json'
+        },
+        body: JSON.stringify(user)
+    })
+        .then(res => normalizeResponseErrors(res))
+        .then(res => res.json())
+        .catch(err => {
+            const { reason, message, location } = err;
+            if (reason === 'ValidationError') {
+                // Convert ValidationErrors into SubmissionErrors for Redux Form
+                return Promise.reject(
+                    new SubmissionError({
+                        [location]: message
+                    })
+                );
+            } else {
+                return err;
+            }
+        });
+};
+
 export const FETCH_CURRENT_USER_REQUEST = 'FETCH_CURRENT_USER_REQUEST';
 export const fetchCurrentUserRequest = () => ({
     type: FETCH_CURRENT_USER_REQUEST
@@ -116,28 +141,51 @@ export const fetchFriended = () => (dispatch, getState) => {
         .catch(err => dispatch(fetchFriendedFailure(err)));
 };
 
-export const registerUser = user => dispatch => {
-    return fetch(`${API_BASE_URL}/users`, {
-        method: 'POST',
-        headers: {
-            'content-type': 'application/json'
-        },
-        body: JSON.stringify(user)
-    })
-        .then(res => normalizeResponseErrors(res))
-        .then(res => res.json())
-        .catch(err => {
-            const { reason, message, location } = err;
-            if (reason === 'ValidationError') {
-                // Convert ValidationErrors into SubmissionErrors for Redux Form
-                return Promise.reject(
-                    new SubmissionError({
-                        [location]: message
-                    })
-                );
-            } else {
-                return err;
-            }
-        });
-};
+export const FETCH_MESSAGE_REQUEST = 'FETCH_MESSAGE_REQUEST';
+export const fetchMessageRequest = () => ({
+    type: FETCH_MESSAGE_REQUEST
+});
 
+export const FETCH_MESSAGE_SUCCESS = 'FETCH_MESSAGE_SUCCESS';
+export const fetchMessageSuccess = () => ({
+    type: FETCH_MESSAGE_SUCCESS
+});
+
+export const FETCH_MESSAGE_FAILURE = 'FETCH_MESSAGE_FAILURE';
+export const fetchMessageFailure = error => ({
+    type: FETCH_MESSAGE_FAILURE,
+    error
+});
+
+export const PUT_MESSAGE_REQUEST = 'PUT_MESSAGE_REQUEST';
+export const putMessageRequest = () => ({
+    type: PUT_MESSAGE_REQUEST
+});
+
+export const PUT_MESSAGE_SUCCESS = 'PUT_MESSAGE_SUCCESS';
+export const putMessageSuccess = () => ({
+    type: PUT_MESSAGE_SUCCESS
+});
+
+export const PUT_MESSAGE_FAILURE = 'PUT_MESSAGE_FAILURE';
+export const putMessageFailure = error => ({
+    type: PUT_MESSAGE_FAILURE,
+    error
+});
+
+export const putMessages = (chatroomId, messages) => (dispatch, getState) => {
+    dispatch(putMessageRequest());
+    const authToken = getState().auth.authToken;
+    return fetch(`${API_BASE_URL}/messages/${chatroomId}`, {
+        method: 'PUT',
+        headers: {
+            'content-type': 'application/json',
+            Authorization: `Bearer ${authToken}`
+        },
+        body: JSON.stringify({ messages })
+    })
+        .then(res => {
+            dispatch(putMessageSuccess(res));
+        })
+        .catch(err => dispatch(putMessageFailure(err)));
+}; 

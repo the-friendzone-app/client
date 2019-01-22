@@ -7,7 +7,13 @@ import {
   FETCH_FRIENDS_ERROR,
   FETCH_FRIENDED_REQUEST,
   FETCH_FRIENDED_SUCCESS,
-  FETCH_FRIENDED_FAILURE
+  FETCH_FRIENDED_FAILURE,
+  FETCH_MESSAGE_REQUEST,
+  FETCH_MESSAGE_SUCCESS,
+  FETCH_MESSAGE_FAILURE,
+  PUT_MESSAGE_REQUEST,
+  PUT_MESSAGE_SUCCESS,
+  PUT_MESSAGE_FAILURE
 } from '../actions/users';
 
 const initialState = {
@@ -66,6 +72,40 @@ export default function reducer(state = initialState, action) {
     });
   }
   else if (action.type === FETCH_FRIENDED_FAILURE) {
+    return Object.assign({}, state, {
+      loading: false,
+      error: action.error
+    });
+  }
+  else if (action.type === FETCH_MESSAGE_REQUEST) {
+    return Object.assign({}, state, {
+      loading: true,
+      error: null
+    });
+  }
+  else if (action.type === FETCH_MESSAGE_SUCCESS) {
+    return Object.assign({}, state, {
+      loading: false
+    });
+  }
+  else if (action.type === FETCH_MESSAGE_FAILURE) {
+    return Object.assign({}, state, {
+      loading: false,
+      error: action.error
+    });
+  }
+  else if (action.type === PUT_MESSAGE_REQUEST) {
+    return Object.assign({}, state, {
+      loading: true,
+      error: null
+    });
+  }
+  else if (action.type === PUT_MESSAGE_SUCCESS) {
+    return Object.assign({}, state, {
+      loading: false
+    });
+  }
+  else if (action.type === PUT_MESSAGE_FAILURE) {
     return Object.assign({}, state, {
       loading: false,
       error: action.error

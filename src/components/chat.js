@@ -2,6 +2,7 @@ import React from "react";
 import io from "socket.io-client";
 import { API_BASE_URL } from '../config';
 import { connect } from 'react-redux';
+import { fetchMessageRequest, fetchMessageSuccess, fetchMessageFailure, putMessages } from '../actions/users';
 
 class Chat extends React.Component {
   constructor(props) {
@@ -20,7 +21,8 @@ class Chat extends React.Component {
       this.setState({
         messages: [...this.state.messages, data]
       });
-      console.log(this.state.messages);
+      // this.props.dispatch(putMessages(this.state.chatroom, this.state.messages));
+      // console.log(this.state.messages);
     });
   }
   // when clicking send message, sends message to server every time then message input is cleared so another message can be sent
@@ -39,6 +41,21 @@ class Chat extends React.Component {
     });
   }
 
+  // fetchMessages(chatroomId) {
+  //   this.props.dispatch(fetchMessageRequest());
+  //   return fetch(`${API_BASE_URL}/messages/${chatroomId}`, {
+  //     method: 'GET'
+  //   })
+  //     .then(res => res.json())
+  //     .then(res => {
+  //       this.props.dispatch(fetchMessageSuccess(res));
+  //       this.setState({
+  //         messages: res.messages
+  //       });
+  //     })
+  //     .catch(err => this.props.dispatch(fetchMessageFailure(err)));
+  // };
+
   componentDidMount() {
     console.log(this.props.friended);
     const friended = this.props.friended;
@@ -54,6 +71,9 @@ class Chat extends React.Component {
       friend, chatroom
     });
     this.state.socket.emit('subscribe', chatroom);
+    if (chatroom !== 'Global chat') {
+      // this.fetchMessages(chatroom);
+    }
   }
 
   componentWillUnmount() {
@@ -82,6 +102,6 @@ class Chat extends React.Component {
   }
 }
 const mapStateToProps = state => ({
-  username: state.auth.currentUser.username,
+  username: state.auth.currentUser.username
 })
 export default connect(mapStateToProps)(Chat);
