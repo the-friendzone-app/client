@@ -4,6 +4,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import requiresLogin from './requires-login';
+import { Link } from 'react-router-dom';
 import {
     // goToAnswerPage,
     fetchQuestion
@@ -24,10 +25,10 @@ export class Poll extends React.Component {
         // this.props.dispatch(selectedOption(changeEvent.target.value))
         console.log('console.log',changeEvent.target.value)
     }
-handleFormSubmit() {
-    // return this.props.dispatch(goToAnswerPage(this.props.history))
+// answerSubmit() {
+//     return this.props.dispatch(goToAnswerPage(this.props.history))
 
-}
+// }
 
     render() {
 
@@ -52,16 +53,17 @@ handleFormSubmit() {
                 </div>
                 <div>
                     <p className="your-answer"> Answer What You Would Do</p>
-                    <form onSubmit={this.handleFormSubmit}>
+                    {/* <form onSubmit={this.handleFormSubmit}> */}
                   
                         {questionOptions}
                    
-                    </form>
+                    {/* </form> */}
                 </div>
                 <div className="position-button">
-                    <button className="answer-button" onClick={() => this.answerSubmit()} type="submit">
+                    {/* <button className="answer-button" onClick={() => this.answerSubmit()} type="submit">
                         Submit
-                </button>
+                </button> */}
+                    <Link to='/answerpage'><button>Submit</button></Link>
                 </div>
             </div>
 

@@ -71,7 +71,7 @@ export const FETCH_OPTION_SUCCESS = 'FETCH_OPTION_SUCCESS';
 export const fetchOptionSuccess = option =>({
 type: FETCH_OPTION_SUCCESS,
 option
-})
+});
 
 
 export const FETCH_OPTION_ERROR = 'FETCH_OPTION_ERROR';
@@ -104,3 +104,4 @@ export const goToAnswerPage = ( history) => {
     history.push('/answerpage')
   
 
+}
