@@ -2,26 +2,39 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import requiresLogin from './requires-login';
-import Comment from './comment';
-import { fetchTopic } from '../actions/community';
+import { fetchTopic, postTopic } from '../actions/community';
 
 export class Topic extends React.Component{
+  onSubmit(e){
+    const newTopic = {
+      topicName: e.target.topicInput.value,
+      description: e.target.topicDescription.value,
+      community: this.props.match.params.communityId
+    }
+    e.target.topicInput.value = '';
+    e.target.topicDescription.value = '';
+    this.props.dispatch(postTopic(newTopic));
+    this.props.dispatch(fetchTopic(this.props.match.params.communityId));    
+  }
+
+  
   componentDidMount(){
-    this.props.dispatch(fetchTopic());
+    this.props.dispatch(fetchTopic(this.props.match.params.communityId));
   }
 
   render() {
     const communityId = this.props.match.params.communityId;
     const community = this.props.community.find(community => community.id == communityId);
     
-    const topics= community.topics.map(topic => {
-      let topicId = `/community/${communityId}/${topic.id}`;
+    const topics= this.props.topics.map((topic, index) => {
+      let topicId = `${this.props.match.url}/${topic.id}`;
       return (
-        <li>
+        <li className={'topic-'+topic.title} key={index}>
           <Link to={topicId}>
             <section>
-              <div>{topic.title}</div>
-              <div>Created By: {topic.creatorUser}</div>
+              <h4>{topic.topicName}</h4>
+              <p>{topic.description}</p>
+              <div>Created By: {topic.creator.username}</div>
               <div>Total Comments:{topic.comments.length}</div>
             </section>
           </Link>
@@ -31,16 +44,29 @@ export class Topic extends React.Component{
 
     return (
       <section className="Topics">
+        <Link to='/community'><button> Back to Communities</button></Link>
         <h3>{community.mainTitle}</h3>
         <ul>{topics}</ul>
+        <form className='topic-post' onSubmit={e =>{
+          e.preventDefault();
+          this.onSubmit(e);
+        }}>
+          <h4>Want to add a topic?</h4>
+          <label htmlFor='topicInput'>Topic:</label>
+          <input className='topicInput' name='topicInput' type='text' placeholder='Give the people something to talk about ...'></input>
+          <label htmlFor='topicDescription'>Description:</label>
+          <textarea name='topicDescription' rows='4' cols='30'></textarea>
+          <button>Submit Topic</button>
+        </form>
       </section>
     )
   }
 }
 
-function mapStateToProps(state, props){
+function mapStateToProps(state){
   return{
-    community: state.community.community
+    community: state.community.community,
+    topics: state.community.topics
   }
 }
 
