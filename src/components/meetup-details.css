@@ -23,7 +23,8 @@
 
 .meetup-details-info li {
   list-style-type: none;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
+  font-size: 18px;
 }
 
 .join-meetup-button-container {
