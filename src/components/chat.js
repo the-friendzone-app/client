@@ -29,7 +29,7 @@ class Chat extends React.Component {
   onClick(ev) {
     this.setState({ message: '' });
     this.state.socket.emit('CHAT', {
-      handle: this.props.username,
+      handle: this.props.hashedUsername,
       message: this.state.message,
       room: this.state.chatroom
     });
@@ -57,15 +57,17 @@ class Chat extends React.Component {
   // };
 
   componentDidMount() {
-    console.log(this.props.friended);
+    //console.log(this.props.friended);
     const friended = this.props.friended;
     let user;
     let room;
+    // console.log('ZZZZZZZZZZ', friended);
     if (friended) {
       user = friended._id;
       room = friended.chatroom;
     }
-    const friend = user ? user.username : 'Global chat';
+    // console.log('user', user);
+    const friend = user ? user.hashedUsername : 'Global chat';
     const chatroom = room ? room._id : 'Global chat';
     this.setState({
       friend, chatroom
@@ -102,6 +104,7 @@ class Chat extends React.Component {
   }
 }
 const mapStateToProps = state => ({
-  username: state.auth.currentUser.username
+  username: state.auth.currentUser.username,
+  hashedUsername: state.auth.currentUser.hashedUsername
 })
 export default connect(mapStateToProps)(Chat);
