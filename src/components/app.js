@@ -20,7 +20,6 @@ import MeetupDetails from './meetup-details';
 import PersonalityPolls from './personalitypolls';
 import Topic from './topic';
 import Comment from './comment';
-import Chat from './chat';
 
 
 import RegistrationPage from './registration-page';
@@ -71,7 +70,7 @@ export class App extends React.Component {
                     <Route exact path="/personality-polls" component={PersonalityPolls} />
                     <Route exact path="/personality-polls/:category" component={Poll} />
                     <Route exact path="/meetups" component={Meetups} />
-                    <Route exact path="/meetups/:meetupName" component ={MeetupDetails} />
+                    <Route exact path="/meetups/:meetupName" component={MeetupDetails} />
                     <Route exact path="/chat" component={Chat} />
                     <Route exact path="/answerpage" component={AnswerPage} />
                 </Switch>
