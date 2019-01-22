@@ -31,7 +31,7 @@ export class MeetupsList extends React.Component {
   }
 
   render() {
-    const { meetups, username } = this.props;
+    const { meetups, username, meetupDisplayFilter, meetupAttendence } = this.props;
 
     if (!meetups) {
       return null;
@@ -46,7 +46,22 @@ export class MeetupsList extends React.Component {
       )
     } 
 
-    const  meetupsList = meetups.map((meetup, index) => {
+    // filter to pull all instances of meetups where current user has joined.
+    let userJoined = meetupAttendence.filter(meetup => meetup.username === username);
+    // create an array with all of the meetupId's for all of the user joined meetups
+    userJoined = userJoined.map(meetup => meetup.meetupId);
+    
+    // filter for meetups user by 'all' 'joined' 'created'
+    let filteredMeetups;
+    if (meetupDisplayFilter === 'all') {
+      filteredMeetups = meetups;
+    } else if (meetupDisplayFilter === 'joined') {
+      filteredMeetups = meetups.filter(meetup => userJoined.includes(meetup.id));
+    } else if (meetupDisplayFilter === 'created') {
+      filteredMeetups = meetups.filter(meetup => meetup.createdBy === username);
+    }
+
+    const  meetupsList = filteredMeetups.map((meetup, index) => {
       // convert time to users local time
       let startTime = meetup.startTime;
       startTime = moment(startTime);
@@ -73,7 +88,7 @@ export class MeetupsList extends React.Component {
           <li><b>Description:</b> {meetup.description}</li>
           <li><b>Start Time:</b> {formattedStartTime}</li>
           <li><b>End Time:</b> {formattedEndTime}</li>
-          <li><b>Duration</b> {hours} hours {minutes} minutes</li>
+          <li><b>Duration:</b> {hours} hours {minutes} minutes</li>
         </ul>
       </li>
       )
@@ -102,6 +117,7 @@ const mapStateToProps = state => {
       loggedIn: state.auth.currentUser !== null,
       meetups: state.meetups.meetups,
       meetupAttendence: state.meetups.meetupAttendence,
+      meetupDisplayFilter: state.meetups.meetupDisplayFilter,
   };
 };
 

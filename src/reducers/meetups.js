@@ -20,6 +20,7 @@ const initialState ={
   loading: false,
   error: null,
   meetupAttendence: [],
+  meetupDisplayFilter: 'all',
 }
 
 
