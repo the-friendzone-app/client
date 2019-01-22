@@ -17,7 +17,7 @@ export class Comment extends React.Component{
     }
     e.target.commentInput.value = '';
     this.props.dispatch(postComment(newComment));
-    this.props.dispatch(fetchComments());
+    this.props.dispatch(fetchComments(this.props.match.params.topicId));
   }
 
   render(){
@@ -52,7 +52,7 @@ export class Comment extends React.Component{
           this.onSubmit(e);
         }}>
           <section className='add-comment'>
-            <label htmlFor=''>Post a Comment:</label>
+            <label htmlFor='commentInput'>Post a Comment:</label>
             <textarea name='commentInput'></textarea>
             <button>Submit Comment</button>
           </section>

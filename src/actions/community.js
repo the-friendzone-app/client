@@ -2,8 +2,8 @@ import { API_BASE_URL } from '../config';
 import { normalizeResponseErrors } from './utils';
 
 
-// GET '/forums' route
-// Check and Retrieve from forum collections
+// GET '/community' route
+// check and Retrieve from community collections
 
 export const FETCH_FORUM_REQUEST = 'FETCH_FORUM_REQUEST';
 export const fetchForumRequest = () => ({
@@ -70,7 +70,7 @@ export const fetchForum = () => (dispatch, getState) => {
     });
 };
 
-//retrieve topic
+// checks and retrieve topic
 export const fetchTopic = communityId => (dispatch, getState) => {
   dispatch(fetchForumRequest());
   const authToken = getState().auth.authToken;
@@ -95,7 +95,7 @@ export const fetchTopic = communityId => (dispatch, getState) => {
     });
 };
 
-//retrieves comments
+//checks and retrieves comments
 export const fetchComments = topicId => (dispatch, getState) => {
   dispatch(fetchForumRequest());
   const authToken = getState().auth.authToken;
@@ -121,8 +121,7 @@ export const fetchComments = topicId => (dispatch, getState) => {
 };
 
 
-// POST '/forums' route,
-// Searching for specific topics (#topic)
+// posts comment to specific topic
 
 export const POST_COMMENT_REQUEST = 'POST_COMMENT_REQUEST';
 export const postCommentRequest = () => ({
@@ -139,6 +138,7 @@ export const postCommentError = (error) => ({
   type: POST_COMMENT_ERROR,
   error
 });
+
 
 export const postComment = comment => (dispatch, getState) => {
   dispatch(postCommentRequest());
@@ -157,6 +157,36 @@ export const postComment = comment => (dispatch, getState) => {
   });
 }
 
+// posts topics to post to specific community
+export const POST_TOPIC_REQUEST = 'POST_TOPIC_REQUEST';
+export const postTopicRequest = () => ({
+  type: POST_TOPIC_REQUEST
+});
 
-// POST '/forums/:id' route
-// Sends comments to post to specific forum
+export const POST_TOPIC_SUCCESS = 'POST_TOPIC_SUCCESS';
+export const postTopicSuccess = () => ({
+  type: POST_TOPIC_SUCCESS
+});
+
+export const POST_TOPIC_ERROR = 'POST_TOPIC_ERROR';
+export const postTopicError = (error) => ({
+  type: POST_TOPIC_ERROR,
+  error
+});
+
+export const postTopic = topic => (dispatch, getState) => {
+  dispatch(postTopicRequest());
+  const authToken = getState().auth.authToken;
+  return fetch(`${API_BASE_URL}/community/topic/post`, {
+    method: 'POST',
+    headers: {
+      "Content-Type": "application/json; charset=utf-8",
+      Authorization: `Bearer ${authToken}`
+    },
+    body: JSON.stringify(topic),
+  }).then(() => {
+    dispatch(postTopicSuccess());
+  }).catch(err => {
+    dispatch(postTopicError(err));
+  });
+}

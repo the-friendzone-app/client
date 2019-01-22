@@ -30,6 +30,12 @@ export default function forumsReducer(state = initialState, action) {
       return { ...state, error: null, loading: false };
     case actions.POST_COMMENT_ERROR:
       return { ...state, loading: false, error: action.error };
+    case actions.POST_TOPIC_REQUEST:
+      return { ...state, loading: true };
+    case actions.POST_TOPIC_SUCCESS:
+      return { ...state, error: null, loading: false };
+    case actions.POST_TOPIC_ERROR:
+      return { ...state, loading: false, error: action.error };
     default:
       return state;
   }
