@@ -10,9 +10,9 @@ export class Dashboard extends React.Component {
 
     render() {
 
-if (!this.props.intro) {
-        return <Redirect to="/intro-quiz" />;
-    }
+// if (!this.props.intro) {
+//         return <Redirect to="/intro-quiz" />;
+//     }
    
 
         return (
@@ -45,7 +45,7 @@ const mapStateToProps = state => {
         hashedUsername: state.auth.currentUser.hashedUsername,
         name: `${currentUser.firstName} ${currentUser.lastName}`,
         loggedIn: state.auth.currentUser !== null,
-        intro: state.auth.currentUser.introQuizCompleted
+        // intro: state.auth.currentUser.introQuizCompleted
     };
 };
 

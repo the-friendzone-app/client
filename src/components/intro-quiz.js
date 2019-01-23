@@ -3,11 +3,27 @@ import {connect} from 'react-redux';
 import {Link, 
     // Redirect
 } from 'react-router-dom';
+import {clearAuth} from '../actions/auth';
+import {clearAuthToken} from '../local-storage';
+
+export class IntroQuiz extends React.Component {
 
 
+    logOut() {
+        this.props.dispatch(clearAuth());
+        clearAuthToken();
+    }
 
-export function IntroQuiz(props) {
-
+    render() {
+        if(!this.props.loggedIn){
+            return(
+                <div></div>
+            )
+        }
+        // Only render the log out button if we are logged in
+        let logOutButton;
+            logOutButton = ( <Link to='/' onClick={() => this.logOut()}><div className='navbar-logout'>Log out</div></Link>);
+    
     // if (props.loggedIn) {
     //     return <Redirect to="/dashboard" />;
     // }
@@ -26,10 +42,11 @@ export function IntroQuiz(props) {
                 For more information: Check out our <Link to="/community-guide">Community Guidelines</Link>
             </p>
             <Link to="/intro-quiz"><button>Get Started!</button></Link>
+            {logOutButton}
         </div>
     );
 }
-
+}
 const mapStateToProps = state => ({
     loggedIn: state.auth.currentUser !== null
 });
