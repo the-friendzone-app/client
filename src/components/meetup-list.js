@@ -1,40 +1,25 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import requiresLogin from './requires-login';
-import { fetchAllMeetups, fetchMeetupAttendence, meetupDisplayFilter } from '../actions/meetups';
+import { fetchAllMeetups, fetchMeetupAttendence, meetupDisplayFilter, fetchUserLocation } from '../actions/meetups';
 import './meetup-list.css';
 import { Link } from 'react-router-dom';
+import SetLocationForm from './set-location-form';
 let moment = require('moment');
 
 export class MeetupsList extends React.Component {
   componentDidMount() {
     this.props.dispatch(fetchAllMeetups());
     this.props.dispatch(fetchMeetupAttendence());
+    this.props.dispatch(fetchUserLocation(this.props.userId))
   }
-
-  // onClick(e) {
-    // const { meetupAttendence } = this.props;
-    // let username = e.currentTarget.value;
-    // let meetupId = e.currentTarget.id;
-    // let userInfo = { username, meetupId }
-    // // if user is already joined meetup they can't join again.
-    // if (meetupAttendence.length !== 0) {
-    //   for (let i = 0; i < meetupAttendence.length; i++) {
-    //     if (meetupAttendence[i].username === username && meetupAttendence[i].meetupId === meetupId) {
-    //       return alert('You have already joined this meetup!');
-    //     }
-    //   }
-    //   return this.props.dispatch(joinMeetup(userInfo));
-    // }
-    // return this.props.dispatch(joinMeetup(userInfo));
-  // }
 
   handleDisplayFilter(e) {
     this.props.dispatch(meetupDisplayFilter(e.currentTarget.value));
   }
 
   render() {
-    const { meetups, username, meetupDisplayFilter, meetupAttendence } = this.props;
+    const { meetups, username, meetupDisplayFilter, meetupAttendence, currentLocation, userId } = this.props;
 
     if (!meetups) {
       return null;
@@ -106,6 +91,7 @@ export class MeetupsList extends React.Component {
         <p className="meetups-list-info">Click on the meetup name to see more details about the event. If you find a
           event that you would like to attend click the 'Join Meetup' button to let other
           members know you'll be there!</p>
+        <SetLocationForm userId={userId} currentLocation={currentLocation}/>
         <div className="meetups-list-dropdown">
           <span><b>filter display: </b></span>
           <select onChange={e => this.handleDisplayFilter(e)}>
@@ -132,6 +118,8 @@ const mapStateToProps = state => {
     meetups: state.meetups.meetups,
     meetupAttendence: state.meetups.meetupAttendence,
     meetupDisplayFilter: state.meetups.meetupDisplayFilter,
+    currentLocation: state.meetups.currentLocation,
+    userId: state.auth.currentUser._id,
   };
 };
 

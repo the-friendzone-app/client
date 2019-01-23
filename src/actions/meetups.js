@@ -78,13 +78,47 @@ export const MEETUP_ATTENDENCE_ERROR = 'MEETUP_ATTENDENCE_ERROR';
 export const meetupAttendenceError = (error) => ({
   type: MEETUP_ATTENDENCE_ERROR,
   error,
-})
+});
 
 export const MEETUP_DISPLAY_FILTER = 'MEETUP_DISPLAY_FILTER';
 export const meetupDisplayFilter = (meetupDisplayFilter) => ({
   type: MEETUP_DISPLAY_FILTER,
   meetupDisplayFilter,
-})
+});
+
+export const FETCH_USER_LOCATION_REQUEST = 'FETCH_USER_LOCATION_REQUEST';
+export const fetchUserLocationRequest = () => ({
+  type: FETCH_USER_LOCATION_REQUEST,
+  loading: true,
+});
+
+export const FETCH_USER_LOCATION_SUCCESS = 'FETCH_USER_LOCATION_SUCCESS';
+export const fetchUserLocationSuccess = (userLocation) => ({
+  type: FETCH_USER_LOCATION_SUCCESS,
+  userLocation,
+});
+
+export const FETCH_USER_LOCATION_ERROR = 'FETCH_USER_LOCATION_ERROR';
+export const fetchUserLocationError = (error) => ({
+  type: FETCH_USER_LOCATION_ERROR,
+  error,
+});
+
+export const fetchUserLocation = () => (dispatch, getState) => {
+  dispatch(fetchUserLocationRequest());
+  const authToken = getState().auth.authToken;
+  return fetch(`${API_BASE_URL}/user-location`, {
+    method: 'GET',
+    headers: {
+      Accept: 'application/json',
+      Authorization: `Bearer ${authToken}`
+    }
+  })
+  .then(res => res.json())
+  .then(res => {
+    dispatch(fetchUserLocationSuccess(res[0]))})
+  .catch(err => dispatch(fetchUserLocationError(err)))
+}
 
 export const fetchMeetupAttendence = () => (dispatch, getState) => {
   dispatch(meetupAttendenceRequest());
@@ -181,4 +215,46 @@ export const joinMeetup = userInfo => (dispatch, getState) => {
   .then(res => res.json())
   .then(data => dispatch(joinMeetupsSuccess(data)))
   .catch(err => dispatch(joinMeetupsError(err)))
+}
+
+export const UPDATE_USER_LOCATION_REQUEST = 'UPDATE_USER_LOCATION_REQUEST';
+export const updateUserLocationRequest = () => ({
+  type: UPDATE_USER_LOCATION_REQUEST,
+  loading: true,
+});
+
+export const UPDATE_USER_LOCATION_SUCCESS = 'UPDATE_USER_LOCATION_SUCCESS';
+export const updateUserLocationSuccess = (locationData) => ({
+  type: UPDATE_USER_LOCATION_SUCCESS,
+  // locationData,
+});
+
+export const UPDATE_USER_LOCATION_ERROR = 'UPDATE_USER_LOCATION_ERROR';
+export const updateUserLocationError = (error) => ({
+  type: UPDATE_USER_LOCATION_ERROR,
+  error,
+});
+
+export const updateUserLocation = userLocation => (dispatch, getState) => {
+  dispatch(updateUserLocationRequest());
+  const { location, latitude, longitude, userId } = userLocation;
+  const authToken = getState().auth.authToken;
+  return fetch(`${API_BASE_URL}/user-location`, {
+    method: 'PUT',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${authToken}`
+    },
+    body: JSON.stringify({
+      location,
+      latitude,
+      longitude,
+      userId,
+    })
+  })
+  .then(res => normalizeResponseErrors(res))
+  .then(res => res.json())
+  .then(data => dispatch(fetchUserLocationSuccess(data)))
+  .catch(err => dispatch(updateUserLocationError(err)))
 }

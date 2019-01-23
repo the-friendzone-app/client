@@ -13,6 +13,12 @@ import {
   MEETUP_ATTENDENCE_SUCCESS,
   MEETUP_ATTENDENCE_ERROR,
   MEETUP_DISPLAY_FILTER,
+  FETCH_USER_LOCATION_REQUEST,
+  FETCH_USER_LOCATION_SUCCESS,
+  FETCH_USER_LOCATION_ERROR,
+  UPDATE_USER_LOCATION_SUCCESS,
+  UPDATE_USER_LOCATION_REQUEST,
+  UPDATE_USER_LOCATION_ERROR,
 } from '../actions/meetups';
 
 const initialState ={
@@ -22,6 +28,8 @@ const initialState ={
   error: null,
   meetupAttendence: [],
   meetupDisplayFilter: 'all',
+  userLocation: null,
+  currentLocation: {location: 'Please select a location', latitude: 'none', longitude: 'none'},
 }
 
 
@@ -110,6 +118,35 @@ export default function reducer(state=initialState, action) {
     return {
       ...state,
       meetupDisplayFilter: action.meetupDisplayFilter,
+    }
+  } else if (action.type === FETCH_USER_LOCATION_SUCCESS) {
+    return {
+      ...state,
+      currentLocation: action.userLocation,
+    }
+  } else if (action.type === FETCH_USER_LOCATION_REQUEST) {
+    return {
+      ...state,
+      loading: true,
+    }
+  } else if (action.type === FETCH_USER_LOCATION_ERROR) {
+    return {
+      ...state,
+      error: action.error,
+    }
+  } else if (action.type === UPDATE_USER_LOCATION_REQUEST) {
+    return {
+      ...state,
+      loading: true,
+    }
+  } else if (action.type === UPDATE_USER_LOCATION_SUCCESS) {
+    return {
+      ...state,
+    }
+  } else if (action.type === UPDATE_USER_LOCATION_ERROR) {
+    return {
+      ...state,
+      error: action.error,
     }
   }
   return state;
