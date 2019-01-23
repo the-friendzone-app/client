@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import {Link} from 'react-router-dom';
 import requiresLogin from './requires-login';
-import {postComment, fetchComments} from '../actions/community';
+import {postComment, fetchComments, deleteComment} from '../actions/community';
 import './comment.css';
 
 export class Comment extends React.Component{
@@ -20,6 +20,18 @@ export class Comment extends React.Component{
     this.props.dispatch(postComment(newComment))
     .then(() => this.props.dispatch(fetchComments(this.props.match.params.topicId)));
   }
+  
+  onDeleteSubmit(commentId){
+    const deletionRequest = {
+      _id: commentId,
+      comment: 'This comment has been deleted',
+      topic: this.props.match.params.topicId,
+      community: this.props.match.params.communityId,
+    }
+    console.log(deletionRequest);
+    this.props.dispatch(deleteComment(deletionRequest))
+    .then(() => this.props.dispatch(fetchComments(this.props.match.params.topicId)));
+  }
 
   render(){
     const communityId = this.props.match.params.communityId;
@@ -30,11 +42,42 @@ export class Comment extends React.Component{
     const comments = this.props.comments.map((comment, index) => {
       let timestamp = new Date(comment.createdAt);
       let fixedTimestamp = timestamp.toString().slice(0,25);
+      let userControls;
+      if(comment.user === null){
+        userControls = (<div></div>)
+      }
+       else if (this.props.currentUser._id === comment.user._id && comment.user._id !== null){
+          userControls = ( 
+            <div className='comment-controls'>
+              <button>
+                <img src={process.env.PUBLIC_URL + '/resources/edit-icon.png'} alt='Edit Your Post' />
+              </button>
+              <button>
+                <img src={process.env.PUBLIC_URL + '/resources/trash-icon.png'} alt='Delete Your Post' onClick={ e => {
+                  e.preventDefault();
+                  this.onDeleteSubmit(comment._id);
+                }}/>
+              </button> 
+            </div>)
+      } else {
+        userControls = (<div></div>)
+      }
+      
+      let userName;
+      if(comment.user === null){
+        userName = 'deleted';
+      } else {
+       userName = comment.user.username;
+      }
+
       return(
         <li className={'comment-'+comment._id} key={index}>
           <section className='comment-card'>
               <div className='commentID'>>>{comment._id}</div>
-              <div className='user-plate'>User: {comment.user.username}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Posted At: {fixedTimestamp}</div>         
+              <div className='user-plate'>
+                User: {userName}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Posted At: {fixedTimestamp}
+                {userControls}
+              </div>     
               <p className='user-comment'>{comment.comment}</p>
           </section>
         </li>
@@ -47,7 +90,7 @@ export class Comment extends React.Component{
     } else{
       thread = (<ul className='comments'>{comments}</ul>);
     }
-
+    
     return (
       <section className="thread">
         <Link to={'/community/'+communityId}><button className='back-button'>Back to {community.mainTitle}</button></Link>
@@ -80,7 +123,8 @@ function mapStateToProps(state){
     loading: state.community.loading,
     community: state.community.community,
     topics: state.community.topics,
-    comments: state.community.comments
+    comments: state.community.comments,
+    currentUser: state.auth.currentUser
   }
 }
 

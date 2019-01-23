@@ -157,6 +157,41 @@ export const postComment = comment => (dispatch, getState) => {
   });
 }
 
+// "delete" a comment
+export const DELETE_COMMENT_REQUEST = 'DELETE_COMMENT_REQUEST';
+export const deleteCommentRequest = () => ({
+  type: DELETE_COMMENT_REQUEST
+});
+
+export const DELETE_COMMENT_SUCCESS = 'DELETE_COMMENT_SUCCESS';
+export const deleteCommentSuccess = () => ({
+  type: DELETE_COMMENT_SUCCESS
+});
+
+export const DELETE_COMMENT_ERROR = 'DELETE_COMMENT_ERROR';
+export const deleteCommentError = (error) => ({
+  type: DELETE_COMMENT_ERROR,
+  error
+});
+
+export const deleteComment = (deletionRequest) => (dispatch, getState) => {
+  dispatch(deleteCommentRequest());
+  const authToken = getState().auth.authToken;
+  return fetch(`${API_BASE_URL}/community/comments/delete`, {
+    method: 'PUT',
+    headers: {
+      "Content-Type": "application/json; charset=utf-8",
+      Authorization: `Bearer ${authToken}`
+    },
+    body: JSON.stringify(deletionRequest),
+  }).then(() => {
+    dispatch(deleteCommentRequest());
+  }).catch(err => {
+    dispatch(deleteCommentError(err));
+  });
+}
+
+
 // posts topics to post to specific community
 export const POST_TOPIC_REQUEST = 'POST_TOPIC_REQUEST';
 export const postTopicRequest = () => ({

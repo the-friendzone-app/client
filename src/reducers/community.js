@@ -41,6 +41,12 @@ export default function forumsReducer(state = initialState, action) {
       return {...state, topicAdd: true};
     case actions.ADD_TOPIC_FALSE:
       return {...state, topicAdd: false};
+    case actions.DELETE_COMMENT_REQUEST:
+      return { ...state, loading: true };
+    case actions.DELETE_COMMENT_SUCCESS:
+      return { ...state, error: null, loading: false };
+    case actions.DELETE_COMMENT_ERROR:
+      return { ...state, loading: false, error: action.error }; 
     default:
       return state;
   }
