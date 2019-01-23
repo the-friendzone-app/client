@@ -18,6 +18,7 @@ import Chat from './chat';
 import MeetupDetails from './meetup-details';
 
 import PersonalityPolls from './personalitypolls';
+import IntroQuiz from './intro-quiz';
 import Topic from './topic';
 import Comment from './comment';
 
@@ -73,6 +74,7 @@ export class App extends React.Component {
                     <Route exact path="/meetups/:meetupName" component={MeetupDetails} />
                     <Route exact path="/chat" component={Chat} />
                     <Route exact path="/answerpage" component={AnswerPage} />
+                    <Route exact path="/intro-quiz" component={IntroQuiz} />
                 </Switch>
             </div>
         );
