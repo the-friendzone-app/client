@@ -13,7 +13,6 @@ import Meetups from './meetups';
 import Poll from './poll';
 import AnswerPage from './answerpage';
 
-import Chat from './chat';
 
 import MeetupDetails from './meetup-details';
 

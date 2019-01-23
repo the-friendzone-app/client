@@ -5,7 +5,7 @@ const initialState = {
   currentQuestion: null,
   questionID: null,
   options: [],
-  selectedAnswer: null,
+  optionIndex: null,
   error: null,
   loading: false
 };
@@ -35,6 +35,11 @@ const questions = (state = initialState, action) => {
       return {
         ...state,
         error: action.error
+      }
+      case 'SUBMIT_USERANSWER_SUCCESS':
+      return {
+        ...state,
+        optionIndex: action.index
       }
     // case 'FETCH'
     //   case actions.FETCH_QUESTION_REQUEST:

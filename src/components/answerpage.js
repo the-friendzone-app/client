@@ -1,33 +1,81 @@
+
 import React from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import requiresLogin from './requires-login';
 
-export class AnswerPage extends React.Component {
-    componentDidMount() {
 
-    }
+export class AnswerPage extends React.Component {
 
     render() {
 
-        
+        const selectedAnswer = this.props.selectedAnswer;
+
+        console.log(selectedAnswer)
         return (
-            <div className="dashboard">
-                <div className="dashboard-username">
-                🗳️ Thank you for participating! For each answer there is a Pro, and a Con. Please feel free to go back and evaluate other approaches! :)<br /><br />
+            <div>
+                <div className="dashboard">
+                    <div className="dashboard-username">
+                        🗳️ Thank you for participating! For each answer there is a Pro, and a Con.
+                 Please feel free to go back and evaluate other approaches! :)<br /><br />
+                    </div>
                 </div>
                 <section className='dashboard-menu'>
-                   Your Answer: I'd confront them about it<br /><br />
-                   😊 Pro: They would know exactly how you feel. The key to relationships is communication! They would know what lines they might have crossed
-                   in what you consider to be important in the friendship, and you've now put your foot down, and they are able to respond.<br />
-                   🤔 Con: Depending on your approach, and who they are as a person --they might not respond well to confrontation. They might close up and not
-                   give you the closure you're hoping for, and they might get defensive. Try to be open for misunderstanding, and give room for dialogue, rather than a monologue.
+                    Your Answer: {selectedAnswer.text}<br /><br />
+                    😊 Pro: {selectedAnswer.pros}<br />
+                    🤔 Con: {selectedAnswer.cons}
                 </section>
                 <Link to="/personality-polls">Go Back To Personality Polls!</Link>
             </div>
+
         );
     }
 }
 
+const mapStateToProps = state => {
+    return {
 
-export default requiresLogin()(connect()(AnswerPage));
+        selectedAnswer: state.questions.options[state.questions.optionIndex]
+    };
+};
+
+export default withRouter(
+    requiresLogin()(connect(mapStateToProps)(AnswerPage))
+);
+
+
+
+// import React from 'react';
+// import { connect } from 'react-redux';
+// import { Link } from 'react-router-dom';
+// import requiresLogin from './requires-login';
+
+// export class AnswerPage extends React.Component {
+//     componentDidMount() {
+
+//     }
+
+//     render() {
+
+
+//         return (
+//             <div className="dashboard">
+//                 <div className="dashboard-username">
+//                 🗳️ Thank you for participating! For each answer there is a Pro, and a Con. Please feel free to go back and evaluate other approaches! :)<br /><br />
+//                 </div>
+//                 <section className='dashboard-menu'>
+//                    Your Answer: I'd confront them about it<br /><br />
+//                    😊 Pro: They would know exactly how you feel. The key to relationships is communication! They would know what lines they might have crossed
+//                    in what you consider to be important in the friendship, and you've now put your foot down, and they are able to respond.<br />
+//                    🤔 Con: Depending on your approach, and who they are as a person --they might not respond well to confrontation. They might close up and not
+//                    give you the closure you're hoping for, and they might get defensive. Try to be open for misunderstanding, and give room for dialogue, rather than a monologue.
+//                 </section>
+//                 <Link to="/personality-polls">Go Back To Personality Polls!</Link>
+//             </div>
+//         );
+//     }
+// }
+
+
+// export default requiresLogin()(connect()(AnswerPage));
