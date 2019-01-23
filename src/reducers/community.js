@@ -2,6 +2,7 @@ import * as actions from '../actions/community';
 
 const initialState = {
   community: [],
+  topicAdd: false,
   topics: [],
   comments:[],
   error: null,
@@ -36,6 +37,10 @@ export default function forumsReducer(state = initialState, action) {
       return { ...state, error: null, loading: false };
     case actions.POST_TOPIC_ERROR:
       return { ...state, loading: false, error: action.error };
+    case actions.ADD_TOPIC_TRUE:
+      return {...state, topicAdd: true};
+    case actions.ADD_TOPIC_FALSE:
+      return {...state, topicAdd: false};
     default:
       return state;
   }

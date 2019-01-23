@@ -1,0 +1,10 @@
+.thread {
+  width: 600px;
+  border: solid black 1px;
+}
+
+.comments {
+  padding: 0px;
+  width: 500px;
+  border: solid black 1px;
+}

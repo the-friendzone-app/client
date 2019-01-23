@@ -190,3 +190,15 @@ export const postTopic = topic => (dispatch, getState) => {
     dispatch(postTopicError(err));
   });
 }
+
+// interactivity actions
+
+export const ADD_TOPIC_TRUE = 'ADD_TOPIC_TRUE';
+export const addTopicTrue = () => ({
+  type: ADD_TOPIC_TRUE
+});
+
+export const ADD_TOPIC_FALSE = 'ADD_TOPIC_FALSE';
+export const addTopicFalse = () => ({
+  type: ADD_TOPIC_FALSE
+});

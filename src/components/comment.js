@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import {Link} from 'react-router-dom';
 import requiresLogin from './requires-login';
 import {postComment, fetchComments} from '../actions/community';
+import './comment.css';
 
 export class Comment extends React.Component{
   componentDidMount(){
@@ -16,8 +17,8 @@ export class Comment extends React.Component{
       community: this.props.match.params.communityId
     }
     e.target.commentInput.value = '';
-    this.props.dispatch(postComment(newComment));
-    this.props.dispatch(fetchComments(this.props.match.params.topicId));
+    this.props.dispatch(postComment(newComment))
+    .then(() => this.props.dispatch(fetchComments(this.props.match.params.topicId)));
   }
 
   render(){
@@ -31,12 +32,21 @@ export class Comment extends React.Component{
       console.log(timestamp)
       return(
         <li className={'comment-'+comment.id} key={index}>
-          <div>{comment.user.username}</div>
-          <div>{comment.createdAt}</div>
-          <p>{comment.comment}</p>
+          <section className='comment-card'>
+            <div>{comment.user.username}</div>
+            <div>{comment.createdAt}</div>
+            <p>{comment.comment}</p>
+          </section>
         </li>
       );
     });
+
+    let thread;
+    if(this.props.loading === true){
+      thread = (<div className='loading'>Loading Thread...</div>);
+    } else{
+      thread = (<ul className='comments'>{comments}</ul>);
+    }
 
     return (
       <section className="thread">
@@ -46,7 +56,7 @@ export class Comment extends React.Component{
           <p>{topic.description}</p>
           <p>Created by: {topic.creator.username}</p>
         </div>
-        <ul>{comments}</ul>
+        {thread}
         <form className='add-comment-form' onSubmit={e => {
           e.preventDefault();
           this.onSubmit(e);
@@ -63,8 +73,9 @@ export class Comment extends React.Component{
 
 }
 
-function mapStateToProps(state, props){
+function mapStateToProps(state){
   return{
+    loading: state.community.loading,
     community: state.community.community,
     topics: state.community.topics,
     comments: state.community.comments
