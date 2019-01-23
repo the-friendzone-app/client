@@ -21,7 +21,7 @@ export class Friends extends React.Component {
       )
     })
     let chats;
-    console.log(this.props);
+    // console.log(this.props);
     if (this.props.friended.friended) {
       chats = this.props.friended.friended.map(friend => {
         return (<Chat key={friend.chatroom._id} friended={friend} />);
