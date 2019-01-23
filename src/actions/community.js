@@ -174,6 +174,11 @@ export const deleteCommentError = (error) => ({
   error
 });
 
+export const DELETE_COMMENT_RESET = 'DELETE_COMMENT_RESET';
+export const deleteCommentReset = () => ({
+  type: DELETE_COMMENT_RESET
+});
+
 export const deleteComment = (deletionRequest) => (dispatch, getState) => {
   dispatch(deleteCommentRequest());
   const authToken = getState().auth.authToken;
@@ -184,8 +189,8 @@ export const deleteComment = (deletionRequest) => (dispatch, getState) => {
       Authorization: `Bearer ${authToken}`
     },
     body: JSON.stringify(deletionRequest),
-  }).then(() => {
-    dispatch(deleteCommentRequest());
+  }).then(res => {
+    dispatch(deleteCommentSuccess());
   }).catch(err => {
     dispatch(deleteCommentError(err));
   });

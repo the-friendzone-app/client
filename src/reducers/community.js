@@ -3,9 +3,11 @@ import * as actions from '../actions/community';
 const initialState = {
   community: [],
   topicAdd: false,
+  editing: false,
+  deletion: false,
   topics: [],
   comments:[],
-  error: null,
+  error: {},
   loading: false
 };
 
@@ -44,9 +46,11 @@ export default function forumsReducer(state = initialState, action) {
     case actions.DELETE_COMMENT_REQUEST:
       return { ...state, loading: true };
     case actions.DELETE_COMMENT_SUCCESS:
-      return { ...state, error: null, loading: false };
+      return { ...state, error: null, loading: false, deletion: true };
     case actions.DELETE_COMMENT_ERROR:
       return { ...state, loading: false, error: action.error }; 
+    case actions.DELETE_COMMENT_RESET:
+      return { ...state, error: null, loading: false, deletion: false };
     default:
       return state;
   }

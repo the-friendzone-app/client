@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import {Link} from 'react-router-dom';
 import requiresLogin from './requires-login';
-import {postComment, fetchComments, deleteComment} from '../actions/community';
+import {postComment, fetchComments, deleteComment, deleteCommentReset} from '../actions/community';
 import './comment.css';
 
 export class Comment extends React.Component{
@@ -40,7 +40,7 @@ export class Comment extends React.Component{
     const topic = this.props.topics.find(topic => topic.id == topicId);
     
     const comments = this.props.comments.map((comment, index) => {
-      let timestamp = new Date(comment.createdAt);
+      let timestamp = new Date(comment.updatedAt);
       let fixedTimestamp = timestamp.toString().slice(0,25);
       let userControls;
       if(comment.user === null){
@@ -91,6 +91,16 @@ export class Comment extends React.Component{
       thread = (<ul className='comments'>{comments}</ul>);
     }
     
+    let notification;
+    if(this.props.deletion === true){
+      notification = (
+        <div className='comment-notification'>
+          <p className='message'>Your comment has been deleted!</p>
+          <button onClick={()=> this.props.dispatch(deleteCommentReset())}>X</button>
+        </div>);
+    }
+
+
     return (
       <section className="thread">
         <Link to={'/community/'+communityId}><button className='back-button'>Back to {community.mainTitle}</button></Link>
@@ -101,6 +111,7 @@ export class Comment extends React.Component{
           </div>
           <p>{topic.description}</p>
         </div>
+        {notification}
         {thread}
         <form className='add-comment-form' onSubmit={e => {
           e.preventDefault();
@@ -124,7 +135,8 @@ function mapStateToProps(state){
     community: state.community.community,
     topics: state.community.topics,
     comments: state.community.comments,
-    currentUser: state.auth.currentUser
+    currentUser: state.auth.currentUser,
+    deletion: state.community.deletion
   }
 }
 
