@@ -1,10 +1,96 @@
 .thread {
-  width: 600px;
+  min-width: 320px;
+  width: 960px;
+  max-width: 960px;
   border: solid black 1px;
+  border-radius: 4px;
+  box-shadow: 5px 5px 2.5px grey;
+  background: cornflowerblue;
+  margin: 50px;
 }
 
 .comments {
+  display: inline-block;
   padding: 0px;
-  width: 500px;
+  margin: 10px;
+  min-width: 320px;
+  width: 900px;
+  max-width: 900px;
   border: solid black 1px;
+  border-radius: 4px;
+  background: lightgoldenrodyellow;
+}
+
+.comment-card {
+  border: solid black 2px;
+  margin: 10px;
+  border-radius: 4px;
+  background: white;
+  font-size: 14px;
+}
+
+.user-plate {
+  text-align: left;
+  width: 99%;
+  border-bottom: solid black 2px;
+  padding:5px;
+}
+
+.user-comment{
+  text-align:left;
+  padding: 5px;
+}
+
+.commentID{
+  text-align:left;
+}
+
+.topic{
+  border: solid black 1px;
+  border-radius: 4px;
+  background: white;
+  position: sticky;
+  top: 0;
+}
+
+.topic-plate{
+  border-bottom: solid black 1px;
+}
+
+.topic-name{
+  display: inline-block;
+  text-align: left;
+  margin-top:5px;
+  margin-bottom: 5px;
+  float:left;
+  width:48%;
+  height:auto;
+  padding-left: 5px;
+}
+
+.topic-creator{
+  width:48%;
+  display: inline-block;
+  text-align:right;
+  margin-top:5px;
+  margin-bottom: 5px;
+  padding-right: 5px;
+}
+
+.add-comment-form{
+  display: inline-block;
+  width:700px;
+  max-width:700px;
+  min-width:320px;
+  background: white;
+  border-radius: 4px;
+  margin: 10px;
+}
+
+.commentInput-label{
+  width:100%;
+  display: block;
+  padding: 5px;
+  text-align: left;
+  font-weight: bold;
 }

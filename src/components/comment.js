@@ -29,13 +29,13 @@ export class Comment extends React.Component{
     
     const comments = this.props.comments.map((comment, index) => {
       let timestamp = new Date(comment.createdAt);
-      console.log(timestamp)
+      let fixedTimestamp = timestamp.toString().slice(0,25);
       return(
-        <li className={'comment-'+comment.id} key={index}>
+        <li className={'comment-'+comment._id} key={index}>
           <section className='comment-card'>
-            <div>{comment.user.username}</div>
-            <div>{comment.createdAt}</div>
-            <p>{comment.comment}</p>
+              <div className='commentID'>>>{comment._id}</div>
+              <div className='user-plate'>User: {comment.user.username}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Posted At: {fixedTimestamp}</div>         
+              <p className='user-comment'>{comment.comment}</p>
           </section>
         </li>
       );
@@ -50,11 +50,13 @@ export class Comment extends React.Component{
 
     return (
       <section className="thread">
-        <Link to={'/community/'+communityId}><button>Back to {community.mainTitle}</button></Link>
-        <div>
-          <h3>Discussion: {topic.topicName}</h3>
+        <Link to={'/community/'+communityId}><button className='back-button'>Back to {community.mainTitle}</button></Link>
+        <div className='topic'>
+          <div className='topic-plate'>
+            <h3 className='topic-name'>{topic.topicName}</h3>
+            <p className='topic-creator'>Created by: {topic.creator.username}</p>
+          </div>
           <p>{topic.description}</p>
-          <p>Created by: {topic.creator.username}</p>
         </div>
         {thread}
         <form className='add-comment-form' onSubmit={e => {
@@ -62,8 +64,8 @@ export class Comment extends React.Component{
           this.onSubmit(e);
         }}>
           <section className='add-comment'>
-            <label htmlFor='commentInput'>Post a Comment:</label>
-            <textarea name='commentInput'></textarea>
+            <label htmlFor='commentInput' className='commentInput-label'>Post a Comment:</label>
+            <textarea cols='80' rows='10'name='commentInput'></textarea>
             <button>Submit Comment</button>
           </section>
         </form>
