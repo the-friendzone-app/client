@@ -8,7 +8,6 @@ import './meetups.css';
 export class Meetups extends React.Component {
 
   render() {
-
     return (
       <section className="meetups">
         <h1 className="meetups-page-title">FriendZone Meetups!</h1>

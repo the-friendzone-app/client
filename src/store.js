@@ -12,6 +12,7 @@ import forumsReducer from './reducers/community';
 import userReducer from './reducers/users';
 import { setAuthToken, refreshAuthToken } from './actions/auth';
 import { composeWithDevTools } from 'redux-devtools-extension';
+import eventsReducer from './reducers/event-search';
 
 
 const store = createStore(
@@ -23,6 +24,7 @@ const store = createStore(
         friends: friendsReducer,
         questions: questionReducer,
         community: forumsReducer,
+        event: eventsReducer,
 
     }),
     composeWithDevTools(applyMiddleware(thunk))

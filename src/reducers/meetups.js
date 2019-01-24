@@ -21,7 +21,7 @@ import {
   UPDATE_USER_LOCATION_ERROR,
 } from '../actions/meetups';
 
-const initialState ={
+const initialState = {
   userMeetups: null,
   meetups: null,
   loading: false,

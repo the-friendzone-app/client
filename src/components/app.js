@@ -24,6 +24,7 @@ import Comment from './comment';
 
 import RegistrationPage from './registration-page';
 import { refreshAuthToken } from '../actions/auth';
+import EventSearch from './event-search';
 
 export class App extends React.Component {
     componentDidUpdate(prevProps) {
@@ -70,6 +71,7 @@ export class App extends React.Component {
                     <Route exact path="/personality-polls" component={PersonalityPolls} />
                     <Route exact path="/personality-polls/:category" component={Poll} />
                     <Route exact path="/meetups" component={Meetups} />
+                    <Route exact path="/meetups/event-search" component={EventSearch} />
                     <Route exact path="/meetups/:meetupName" component={MeetupDetails} />
                     <Route exact path="/chat" component={Chat} />
                     <Route exact path="/answerpage" component={AnswerPage} />
