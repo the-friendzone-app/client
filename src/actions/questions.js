@@ -99,9 +99,17 @@ export const selectedOption = (optionID) => (dispatch, getState) => {
         });
 };
 
+export const SUBMIT_USERANSWER_SUCCESS = 'SUBMIT_USERANSWER_SUCCESS';
+export const submitUserAnswerSuccess = index => ({
+    type: SUBMIT_USERANSWER_SUCCESS,
+    index
+})
 
-export const goToAnswerPage = ( history) => {
-    history.push('/answerpage')
-  
+export const submitAnswer = (index) => {
+
+    return {
+        type: SUBMIT_USERANSWER_SUCCESS,
+        index
+    }
 
 }
