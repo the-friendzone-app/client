@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Redirect, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import requiresLogin from './requires-login';
-// import RedirectIntro from './redirectintro';
+
 export class Dashboard extends React.Component {
     componentDidMount() {
 
@@ -10,14 +10,12 @@ export class Dashboard extends React.Component {
 
     render() {
 
-// if (!this.props.intro) {
-//         return <Redirect to="/intro-quiz" />;
-//     }
+
    
 
         return (
             <React.Fragment>
-            {/* <RedirectIntro intro={this.props.intro}/> */}
+        
             <div className="dashboard">
                 <div className="dashboard-username">
                 <h1>The Friend Zone</h1>
@@ -45,7 +43,7 @@ const mapStateToProps = state => {
         hashedUsername: state.auth.currentUser.hashedUsername,
         name: `${currentUser.firstName} ${currentUser.lastName}`,
         loggedIn: state.auth.currentUser !== null,
-        // intro: state.auth.currentUser.introQuizCompleted
+
     };
 };
 

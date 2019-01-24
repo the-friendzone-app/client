@@ -10,9 +10,9 @@ export default () => Component => {
             return <div>Logging in...</div>;
         } else if (!loggedIn || error) {
             return <Redirect to="/" />;
-        }
-        else if (user!==null && loggedIn && !user.introQuizCompleted) {
-            return <Redirect to="/intro-quiz" />;
+        // }
+        // else if (user!==null && loggedIn && !user.introQuizCompleted) {
+        //     return <Redirect to="/intro-quiz" />;
         }
         return <Component {...passThroughProps} />;
     }
@@ -25,7 +25,7 @@ export default () => Component => {
         loggedIn: state.auth.currentUser !== null,
         error: state.auth.error,
         user: state.auth.currentUser
-        // intro: state.auth.currentUser.introQuizCompleted
+        
     });
 
     return connect(mapStateToProps)(RequiresLogin);
