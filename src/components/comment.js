@@ -4,6 +4,7 @@ import {Link} from 'react-router-dom';
 import requiresLogin from './requires-login';
 import {postComment, fetchComments, deleteComment, deleteCommentReset, editingCommentTrue, editingCommentFalse, editComment} from '../actions/community';
 import './comment.css';
+import { addReplyTo, removeReplyTo } from '../actions/comment';
 
 export class Comment extends React.Component{
   componentDidMount(){
@@ -11,10 +12,16 @@ export class Comment extends React.Component{
   }
   
   onSubmit(e){
+    let reply;
+    if(this.props.replyTo){
+      reply = this.props.replyTo;
+    }
+
     const newComment = {
       comment: e.target.commentInput.value,
       topic: this.props.match.params.topicId,
-      community: this.props.match.params.communityId
+      community: this.props.match.params.communityId,
+      replyTo: reply
     }
     e.target.commentInput.value = '';
     this.props.dispatch(postComment(newComment))
@@ -37,7 +44,7 @@ export class Comment extends React.Component{
   onDeleteSubmit(commentId){
     const deletionRequest = {
       _id: commentId,
-      comment: '[[This comment has been deleted]]',
+      comment: '[[  This comment has been deleted  :(  ]]',
       topic: this.props.match.params.topicId,
       community: this.props.match.params.communityId,
     }
@@ -56,6 +63,7 @@ export class Comment extends React.Component{
       let timestamp = new Date(comment.updatedAt);
       let fixedTimestamp = timestamp.toString().slice(0,25);
       let userControls;
+      let commentId = comment._id;
       if(comment.user === null){
         userControls = (<div></div>)
       }
@@ -99,15 +107,27 @@ export class Comment extends React.Component{
         edited = (<p className='comment-status'>edited</p>);
       }
 
+      let replyTo;
+      if(comment.replyTo){
+        replyTo = (<a href={'#comment-'+comment.replyTo}>REPLY TO: {comment.replyTo} </a>);
+      }
+      
+      let responses;
+      // if(){
+      //   responses = (<a href={'#comment-'+this.props.replyTo}>);
+      //}
+
       return(
-        <li className={'comment-'+comment._id} key={index}>
+        <li id={'comment-'+comment._id} className={'comment-'+comment._id} key={index}>
           <section className='comment-card'>
-              <div className='commentID'>>>{comment._id}</div>
+              <a className='commentID' href='#add-comment-form' onClick={() => this.props.dispatch(addReplyTo(commentId))}>>>{comment._id}</a>
               <div className='user-plate'>
                 User: {userName}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Posted At: {fixedTimestamp}&nbsp;&nbsp;&nbsp;{edited}
                 {userControls}
-              </div>     
+              </div>
+              {replyTo}     
               {commentText}
+              {responses}
           </section>
         </li>
       );
@@ -129,6 +149,13 @@ export class Comment extends React.Component{
         </div>);
     }
 
+    let replyingTo;
+    if(this.props.replyTo){
+      replyingTo = (<h5>Replying to >>
+        <a href={'#comment-'+this.props.replyTo}>{this.props.replyTo}</a>
+        <button onClick={()=> this.props.dispatch(removeReplyTo())}>X</button>
+        </h5>);
+    }
 
     return (
       <section className="thread">
@@ -142,12 +169,13 @@ export class Comment extends React.Component{
         </div>
         {notification}
         {thread}
-        <form className='add-comment-form' onSubmit={e => {
+        <form id='add-comment-form' className='add-comment-form' onSubmit={e => {
           e.preventDefault();
           this.onSubmit(e);
         }}>
           <section className='add-comment'>
             <label htmlFor='commentInput' className='commentInput-label'>Post a Comment:</label>
+            {replyingTo}
             <textarea cols='80' rows='10'name='commentInput'></textarea>
             <button>Submit Comment</button>
           </section>
@@ -167,7 +195,8 @@ function mapStateToProps(state){
     currentUser: state.auth.currentUser,
     deletion: state.community.deletion,
     editing: state.community.editing,
-    editComment: state.community.editComment
+    editComment: state.community.editComment,
+    replyTo: state.comment.replyTo
   }
 }
 
