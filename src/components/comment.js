@@ -7,9 +7,6 @@ import './comment.css';
 import { addReplyTo, removeReplyTo } from '../actions/comment';
 
 export class Comment extends React.Component{
-  componentDidMount(){
-    this.props.dispatch(fetchComments(this.props.match.params.topicId));
-  }
   
   onSubmit(e){
     let reply;
@@ -19,170 +16,123 @@ export class Comment extends React.Component{
 
     const newComment = {
       comment: e.target.commentInput.value,
-      topic: this.props.match.params.topicId,
-      community: this.props.match.params.communityId,
+      topic: this.props.topicId,
+      community: this.props.communityId,
       replyTo: reply
     }
     e.target.commentInput.value = '';
+    this.props.dispatch(removeReplyTo());
     this.props.dispatch(postComment(newComment))
-    .then(() => this.props.dispatch(fetchComments(this.props.match.params.topicId)));
+    .then(() => this.props.dispatch(fetchComments(this.props.topicId)));
   }
   
   onEditSubmit(e, commentId){ 
     const editedComment = {
       _id: commentId,
       comment: e.target.editComment.value,
-      topic: this.props.match.params.topicId,
-      community: this.props.match.params.communityId,
+      topic: this.props.topicId,
+      community: this.props.communityId,
       edited: true
     }
     this.props.dispatch(editingCommentFalse());
     this.props.dispatch(editComment(editedComment))
-    .then(() => this.props.dispatch(fetchComments(this.props.match.params.topicId)));
+    .then(() => this.props.dispatch(fetchComments(this.props.topicId)));
   }
 
   onDeleteSubmit(commentId){
     const deletionRequest = {
       _id: commentId,
       comment: '[[  This comment has been deleted  :(  ]]',
-      topic: this.props.match.params.topicId,
-      community: this.props.match.params.communityId,
+      topic: this.props.topicId,
+      community: this.props.communityId,
     }
     this.props.dispatch(deleteComment(deletionRequest))
-    .then(() => this.props.dispatch(fetchComments(this.props.match.params.topicId)));
+    .then(() => this.props.dispatch(fetchComments(this.props.topicId)));
   }
 
 
   render(){
-    const communityId = this.props.match.params.communityId;
-    const community = this.props.community.find(community => community.id == communityId);
-    const topicId = this.props.match.params.topicId;
-    const topic = this.props.topics.find(topic => topic.id == topicId);
+    let timestamp = new Date(this.props.comment.updatedAt);
+    let fixedTimestamp = timestamp.toString().slice(0,25);
+    let userControls;
+    let commentId = this.props.comment._id;
+    if(this.props.comment.user === null){
+      userControls = (<div></div>);
+    } 
+    else if (this.props.currentUser._id === this.props.comment.user._id && this.props.comment.user._id !== null) {
+        userControls = ( 
+          <div className='comment-controls'>
+            <button class='comment-button'>
+              <img src={process.env.PUBLIC_URL + '/resources/edit-icon.png'} alt='Edit Your Post' onClick={ e => {
+                e.preventDefault();
+                this.props.dispatch(editingCommentTrue(this.props.comment._id));
+              }} />
+            </button>
+            <button class='comment-button'>
+              <img src={process.env.PUBLIC_URL + '/resources/trash-icon.png'} alt='Delete Your Post' onClick={ e => {
+                e.preventDefault();
+                this.onDeleteSubmit(this.props.comment._id);
+              }}/>
+            </button> 
+          </div>);
+    }
     
-    const comments = this.props.comments.map((comment, index) => {
-      let timestamp = new Date(comment.updatedAt);
-      let fixedTimestamp = timestamp.toString().slice(0,25);
-      let userControls;
-      let commentId = comment._id;
-      if(comment.user === null){
-        userControls = (<div></div>)
-      }
-       else if (this.props.currentUser._id === comment.user._id && comment.user._id !== null){
-          userControls = ( 
-            <div className='comment-controls'>
-              <button>
-                <img src={process.env.PUBLIC_URL + '/resources/edit-icon.png'} alt='Edit Your Post' onClick={ e => {
-                  e.preventDefault();
-                  this.props.dispatch(editingCommentTrue(comment._id));
-                }} />
-              </button>
-              <button>
-                <img src={process.env.PUBLIC_URL + '/resources/trash-icon.png'} alt='Delete Your Post' onClick={ e => {
-                  e.preventDefault();
-                  this.onDeleteSubmit(comment._id);
-                }}/>
-              </button> 
-            </div>)
-      }
-      
-      let userName;
-      if(comment.user === null){
-        userName = (<p className='comment-status'>deleted</p>)
-      } else {
-       userName = comment.user.username;
-      }
+    let userName;
+    if(this.props.comment.user === null){
+      userName = (<p className='comment-status'>deleted</p>)
+    } else {
+      userName = this.props.comment.user.username;
+    }
 
-      let commentText;
-      if(this.props.editing === true && this.props.editComment === comment._id){
-        commentText = (<form className='edit-user-comment-form' onSubmit={(e) => {
-          e.preventDefault();
-          this.onEditSubmit(e, comment._id);
-        }}><textarea name='editComment' className='edit-user-comment' defaultValue={comment.comment}></textarea><button>Submit Edit</button></form>); 
-      } else {
-        commentText = (<p className='user-comment'>{comment.comment}</p>);
-      }
+    let commentText;
+    if(this.props.editing === true && this.props.editComment === this.props.comment._id){
+      commentText = (<form className='edit-user-comment-form' onSubmit={(e) => {
+        e.preventDefault();
+        this.onEditSubmit(e, this.props.comment._id);
+      }}><textarea name='editComment' className='edit-user-comment' defaultValue={this.props.comment.comment}></textarea><button>Submit Edit</button></form>); 
+    } else {
+      commentText = (<p className='user-comment'>{this.props.comment.comment}</p>);
+    }
 
-      let edited;
-      if(comment.edited === true){
-        edited = (<p className='comment-status'>edited</p>);
-      }
+    let edited;
+    if(this.props.comment.edited === true){
+      edited = (<p className='comment-status'>edited</p>);
+    }
 
-      let replyTo;
-      if(comment.replyTo){
-        replyTo = (<a href={'#comment-'+comment.replyTo}>REPLY TO: {comment.replyTo} </a>);
-      }
-      
-      let responses;
-      // if(){
-      //   responses = (<a href={'#comment-'+this.props.replyTo}>);
-      //}
-
+    let replyTo;
+    if(this.props.comment.replyTo){
+      replyTo = (<a className='replyCommentId'href={'#comment-'+this.props.comment.replyTo}>Replying To>>{this.props.comment.replyTo}</a>);
+    }
+    
+    const responses = this.props.comment.responses.map(response => {
       return(
-        <li id={'comment-'+comment._id} className={'comment-'+comment._id} key={index}>
-          <section className='comment-card'>
-              <a className='commentID' href='#add-comment-form' onClick={() => this.props.dispatch(addReplyTo(commentId))}>>>{comment._id}</a>
-              <div className='user-plate'>
-                User: {userName}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Posted At: {fixedTimestamp}&nbsp;&nbsp;&nbsp;{edited}
-                {userControls}
-              </div>
-              {replyTo}     
-              {commentText}
-              {responses}
-          </section>
-        </li>
-      );
+        <li className='response' key={'response'+response}><a href={'#comment-'+response}>>>{response}</a></li>
+        );
     });
-
-    let thread;
-    if(this.props.loading === true){
-      thread = (<div className='loading'>Loading Thread...</div>);
-    } else{
-      thread = (<ul className='comments'>{comments}</ul>);
+    
+    
+    let responseList;
+    if(this.props.comment.responses.length > 0){
+      responseList = (<div className='response-list'>Responses:<ul className='responses'>{responses}</ul></div>);
     }
     
-    let notification;
-    if(this.props.deletion === true){
-      notification = (
-        <div className='comment-notification'>
-          <p className='message'>**Your comment has been deleted!**</p>
-          <button onClick={()=> this.props.dispatch(deleteCommentReset())}>X</button>
-        </div>);
-    }
-
-    let replyingTo;
-    if(this.props.replyTo){
-      replyingTo = (<h5>Replying to >>
-        <a href={'#comment-'+this.props.replyTo}>{this.props.replyTo}</a>
-        <button onClick={()=> this.props.dispatch(removeReplyTo())}>X</button>
-        </h5>);
-    }
-
-    return (
-      <section className="thread">
-        <Link to={'/community/'+communityId}><button className='back-button'>Back to {community.mainTitle}</button></Link>
-        <div className='topic'>
-          <div className='topic-plate'>
-            <h3 className='topic-name'>{topic.topicName}</h3>
-            <p className='topic-creator'>Created by: {topic.creator.username}</p>
-          </div>
-          <p>{topic.description}</p>
-        </div>
-        {notification}
-        {thread}
-        <form id='add-comment-form' className='add-comment-form' onSubmit={e => {
-          e.preventDefault();
-          this.onSubmit(e);
-        }}>
-          <section className='add-comment'>
-            <label htmlFor='commentInput' className='commentInput-label'>Post a Comment:</label>
-            {replyingTo}
-            <textarea cols='80' rows='10'name='commentInput'></textarea>
-            <button>Submit Comment</button>
-          </section>
-        </form>
-      </section>
-    )
-  }
+    
+    return(
+      <li id={'comment-'+this.props.comment._id} className='comment' key={this.props.commentIndex}>
+        <section className='comment-card'>
+            <a className='commentID' href='#add-comment-form' onClick={() => this.props.dispatch(addReplyTo(this.props.comment._id))}>>>{this.props.comment._id}</a>
+            <div className='user-plate'>
+              User: {userName}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Posted At: {fixedTimestamp}&nbsp;&nbsp;&nbsp;{edited}
+              {userControls}
+            </div>
+            {replyTo}     
+            {commentText}
+            {responseList}
+        </section>
+      </li>
+    );
+  };
+  
 
 }
 
@@ -191,7 +141,6 @@ function mapStateToProps(state){
     loading: state.community.loading,
     community: state.community.community,
     topics: state.community.topics,
-    comments: state.community.comments,
     currentUser: state.auth.currentUser,
     deletion: state.community.deletion,
     editing: state.community.editing,
