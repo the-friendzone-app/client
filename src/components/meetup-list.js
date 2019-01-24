@@ -11,7 +11,7 @@ export class MeetupsList extends React.Component {
   componentDidMount() {
     this.props.dispatch(fetchAllMeetups());
     this.props.dispatch(fetchMeetupAttendence());
-    this.props.dispatch(fetchUserLocation(this.props.userId))
+    this.props.dispatch(fetchUserLocation());
   }
 
   handleDisplayFilter(e) {

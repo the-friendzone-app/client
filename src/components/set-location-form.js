@@ -22,7 +22,7 @@ export class SetLocationForm extends React.Component {
       .then(res => res.json())
       .then(res => {
         res = res.results[0]
-        console.log('on submit results', res);
+        // console.log('on submit results', res);
         let location = res.formatted_address;
         let latitude = res.geometry.location.lat;
         let longitude = res.geometry.location.lng;
@@ -51,12 +51,13 @@ export class SetLocationForm extends React.Component {
         )}>
         {locationPrompt}
         <div>
-          <label htmlFor="userLocation">Current Location</label>
+          <label htmlFor="userLocation">Set Location</label>
           <Field
             component={Input}
             type="text"
             name="userLocation"
             id="userLocation"
+            placeholder="Address, Landmarks, Streets, Zipcode, etc."
           />
         </div>
         <button
