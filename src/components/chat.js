@@ -3,7 +3,9 @@ import io from "socket.io-client";
 import { API_BASE_URL } from '../config';
 import { connect } from 'react-redux';
 import { fetchMessageRequest, fetchMessageSuccess, fetchMessageFailure, putMessages } from '../actions/users';
+import Modal from 'react-modal';
 
+Modal.setAppElement('body');
 class Chat extends React.Component {
   constructor(props) {
     super(props);
@@ -13,7 +15,8 @@ class Chat extends React.Component {
       message: '',
       messages: [],
       friend: '',
-      chatroom: ''
+      chatroom: '',
+      modalIsOpen: false
     };
 
     this.state.socket.on('CHAT', data => {
@@ -24,8 +27,22 @@ class Chat extends React.Component {
       this.props.dispatch(putMessages(this.state.chatroom, this.state.messages));
       // console.log(this.state.messages);
     });
+    this.openModal = this.openModal.bind(this);
+    this.afterOpenModal = this.afterOpenModal.bind(this);
+    this.closeModal = this.closeModal.bind(this);
+  }
+  //Modal
+  openModal() {
+    this.setState({ modalIsOpen: true });
   }
 
+  afterOpenModal() {
+    console.log('modal open');
+  }
+
+  closeModal() {
+    this.setState({ modalIsOpen: false });
+  }
   // when clicking send message, sends message to server every time then message input is cleared so another message can be sent
   onClick(ev) {
     this.state.socket.emit('CHAT', {
@@ -37,11 +54,17 @@ class Chat extends React.Component {
       message: ''
     });
   }
+
   onChange(ev) {
     this.setState({
       message: ev.target.value
     });
   }
+
+  componentWillMount() {
+    Modal.setAppElement('body');
+  }
+
   componentDidMount() {
     //console.log(this.props.friended);
     const friended = this.props.friended;
@@ -99,15 +122,24 @@ class Chat extends React.Component {
 
     return (
       <div className="container">
-        <div className="row">
-          <div className="card-title">Connected to: {this.state.friend}</div>
-          <div className="messages">
-            {messages}
-          </div>
-          <div>
-            <input id="message" type="text" placeholder="Message" value={this.state.message} onChange={ev => this.onChange(ev)} />
-            <button onClick={ev => this.onClick(ev)}>Send</button>
-          </div>
+        <p>{this.state.friend}</p>
+        <button onClick={this.openModal}>CHAT</button>
+        <div className="chat-modal">
+          <Modal
+            isOpen={this.state.modalIsOpen}
+            onAfterOpen={this.afterOpenModal}
+            onRequestClose={this.closeModal}
+          >
+            <div className="card-title">Connected to: {this.state.friend}</div>
+            <button onClick={this.closeModal}>CLOSE CHAT</button>
+            <div className="messages">
+              {messages}
+            </div>
+            <div>
+              <input id="message" type="text" placeholder="Message" value={this.state.message} onChange={ev => this.onChange(ev)} />
+              <button onClick={ev => this.onClick(ev)}>Send</button>
+            </div>
+          </Modal>
         </div>
       </div>
     );
