@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Redirect, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import requiresLogin from './requires-login';
 
 export class Dashboard extends React.Component {
@@ -10,26 +10,28 @@ export class Dashboard extends React.Component {
 
     render() {
 
-        if (!this.props.loggedIn) {
-            return (
-                <Redirect to='/landing-page' />
-            )
-        }
+
+   
 
         return (
+            <React.Fragment>
+        
             <div className="dashboard">
                 <div className="dashboard-username">
+                <h1>The Friend Zone</h1>
                     Welcome to The Friend Zone!<br />
+                    Your Username is '{this.props.username}'<br />
                     Your Hashed Username is: {this.props.hashedUsername}!
-                </div>
-                <section className='dashboard-menu'>
+              <br />
+                
                     <Link to ='/friends'><div className="dashboard-friends">Friends</div></Link>
                     <Link to ='/meetups'><div className="dashboard-meetups">Meetups</div></Link>
                     <Link to ='/personality-polls'><div className="dashboard-polls">Personality Polls</div></Link>
                     <Link to ='/community'><div className="dashboard-communities">Community</div></Link>
-
-                </section>
+                    </div>
+   
             </div>
+   </React.Fragment>         
         );
     }
 }
@@ -37,9 +39,11 @@ export class Dashboard extends React.Component {
 const mapStateToProps = state => {
     const { currentUser } = state.auth;
     return {
+        username: state.auth.currentUser.username,
         hashedUsername: state.auth.currentUser.hashedUsername,
         name: `${currentUser.firstName} ${currentUser.lastName}`,
-        loggedIn: state.auth.currentUser !== null
+        loggedIn: state.auth.currentUser !== null,
+
     };
 };
 

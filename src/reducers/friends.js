@@ -1,36 +1,33 @@
-import {
-  FETCH_USER_FRIENDS_REQUEST,
-  FETCH_USER_FRIENDS_SUCCESS,
-  FETCH_USER_FRIENDS_ERROR
-}from '../actions/friends';
+// import {
+//   FETCH_FRIENDS_REQUEST,
+//   FETCH_FRIENDS_SUCCESS,
+//   FETCH_FRIENDS_ERROR
+// } from '../actions/friends';
 
-const initialState ={
-  friendsList: null,
-  loading: false,
-  error: null
-};
+// const initialState = {
+//   friends: [],
+//   loading: false,
+//   error: null
+// };
 
-export default function reducer(state=initialState, action){
-  if(action.type === FETCH_USER_FRIENDS_REQUEST){
-    return{
-      ...state,
-      loading: true,
-      error: null
-    }
-  }
-  else if(action.type === FETCH_USER_FRIENDS_SUCCESS){
-    return{
-      friendsList: action.friends,
-      loading: false,
-      error: null
-    }
-  }
-  else if(action.type === FETCH_USER_FRIENDS_ERROR){
-    return{
-      ...state,
-      loading: true,
-      error: action.type
-    }
-  }
-  return state;
-}
+// export default function reducer(state = initialState, action) {
+//   if (action.type === FETCH_FRIENDS_REQUEST) {
+//     return Object.assign({}, state, {
+//       loading: true,
+//       error: null
+//     });
+//   }
+//   else if (action.type === FETCH_FRIENDS_SUCCESS) {
+//     return Object.assign({}, state, {
+//       friends: action.friends,
+//       loading: false
+//     });
+//   }
+//   else if (action.type === FETCH_FRIENDS_ERROR) {
+//     return Object.assign({}, state, {
+//       loading: true,
+//       error: action.error
+//     });
+//   }
+//   return state;
+// }

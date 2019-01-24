@@ -24,6 +24,7 @@ export class Community extends React.Component {
     }); 
 
     return (
+      <div className="dashboard">
       <section className="community">
         <h1>Community</h1>
         <section>
@@ -32,6 +33,7 @@ export class Community extends React.Component {
           </ul>
         </section>
       </section>
+      </div>
     )
   }
 }

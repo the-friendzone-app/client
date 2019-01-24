@@ -18,12 +18,17 @@ componentDidMount() {
     <li key={`poll-${i}`}><Link className="red-square" to={`/personality-polls/${poll.category}`}>{poll.question}</Link></li>
       )})
     return (
-   
-      <section className="p-poll">
-
+   <div className="outerdiv">
+      <div className="p-poll">
+<h1> Personality Polls</h1>
+<p>Welcome to the Personality Polls section. We here at the Friend Zone wanted to give everyone an 
+  opportunity to have their opinions count. The questions will change every month, so be sure to participate when you can!
+</p><br />
+<h3>January 2019 Questions</h3>
         <p>Please click on a link to polls below</p>
      <ul>{activePolls ? activePolls : 'Loading.....'}</ul>
-      </section>
+      </div>
+      </div>
     )
   }
 }
