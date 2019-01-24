@@ -7,6 +7,7 @@ const initialState = {
   deletion: false,
   topics: [],
   comments:[],
+  editComment: '',
   error: {},
   loading: false
 };
@@ -51,6 +52,16 @@ export default function forumsReducer(state = initialState, action) {
       return { ...state, loading: false, error: action.error }; 
     case actions.DELETE_COMMENT_RESET:
       return { ...state, error: null, loading: false, deletion: false };
+    case actions.EDIT_COMMENT_REQUEST:
+      return { ...state, loading: true };
+    case actions.EDIT_COMMENT_SUCCESS:
+      return { ...state, loading: false, error: null };
+    case actions.EDIT_COMMENT_ERROR:
+      return { ...state, loading: false, error: action.error };  
+    case actions.EDITING_COMMENT_TRUE:
+      return { ...state, editing: true, editComment: action.commentId };
+    case actions.EDITING_COMMENT_FALSE:
+      return { ...state, editing: false, editComment:{} }; 
     default:
       return state;
   }

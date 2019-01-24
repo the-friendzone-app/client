@@ -157,6 +157,51 @@ export const postComment = comment => (dispatch, getState) => {
   });
 }
 
+//edit a comment
+export const EDIT_COMMENT_REQUEST = 'EDIT_COMMENT_REQUEST';
+export const editCommentRequest = () => ({
+  type: EDIT_COMMENT_REQUEST
+});
+
+export const EDIT_COMMENT_SUCCESS = 'EDIT_COMMENT_SUCCESS';
+export const editCommentSuccess = () => ({
+  type: EDIT_COMMENT_SUCCESS
+});
+
+export const EDIT_COMMENT_ERROR = 'EDIT_COMMENT_ERROR';
+export const editCommentError = (error) => ({
+  type: EDIT_COMMENT_ERROR,
+  error
+});
+
+export const EDITING_COMMENT_TRUE = 'EDITING_COMMENT_TRUE';
+export const editingCommentTrue = (commentId) => ({
+  type: EDITING_COMMENT_TRUE,
+  commentId
+});
+
+export const EDITING_COMMENT_FALSE = 'EDITING_COMMENT_FALSE';
+export const editingCommentFalse = () => ({
+  type: EDITING_COMMENT_FALSE
+});
+
+export const editComment = (editedComment) => (dispatch, getState) => {
+  dispatch(editCommentRequest());
+  const authToken = getState().auth.authToken;
+  return fetch(`${API_BASE_URL}/community/comments/edit`, {
+    method: 'PUT',
+    headers: {
+      "Content-Type": "application/json; charset=utf-8",
+      Authorization: `Bearer ${authToken}`
+    },
+    body: JSON.stringify(editedComment),
+  }).then(res => {
+    dispatch(editCommentSuccess());
+  }).catch(err => {
+    dispatch(editCommentError(err));
+  });
+}
+
 // "delete" a comment
 export const DELETE_COMMENT_REQUEST = 'DELETE_COMMENT_REQUEST';
 export const deleteCommentRequest = () => ({

@@ -108,3 +108,21 @@
   width: 320px;
   margin: 5px;
 }
+
+.edit-user-comment{
+  resize: none;
+  width: 100%;
+  box-sizing: border-box;
+  font-size: 16px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+  "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+  sans-serif;
+}
+
+.comment-status{
+  display: inline-block;
+  font-style: italic;
+  width: 50px;
+  margin: 0px;
+  
+}

@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import {Link} from 'react-router-dom';
 import requiresLogin from './requires-login';
-import {postComment, fetchComments, deleteComment, deleteCommentReset} from '../actions/community';
+import {postComment, fetchComments, deleteComment, deleteCommentReset, editingCommentTrue, editingCommentFalse, editComment} from '../actions/community';
 import './comment.css';
 
 export class Comment extends React.Component{
@@ -21,17 +21,30 @@ export class Comment extends React.Component{
     .then(() => this.props.dispatch(fetchComments(this.props.match.params.topicId)));
   }
   
+  onEditSubmit(e, commentId){ 
+    const editedComment = {
+      _id: commentId,
+      comment: e.target.editComment.value,
+      topic: this.props.match.params.topicId,
+      community: this.props.match.params.communityId,
+      edited: true
+    }
+    this.props.dispatch(editingCommentFalse());
+    this.props.dispatch(editComment(editedComment))
+    .then(() => this.props.dispatch(fetchComments(this.props.match.params.topicId)));
+  }
+
   onDeleteSubmit(commentId){
     const deletionRequest = {
       _id: commentId,
-      comment: 'This comment has been deleted',
+      comment: '[[This comment has been deleted]]',
       topic: this.props.match.params.topicId,
       community: this.props.match.params.communityId,
     }
-    console.log(deletionRequest);
     this.props.dispatch(deleteComment(deletionRequest))
     .then(() => this.props.dispatch(fetchComments(this.props.match.params.topicId)));
   }
+
 
   render(){
     const communityId = this.props.match.params.communityId;
@@ -50,7 +63,10 @@ export class Comment extends React.Component{
           userControls = ( 
             <div className='comment-controls'>
               <button>
-                <img src={process.env.PUBLIC_URL + '/resources/edit-icon.png'} alt='Edit Your Post' />
+                <img src={process.env.PUBLIC_URL + '/resources/edit-icon.png'} alt='Edit Your Post' onClick={ e => {
+                  e.preventDefault();
+                  this.props.dispatch(editingCommentTrue(comment._id));
+                }} />
               </button>
               <button>
                 <img src={process.env.PUBLIC_URL + '/resources/trash-icon.png'} alt='Delete Your Post' onClick={ e => {
@@ -59,15 +75,28 @@ export class Comment extends React.Component{
                 }}/>
               </button> 
             </div>)
-      } else {
-        userControls = (<div></div>)
       }
       
       let userName;
       if(comment.user === null){
-        userName = 'deleted';
+        userName = (<p className='comment-status'>deleted</p>)
       } else {
        userName = comment.user.username;
+      }
+
+      let commentText;
+      if(this.props.editing === true && this.props.editComment === comment._id){
+        commentText = (<form className='edit-user-comment-form' onSubmit={(e) => {
+          e.preventDefault();
+          this.onEditSubmit(e, comment._id);
+        }}><textarea name='editComment' className='edit-user-comment' defaultValue={comment.comment}></textarea><button>Submit Edit</button></form>); 
+      } else {
+        commentText = (<p className='user-comment'>{comment.comment}</p>);
+      }
+
+      let edited;
+      if(comment.edited === true){
+        edited = (<p className='comment-status'>edited</p>);
       }
 
       return(
@@ -75,10 +104,10 @@ export class Comment extends React.Component{
           <section className='comment-card'>
               <div className='commentID'>>>{comment._id}</div>
               <div className='user-plate'>
-                User: {userName}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Posted At: {fixedTimestamp}
+                User: {userName}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Posted At: {fixedTimestamp}&nbsp;&nbsp;&nbsp;{edited}
                 {userControls}
               </div>     
-              <p className='user-comment'>{comment.comment}</p>
+              {commentText}
           </section>
         </li>
       );
@@ -95,7 +124,7 @@ export class Comment extends React.Component{
     if(this.props.deletion === true){
       notification = (
         <div className='comment-notification'>
-          <p className='message'>Your comment has been deleted!</p>
+          <p className='message'>**Your comment has been deleted!**</p>
           <button onClick={()=> this.props.dispatch(deleteCommentReset())}>X</button>
         </div>);
     }
@@ -136,7 +165,9 @@ function mapStateToProps(state){
     topics: state.community.topics,
     comments: state.community.comments,
     currentUser: state.auth.currentUser,
-    deletion: state.community.deletion
+    deletion: state.community.deletion,
+    editing: state.community.editing,
+    editComment: state.community.editComment
   }
 }
 
