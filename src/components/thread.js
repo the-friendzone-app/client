@@ -2,9 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import {Link} from 'react-router-dom';
 import requiresLogin from './requires-login';
-import { fetchForum, fetchTopic, postComment, fetchComments, deleteComment, deleteCommentReset, editingCommentTrue, editingCommentFalse, editComment} from '../actions/community';
+import { fetchForum, fetchTopic, postComment, fetchComments, deleteComment, deleteCommentReset } from '../actions/community';
 import './comment.css';
-import { addReplyTo, removeReplyTo } from '../actions/comment';
+import { removeReplyTo } from '../actions/comment';
 import Comment from './comment';
 
 export class Thread extends React.Component{
@@ -34,20 +34,6 @@ export class Thread extends React.Component{
   }
   
   
-
-  onEditSubmit(e, commentId){ 
-    const editedComment = {
-      _id: commentId,
-      comment: e.target.editComment.value,
-      topic: this.props.match.params.topicId,
-      community: this.props.match.params.communityId,
-      edited: true
-    }
-    this.props.dispatch(editingCommentFalse());
-    this.props.dispatch(editComment(editedComment))
-    .then(() => this.props.dispatch(fetchComments(this.props.match.params.topicId)));
-  }
-
   onDeleteSubmit(commentId){
     const deletionRequest = {
       _id: commentId,
@@ -62,9 +48,9 @@ export class Thread extends React.Component{
 
   render(){
     const communityId = this.props.match.params.communityId;
-    const community = this.props.community.find(community => community.id == communityId);
+    const community = this.props.community.find(community => community.id === communityId);
     const topicId = this.props.match.params.topicId;
-    const topic = this.props.topics.find(topic => topic.id == topicId);
+    const topic = this.props.topics.find(topic => topic.id === topicId);
     
     const comments = this.props.comments.map((comment, index) => {
       return(<Comment comment={comment} commentIndex={index} communityId={communityId} topicId={topicId}/>);

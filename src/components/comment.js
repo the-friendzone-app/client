@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import {Link} from 'react-router-dom';
 import requiresLogin from './requires-login';
 import {postComment, fetchComments, deleteComment, editingCommentTrue, editingCommentFalse, editComment} from '../actions/community';
 import './comment.css';
@@ -55,14 +54,13 @@ export class Comment extends React.Component{
     let timestamp = new Date(this.props.comment.updatedAt);
     let fixedTimestamp = timestamp.toString().slice(0,25);
     let userControls;
-    let commentId = this.props.comment._id;
     if(this.props.comment.user === null){
       userControls = (<div></div>);
     } 
     else if (this.props.currentUser._id === this.props.comment.user._id && this.props.comment.user._id !== null) {
         userControls = ( 
           <div className='comment-controls'>
-            <button class='comment-button'>
+            <button className='comment-button'>
               <img className='comment-img' src={process.env.PUBLIC_URL + '/resources/edit-icon.png'} alt='Edit Your Post' onClick={ e => {
                 e.preventDefault();
                 this.props.dispatch(editingCommentTrue(this.props.comment._id));

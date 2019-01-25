@@ -23,7 +23,6 @@ export class HeaderBar extends React.Component {
             logOutButton = ( <Link to='/' onClick={() => this.logOut()}><div className='navbar-logout'>Log out</div></Link>);
         return (
             <div className="header-bar">
-                <h4></h4>
                 <Link to ='/'><div className='navbar-tab'>Home</div></Link>
                 <Link to ='/friends'><div className='navbar-tab'>Friends List</div></Link>
                 <Link to ='/meetups'><div className='navbar-tab'>My Meetups</div></Link>

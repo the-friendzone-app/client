@@ -7,10 +7,8 @@ import { fetchForum, fetchTopic, postTopic, addTopicTrue, addTopicFalse } from '
 export class Topic extends React.Component{
    
   componentDidMount(){
-    let communityLocation = this.props.location.pathname.slice(-24);
-    console.log(communityLocation);
     this.props.dispatch(fetchForum())
-    .then(() => this.props.dispatch(fetchTopic(this.props.match.params.communityId)));
+    .then(() => this.props.dispatch(fetchTopic(this.props.location.pathname.slice(-24))));
   }
 
 
@@ -28,8 +26,7 @@ export class Topic extends React.Component{
 
   render() {
     const communityId = this.props.match.params.communityId;
-    const community = this.props.community.find(community => community.id == communityId);
-    
+    const community = this.props.community.find(community => community.id === communityId);
     const topics= this.props.topics.map((topic, index) => {
       let topicId = `${this.props.match.url}/${topic.id}`;
       return (

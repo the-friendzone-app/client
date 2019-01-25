@@ -19,7 +19,6 @@ import MeetupDetails from './meetup-details';
 
 import PersonalityPolls from './personalitypolls';
 import Topic from './topic';
-import Comment from './comment';
 import Thread from './thread';
 
 
