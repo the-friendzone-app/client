@@ -73,3 +73,40 @@ export const fetchEventbriteApi = userSearchQuery => (dispatch, getState) => {
   // })
   .catch(err => dispatch(fetchEventbriteApiError(err)))
 }
+
+export const FETCH_EVENTBRITE_VENUE_REQUEST = 'FETCH_EVENTBRITE_VENUE_REQUEST';
+export const fetchEventbriteVenueRequest = () => ({
+  type: FETCH_EVENTBRITE_VENUE_REQUEST,
+});
+
+export const FETCH_EVENTBRITE_VENUE_SUCCESS = 'FETCH_EVENTBRITE_VENUE_SUCCESS';
+export const fetchEventbriteVenueSuccess = (results) => ({
+  type: FETCH_EVENTBRITE_VENUE_SUCCESS,
+  results,
+});
+
+export const FETCH_EVENTBRITE_VENUE_ERROR = 'FETCH_EVENTBRITE_VENUE_ERROR';
+export const fetchEventbriteVenueError = (error) => ({
+  type: FETCH_EVENTBRITE_VENUE_ERROR,
+  error,
+});
+
+export const fetchEventbriteVenue = events => (dispatch, getState) => {
+  dispatch(fetchEventbriteVenueRequest());
+  const authToken = getState().auth.authToken;
+  return fetch(`${API_BASE_URL}/eventbrite-search-complete`, {
+    method: 'PUT',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${authToken}`
+    },
+    body: JSON.stringify({
+      events,
+    })
+  })
+  .then(res => normalizeResponseErrors(res))
+  .then(res => res.json())
+  .then(res => dispatch(fetchEventbriteVenueSuccess(res)))
+  .catch(err => dispatch(fetchEventbriteVenueError(err)))
+}

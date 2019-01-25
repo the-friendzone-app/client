@@ -3,6 +3,9 @@ import {
   FETCH_EVENTBRITE_API_REQUEST,
   FETCH_EVENTBRITE_API_SUCCESS,
   FETCH_EVENTBRITE_API_ERROR,
+  FETCH_EVENTBRITE_VENUE_REQUEST,
+  FETCH_EVENTBRITE_VENUE_SUCCESS,
+  FETCH_EVENTBRITE_VENUE_ERROR,
 } from '../actions/event-search';
 
 const initialState = {
@@ -10,6 +13,7 @@ const initialState = {
   searchResults: null,
   loading: false,
   error: null,
+  searchResultsVenue: null,
 }
 
 export default function reducer(state=initialState, action) {
@@ -29,6 +33,21 @@ export default function reducer(state=initialState, action) {
       searchResults: action.searchQuery,
     }
   } if (action.type === FETCH_EVENTBRITE_API_ERROR) {
+    return {
+      ...state,
+      error: action.error,
+    }
+  } if (action.type === FETCH_EVENTBRITE_VENUE_REQUEST) {
+    return {
+      ...state, 
+      loading: true,
+    }
+  } if (action.type === FETCH_EVENTBRITE_VENUE_SUCCESS) {
+    return {
+      ...state,
+      searchResultsVenue: action.results,
+    }
+  } if (action.type === FETCH_EVENTBRITE_VENUE_ERROR) {
     return {
       ...state,
       error: action.error,

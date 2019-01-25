@@ -20,7 +20,7 @@ export class EventSearch extends React.Component {
     let searchFormBtnDescription;
     // toggles showing event search form on click.
     if (this.props.event.showEventSearchForm) {
-      eventSearchForm = <EventSearchForm currentUsername={this.props.username} currentLocation={this.props.currentLocation}/>
+      eventSearchForm = <EventSearchForm currentUsername={this.props.username} currentLocation={this.props.currentLocation} searchResults={this.props.searchResults}/>
       searchFormBtnDescription = 'Close Event Search Form';
     } else {
       searchFormBtnDescription = 'Open Event Search Form';
@@ -53,6 +53,7 @@ const mapStateToProps = state => {
     currentLocation: state.meetups.currentLocation,
     userId: state.auth.currentUser._id,
     event: state.event,
+    searchResults: state.event.searchResults,
   };
 };
 
