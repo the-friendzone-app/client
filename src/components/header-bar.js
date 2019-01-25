@@ -23,13 +23,13 @@ export class HeaderBar extends React.Component {
             logOutButton = ( <Link to='/' onClick={() => this.logOut()}><div className='navbar-logout'>Log out</div></Link>);
         return (
             <div className="header-bar">
-           
+                <h4></h4>
                 <Link to ='/'><div className='navbar-tab'>Home</div></Link>
                 <Link to ='/friends'><div className='navbar-tab'>Friends List</div></Link>
                 <Link to ='/meetups'><div className='navbar-tab'>My Meetups</div></Link>
                 <Link to ='/community'><div className='navbar-tab'>Community Guidelines</div></Link>
                 <div className='navbar-tab'>Report</div>
-                <div className='navbar-tab'>Settings</div>
+                <div className='navbar-tab'>Account: {this.props.currentUser.username}</div>
                 {logOutButton}
                 <br/>
                 <br/>
@@ -39,7 +39,8 @@ export class HeaderBar extends React.Component {
 }
 
 const mapStateToProps = state => ({
-    loggedIn: state.auth.currentUser !== null
+    loggedIn: state.auth.currentUser !== null,
+    currentUser: state.auth.currentUser 
 });
 
 export default requiresLogin()(connect(mapStateToProps)(HeaderBar));

@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import {Link} from 'react-router-dom';
 import requiresLogin from './requires-login';
-import {postComment, fetchComments, deleteComment, deleteCommentReset, editingCommentTrue, editingCommentFalse, editComment} from '../actions/community';
+import {postComment, fetchComments, deleteComment, editingCommentTrue, editingCommentFalse, editComment} from '../actions/community';
 import './comment.css';
 import { addReplyTo, removeReplyTo } from '../actions/comment';
 
@@ -42,7 +42,7 @@ export class Comment extends React.Component{
   onDeleteSubmit(commentId){
     const deletionRequest = {
       _id: commentId,
-      comment: '[[  This comment has been deleted  :(  ]]',
+      comment: '[*[  This comment has been deleted  :(  ]*]',
       topic: this.props.topicId,
       community: this.props.communityId,
     }
@@ -63,20 +63,20 @@ export class Comment extends React.Component{
         userControls = ( 
           <div className='comment-controls'>
             <button class='comment-button'>
-              <img src={process.env.PUBLIC_URL + '/resources/edit-icon.png'} alt='Edit Your Post' onClick={ e => {
+              <img className='comment-img' src={process.env.PUBLIC_URL + '/resources/edit-icon.png'} alt='Edit Your Post' onClick={ e => {
                 e.preventDefault();
                 this.props.dispatch(editingCommentTrue(this.props.comment._id));
               }} />
             </button>
             <button class='comment-button'>
-              <img src={process.env.PUBLIC_URL + '/resources/trash-icon.png'} alt='Delete Your Post' onClick={ e => {
+              <img className='comment-img' src={process.env.PUBLIC_URL + '/resources/trash-icon.png'} alt='Delete Your Post' onClick={ e => {
                 e.preventDefault();
                 this.onDeleteSubmit(this.props.comment._id);
               }}/>
             </button> 
           </div>);
     }
-    
+
     let userName;
     if(this.props.comment.user === null){
       userName = (<p className='comment-status'>deleted</p>)

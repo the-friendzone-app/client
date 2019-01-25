@@ -2,9 +2,18 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import requiresLogin from './requires-login';
-import { fetchTopic, postTopic, addTopicTrue, addTopicFalse } from '../actions/community';
+import { fetchForum, fetchTopic, postTopic, addTopicTrue, addTopicFalse } from '../actions/community';
 
 export class Topic extends React.Component{
+   
+  componentDidMount(){
+    let communityLocation = this.props.location.pathname.slice(-24);
+    console.log(communityLocation);
+    this.props.dispatch(fetchForum())
+    .then(() => this.props.dispatch(fetchTopic(this.props.match.params.communityId)));
+  }
+
+
   onSubmit(e){
     const newTopic = {
       topicName: e.target.topicInput.value,
@@ -15,11 +24,6 @@ export class Topic extends React.Component{
     e.target.topicDescription.value = '';
     this.props.dispatch(postTopic(newTopic))
     .then(() => this.props.dispatch(fetchTopic(this.props.match.params.communityId)));    
-  }
-
-  
-  componentDidMount(){
-    this.props.dispatch(fetchTopic(this.props.match.params.communityId));
   }
 
   render() {
@@ -73,7 +77,7 @@ export class Topic extends React.Component{
     return (
       <section className="Topics">
         <Link to='/community'><button> Back to Communities</button></Link>
-        <h3>{community.mainTitle}</h3>
+        <h3>{community ? community.mainTitle : 'Loading...'}</h3>
         {topicList}
         {topicAdd}
       </section>

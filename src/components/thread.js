@@ -2,15 +2,18 @@ import React from 'react';
 import { connect } from 'react-redux';
 import {Link} from 'react-router-dom';
 import requiresLogin from './requires-login';
-import {postComment, fetchComments, deleteComment, deleteCommentReset, editingCommentTrue, editingCommentFalse, editComment} from '../actions/community';
+import { fetchForum, fetchTopic, postComment, fetchComments, deleteComment, deleteCommentReset, editingCommentTrue, editingCommentFalse, editComment} from '../actions/community';
 import './comment.css';
 import { addReplyTo, removeReplyTo } from '../actions/comment';
 import Comment from './comment';
 
 export class Thread extends React.Component{
   componentDidMount(){
+    this.props.dispatch(fetchForum());
+    this.props.dispatch(fetchTopic(this.props.match.params.communityId));
     this.props.dispatch(fetchComments(this.props.match.params.topicId));
   }
+
   
   onSubmit(e){
     let reply;
@@ -30,6 +33,8 @@ export class Thread extends React.Component{
     .then(() => this.props.dispatch(fetchComments(this.props.match.params.topicId)));
   }
   
+  
+
   onEditSubmit(e, commentId){ 
     const editedComment = {
       _id: commentId,
@@ -65,53 +70,61 @@ export class Thread extends React.Component{
       return(<Comment comment={comment} commentIndex={index} communityId={communityId} topicId={topicId}/>);
     });
 
-    let thread;
-    if(this.props.loading === true){
-      thread = (<div className='loading'>Loading Thread...</div>);
-    } else{
-      thread = (<ul className='comments'>{comments}</ul>);
-    }
-    
-    let notification;
-    if(this.props.deletion === true){
-      notification = (
-        <div className='comment-notification'>
-          <p className='message'>**Your comment has been deleted!**</p>
-          <button onClick={()=> this.props.dispatch(deleteCommentReset())}>X</button>
-        </div>);
-    }
 
     let replyingTo;
     if(this.props.replyTo){
       replyingTo = (<h5>Replying to >>
         <a href={'#comment-'+this.props.replyTo}>{this.props.replyTo}</a>
-        <button onClick={()=> this.props.dispatch(removeReplyTo())}>X</button>
+        <button onClick={this.handleClicked}>X</button>
         </h5>);
+    }
+
+    let thread;
+    if(this.props.loading === true){
+      thread = (
+        <div className='loading'>
+          <img className='loading-img' src={process.env.PUBLIC_URL + '/resources/loading-thread.png'} alt='Loading Thread...'></img>
+          <p className='thread-status'>Loading Thread...</p>
+        </div>);
+    } else{
+      thread = (
+        <div>
+          <ul className='comments'>{comments}</ul>
+          <form id='add-comment-form' className='add-comment-form' onSubmit={e => {
+          e.preventDefault();
+          this.onSubmit(e);
+          }}>
+            <section className='add-comment'>
+              <label htmlFor='commentInput' className='commentInput-label'>Post a Comment:</label>
+              {replyingTo}
+              <textarea cols='80' rows='10'name='commentInput'></textarea>
+              <button>Submit Comment</button>
+            </section>
+          </form>
+      </div>);
+    }
+
+    let notification;
+    if(this.props.deletion === true){
+      notification = (
+        <div className='comment-notification'>
+          <p className='message'>**Your comment has been deleted!**</p>
+          <button className='delete-reset' onClick={() => this.props.dispatch(deleteCommentReset())}>X</button>
+        </div>);
     }
 
     return (
       <section className="thread">
         <div className='topic'>
-          <Link to={'/community/'+communityId}><button className='back-button'>Back to {community.mainTitle}</button></Link>
+          <Link to={'/community/'+communityId}><button className='back-button'>Back to {community ? community.mainTitle : '...'}</button></Link>
           <div className='topic-plate'>
-            <h3 className='topic-name'>{topic.topicName}</h3>
-            <p className='topic-creator'>Created by: {topic.creator.username}</p>
+            <h3 className='topic-name'>{topic ? topic.topicName : '...' }</h3>
+            <p className='topic-creator'>Created by: {topic ? topic.creator.username : '...'}</p>
           </div>
-          <p>{topic.description}</p>
+          <p>{topic ? topic.description : '...'}</p>
+          {notification}
         </div>
-        {notification}
         {thread}
-        <form id='add-comment-form' className='add-comment-form' onSubmit={e => {
-          e.preventDefault();
-          this.onSubmit(e);
-        }}>
-          <section className='add-comment'>
-            <label htmlFor='commentInput' className='commentInput-label'>Post a Comment:</label>
-            {replyingTo}
-            <textarea cols='80' rows='10'name='commentInput'></textarea>
-            <button>Submit Comment</button>
-          </section>
-        </form>
       </section>
     )
   }
