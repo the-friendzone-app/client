@@ -4,6 +4,7 @@ import Input from './input';
 import { DropdownList, Multiselect, DateTimePicker } from 'react-widgets';
 import moment from 'moment'
 import momentLocalizer from 'react-widgets-moment';
+import { fetchEventbriteApi } from '../actions/event-search';
 
 momentLocalizer(moment);
 
@@ -67,8 +68,8 @@ export class EventSearchForm extends React.Component {
     console.log('start time:', startTime);
     console.log('end time:', endTime);
 
-    let userEventSearch = { latitude, longitude, search, searchDistance, price, categories, formats, startTime, endTime };
-
+    let userSearchQuery = { latitude, longitude, search, searchDistance, price, categories, formats, startTime, endTime };
+    this.props.dispatch(fetchEventbriteApi(userSearchQuery));
   }
 
   render() {
