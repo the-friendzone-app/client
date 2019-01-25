@@ -36,24 +36,38 @@ export class EventSearchForm extends React.Component {
     
     console.log(value);
 
-    console.log('lat -->', this.props.currentLocation.latitude);
-    console.log('long -->', this.props.currentLocation.longitude);
-    console.log('search -->', value.userSearch);
-    console.log('search distance -->', value.userSearchDistance.value);
-    console.log('price -->', value.userSearchPrice.value);
-
+    let latitude = this.props.currentLocation.latitude;
+    let longitude = this.props.currentLocation.longitude
+    let search = value.userSearch;
+    let searchDistance = (value.userSearchDistance.value === undefined ? '' : value.userSearchDistance.value)
+    let price = (value.userSearchPrice.value === undefined ? '' : value.userSearchPrice.value);
     // multi-entry possible map through array to get category values
-    let categories = value.userSearchCategories.map(category => category.value);
-    console.log('cat map -->', categories.toString());
-
+    let categories = value.userSearchCategories;
+    if (categories.length >= 1) {
+      categories = categories.map(category => category.value).toString();
+    }
     // multi-entry possible map through array to get formats values
-    let formats = value.userSearchFormat.map(format => format.value);
-    console.log('for map -->', formats.toString());
-
+    let formats = value.userSearchFormat;
+    if (formats.length >= 1) {
+      formats = formats.map(format => format.value).toString();
+    }
+    // use charAt to make sure it's returning date not 'Invalid Date'
     let startTime = moment(value.startTime).format();
-    let endTime = moment(value.endTime).format();
-    console.log('start time -->', startTime);
-    console.log('end time -->', endTime);
+    startTime = (startTime.charAt(0) === 'I' && startTime.charAt(1) === 'n' ? '' : startTime );
+    let endTime = moment(value.endTime).format().toString();
+    endTime = (endTime.charAt(0) === 'I' && endTime.charAt(1) === 'n' ? '' : endTime );
+
+    console.log('latitude:', this.props.currentLocation.latitude);
+    console.log('longitude:', this.props.currentLocation.longitude);
+    console.log('search:', value.userSearch);
+    console.log('distance:', searchDistance);
+    console.log('price:', price);
+    console.log('categories:', categories);
+    console.log('formats:', formats);
+    console.log('start time:', startTime);
+    console.log('end time:', endTime);
+
+    let userEventSearch = { latitude, longitude, search, searchDistance, price, categories, formats, startTime, endTime };
 
   }
 
@@ -66,52 +80,16 @@ export class EventSearchForm extends React.Component {
 
     const priceOptions = [{ value: 'free' }, { value: 'paid' }];
 
-    const categoryOptions = [
-      { name: 'Auto, Boat & Air', value: 118 },
-      { name: 'Business & Professional', value: 101 },
-      { name: 'Charity & Causes', value: 111 },
-      { name: 'Community & Culture', value: 113 },
-      { name: 'Family & Education', value: 115 },
-      { name: 'Fashion & Beauty', value: 106 },
-      { name: 'Film, Media & Entertainment', value: 104 },
-      { name: 'Food & Drink', value: 110 },
-      { name: 'Government & Politics', value: 112 },
-      { name: 'Health & Wellness', value: 107 },
-      { name: 'Hobbies & Special Interest', value: 119 },
-      { name: 'Home & Lifestyle', value: 117 },
-      { name: 'Music', value: 103 },
-      { name: 'Performing & Visual Arts', value: 105 },
-      { name: 'Religion & Spirituality', value: 114 },
-      { name: 'School Activities', value: 120 },
-      { name: 'Science & Technology', value: 102 },
-      { name: 'Seasonal & Holiday', value: 116 },
-      { name: 'Sports & Fitness', value: 108 },
-      { name: 'Travel & Outdoor', value: 109 },
-      { name: 'Other', value: 199 }
-    ];
+    const categoryOptions = [{ name: 'Auto, Boat & Air', value: 118 }, { name: 'Business & Professional', value: 101 }, { name: 'Charity & Causes', value: 111 }, { name: 'Community & Culture', value: 113 },
+      { name: 'Family & Education', value: 115 }, { name: 'Fashion & Beauty', value: 106 }, { name: 'Film, Media & Entertainment', value: 104 }, { name: 'Food & Drink', value: 110 },
+      { name: 'Government & Politics', value: 112 }, { name: 'Health & Wellness', value: 107 }, { name: 'Hobbies & Special Interest', value: 119 }, { name: 'Home & Lifestyle', value: 117 },
+      { name: 'Music', value: 103 }, { name: 'Performing & Visual Arts', value: 105 }, { name: 'Religion & Spirituality', value: 114 }, { name: 'School Activities', value: 120 },
+      { name: 'Science & Technology', value: 102 }, { name: 'Seasonal & Holiday', value: 116 }, { name: 'Sports & Fitness', value: 108 }, { name: 'Travel & Outdoor', value: 109 }, { name: 'Other', value: 199 }];
 
-    const formatOptions = [
-      { name: 'Appearance or Signing', value: 19 },
-      { name: 'Attraction', value: 17 },
-      { name: 'Camp, Trip, or Retreat', value: 18 },
-      { name: 'Class, Training, or Workshop', value: 9 },
-      { name: 'Concert or Performance', value: 6 },
-      { name: 'Conference', value: 1 },
-      { name: 'Convention', value: 4 },
-      { name: 'Dinner or Gala', value: 8 },
-      { name: 'Festival or Fair', value: 5 },
-      { name: 'Game or Competition', value: 14 },
-      { name: 'Meeting or Networking Event', value: 10 },
-      { name: 'Party or Social Gathering', value: 11 },
-      { name: 'Race or Endurance Event', value: 15 },
-      { name: 'Rally', value: 12 },
-      { name: 'Screening', value: 7 },
-      { name: 'Seminar or Talk', value: 2 },
-      { name: 'Tour', value: 16 },
-      { name: 'Tournament', value: 13 },
-      { name: 'Tradeshow, Consumer Show, or Expo', value: 3 },
-      { name: 'Other', value: 100 },
-    ];
+    const formatOptions = [{ name: 'Appearance or Signing', value: 19 }, { name: 'Attraction', value: 17 }, { name: 'Camp, Trip, or Retreat', value: 18 }, { name: 'Class, Training, or Workshop', value: 9 },
+      { name: 'Concert or Performance', value: 6 }, { name: 'Conference', value: 1 }, { name: 'Convention', value: 4 }, { name: 'Dinner or Gala', value: 8 }, { name: 'Festival or Fair', value: 5 },
+      { name: 'Game or Competition', value: 14 }, { name: 'Meeting or Networking Event', value: 10 }, { name: 'Party or Social Gathering', value: 11 }, { name: 'Race or Endurance Event', value: 15 },
+      { name: 'Rally', value: 12 }, { name: 'Screening', value: 7 }, { name: 'Seminar or Talk', value: 2 }, { name: 'Tour', value: 16 }, { name: 'Tournament', value: 13 }, { name: 'Tradeshow, Consumer Show, or Expo', value: 3 }, { name: 'Other', value: 100 }];
 
     return (
       <form
@@ -173,7 +151,7 @@ export class EventSearchForm extends React.Component {
           />
         </div>
         <div>
-          <label>Start Time</label>
+          <label>Search events after this date (optional):</label>
           <Field
             name="startTime"
             id="startTime"
@@ -181,14 +159,14 @@ export class EventSearchForm extends React.Component {
           />
         </div>
         <div>
-          <label>End Time</label>
+          <label>Search events until this date (optional):</label>
           <Field
             name="endTime"
             id="endTime"
             component={renderDateTimePicker}
           />
         </div>
-        <button type="submit" disabled={this.props.pristine || this.props.submitting}>Search Events</button>
+        <button type="submit" disabled={this.props.submitting}>Search Events</button>
         <button type="button" disabled={this.props.pristine || this.props.submitting} onClick={() => this.props.reset()}>Reset Search</button>
       </form>
     );
@@ -196,5 +174,14 @@ export class EventSearchForm extends React.Component {
 }
 
 export default reduxForm({
-  form: 'event-search-form'
+  form: 'event-search-form',
+  initialValues: {
+    userSearch: '',
+    userSearchDistance: '',
+    userSearchPrice: '',
+    userSearchCategories: '',
+    userSearchFormat: '',
+    startTime: '',
+    endTime: '',
+  }
 })(EventSearchForm);

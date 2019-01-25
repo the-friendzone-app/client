@@ -14,8 +14,10 @@ export class EventSearch extends React.Component {
   };
 
   render() {
+
     let eventSearchForm;
     let searchFormBtnDescription;
+    // toggles showing event search form on click.
     if (this.props.event.showEventSearchForm) {
       eventSearchForm = <EventSearchForm currentUsername={this.props.username} currentLocation={this.props.currentLocation}/>
       searchFormBtnDescription = 'Close Event Search Form';
