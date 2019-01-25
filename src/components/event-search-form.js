@@ -53,9 +53,9 @@ export class EventSearchForm extends React.Component {
       formats = formats.map(format => format.value).toString();
     }
     // use charAt to make sure it's returning date not 'Invalid Date'
-    let startTime = moment(value.startTime).format();
+    let startTime = moment(value.startTime).format('YYYY-MM-DDThh:mm:ss');
     startTime = (startTime.charAt(0) === 'I' && startTime.charAt(1) === 'n' ? '' : startTime );
-    let endTime = moment(value.endTime).format().toString();
+    let endTime = moment(value.endTime).format('YYYY-MM-DDThh:mm:ss').toString();
     endTime = (endTime.charAt(0) === 'I' && endTime.charAt(1) === 'n' ? '' : endTime );
 
     console.log('latitude:', this.props.currentLocation.latitude);

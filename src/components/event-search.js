@@ -5,6 +5,7 @@ import EventSearchForm from './event-search-form';
 import SetLocationForm from './set-location-form';
 import './event-search.css';
 import { toggleShowEventSearchForm } from '../actions/event-search';
+import EventSearchResults from './event-search-results';
 
 export class EventSearch extends React.Component {
 
@@ -34,6 +35,7 @@ export class EventSearch extends React.Component {
         <SetLocationForm userId={this.props.userId} currentLocation={this.props.currentLocation}/>
         <button onClick={() => this.handleClick()}>{searchFormBtnDescription}</button>
         {eventSearchForm}
+        <EventSearchResults />
       </section>
     )
   }
