@@ -111,5 +111,39 @@ export const submitAnswer = (index) => {
         type: SUBMIT_USERANSWER_SUCCESS,
         index
     }
-
 }
+
+//fetch introquiz
+export const FETCH_INTRO_SUCCESS = 'FETCH_INTRO_SUCCESS';
+export const fetchIntroSuccess = questions =>({
+type: FETCH_INTRO_SUCCESS,
+questions
+});
+
+
+export const FETCH_INTRO_ERROR = 'FETCH_INTRO_ERROR';
+export const fetchIntroError = error => ({
+    type: FETCH_INTRO_ERROR,
+    error
+});
+
+export const fetchIntroQuestions = () => (dispatch, getState) => {
+
+    const authToken = getState().auth.authToken;
+    return fetch(`${API_BASE_URL}/questions/intro-quiz`, {
+        method: 'GET',
+        headers: {
+            Authorization: `Bearer ${authToken}`
+        }
+    })
+        .then(res => normalizeResponseErrors(res))
+        .then(res => res.json())
+        .then((questions) => {
+            console.log('consolelog', questions)
+            dispatch(fetchIntroSuccess(questions))
+   
+        })
+            .catch(err => {
+            dispatch(fetchIntroError(err));
+        });
+};
