@@ -66,6 +66,40 @@ export const fetchQuestion = (category) => (dispatch, getState) => {
         });
 };
 
+//fetchQuestion
+export const ANSWER_QUESTION_SUCCESS = 'ANSWER_QUESTION_SUCCESS';
+export const answerQuestionSuccess = userAnswers =>({
+type: ANSWER_QUESTION_SUCCESS,
+userAnswers
+})
+
+
+export const ANSWER_QUESTION_ERROR = 'ANSWER_QUESTION_ERROR';
+export const answerQuestionError = error => ({
+    type: ANSWER_QUESTION_ERROR,
+    error
+});
+
+export const answerQuestion = (questionId, answer) => (dispatch, getState) => {
+
+    const authToken = getState().auth.authToken;
+    return fetch(`${API_BASE_URL}/questions/user-answered/${questionId}/${answer}`, {
+        method: 'GET',
+        headers: {
+            Authorization: `Bearer ${authToken}`
+        }
+    })
+        .then(res => normalizeResponseErrors(res))
+        .then(res => res.json())
+        .then((userAnswers) => {
+            dispatch(answerQuestionSuccess(userAnswers))
+   
+        })
+            .catch(err => {
+            dispatch(answerQuestionError(err));
+        });
+};
+
 //fetch option with pros & cons
 export const FETCH_OPTION_SUCCESS = 'FETCH_OPTION_SUCCESS';
 export const fetchOptionSuccess = option =>({
@@ -115,9 +149,10 @@ export const submitAnswer = (index) => {
 
 //fetch introquiz
 export const FETCH_INTRO_SUCCESS = 'FETCH_INTRO_SUCCESS';
-export const fetchIntroSuccess = questions =>({
+export const fetchIntroSuccess = (questions, answered) =>({
 type: FETCH_INTRO_SUCCESS,
-questions
+questions,
+answered
 });
 
 
@@ -138,9 +173,9 @@ export const fetchIntroQuestions = () => (dispatch, getState) => {
     })
         .then(res => normalizeResponseErrors(res))
         .then(res => res.json())
-        .then((questions) => {
-            console.log('consolelog', questions)
-            dispatch(fetchIntroSuccess(questions))
+        .then((data) => {
+            console.log('consolelog', data.questions, data.answered)
+            dispatch(fetchIntroSuccess(data.questions, data.answered))
    
         })
             .catch(err => {

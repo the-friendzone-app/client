@@ -1,33 +1,24 @@
 import React from 'react';
 import {Field, reduxForm, focus} from 'redux-form';
+import {answerQuestion} from '../actions/questions';
 import Input from './input';
 import {required} from '../validators';
 
 
 export class IntroQuizForm extends React.Component {
     onSubmit(values) {
-        const { Q1, Q2, Q3, Q4 } = values;
         console.log(values);
-      
-        return this.props
-
+        let questionId = Object.keys(values)[0];
+        this.props.dispatch(answerQuestion(questionId,values[questionId]));
     }
-
+//string seperated by white space javascript split function takea the first as the Q_id and 2nd value is value conditioning upon the white space
+//string=string
+//questionID= split(0,1)
+//questionvalue= split(1,1)
     render() {
+        const QuestionIndex = this.props.userAnswers.length;
+        const question = this.props.Questions[QuestionIndex];
 
-        const Questions = this.props.Questions.map((question,i) => {
-
-            return(
-                <section>
-                <label htmlFor={`Q${i}`}>{question.questionText}</label>
-                <div>
-                    <label><Field name={`Q${i}`} validate={[required]} id={`option1`}component={Input} type="radio" value={`option1`}/>{question.option1}</label>
-                    <label><Field name={`Q${i}`} validate={[required]} id={`option1`}component={Input} type="radio" value={`option2`}/>{question.option2}</label>
-                    <label><Field name={`Q${i}`} validate={[required]} id={`option1`}component={Input} type="radio" value={`option3`}/>{question.option3}</label>
-                </div>
-                </section>
-            )
-        })
         return (
             
             <form
@@ -35,11 +26,20 @@ export class IntroQuizForm extends React.Component {
                 onSubmit={this.props.handleSubmit(values =>
                     this.onSubmit(values)
                 )}>
-                {Questions}
+                <section>
+                <label htmlFor={`${question.id}`}><strong>{question.questionText}</strong></label>
+                <div>
+                    <label><Field name={`${question.id}`} id={question.id} component={Input} type="radio" value={`${question.option1}`}/>{question.option1}</label>
+                    <label><Field name={`${question.id}`}  id={question.id} component={Input} type="radio" value={`${question.option2}`}/>{question.option2}</label>
+                    <label><Field name={`${question.id}`}  id={question.id} component={Input} type="radio" value={`${question.option3}`}/>{question.option3}</label>
+                    <label><Field name={`${question.id}`}  id={question.id} component={Input} type="radio" value={`${question.option4}`}/>{question.option4}</label>
+                    <label><Field name={`${question.id}`}  id={question.id} component={Input} type="radio" value={`${question.option5}`}/>{question.option5}</label>
+                </div>
+                </section>
                 <button
                     type="submit"
                     disabled={this.props.pristine || this.props.submitting}>
-                    Finish Quiz
+                    Submit Answer
                 </button>
             </form>
         );

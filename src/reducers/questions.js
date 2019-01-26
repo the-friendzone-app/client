@@ -44,7 +44,14 @@ const questions = (state = initialState, action) => {
       case 'FETCH_INTRO_SUCCESS':
       return {
         ...state,
+        usersIntroAnswers: action.answered,
         introQuiz: action.questions,
+      }
+
+      case 'ANSWER_QUESTION_SUCCESS':
+      return {
+        ...state,
+        usersIntroAnswers: action.userAnswers
       }
 
     case 'FETCH_INTRO_ERROR':

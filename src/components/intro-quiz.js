@@ -24,7 +24,7 @@ export class IntroQuiz extends React.Component {
                     <h1>Intro Quiz Page</h1>
                 <section>Welcome to the Quiz. Please complete the quiz to use the app! If you close before finishing your 
                     answers will not be saved and you will have to start over from the beginning! :)</section>
-            <IntroQuizForm Questions={this.props.currentQuestion} {...this.props}/>
+            <IntroQuizForm {...this.props}/>
                         
                     </div>
                 </div>
@@ -57,7 +57,8 @@ export class IntroQuiz extends React.Component {
 }
 const mapStateToProps = state => ({
     loggedIn: state.auth.currentUser !== null,
-    Questions: state.questions.introQuiz
+    Questions: state.questions.introQuiz,
+    userAnswers: state.questions.usersIntroAnswers    
 });
 
 export default connect(mapStateToProps)(IntroQuiz);
