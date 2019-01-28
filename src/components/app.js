@@ -8,6 +8,7 @@ import Dashboard from './dashboard';
 
 import Community from './community';
 import Friends from './friends';
+import Suggested from './suggested';
 import Meetups from './meetups';
 
 import Poll from './poll';
@@ -15,7 +16,7 @@ import AnswerPage from './answerpage';
 
 
 import MeetupDetails from './meetup-details';
-
+import Chat from './chat';
 import PersonalityPolls from './personalitypolls';
 import IntroQuiz from './intro-quiz';
 import Topic from './topic';
@@ -64,6 +65,7 @@ export class App extends React.Component {
                     <Route exact path="/dashboard" component={Dashboard} />
                     <Route exact path="/register" component={RegistrationPage} />
                     <Route exact path="/friends" component={Friends} />
+                    <Route exact path="/suggested" component={Suggested} />
                     <Route exact path="/community" component={Community} />
                     <Route exact path="/community/:communityId" component={Topic} />
                     <Route exact path="/community/:communityId/:topicId" component={Comment} />

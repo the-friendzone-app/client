@@ -3,7 +3,7 @@ import * as actions from '../actions/community';
 const initialState = {
   community: [],
   topics: [],
-  comments:[],
+  comments: [],
   error: null,
   loading: false
 };
@@ -17,11 +17,11 @@ export default function forumsReducer(state = initialState, action) {
     case actions.FETCH_FORUM_ERROR:
       return { ...state, loading: false, error: action.error };
     case actions.FETCH_TOPIC_SUCCESS:
-      return {...state, loading: false, error: null, topics: action.topics}
+      return { ...state, loading: false, error: null, topics: action.topics }
     case actions.FETCH_TOPIC_ERROR:
       return { ...state, loading: false, error: action.error };
     case actions.FETCH_COMMENTS_SUCCESS:
-      return {...state, loading: false, error: null, comments: action.comments };
+      return { ...state, loading: false, error: null, comments: action.comments };
     case actions.FETCH_COMMENTS_ERROR:
       return { ...state, loading: false, error: action.error };
     case actions.POST_COMMENT_REQUEST:

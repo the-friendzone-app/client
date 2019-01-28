@@ -94,7 +94,7 @@ export const fetchFriends = () => (dispatch, getState) => {
     })
         .then(res => res.json())
         .then(res => {
-            console.log(res);
+            // console.log(res);
             dispatch(fetchFriendsSuccess(res));
         })
         .catch(err => dispatch(fetchFriendsError(err)));
@@ -121,7 +121,7 @@ export const fetchFriended = () => (dispatch, getState) => {
     dispatch(fetchFriendedRequest());
     const authToken = getState().auth.authToken;
     const currentUser = getState().auth.currentUser;
-    console.log(currentUser);
+    // console.log(currentUser);
     let userId;
     if (currentUser) {
         userId = currentUser._id;
@@ -135,7 +135,7 @@ export const fetchFriended = () => (dispatch, getState) => {
     })
         .then(res => res.json())
         .then(res => {
-            console.log(res);
+            // console.log(res);
             dispatch(fetchFriendedSuccess(res));
         })
         .catch(err => dispatch(fetchFriendedFailure(err)));
@@ -188,4 +188,105 @@ export const putMessages = (chatroomId, messages) => (dispatch, getState) => {
             dispatch(putMessageSuccess(res));
         })
         .catch(err => dispatch(putMessageFailure(err)));
-}; 
+};
+
+export const FETCH_SUGGESTED_REQUEST = 'FETCH_SUGGESTED_REQUEST';
+export const fetchSuggestedRequest = () => ({
+    type: FETCH_SUGGESTED_REQUEST
+});
+
+export const FETCH_SUGGESTED_SUCCESS = 'FETCH_SUGGESTED_SUCCESS';
+export const fetchSuggestedSuccess = suggested => ({
+    type: FETCH_SUGGESTED_SUCCESS,
+    suggested
+});
+
+export const FETCH_SUGGESTED_FAILURE = 'FETCH_SUGGESTED_FAILURE';
+export const fetchSuggestedFailure = error => ({
+    type: FETCH_SUGGESTED_FAILURE,
+    error
+});
+
+export const fetchSuggested = () => (dispatch, getState) => {
+    dispatch(fetchSuggestedRequest());
+    const authToken = getState().auth.authToken;
+    const currentUser = getState().auth.currentUser;
+    // console.log(currentUser);
+    let userId;
+    if (currentUser) {
+        userId = currentUser._id;
+    }
+
+    return fetch(`${API_BASE_URL}/friends/suggested/${userId}`, {
+        method: 'GET',
+        headers: {
+            Authorization: `Bearer ${authToken}`
+        }
+    })
+        .then(res => res.json())
+        .then(res => {
+            // console.log(res);
+            dispatch(fetchSuggestedSuccess(res));
+        })
+        .catch(err => dispatch(fetchSuggestedFailure(err)));
+};
+
+//add a friend
+export const ADD_FRIEND_REQUEST = 'ADD_FRIEND_REQUEST';
+export const addFriendRequest = () => ({
+    type: ADD_FRIEND_REQUEST
+});
+
+export const ADD_FRIEND_SUCCESS = 'ADD_FRIEND_SUCCESS';
+export const addFriendSuccess = (friends) => ({
+    type: ADD_FRIEND_SUCCESS,
+    friends
+});
+
+export const ADD_FRIEND_ERROR = 'ADD_FRIEND_ERROR';
+export const addFriendError = error => ({
+    type: ADD_FRIEND_ERROR,
+    error
+});
+
+export const addFriendToUser = (id) => (dispatch, getState) => {
+    const authToken = getState().auth.authToken;
+    const currentUser = getState().auth.currentUser;
+    console.log('friend added endpoint');
+    let userId;
+    if (currentUser) {
+        userId = currentUser._id;
+    }
+    dispatch(addFriendRequest());
+    fetch(`${API_BASE_URL}/friends/addfriend/${userId}/${id}`, {
+        method: 'PUT',
+        headers: {
+            authorization: `Bearer ${authToken}`
+        },
+    })
+        .catch(err => {
+            console.error(err);
+        });
+};
+
+//delete friend
+export const deleteFriend = (id) => (dispatch, getState) => {
+    const authToken = getState().auth.authToken;
+    const currentUser = getState().auth.currentUser;
+    console.log('delete friend endpoint');
+    let userId;
+    if (currentUser) {
+        userId = currentUser._id;
+    }
+    fetch(`${API_BASE_URL}/friends/friended/${userId}/${id}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+            authorization: `Bearer ${authToken}`
+        },
+    })
+        .then(result => result.json())
+        .then(friended => {
+            dispatch(fetchFriendedSuccess(friended));
+        })
+}

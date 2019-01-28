@@ -13,12 +13,19 @@ import {
   FETCH_MESSAGE_FAILURE,
   PUT_MESSAGE_REQUEST,
   PUT_MESSAGE_SUCCESS,
-  PUT_MESSAGE_FAILURE
+  PUT_MESSAGE_FAILURE,
+  FETCH_SUGGESTED_REQUEST,
+  FETCH_SUGGESTED_SUCCESS,
+  FETCH_SUGGESTED_FAILURE,
+  ADD_FRIEND_REQUEST,
+  ADD_FRIEND_SUCCESS,
+  ADD_FRIEND_ERROR,
 } from '../actions/users';
 
 const initialState = {
   friends: [],
   friended: [],
+  suggested: [],
   loading: false,
   error: null
 };
@@ -110,6 +117,40 @@ export default function reducer(state = initialState, action) {
       loading: false,
       error: action.error
     });
+  }
+  else if (action.type === FETCH_SUGGESTED_REQUEST) {
+    return Object.assign({}, state, {
+      loading: true,
+      error: null
+    });
+  }
+  else if (action.type === FETCH_SUGGESTED_SUCCESS) {
+    return Object.assign({}, state, {
+      loading: false,
+      suggested: action.suggested
+    });
+  }
+  else if (action.type === FETCH_SUGGESTED_FAILURE) {
+    return Object.assign({}, state, {
+      loading: false,
+      error: action.error
+    });
+  }
+  else if (action.type === ADD_FRIEND_REQUEST) {
+    return Object.assign({}, state, {
+      loading: true,
+      error: null
+    })
+  } else if (action.type === ADD_FRIEND_SUCCESS) {
+    return Object.assign({}, state, {
+      loading: false,
+      friends: [action.friends, ...state.friends]
+    })
+  } else if (action.type === ADD_FRIEND_ERROR) {
+    return Object.assign({}, state, {
+      loading: false,
+      error: action.error
+    })
   }
   return state;
 }
