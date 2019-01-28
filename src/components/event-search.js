@@ -35,6 +35,7 @@ export class EventSearch extends React.Component {
         <SetLocationForm userId={this.props.userId} currentLocation={this.props.currentLocation}/>
         <button onClick={() => this.handleClick()}>{searchFormBtnDescription}</button>
         {eventSearchForm}
+        {this.props.loading ? 'Loading event search results...' : '' }
         <EventSearchResults />
       </section>
     )
@@ -54,6 +55,7 @@ const mapStateToProps = state => {
     userId: state.auth.currentUser._id,
     event: state.event,
     searchResults: state.event.searchResults,
+    loading: state.event.loading,
   };
 };
 

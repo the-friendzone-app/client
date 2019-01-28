@@ -31,11 +31,13 @@ export default function reducer(state=initialState, action) {
     return {
       ...state, 
       searchResults: action.searchQuery,
+      loading: false,
     }
   } if (action.type === FETCH_EVENTBRITE_API_ERROR) {
     return {
       ...state,
       error: action.error,
+      loading: false,
     }
   } if (action.type === FETCH_EVENTBRITE_VENUE_REQUEST) {
     return {
@@ -46,11 +48,13 @@ export default function reducer(state=initialState, action) {
     return {
       ...state,
       searchResultsVenue: action.results,
+      loading: false,
     }
   } if (action.type === FETCH_EVENTBRITE_VENUE_ERROR) {
     return {
       ...state,
       error: action.error,
+      loading: false,
     }
   }
 
