@@ -7,9 +7,8 @@ import {required} from '../validators';
 
 export class IntroQuizForm extends React.Component {
     onSubmit(values) {
-        console.log(values);
-        let questionId = Object.keys(values)[0];
-        this.props.dispatch(answerQuestion(questionId,values[questionId]));
+        let questionIds = Object.keys(values)[Object.keys(values).length-1];
+        this.props.dispatch(answerQuestion(questionIds,values[questionIds]));
     }
 //string seperated by white space javascript split function takea the first as the Q_id and 2nd value is value conditioning upon the white space
 //string=string
@@ -37,7 +36,6 @@ export class IntroQuizForm extends React.Component {
                 </div>
                 </section>
                 <button
-                    type="submit"
                     disabled={this.props.pristine || this.props.submitting}>
                     Submit Answer
                 </button>
