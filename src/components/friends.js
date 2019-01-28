@@ -16,16 +16,17 @@ export class Friends extends React.Component {
     let deleteIt;
     // console.log(this.props);
     if (this.props.friended.friended) {
-      console.log(this.props.friended.friended);
+      // console.log(this.props.friended.friended);
       deleteIt = this.props.friended.friended.map((friend, i) => {
-        if (friend._id) {
-          return <button key={friend._id._id} onClick={() => this.props.dispatch(deleteFriend(friend._id._id))}>DELETE</button>
+        if (friend.chatroom) {
+          return <button key={friend._id._id} onClick={() => this.props.dispatch(deleteFriend(friend.chatroom._id))}>DELETE</button>
         }
         return <p key={i}>No friends :(</p>
       })
 
       chats = this.props.friended.friended.map(friend => {
-        if (friend._id) {
+        console.log(friend);
+        if (friend.chatroom) {
           return (<Chat key={friend.chatroom._id} friended={friend} />);
         }
       })
