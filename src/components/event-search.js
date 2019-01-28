@@ -20,7 +20,7 @@ export class EventSearch extends React.Component {
     let searchFormBtnDescription;
     // toggles showing event search form on click.
     if (this.props.event.showEventSearchForm) {
-      eventSearchForm = <EventSearchForm currentUsername={this.props.username} currentLocation={this.props.currentLocation} searchResults={this.props.searchResults}/>
+      eventSearchForm = <EventSearchForm currentUsername={this.props.username} currentLocation={this.props.currentLocation} searchResults={this.props.searchResults} />
       searchFormBtnDescription = 'Close Event Search Form';
     } else {
       searchFormBtnDescription = 'Open Event Search Form';
@@ -32,10 +32,12 @@ export class EventSearch extends React.Component {
         <p>Please use the event search form below to find available events in your area. Your search area is based off the
           current location you have set. You can change your current location at any time.
         </p>
-        <SetLocationForm userId={this.props.userId} currentLocation={this.props.currentLocation}/>
+        <SetLocationForm userId={this.props.userId} currentLocation={this.props.currentLocation} />
         <button onClick={() => this.handleClick()}>{searchFormBtnDescription}</button>
         {eventSearchForm}
-        {this.props.loading ? 'Loading event search results...' : '' }
+        <div>
+          {this.props.loading ? 'Loading event search results...' : ''}
+        </div>
         <EventSearchResults />
       </section>
     )
