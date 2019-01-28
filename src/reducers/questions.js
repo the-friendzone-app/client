@@ -1,13 +1,13 @@
 
-
 const initialState = {
   activePolls: [],
+  introQuiz: [],
   currentQuestion: null,
   questionID: null,
   options: [],
   optionIndex: null,
   error: null,
-  loading: false
+  loading: false,
 };
 
 const questions = (state = initialState, action) => {
@@ -41,19 +41,25 @@ const questions = (state = initialState, action) => {
         ...state,
         optionIndex: action.index
       }
-    // case 'FETCH'
-    //   case actions.FETCH_QUESTION_REQUEST:
-    //     return { ...state, loading: true };
-    //   case actions.FETCH_QUESTION_SUCCESS:
-    //     return { ...state, questions: action.questions, error: null, loading: false };
-    //   case actions.FETCH_QUESTION_ERROR:
-    //     return { ...state, loading: false, error: action.error };
-    //   case actions.POST_ANSWER_REQUEST:
-    //     return { ...state, loading: true };
-    //   case actions.POST_ANSWER_SUCCESS:
-    //     return { ...state, error: null, loading: false };
-    //   case actions.POST_ANSWER_ERROR:
-    //     return { ...state, loading: false, error: action.error };
+      case 'FETCH_INTRO_SUCCESS':
+      return {
+        ...state,
+        usersIntroAnswers: action.answered,
+        introQuiz: action.questions,
+      }
+
+      case 'ANSWER_QUESTION_SUCCESS':
+      return {
+        ...state,
+        usersIntroAnswers: action.userAnswers
+      }
+
+    case 'FETCH_INTRO_ERROR':
+      return {
+        ...state,
+        error: action.error
+      }
+ 
     default:
       return state;
   }
