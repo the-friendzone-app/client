@@ -17,6 +17,14 @@ export class IntroQuiz extends React.Component {
     this.props.dispatch(fetchIntroQuestions());
     }
     render() {
+        //have some sort of user marked for deletion that renders 2 different
+        //pages? one that says you're not a fit and another that says thank you and that button
+        //sends off the verification code to the email?
+        if(this.props.hasOwnProperty('Questions') && this.props.Questions.length && this.props.Questions !== null && this.props.Questions.length === this.props.userAnswers.length){
+            return(
+                <div><h1>Thanks for taking the quiz!</h1></div>
+            )
+        }
         if(this.props.hasOwnProperty('Questions') && this.props.Questions.length && this.props.Questions !== null){
             return (
                 <div>
