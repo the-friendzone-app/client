@@ -1,0 +1,351 @@
+/* comment-level*/
+
+.thread {
+  min-width: 320px;
+  width: 960px;
+  max-width: 960px;
+  border: solid black 1px;
+  border-radius: 4px;
+  box-shadow: 5px 5px 2.5px grey;
+  background: cornflowerblue;
+  margin-top: 100px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.comments {
+  display: inline-block;
+  padding: 0px;
+  margin: 10px;
+  min-width: 320px;
+  width: 900px;
+  max-width: 900px;
+  border: solid black 1px;
+  border-radius: 4px;
+  background: teal;
+}
+
+.comment-card {
+  border: solid black 2px;
+  margin: 10px;
+  border-radius: 4px;
+  background: white;
+  font-size: 14px;
+}
+
+.user-plate {
+  text-align: left;
+  width: 99%;
+  border-bottom: solid black 2px;
+  padding:5px;
+}
+
+.user-comment{
+  text-align:left;
+  padding: 5px;
+}
+
+.commentID{
+  display: inline-block;
+  width: 100%;
+  text-align: left;
+  color: black;
+  text-decoration: none;
+}
+
+.commentID:hover{
+  text-decoration: underline;
+  color:black;
+}
+
+.topic{
+  display: inline-block;
+  border: solid black 1px;
+  border-radius: 4px;
+  background: white;
+  position: sticky;
+  top: 0;
+  margin-bottom: 30px;
+  width: 95%;
+  background-color: teal;
+  color: white;
+}
+
+.topic-description{
+  background-color: white;
+  margin:0px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  color:black;
+}
+
+.topic-plate{
+  border-bottom: solid black 1px;
+}
+
+.topic-name{
+  display: inline-block;
+  text-align: left;
+  margin-top:5px;
+  margin-bottom: 5px;
+  float:left;
+  width:48%;
+  height:auto;
+  padding-left: 5px;
+}
+
+.topic-creator{
+  width:48%;
+  display: inline-block;
+  text-align:right;
+  margin-top:5px;
+  margin-bottom: 5px;
+  padding-right: 5px;
+}
+
+.add-comment-form{
+  display: inline-block;
+  width:700px;
+  max-width:700px;
+  min-width:320px;
+  background: white;
+  border-radius: 4px;
+  margin: 10px;
+}
+
+.commentInput-label{
+  width:100%;
+  display: block;
+  padding: 5px;
+  text-align: left;
+  font-weight: bold;
+}
+
+.comment-notification{
+  width: 100%;
+  height: 30px;
+  background: teal;
+  font: black;
+}
+
+.message{
+  display: inline-block;
+  width: 320px;
+  margin: 5px;
+}
+
+.edit-user-comment{
+  resize: none;
+  width: 100%;
+  box-sizing: border-box;
+  font-size: 16px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+  "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+  sans-serif;
+}
+
+.comment-status{
+  display: inline-block;
+  font-style: italic;
+  width: 50px;
+  margin: 0px;
+  
+}
+
+.response-list{
+  display: inline-block;
+  width: 99%;
+  text-align: left;
+  padding: 5px;
+  border-top: solid black 1px;
+  font-size: 12px;
+}
+
+.responses{
+  list-style: none;
+  display: inline-block;
+  padding-left: 5px;
+}
+
+.response{
+  display: inline-block;
+  margin:5px;
+}
+
+.comment-controls{
+  display: inline-block;
+  float: right;
+  widows: 10%;
+  height: auto;
+}
+
+.comment-controls, .comment-img{
+  height: 20px;
+  width: 20px;
+}
+
+.comment-controls, .comment-button{
+  height: 24px;
+  width: auto;
+  border-radius: 6px;
+  background: white;
+}
+
+.comment-button:hover{
+  border-color: black;
+}
+
+.replyCommentId{
+  display: inline-block;
+  width: 100%;
+  text-align: left;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-left: 5px;
+  font-style: italic;
+  color: black;
+  text-decoration: none;
+}
+
+.replyCommentId:hover{
+  text-decoration: underline;
+  color: black;
+}
+
+.comment::before { 
+  display: block; 
+  content: " "; 
+  margin-top: -110px; 
+  height: 110px; 
+  visibility: hidden; 
+  pointer-events: none;
+  z-index: -1;
+}
+
+.loading{
+  display: inline-block;
+}
+
+.loading-img{
+  display: inline-block;
+  height:100px;
+  width: 100px;
+}
+
+.thread-status{
+  font-style: italic;
+}
+
+/* community-level */
+
+.community-intro{
+  margin-top:100px;
+  min-width: 300px;
+  max-width: 960px;
+  border:solid black 1px;
+  border: solid black 1px;
+  border-radius: 4px;
+  box-shadow: 5px 5px 2.5px grey;
+  background: cornflowerblue;
+  margin-top: 100px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.community-description{
+  display: inline-block;
+  width: 90%;
+  background:white;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  padding: 20px;
+  text-align: left;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.communities-list{
+  display: inline-block;
+  padding: 0px;
+  width: 90%;
+  background: teal;
+  border-radius: 4px;
+  border: solid black 1px;
+}
+
+.community{
+  margin: 20px;
+  border: solid black 1px;
+  border-radius: 4px;
+  background: white;
+}
+
+.community-title{
+  background: teal;
+  display: inline-block;
+  width: 95%;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  margin-bottom: 0px;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  margin-left: auto;
+  margin-right: auto;
+  color: white;
+}
+
+/* topic level*/
+.topics{
+  margin-top:100px;
+  min-width: 300px;
+  max-width: 960px;
+  border:solid black 1px;
+  border: solid black 1px;
+  border-radius: 4px;
+  box-shadow: 5px 5px 2.5px grey;
+  background: cornflowerblue;
+  margin-top: 100px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.topics-list{
+  display: inline-block;
+  padding: 0px;
+  width: 90%;
+  background: teal;
+  border-radius: 4px;
+  border: solid black 1px;
+}
+
+.topic-card{
+  margin: 20px;
+  border: solid black 1px;
+  border-radius: 4px;
+  background: white;
+}
+
+.add-topic-form{
+  display: inline-block;
+  padding: 0px;
+  width: 90%;
+  background: teal;
+  border-radius: 4px;
+  border: solid black 1px;
+}
+
+.topicDescription{
+  resize: none;
+  width: 80%;
+  box-sizing: border-box;
+  font-size: 16px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+  "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+  sans-serif;
+}
+
+.topicInput{
+  font-size: 16px;
+}

@@ -8,18 +8,19 @@ import Dashboard from './dashboard';
 
 import Community from './community';
 import Friends from './friends';
+import Suggested from './suggested';
 import Meetups from './meetups';
 
 import Poll from './poll';
 import AnswerPage from './answerpage';
 
-import Chat from './chat';
 
 import MeetupDetails from './meetup-details';
-
+import Chat from './chat';
 import PersonalityPolls from './personalitypolls';
+import IntroQuiz from './intro-quiz';
 import Topic from './topic';
-import Comment from './comment';
+import Thread from './thread';
 
 
 import RegistrationPage from './registration-page';
@@ -67,9 +68,10 @@ export class App extends React.Component {
                     <Route exact path="/dashboard" component={Dashboard} />
                     <Route exact path="/register" component={RegistrationPage} />
                     <Route exact path="/friends" component={Friends} />
+                    <Route exact path="/suggested" component={Suggested} />
                     <Route exact path="/community" component={Community} />
                     <Route exact path="/community/:communityId" component={Topic} />
-                    <Route exact path="/community/:communityId/:topicId" component={Comment} />
+                    <Route exact path="/community/:communityId/:topicId" component={Thread} />
                     <Route exact path="/personality-polls" component={PersonalityPolls} />
                     <Route exact path="/personality-polls/:category" component={Poll} />
                     <Route exact path="/meetups" component={Meetups} />
@@ -79,6 +81,7 @@ export class App extends React.Component {
                     <Route exact path="/meetups/:meetupName" component={MeetupDetails} />
                     <Route exact path="/chat" component={Chat} />
                     <Route exact path="/answerpage" component={AnswerPage} />
+                    <Route exact path="/intro-quiz" component={IntroQuiz} />
                 </Switch>
             </div>
         );

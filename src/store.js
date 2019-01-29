@@ -25,7 +25,6 @@ const store = createStore(
         questions: questionReducer,
         community: forumsReducer,
         event: eventsReducer,
-
     }),
     composeWithDevTools(applyMiddleware(thunk))
 );
