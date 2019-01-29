@@ -63,42 +63,6 @@ export const fetchCurrentUser = () => (dispatch, getState) => {
         })
         .catch(err => dispatch(fetchCurrentUserFailure(err)));
 };
-export const FETCH_FRIENDS_REQUEST = 'FETCH_FRIENDS_REQUEST';
-export const fetchFriendsRequest = () => ({
-    type: FETCH_FRIENDS_REQUEST
-});
-
-export const FETCH_FRIENDS_SUCCESS = 'FETCH_FRIENDS_SUCCESS';
-export const fetchFriendsSuccess = friends => ({
-    type: FETCH_FRIENDS_SUCCESS,
-    friends
-});
-
-export const FETCH_FRIENDS_ERROR = 'FETCH_FRIENDS_ERROR';
-export const fetchFriendsError = error => ({
-    type: FETCH_FRIENDS_ERROR,
-    error
-});
-
-export const fetchFriends = () => (dispatch, getState) => {
-    dispatch(fetchFriendsRequest());
-    let userId;
-    const currentUser = getState().auth.currentUser;
-    // console.log(currentUser);
-    if (currentUser) {
-        userId = currentUser._id;
-    }
-
-    return fetch(`${API_BASE_URL}/friends/${userId}`, {
-        method: 'GET'
-    })
-        .then(res => res.json())
-        .then(res => {
-            // console.log(res);
-            dispatch(fetchFriendsSuccess(res));
-        })
-        .catch(err => dispatch(fetchFriendsError(err)));
-};
 
 export const FETCH_FRIENDED_REQUEST = 'FETCH_FRIENDED_REQUEST';
 export const fetchFriendedRequest = () => ({
@@ -141,6 +105,47 @@ export const fetchFriended = () => (dispatch, getState) => {
         .catch(err => dispatch(fetchFriendedFailure(err)));
 };
 
+export const FETCH_SCHAT_REQUEST = 'FETCH_SCHAT_REQUEST';
+export const fetchSchatRequest = () => ({
+    type: FETCH_SCHAT_REQUEST
+});
+
+export const FETCH_SCHAT_SUCCESS = 'FETCH_SCHAT_SUCCESS';
+export const fetchSchatSuccess = schat => ({
+    type: FETCH_SCHAT_SUCCESS,
+    schat
+});
+
+export const FETCH_SCHAT_FAILURE = 'FETCH_SCHAT_FAILURE';
+export const fetchSchatFailure = error => ({
+    type: FETCH_FRIENDED_FAILURE,
+    error
+});
+
+export const fetchSchat = () => (dispatch, getState) => {
+    dispatch(fetchSchatRequest());
+    const authToken = getState().auth.authToken;
+    const currentUser = getState().auth.currentUser;
+    // console.log(currentUser);
+    let userId;
+    if (currentUser) {
+        userId = currentUser._id;
+    }
+
+    return fetch(`${API_BASE_URL}/friends/schat/${userId}`, {
+        method: 'GET',
+        headers: {
+            Authorization: `Bearer ${authToken}`
+        }
+    })
+        .then(res => res.json())
+        .then(res => {
+            // console.log(res);
+            dispatch(fetchSchatSuccess(res));
+        })
+        .catch(err => dispatch(fetchSchatFailure(err)));
+};
+
 export const FETCH_MESSAGE_REQUEST = 'FETCH_MESSAGE_REQUEST';
 export const fetchMessageRequest = () => ({
     type: FETCH_MESSAGE_REQUEST
@@ -154,6 +159,21 @@ export const fetchMessageSuccess = messages => ({
 export const FETCH_MESSAGE_FAILURE = 'FETCH_MESSAGE_FAILURE';
 export const fetchMessageFailure = error => ({
     type: FETCH_MESSAGE_FAILURE,
+    error
+});
+export const FETCH_SMESSAGE_REQUEST = 'FETCH_SMESSAGE_REQUEST';
+export const fetchSmessageRequest = () => ({
+    type: FETCH_SMESSAGE_REQUEST
+});
+
+export const FETCH_SMESSAGE_SUCCESS = 'FETCH_SMESSAGE_SUCCESS';
+export const fetchSmessageSuccess = smessages => ({
+    type: FETCH_SMESSAGE_SUCCESS
+});
+
+export const FETCH_SMESSAGE_FAILURE = 'FETCH_SMESSAGE_FAILURE';
+export const fetchSmessageFailure = error => ({
+    type: FETCH_SMESSAGE_FAILURE,
     error
 });
 
@@ -190,6 +210,38 @@ export const putMessages = (chatroomId, messages) => (dispatch, getState) => {
         .catch(err => dispatch(putMessageFailure(err)));
 
 };
+export const PUT_SMESSAGE_REQUEST = 'PUT_SMESSAGE_REQUEST';
+export const putSmessageRequest = () => ({
+    type: PUT_SMESSAGE_REQUEST
+});
+
+export const PUT_SMESSAGE_SUCCESS = 'PUT_SMESSAGE_SUCCESS';
+export const putSmessageSuccess = () => ({
+    type: PUT_SMESSAGE_SUCCESS
+});
+
+export const PUT_SMESSAGE_FAILURE = 'PUT_SMESSAGE_FAILURE';
+export const putSmessageFailure = error => ({
+    type: PUT_SMESSAGE_FAILURE,
+    error
+});
+
+export const putSmessages = (chatroomId, messages) => (dispatch, getState) => {
+    dispatch(putSmessageRequest());
+    const authToken = getState().auth.authToken;
+    return fetch(`${API_BASE_URL}/messages/suggested/${chatroomId}`, {
+        method: 'PUT',
+        headers: {
+            'content-type': 'application/json',
+            Authorization: `Bearer ${authToken}`
+        },
+        body: JSON.stringify({ messages })
+    })
+        .then(res => {
+            dispatch(putSmessageSuccess(res));
+        })
+        .catch(err => dispatch(putSmessageFailure(err)));
+};
 
 export const FETCH_SUGGESTED_REQUEST = 'FETCH_SUGGESTED_REQUEST';
 export const fetchSuggestedRequest = () => ({
@@ -219,17 +271,12 @@ export const fetchSuggested = () => (dispatch, getState) => {
     }
 
     return fetch(`${API_BASE_URL}/friends/suggested/${userId}`, {
-        method: 'GET',
+        method: 'PUT',
         headers: {
             Authorization: `Bearer ${authToken}`
         }
     })
-        .then(res => res.json())
-        .then(res => {
-            // console.log(res);
-            dispatch(fetchSuggestedSuccess(res));
-        })
-        .catch(err => dispatch(fetchSuggestedFailure(err)));
+        .catch(err => console.log(err));
 };
 
 //add a friend
@@ -258,6 +305,8 @@ export const addFriendToUser = (id) => (dispatch, getState) => {
     if (currentUser) {
         userId = currentUser._id;
     }
+    console.log(userId);
+    console.log(id);
     dispatch(addFriendRequest());
     fetch(`${API_BASE_URL}/friends/addfriend/${userId}/${id}`, {
         method: 'PUT',
@@ -291,3 +340,46 @@ export const deleteFriend = (id) => (dispatch, getState) => {
             dispatch(fetchFriendedSuccess(friended));
         })
 }
+
+//IGNORE user
+export const IGNORE_USER_REQUEST = 'IGNORE_USER_REQUEST';
+export const ignoreUserRequest = () => ({
+    type: IGNORE_USER_REQUEST
+});
+
+export const IGNORE_USER_SUCCESS = 'IGNORE_USER_SUCCESS';
+export const ignoreUserSuccess = matched => ({
+    type: IGNORE_USER_SUCCESS,
+    matched
+});
+
+export const IGNORE_USER_FAILURE = 'IGNORE_USER_FAILURE';
+export const ignoreUserFailure = error => ({
+    type: IGNORE_USER_FAILURE,
+    error
+});
+
+export const ignoreUser = id => (dispatch, getState) => {
+    dispatch(ignoreUserRequest());
+    const authToken = getState().auth.authToken;
+    const currentUser = getState().auth.currentUser;
+    // console.log(currentUser);
+    let userId;
+    if (currentUser) {
+        userId = currentUser._id;
+    }
+
+    return fetch(`${API_BASE_URL}/ignore/${userId}`, {
+        method: 'PUT',
+        headers: {
+            'content-type': 'application/json',
+            Authorization: `Bearer ${authToken}`
+        },
+        body: JSON.stringify({ ignoredUser: id })
+    })
+        .then(res => {
+            dispatch(ignoreUserSuccess(res));
+        })
+        .catch(err => dispatch(ignoreUserFailure(err)));
+};
+
