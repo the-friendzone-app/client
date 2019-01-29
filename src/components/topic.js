@@ -34,7 +34,7 @@ export class Topic extends React.Component{
           <Link to={topicId}>
             <section className= 'topic-card'>
               <h4>{topic.topicName}</h4>
-              <div>Created By: {topic.creator.username}</div>
+              <div>Created By: {topic.creator.hashedUsername}</div>
               <p>{topic.description}</p>
               <div>Total Comments:{topic.comments.length}</div>
             </section>
