@@ -66,6 +66,40 @@ export const fetchQuestion = (category) => (dispatch, getState) => {
         });
 };
 
+//fetchQuestion
+export const ANSWER_QUESTION_SUCCESS = 'ANSWER_QUESTION_SUCCESS';
+export const answerQuestionSuccess = userAnswers =>({
+type: ANSWER_QUESTION_SUCCESS,
+userAnswers
+})
+
+
+export const ANSWER_QUESTION_ERROR = 'ANSWER_QUESTION_ERROR';
+export const answerQuestionError = error => ({
+    type: ANSWER_QUESTION_ERROR,
+    error
+});
+
+export const answerQuestion = (questionId, answer) => (dispatch, getState) => {
+
+    const authToken = getState().auth.authToken;
+    return fetch(`${API_BASE_URL}/questions/user-answered/${questionId}/${answer}`, {
+        method: 'GET',
+        headers: {
+            Authorization: `Bearer ${authToken}`
+        }
+    })
+        .then(res => normalizeResponseErrors(res))
+        .then(res => res.json())
+        .then((userAnswers) => {
+            dispatch(answerQuestionSuccess(userAnswers))
+   
+        })
+            .catch(err => {
+            dispatch(answerQuestionError(err));
+        });
+};
+
 //fetch option with pros & cons
 export const FETCH_OPTION_SUCCESS = 'FETCH_OPTION_SUCCESS';
 export const fetchOptionSuccess = option =>({
@@ -111,5 +145,74 @@ export const submitAnswer = (index) => {
         type: SUBMIT_USERANSWER_SUCCESS,
         index
     }
-
 }
+
+//fetch introquiz
+export const FETCH_INTRO_SUCCESS = 'FETCH_INTRO_SUCCESS';
+export const fetchIntroSuccess = (questions, answered) =>({
+type: FETCH_INTRO_SUCCESS,
+questions,
+answered
+});
+
+
+export const FETCH_INTRO_ERROR = 'FETCH_INTRO_ERROR';
+export const fetchIntroError = error => ({
+    type: FETCH_INTRO_ERROR,
+    error
+});
+
+export const fetchIntroQuestions = () => (dispatch, getState) => {
+
+    const authToken = getState().auth.authToken;
+    return fetch(`${API_BASE_URL}/questions/intro-quiz`, {
+        method: 'GET',
+        headers: {
+            Authorization: `Bearer ${authToken}`
+        }
+    })
+        .then(res => normalizeResponseErrors(res))
+        .then(res => res.json())
+        .then((data) => {
+            console.log('consolelog', data.questions, data.answered)
+            dispatch(fetchIntroSuccess(data.questions, data.answered))
+   
+        })
+            .catch(err => {
+            dispatch(fetchIntroError(err));
+        });
+};
+//fetch feedback
+//send verification email
+export const SEND_VERIFICATION_SUCCESS = 'SEND_VERIFICATION_SUCCESS';
+export const sendVerificationSuccess = verificationCode =>({
+type: SEND_VERIFICATION_SUCCESS,
+verificationCode
+});
+
+
+export const SEND_VERIFICATION_ERROR = 'SEND_VERIFICATION_ERROR';
+export const sendVerificationError = error => ({
+    type: SEND_VERIFICATION_ERROR,
+    error
+});
+
+export const sendVerification = () => (dispatch, getState) => {
+
+    const authToken = getState().auth.authToken;
+    return fetch(`${API_BASE_URL}/questions/send-verification`, {
+        method: 'GET',
+        headers: {
+            Authorization: `Bearer ${authToken}`
+        }
+    })
+        .then(res => normalizeResponseErrors(res))
+        .then(res => res.json())
+        .then((verificationCode) => {
+            dispatch(sendVerificationSuccess(verificationCode))
+   
+        })
+            .catch(err => {
+            dispatch(sendVerificationError(err));
+        });
+};

@@ -3,8 +3,10 @@ import {
     CLEAR_AUTH,
     AUTH_REQUEST,
     AUTH_SUCCESS,
-    AUTH_ERROR
+    AUTH_ERROR,
+    FETCH_FEEDBACK_SUCCESS
 } from '../actions/auth';
+
 
 const initialState = {
     authToken: null, // authToken !== null does not mean it has been validated
@@ -37,6 +39,11 @@ export default function reducer(state = initialState, action) {
         return Object.assign({}, state, {
             loading: false,
             error: action.error
+        });
+    }else if (action.type ===FETCH_FEEDBACK_SUCCESS){
+        return Object.assign({}, state, {
+            loading: false,
+            currentUser: action.currentUser
         });
     }
     return state;

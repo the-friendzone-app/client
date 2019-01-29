@@ -208,6 +208,7 @@ export const putMessages = (chatroomId, messages) => (dispatch, getState) => {
             dispatch(putMessageSuccess(res));
         })
         .catch(err => dispatch(putMessageFailure(err)));
+
 };
 export const PUT_SMESSAGE_REQUEST = 'PUT_SMESSAGE_REQUEST';
 export const putSmessageRequest = () => ({
@@ -339,6 +340,7 @@ export const deleteFriend = (id) => (dispatch, getState) => {
             dispatch(fetchFriendedSuccess(friended));
         })
 }
+
 //IGNORE user
 export const IGNORE_USER_REQUEST = 'IGNORE_USER_REQUEST';
 export const ignoreUserRequest = () => ({
@@ -380,3 +382,4 @@ export const ignoreUser = id => (dispatch, getState) => {
         })
         .catch(err => dispatch(ignoreUserFailure(err)));
 };
+

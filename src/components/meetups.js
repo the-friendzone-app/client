@@ -1,11 +1,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import requiresLogin from './requires-login';
-import MeetupForm from './meetup-form';
-import MeetupsList from './meetup-list';
+// import MeetupForm from './meetup-form';
+// import MeetupsList from './meetup-list';
+import { Link } from 'react-router-dom';
 import './meetups.css';
 
 export class Meetups extends React.Component {
+
+  // <h1 className ="create-meetups-title">Create a FriendZone Meetup!</h1>
+  // <MeetupForm currentUsername={this.props.username} />
+  // <MeetupsList />
 
   render() {
     return (
@@ -19,9 +24,9 @@ export class Meetups extends React.Component {
           ‘Create Event’ button once you’ve found the result you're looking for. The event will then 
           be made available for other FriendZone members to join and attend the event with you. Never 
           attend another concert or event alone!</p>
-        <h1 className ="create-meetups-title">Create a FriendZone Meetup!</h1>
-        <MeetupForm currentUsername={this.props.username} />
-        <MeetupsList />
+          <Link className="view-details-link" to={{ pathname: `/meetups/friendzone-meetups` }}>FriendZone Meetups</Link>
+          <Link className="view-details-link" to={{ pathname: `/meetups/create-meetup` }}>Create Meetup</Link>
+          <Link className="view-details-link" to={{ pathname: `/meetups/event-search` }}>Event Search</Link>
       </section>
     )
   }
