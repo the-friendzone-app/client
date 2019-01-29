@@ -13,14 +13,16 @@ import {
   FETCH_MESSAGE_FAILURE,
   PUT_MESSAGE_REQUEST,
   PUT_MESSAGE_SUCCESS,
-  PUT_MESSAGE_FAILURE
+  PUT_MESSAGE_FAILURE,
+  SEND_VERIFICATION_ERROR,
+  SEND_VERIFICATION_SUCCESS
 } from '../actions/users';
 
 const initialState = {
   friends: [],
   friended: [],
   loading: false,
-  error: null
+  error: null,
 };
 
 export default function reducer(state = initialState, action) {
@@ -111,5 +113,6 @@ export default function reducer(state = initialState, action) {
       error: action.error
     });
   }
+ 
   return state;
 }

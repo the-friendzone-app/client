@@ -8,6 +8,7 @@ const initialState = {
   optionIndex: null,
   error: null,
   loading: false,
+  VerifiedPage: false,
 };
 
 const questions = (state = initialState, action) => {
@@ -55,6 +56,17 @@ const questions = (state = initialState, action) => {
       }
 
     case 'FETCH_INTRO_ERROR':
+      return {
+        ...state,
+        error: action.error
+      }
+      case 'SEND_VERIFICATION_SUCCESS':
+      return {
+        ...state,
+       VerifiedPage: true
+      }
+
+    case 'SEND_VERIFICATION_ERROR':
       return {
         ...state,
         error: action.error
