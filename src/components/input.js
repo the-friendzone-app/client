@@ -29,7 +29,7 @@ export default class Input extends React.Component {
                 </label>
                 <input
                     {...this.props.input}
-                    
+                    placeholder={this.props.placeholder}
                     type={this.props.type}
                     ref={input => (this.input = input)}
                 />

@@ -7,25 +7,26 @@ export class Dashboard extends React.Component {
     componentDidMount() {
     }
     render() {
+
         return (
             <React.Fragment>
-        
-            <div className="dashboard">
-                <div className="dashboard-username">
-                <h1>The Friend Zone</h1>
-                    Welcome to The Friend Zone!<br />
-                    Your Username is '{this.props.username}'<br />
-                    Your Hashed Username is: {this.props.hashedUsername}!
+
+                <div className="dashboard">
+                    <div className="dashboard-username">
+                        <h1>The Friend Zone</h1>
+                        Welcome to The Friend Zone!<br />
+                        Your Username is '{this.props.username}'<br />
+                        Your Hashed Username is: {this.props.hashedUsername}!
               <br />
-                
-                    <Link to ='/friends'><div className="dashboard-friends">Friends</div></Link>
-                    <Link to ='/meetups'><div className="dashboard-meetups">Meetups</div></Link>
-                    <Link to ='/personality-polls'><div className="dashboard-polls">Personality Polls</div></Link>
-                    <Link to ='/community'><div className="dashboard-communities">Community</div></Link>
+
+                        <Link to='/suggested'><div className="dashboard-friends">Friends</div></Link>
+                        <Link to='/meetups'><div className="dashboard-meetups">Meetups</div></Link>
+                        <Link to='/personality-polls'><div className="dashboard-polls">Personality Polls</div></Link>
+                        <Link to='/community'><div className="dashboard-communities">Community</div></Link>
                     </div>
-   
-            </div>
-   </React.Fragment>         
+
+                </div>
+            </React.Fragment>
         );
     }
 }

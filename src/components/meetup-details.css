@@ -19,6 +19,7 @@
 
 .meetup-details-info {
   list-style-type: none;
+  text-align: left;
 }
 
 .meetup-details-info li {
@@ -49,6 +50,7 @@
   clear: right;
   float: left;
   border: 0.5px solid lightgray;
+  text-align: left;
 }
 
 .meetup-members-list ul {
@@ -67,14 +69,20 @@
 .meetup-chat {
   display: inline-block;
   margin-left: 25px;
+  margin-bottom: 100px;
   border: 0.5px solid lightgray;
   height: 300px;
-  width: 68%;
+  width: 59%;
   min-width: 300px;
+  float: right;
 }
 
 .meetup-chat-placeholder {
   margin-top: 25px;
   text-align: center;
   font-weight: bold;
+}
+
+.meetup-countdown-timer-container {
+  font-size: 22px;
 }
