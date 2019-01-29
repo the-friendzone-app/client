@@ -6,10 +6,9 @@ import { fetchCurrentUser, fetchSuggested, addFriendToUser, ignoreUser, fetchSch
 import Chat from './schat';
 export class Suggested extends React.Component {
   componentDidMount() {
-    this.props.dispatch(fetchCurrentUser())
-      .then(() => this.props.dispatch(fetchSchat()))
-      .then(() => this.props.dispatch(fetchSuggested()))
-      ;
+    this.props.dispatch(fetchCurrentUser());
+    this.props.dispatch(fetchSuggested());
+    this.props.dispatch(fetchSchat());
   }
   addFriend(id) {
     return (
@@ -35,9 +34,9 @@ export class Suggested extends React.Component {
     if (this.props.currentUser.user) {
       ignoreList = this.props.currentUser.user.ignored;
     }
-    console.log(ignoreList);
+    // console.log(ignoreList);
     // console.log(suggested);
-    console.log(schat.suggested);
+    // console.log(schat.suggested);
 
     if (schat.suggested) {
       suggests = schat.suggested.map((suggest, i) => {
@@ -45,7 +44,7 @@ export class Suggested extends React.Component {
         for (let i = 0; i < ignoreList.length; i++) {
           if (suggest._id._id === ignoreList[i]) {
             schat.suggested.splice(i, 1);
-            console.log(schat.suggested);
+            // console.log(schat.suggested);
           }
         }
       });

@@ -270,17 +270,12 @@ export const fetchSuggested = () => (dispatch, getState) => {
     }
 
     return fetch(`${API_BASE_URL}/friends/suggested/${userId}`, {
-        method: 'GET',
+        method: 'PUT',
         headers: {
             Authorization: `Bearer ${authToken}`
         }
     })
-        .then(res => res.json())
-        .then(res => {
-            // console.log(res);
-            dispatch(fetchSuggestedSuccess(res));
-        })
-        .catch(err => dispatch(fetchSuggestedFailure(err)));
+        .catch(err => console.log(err));
 };
 
 //add a friend
