@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import requiresLogin from './requires-login';
 import { fetchAllMeetups, joinMeetup, fetchMeetupAttendence } from '../actions/meetups';
 import './meetup-details.css';
+import MeetupCountdownTimer from './meetup-countdown-timer';
 
 let moment = require('moment');
 
@@ -74,12 +75,13 @@ export class MeetupsList extends React.Component {
         <section className="meetups-details-container">
           <h1 className="meetup-details-name">{meetup.name}</h1>
           <p className="meetup-details-createdby">Meetup created by {meetup.createdBy} on {formattedCreatedAtTime}</p>
+          <MeetupCountdownTimer startTime={startTime} endTime={endTime}/>
           <ul className="meetup-details-info">
-            <li><b>Location:</b> {meetup.location}</li>
-            <li><b>Description:</b> {meetup.description}</li>
             <li><b>Start Time:</b> {formattedStartTime}</li>
             <li><b>End Time:</b> {formattedEndTime}</li>
             <li><b>Duration:</b> {hours} hours {minutes} minutes</li>
+            <li><b>Location:</b> {meetup.location}</li>
+            <li><b>Description:</b> {meetup.description}</li>
           </ul>
           <div className="join-meetup-button-container">
             {displayJoinBtn}

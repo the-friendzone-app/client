@@ -2,11 +2,11 @@ import React from "react";
 import io from "socket.io-client";
 import { API_BASE_URL } from '../config';
 import { connect } from 'react-redux';
-import { fetchMessageRequest, fetchMessageSuccess, fetchMessageFailure, putMessages } from '../actions/users';
+import { fetchSmessageRequest, fetchSmessageSuccess, fetchSmessageFailure, putSmessages } from '../actions/users';
 import Modal from 'react-modal';
 
 Modal.setAppElement('body');
-class Chat extends React.Component {
+class Schat extends React.Component {
   constructor(props) {
     super(props);
 
@@ -25,7 +25,7 @@ class Chat extends React.Component {
       this.setState({
         messages: [...this.state.messages, data]
       });
-      this.props.dispatch(putMessages(this.state.chatroom, this.state.messages));
+      this.props.dispatch(putSmessages(this.state.chatroom, this.state.messages));
       // console.log(this.state.messages);
     });
     this.openModal = this.openModal.bind(this);
@@ -47,7 +47,7 @@ class Chat extends React.Component {
   // when clicking send message, sends message to server every time then message input is cleared so another message can be sent
   onClick() {
     this.state.socket.emit('CHAT', {
-      handle: this.props.username,
+      handle: this.props.hashedUsername,
       message: this.state.message,
       room: this.state.chatroom
     });
@@ -68,19 +68,20 @@ class Chat extends React.Component {
 
   componentDidMount() {
     //console.log(this.props.friended);
-    const friended = this.props.friended;
+    const schat = this.props.schat;
+    // console.log(schat);
     let user;
     let room;
-    if (friended) {
-      user = friended._id;
-      room = friended.chatroom;
+    if (schat) {
+      user = schat._id;
+      room = schat.chatroom;
     }
-    console.log('FRIENDED', friended);
+    // console.log('SCHAT', schat);
     let person;
     let hashedUser;
     let chatroom;
 
-    if (friended) {
+    if (schat) {
       person = user ? user.username : '';
       hashedUser = user ? user.hashedUsername : '';
       chatroom = room ? room._id : '';
@@ -90,8 +91,8 @@ class Chat extends React.Component {
       person, chatroom, hashedUser
     });
     this.state.socket.emit('subscribe', chatroom);
-    if (chatroom !== 'Global chat') {
-      this.fetchMessages(chatroom);
+    if (chatroom !== '') {
+      this.fetchSmessages(chatroom);
     }
   }
 
@@ -99,10 +100,10 @@ class Chat extends React.Component {
     this.state.socket.disconnect();
   }
 
-  fetchMessages(chatroomId) {
-    this.props.dispatch(fetchMessageRequest());
+  fetchSmessages(chatroomId) {
+    this.props.dispatch(fetchSmessageRequest());
     const authToken = this.props.authToken;
-    return fetch(`${API_BASE_URL}/messages/${chatroomId}`, {
+    return fetch(`${API_BASE_URL}/messages/suggested/${chatroomId}`, {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${authToken}`
@@ -111,12 +112,12 @@ class Chat extends React.Component {
       .then(res => res.json())
       .then(res => {
         // console.log(res);
-        this.props.dispatch(fetchMessageSuccess(res));
+        this.props.dispatch(fetchSmessageSuccess(res));
         this.setState({
           messages: res.messages
         });
       })
-      .catch(err => this.props.dispatch(fetchMessageFailure(err)));
+      .catch(err => this.props.dispatch(fetchSmessageFailure(err)));
   };
 
   render() {
@@ -161,4 +162,4 @@ const mapStateToProps = state => ({
   hashedUsername: state.auth.currentUser.hashedUsername,
   authToken: state.auth.authToken
 })
-export default connect(mapStateToProps)(Chat);
+export default connect(mapStateToProps)(Schat);

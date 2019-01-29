@@ -2,10 +2,14 @@ import * as actions from '../actions/community';
 
 const initialState = {
   community: [],
+  editing: false,
+  deletion: false,
   topics: [],
-  comments: [],
-  error: null,
-  loading: false
+  comments:[],
+  editComment: '',
+  error: {},
+  loading: false,
+  replyTo: ''
 };
 
 export default function forumsReducer(state = initialState, action) {
@@ -36,6 +40,32 @@ export default function forumsReducer(state = initialState, action) {
       return { ...state, error: null, loading: false };
     case actions.POST_TOPIC_ERROR:
       return { ...state, loading: false, error: action.error };
+    case actions.ADD_TOPIC_TRUE:
+      return {...state, topicAdd: true};
+    case actions.ADD_TOPIC_FALSE:
+      return {...state, topicAdd: false};
+    case actions.DELETE_COMMENT_REQUEST:
+      return { ...state, loading: true };
+    case actions.DELETE_COMMENT_SUCCESS:
+      return { ...state, error: null, loading: false, deletion: true };
+    case actions.DELETE_COMMENT_ERROR:
+      return { ...state, loading: false, error: action.error }; 
+    case actions.DELETE_COMMENT_RESET:
+      return { ...state, error: null, loading: false, deletion: false };
+    case actions.EDIT_COMMENT_REQUEST:
+      return { ...state, loading: true };
+    case actions.EDIT_COMMENT_SUCCESS:
+      return { ...state, loading: false, error: null };
+    case actions.EDIT_COMMENT_ERROR:
+      return { ...state, loading: false, error: action.error };  
+    case actions.EDITING_COMMENT_TRUE:
+      return { ...state, editing: true, editComment: action.commentId };
+    case actions.EDITING_COMMENT_FALSE:
+      return { ...state, editing: false, editComment:'' };
+    case actions.ADD_REPLY_TO:
+      return { ...state, editing: false, replyTo: action.commentId }; 
+    case actions.REMOVE_REPLY_TO:
+      return { ...state, editing: false, replyTo: '' };    
     default:
       return state;
   }

@@ -2,9 +2,16 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import requiresLogin from './requires-login';
-import { fetchTopic, postTopic } from '../actions/community';
+import { fetchForum, fetchTopic, postTopic, addTopicTrue, addTopicFalse } from '../actions/community';
 
 export class Topic extends React.Component{
+   
+  componentDidMount(){
+    this.props.dispatch(fetchForum())
+    .then(() => this.props.dispatch(fetchTopic(this.props.location.pathname.slice(-24))));
+  }
+
+
   onSubmit(e){
     const newTopic = {
       topicName: e.target.topicInput.value,
@@ -13,28 +20,22 @@ export class Topic extends React.Component{
     }
     e.target.topicInput.value = '';
     e.target.topicDescription.value = '';
-    this.props.dispatch(postTopic(newTopic));
-    this.props.dispatch(fetchTopic(this.props.match.params.communityId));    
-  }
-
-  
-  componentDidMount(){
-    this.props.dispatch(fetchTopic(this.props.match.params.communityId));
+    this.props.dispatch(postTopic(newTopic))
+    .then(() => this.props.dispatch(fetchTopic(this.props.match.params.communityId)));    
   }
 
   render() {
     const communityId = this.props.match.params.communityId;
-    const community = this.props.community.find(community => community.id == communityId);
-    
+    const community = this.props.community.find(community => community.id === communityId);
     const topics= this.props.topics.map((topic, index) => {
       let topicId = `${this.props.match.url}/${topic.id}`;
       return (
         <li className={'topic-'+topic.title} key={index}>
           <Link to={topicId}>
-            <section>
+            <section className= 'topic-card'>
               <h4>{topic.topicName}</h4>
+              <div>Created By: {topic.creator.hashedUsername}</div>
               <p>{topic.description}</p>
-              <div>Created By: {topic.creator.username}</div>
               <div>Total Comments:{topic.comments.length}</div>
             </section>
           </Link>
@@ -42,22 +43,47 @@ export class Topic extends React.Component{
       );
     });
 
+    let topicList;
+    if(this.props.loading === true){
+      topicList = (<div className='loading'>Loading Topics...</div>);
+    } else {
+      topicList = (<ul className='topics-list'>{topics}</ul>);
+    }
+
+    let topicAdd;
+    if(this.props.topicAdd === false){
+      topicAdd = (
+        <div>
+        <h4>Is there something you'd like to discuss but don't see it on the topic list?</h4>
+        <button onClick={() => this.props.dispatch(addTopicTrue())}>Want to add a topic?</button>  
+        </div>)
+    } else{
+     topicAdd = ( <form className='add-topic-form' onSubmit={e =>{
+        e.preventDefault();
+        this.onSubmit(e);
+      }}>
+        <div className='topic-title-input'>
+          <label htmlFor='topicInput'>Topic:  </label>
+          <input className='topicInput' name='topicInput' type='text' placeholder='Enter a topic!'></input>
+        </div>
+        <div className='topic-description-input'>
+          <label htmlFor='topicDescription'>Description:  </label>
+          <textarea name='topicDescription' className='topicDescription' placeholder='Describe your topic!'></textarea>
+        </div>
+        <button>Submit Topic</button>
+        <button onClick={() => this.props.dispatch(addTopicFalse())}>Cancel</button> 
+      </form>)
+    }
+
     return (
-      <section className="Topics">
+      <section className="topics">
         <Link to='/community'><button> Back to Communities</button></Link>
-        <h3>{community.mainTitle}</h3>
-        <ul>{topics}</ul>
-        <form className='topic-post' onSubmit={e =>{
-          e.preventDefault();
-          this.onSubmit(e);
-        }}>
-          <h4>Want to add a topic?</h4>
-          <label htmlFor='topicInput'>Topic:</label>
-          <input className='topicInput' name='topicInput' type='text' placeholder='Give the people something to talk about ...'></input>
-          <label htmlFor='topicDescription'>Description:</label>
-          <textarea name='topicDescription' rows='4' cols='30'></textarea>
-          <button>Submit Topic</button>
-        </form>
+        <h3 className='community-title'>{community ? community.mainTitle : 'Loading...'}</h3>
+        <div className='community-description'>
+          <p>{community ? community.description : 'Loading...'}</p>
+        </div>
+        {topicList}
+        {topicAdd}
       </section>
     )
   }
@@ -66,7 +92,9 @@ export class Topic extends React.Component{
 function mapStateToProps(state){
   return{
     community: state.community.community,
-    topics: state.community.topics
+    topics: state.community.topics,
+    loading: state.community.loading,
+    topicAdd: state.community.topicAdd
   }
 }
 

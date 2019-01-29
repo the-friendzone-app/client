@@ -20,13 +20,15 @@ import MeetupDetails from './meetup-details';
 import Chat from './chat';
 import PersonalityPolls from './personalitypolls';
 import IntroQuiz from './intro-quiz';
-import IntroQuizPage from './intro-quiz-page';
 import Topic from './topic';
-import Comment from './comment';
+import Thread from './thread';
 
 
 import RegistrationPage from './registration-page';
 import { refreshAuthToken } from '../actions/auth';
+import EventSearch from './event-search';
+import CreateMeetup from './create-meetup';
+import FriendZoneMeetups from './friendzone-meetups';
 
 export class App extends React.Component {
     componentDidUpdate(prevProps) {
@@ -70,15 +72,17 @@ export class App extends React.Component {
                     <Route exact path="/suggested" component={Suggested} />
                     <Route exact path="/community" component={Community} />
                     <Route exact path="/community/:communityId" component={Topic} />
-                    <Route exact path="/community/:communityId/:topicId" component={Comment} />
+                    <Route exact path="/community/:communityId/:topicId" component={Thread} />
                     <Route exact path="/personality-polls" component={PersonalityPolls} />
                     <Route exact path="/personality-polls/:category" component={Poll} />
                     <Route exact path="/meetups" component={Meetups} />
+                    <Route exact path="/meetups/friendzone-meetups" component={FriendZoneMeetups} />
+                    <Route exact path="/meetups/create-meetup" component={CreateMeetup} />
+                    <Route exact path="/meetups/event-search" component={EventSearch} />
                     <Route exact path="/meetups/:meetupName" component={MeetupDetails} />
                     <Route exact path="/chat" component={Chat} />
                     <Route exact path="/answerpage" component={AnswerPage} />
                     <Route exact path="/intro-quiz" component={IntroQuiz} />
-                    <Route exact path="/intro-quiz-page" component={IntroQuizPage} />
                 </Switch>
             </div>
         );

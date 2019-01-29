@@ -182,3 +182,37 @@ export const fetchIntroQuestions = () => (dispatch, getState) => {
             dispatch(fetchIntroError(err));
         });
 };
+//fetch feedback
+//send verification email
+export const SEND_VERIFICATION_SUCCESS = 'SEND_VERIFICATION_SUCCESS';
+export const sendVerificationSuccess = verificationCode =>({
+type: SEND_VERIFICATION_SUCCESS,
+verificationCode
+});
+
+
+export const SEND_VERIFICATION_ERROR = 'SEND_VERIFICATION_ERROR';
+export const sendVerificationError = error => ({
+    type: SEND_VERIFICATION_ERROR,
+    error
+});
+
+export const sendVerification = () => (dispatch, getState) => {
+
+    const authToken = getState().auth.authToken;
+    return fetch(`${API_BASE_URL}/questions/send-verification`, {
+        method: 'GET',
+        headers: {
+            Authorization: `Bearer ${authToken}`
+        }
+    })
+        .then(res => normalizeResponseErrors(res))
+        .then(res => res.json())
+        .then((verificationCode) => {
+            dispatch(sendVerificationSuccess(verificationCode))
+   
+        })
+            .catch(err => {
+            dispatch(sendVerificationError(err));
+        });
+};
