@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import requiresLogin from './requires-login';
-import { fetchCurrentUser, fetchFriends, fetchFriended } from '../actions/users';
+import { withRouter } from 'react-router'
+import { fetchCurrentUser, fetchFriends, fetchFriended, deleteFriend } from '../actions/users';
 import Chat from './chat';
 
 export class Friends extends React.Component {
@@ -11,34 +12,35 @@ export class Friends extends React.Component {
       .then(() => this.props.dispatch(fetchFriended()));
   }
   render() {
-    let friends;
-    //friends
-    friends = this.props.friends.map((friend) => {
-      return (
-        <li key={friend.username}>
-          <p>{friend.username}</p>
-        </li>
-      )
-    })
     let chats;
-    console.log(this.props);
+    let deleteIt;
+    // console.log(this.props);
     if (this.props.friended.friended) {
+      console.log(this.props.friended.friended);
+      deleteIt = this.props.friended.friended.map((friend, i) => {
+        if (friend._id) {
+          return <button key={friend._id._id} onClick={() => this.props.dispatch(deleteFriend(friend._id._id))}>DELETE</button>
+        }
+        return <p key={i}>No friends :(</p>
+      })
+
       chats = this.props.friended.friended.map(friend => {
-        return (<Chat key={friend.chatroom._id} friended={friend} />);
+        if (friend._id) {
+          return (<Chat key={friend.chatroom._id} friended={friend} />);
+        }
       })
     }
     return (
       <div className="dashboard">
-      <section className="friends-list">
-        <h1>Friends List</h1>
-        <ul>
-          <div>{friends}</div>
-        </ul>
-        {chats}
-        <div>
-          <Chat />
-        </div>
-      </section>
+        <section className="friends-list">
+          <h1>Friends List</h1>
+          <button onClick={() => this.props.history.go(-1)}>Suggested List</button>
+          <ul>
+            {chats}
+            {deleteIt}
+          </ul>
+
+        </section>
       </div>
     )
   }
@@ -47,8 +49,9 @@ const mapStateToProps = state => {
   return {
     username: state.auth.currentUser.username,
     friends: state.user.friends,
-    friended: state.user.friended
+    friended: state.user.friended,
+    authToken: state.auth.authToken
   };
 };
 
-export default requiresLogin()(connect(mapStateToProps)(Friends));
+export default withRouter(requiresLogin()(connect(mapStateToProps)(Friends)));
