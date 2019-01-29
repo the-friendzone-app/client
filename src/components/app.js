@@ -20,7 +20,7 @@ import Chat from './chat';
 import PersonalityPolls from './personalitypolls';
 import IntroQuiz from './intro-quiz';
 import Topic from './topic';
-import Comment from './comment';
+import Thread from './thread';
 
 
 import RegistrationPage from './registration-page';
@@ -68,7 +68,7 @@ export class App extends React.Component {
                     <Route exact path="/suggested" component={Suggested} />
                     <Route exact path="/community" component={Community} />
                     <Route exact path="/community/:communityId" component={Topic} />
-                    <Route exact path="/community/:communityId/:topicId" component={Comment} />
+                    <Route exact path="/community/:communityId/:topicId" component={Thread} />
                     <Route exact path="/personality-polls" component={PersonalityPolls} />
                     <Route exact path="/personality-polls/:category" component={Poll} />
                     <Route exact path="/meetups" component={Meetups} />

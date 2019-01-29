@@ -23,7 +23,6 @@ const store = createStore(
         friends: friendsReducer,
         questions: questionReducer,
         community: forumsReducer,
-
     }),
     composeWithDevTools(applyMiddleware(thunk))
 );
