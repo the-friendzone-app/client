@@ -2,9 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import {Link} from 'react-router-dom';
 import requiresLogin from './requires-login';
-import { fetchForum, fetchTopic, postComment, fetchComments, deleteComment, deleteCommentReset } from '../actions/community';
-import './comment.css';
-import { removeReplyTo } from '../actions/comment';
+import { fetchForum, fetchTopic, postComment, fetchComments, deleteComment, deleteCommentReset, removeReplyTo  } from '../actions/community';
 import Comment from './comment';
 
 export class Thread extends React.Component{
@@ -61,7 +59,7 @@ export class Thread extends React.Component{
     if(this.props.replyTo){
       replyingTo = (<h5>Replying to >>
         <a href={'#comment-'+this.props.replyTo}>{this.props.replyTo}</a>
-        <button onClick={this.handleClicked}>X</button>
+        <button onClick={() => this.props.dispatch(removeReplyTo())}>X</button>
         </h5>);
     }
 
@@ -83,7 +81,7 @@ export class Thread extends React.Component{
             <section className='add-comment'>
               <label htmlFor='commentInput' className='commentInput-label'>Post a Comment:</label>
               {replyingTo}
-              <textarea cols='80' rows='10'name='commentInput'></textarea>
+              <textarea cols='80' rows='10' name='commentInput'></textarea>
               <button>Submit Comment</button>
             </section>
           </form>
@@ -107,7 +105,7 @@ export class Thread extends React.Component{
             <h3 className='topic-name'>{topic ? topic.topicName : '...' }</h3>
             <p className='topic-creator'>Created by: {topic ? topic.creator.username : '...'}</p>
           </div>
-          <p>{topic ? topic.description : '...'}</p>
+          <p className='topic-description'>{topic ? topic.description : '...'}</p>
           {notification}
         </div>
         {thread}
@@ -127,7 +125,7 @@ function mapStateToProps(state){
     deletion: state.community.deletion,
     editing: state.community.editing,
     editComment: state.community.editComment,
-    replyTo: state.comment.replyTo
+    replyTo: state.community.replyTo
   }
 }
 

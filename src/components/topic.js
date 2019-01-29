@@ -47,7 +47,7 @@ export class Topic extends React.Component{
     if(this.props.loading === true){
       topicList = (<div className='loading'>Loading Topics...</div>);
     } else {
-      topicList = (<ul>{topics}</ul>);
+      topicList = (<ul className='topics-list'>{topics}</ul>);
     }
 
     let topicAdd;
@@ -58,23 +58,30 @@ export class Topic extends React.Component{
         <button onClick={() => this.props.dispatch(addTopicTrue())}>Want to add a topic?</button>  
         </div>)
     } else{
-     topicAdd = ( <form className='topic-post' onSubmit={e =>{
+     topicAdd = ( <form className='add-topic-form' onSubmit={e =>{
         e.preventDefault();
         this.onSubmit(e);
       }}>
-        <label htmlFor='topicInput'>Topic:</label>
-        <input className='topicInput' name='topicInput' type='text' placeholder='Give the people something to talk about ...'></input>
-        <label htmlFor='topicDescription'>Description:</label>
-        <textarea name='topicDescription' rows='4' cols='30'></textarea>
+        <div className='topic-title-input'>
+          <label htmlFor='topicInput'>Topic:  </label>
+          <input className='topicInput' name='topicInput' type='text' placeholder='Enter a topic!'></input>
+        </div>
+        <div className='topic-description-input'>
+          <label htmlFor='topicDescription'>Description:  </label>
+          <textarea name='topicDescription' className='topicDescription' placeholder='Describe your topic!'></textarea>
+        </div>
         <button>Submit Topic</button>
         <button onClick={() => this.props.dispatch(addTopicFalse())}>Cancel</button> 
       </form>)
     }
 
     return (
-      <section className="Topics">
+      <section className="topics">
         <Link to='/community'><button> Back to Communities</button></Link>
-        <h3>{community ? community.mainTitle : 'Loading...'}</h3>
+        <h3 className='community-title'>{community ? community.mainTitle : 'Loading...'}</h3>
+        <div className='community-description'>
+          <p>{community ? community.description : 'Loading...'}</p>
+        </div>
         {topicList}
         {topicAdd}
       </section>

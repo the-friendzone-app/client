@@ -287,3 +287,14 @@ export const ADD_TOPIC_FALSE = 'ADD_TOPIC_FALSE';
 export const addTopicFalse = () => ({
   type: ADD_TOPIC_FALSE
 });
+
+export const ADD_REPLY_TO = 'ADD_REPLY_TO';
+export const addReplyTo = (commentId) => ({
+  type: ADD_REPLY_TO,
+  commentId
+});
+
+export const REMOVE_REPLY_TO = 'REMOVE_REPLY_TO';
+export const removeReplyTo = () => ({
+  type: REMOVE_REPLY_TO,
+});

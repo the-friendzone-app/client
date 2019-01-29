@@ -2,14 +2,14 @@ import * as actions from '../actions/community';
 
 const initialState = {
   community: [],
-  topicAdd: false,
   editing: false,
   deletion: false,
   topics: [],
   comments:[],
   editComment: '',
   error: {},
-  loading: false
+  loading: false,
+  replyTo: ''
 };
 
 export default function forumsReducer(state = initialState, action) {
@@ -61,7 +61,11 @@ export default function forumsReducer(state = initialState, action) {
     case actions.EDITING_COMMENT_TRUE:
       return { ...state, editing: true, editComment: action.commentId };
     case actions.EDITING_COMMENT_FALSE:
-      return { ...state, editing: false, editComment:{} }; 
+      return { ...state, editing: false, editComment:'' };
+    case actions.ADD_REPLY_TO:
+      return { ...state, editing: false, replyTo: action.commentId }; 
+    case actions.REMOVE_REPLY_TO:
+      return { ...state, editing: false, replyTo: '' };    
     default:
       return state;
   }

@@ -1,9 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import requiresLogin from './requires-login';
-import {postComment, fetchComments, deleteComment, editingCommentTrue, editingCommentFalse, editComment} from '../actions/community';
+import {postComment, fetchComments, deleteComment, editingCommentTrue, editingCommentFalse, editComment, addReplyTo, removeReplyTo} from '../actions/community';
 import './comment.css';
-import { addReplyTo, removeReplyTo } from '../actions/comment';
 
 export class Comment extends React.Component{
   
@@ -79,7 +78,7 @@ export class Comment extends React.Component{
     if(this.props.comment.user === null){
       userName = (<p className='comment-status'>deleted</p>)
     } else {
-      userName = this.props.comment.user.username;
+      userName = this.props.comment.user.hashedUsername;
     }
 
     let commentText;
@@ -143,7 +142,7 @@ function mapStateToProps(state){
     deletion: state.community.deletion,
     editing: state.community.editing,
     editComment: state.community.editComment,
-    replyTo: state.comment.replyTo
+    replyTo: state.community.replyTo
   }
 }
 
