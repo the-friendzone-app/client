@@ -11,6 +11,7 @@ import Friends from './friends';
 import Suggested from './suggested';
 import Meetups from './meetups';
 
+import Chat from './chat'
 import Poll from './poll';
 import AnswerPage from './answerpage';
 

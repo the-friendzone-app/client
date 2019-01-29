@@ -27,7 +27,7 @@ const initialState = {
   friended: [],
   suggested: [],
   loading: false,
-  error: null
+  error: null,
 };
 
 export default function reducer(state = initialState, action) {
@@ -118,6 +118,7 @@ export default function reducer(state = initialState, action) {
       error: action.error
     });
   }
+
   else if (action.type === FETCH_SUGGESTED_REQUEST) {
     return Object.assign({}, state, {
       loading: true,

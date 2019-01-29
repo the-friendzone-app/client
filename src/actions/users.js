@@ -188,6 +188,7 @@ export const putMessages = (chatroomId, messages) => (dispatch, getState) => {
             dispatch(putMessageSuccess(res));
         })
         .catch(err => dispatch(putMessageFailure(err)));
+
 };
 
 export const FETCH_SUGGESTED_REQUEST = 'FETCH_SUGGESTED_REQUEST';

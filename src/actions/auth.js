@@ -101,3 +101,36 @@ export const refreshAuthToken = () => (dispatch, getState) => {
             clearAuthToken(authToken);
         });
 };
+
+export const FETCH_FEEDBACK_SUCCESS = 'FETCH_FEEDBACK_SUCCESS';
+export const fetchFeedbackSuccess = currentUser =>({
+type: FETCH_FEEDBACK_SUCCESS,
+currentUser
+});
+
+
+export const FETCH_FEEDBACK_ERROR = 'FETCH_FEEDBACK_ERROR';
+export const fetchFeedbackError = error => ({
+    type: FETCH_FEEDBACK_ERROR,
+    error
+});
+
+export const fetchFeedback = () => (dispatch, getState) => {
+
+    const authToken = getState().auth.authToken;
+    return fetch(`${API_BASE_URL}/questions/feedback`, {
+        method: 'GET',
+        headers: {
+            Authorization: `Bearer ${authToken}`
+        }
+    })
+        .then(res => normalizeResponseErrors(res))
+        .then(res => res.json())
+        .then((data) => {
+            dispatch(fetchFeedbackSuccess(data))
+   
+        })
+            .catch(err => {
+            dispatch(fetchFeedbackError(err));
+        });
+};

@@ -5,13 +5,8 @@ import requiresLogin from './requires-login';
 
 export class Dashboard extends React.Component {
     componentDidMount() {
-
     }
-
     render() {
-
-
-
 
         return (
             <React.Fragment>
@@ -43,8 +38,6 @@ const mapStateToProps = state => {
         hashedUsername: state.auth.currentUser.hashedUsername,
         name: `${currentUser.firstName} ${currentUser.lastName}`,
         loggedIn: state.auth.currentUser !== null,
-
     };
 };
-
 export default requiresLogin()(connect(mapStateToProps)(Dashboard));
