@@ -2,13 +2,12 @@ import React from 'react';
 import { connect } from 'react-redux';
 import requiresLogin from './requires-login';
 import { withRouter } from 'react-router'
-import { fetchCurrentUser, fetchFriends, fetchFriended, deleteFriend } from '../actions/users';
+import { fetchCurrentUser, fetchFriended, deleteFriend } from '../actions/users';
 import Chat from './chat';
 
 export class Friends extends React.Component {
   componentDidMount() {
     this.props.dispatch(fetchCurrentUser())
-      .then(() => this.props.dispatch(fetchFriends()))
       .then(() => this.props.dispatch(fetchFriended()));
   }
   render() {
@@ -49,7 +48,6 @@ export class Friends extends React.Component {
 const mapStateToProps = state => {
   return {
     username: state.auth.currentUser.username,
-    friends: state.user.friends,
     friended: state.user.friended,
     authToken: state.auth.authToken
   };

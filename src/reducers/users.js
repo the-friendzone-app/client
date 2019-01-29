@@ -2,9 +2,6 @@ import {
   FETCH_CURRENT_USER_REQUEST,
   FETCH_CURRENT_USER_SUCCESS,
   FETCH_CURRENT_USER_FAILURE,
-  FETCH_FRIENDS_REQUEST,
-  FETCH_FRIENDS_SUCCESS,
-  FETCH_FRIENDS_ERROR,
   FETCH_FRIENDED_REQUEST,
   FETCH_FRIENDED_SUCCESS,
   FETCH_FRIENDED_FAILURE,
@@ -20,12 +17,14 @@ import {
   ADD_FRIEND_REQUEST,
   ADD_FRIEND_SUCCESS,
   ADD_FRIEND_ERROR,
+  FETCH_SCHAT_REQUEST,
+  FETCH_SCHAT_SUCCESS,
+  FETCH_SCHAT_FAILURE,
 } from '../actions/users';
 
 const initialState = {
-  friends: [],
   friended: [],
-  suggested: [],
+  schat: [],
   loading: false,
   error: null
 };
@@ -48,24 +47,6 @@ export default function reducer(state = initialState, action) {
       error: action.error
     });
   }
-  else if (action.type === FETCH_FRIENDS_REQUEST) {
-    return Object.assign({}, state, {
-      loading: true,
-      error: null
-    });
-  }
-  else if (action.type === FETCH_FRIENDS_SUCCESS) {
-    return Object.assign({}, state, {
-      friends: action.friends,
-      loading: false
-    });
-  }
-  else if (action.type === FETCH_FRIENDS_ERROR) {
-    return Object.assign({}, state, {
-      loading: true,
-      error: action.error
-    });
-  }
   else if (action.type === FETCH_FRIENDED_REQUEST) {
     return Object.assign({}, state, {
       loading: true,
@@ -79,6 +60,24 @@ export default function reducer(state = initialState, action) {
     });
   }
   else if (action.type === FETCH_FRIENDED_FAILURE) {
+    return Object.assign({}, state, {
+      loading: false,
+      error: action.error
+    });
+  }
+  else if (action.type === FETCH_SCHAT_REQUEST) {
+    return Object.assign({}, state, {
+      loading: true,
+      error: null
+    });
+  }
+  else if (action.type === FETCH_SCHAT_SUCCESS) {
+    return Object.assign({}, state, {
+      loading: false,
+      schat: action.schat
+    });
+  }
+  else if (action.type === FETCH_SCHAT_FAILURE) {
     return Object.assign({}, state, {
       loading: false,
       error: action.error

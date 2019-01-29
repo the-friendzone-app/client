@@ -2,56 +2,54 @@ import React from 'react';
 import { connect } from 'react-redux';
 import requiresLogin from './requires-login';
 import { Link } from 'react-router-dom';
-import { fetchCurrentUser, fetchFriends, fetchSuggested, addFriendToUser } from '../actions/users';
-// import Chat from './chat';
-
+import { fetchCurrentUser, fetchSuggested, addFriendToUser, ignoreUser, fetchSchat } from '../actions/users';
+import Chat from './schat';
 export class Suggested extends React.Component {
   componentDidMount() {
     this.props.dispatch(fetchCurrentUser())
-      .then(() => this.props.dispatch(fetchFriends()))
-      .then(() => this.props.dispatch(fetchSuggested()));
+      .then(() => this.props.dispatch(fetchSchat()))
+      .then(() => this.props.dispatch(fetchSuggested()))
+      ;
   }
   addFriend(id) {
     return (
       this.props.dispatch(addFriendToUser(id)),
+      this.props.dispatch(fetchSchat()),
       this.props.dispatch(fetchSuggested())
     );
   }
+  ignoreUser(id) {
+    this.props.dispatch(ignoreUser(id))
+      .then(() => this.props.dispatch(fetchSchat()))
+      .then(() => this.props.dispatch(fetchSuggested()));
+  }
   render() {
-    // let chats;
-    // // console.log(this.props);
-    // console.log(this.props.suggested);
-    // if (this.props.suggested.suggested) {
-    //   chats = this.props.suggested.suggested.map(friend => {
-    //     return (<Chat key={friend.chatroom._id} suggested={friend} />);
-    //   });
-    // }
-    //console.log(this.props.suggested.friended);
-    // console.log(this.props.authToken);
-    let suggests;
-    let suggestedList = [];
-    let suggested = this.props.suggested;
-    // console.log(suggested);
-    for (let user of suggested) {
-      //console.log(user);
-      // console.log(user.username);
-      suggestedList.push(user);
-    }
-    //console.log(suggestedList);
 
-    if (suggestedList) {
-      suggests = suggestedList.map((suggest, key) => {
-        // console.log(suggest);
-        return <div key={key}>
-          {suggest.hashedUsername}
-          <ul>
-            <li>SELF: {suggest.profile.selfType}</li>
-            <li>PREFERENCE: {suggest.profile.preferenceType}</li>
-          </ul>
-          <button onClick={() => {
-            this.addFriend(suggest._id)
-          }}>Add Suggested</button>
-        </div>;
+    // let suggested = this.props.suggested;
+    let suggests;
+    let schat = this.props.schat;
+    // console.log(suggested);
+    // console.log(schat);
+    if (schat.suggested) {
+      suggests = schat.suggested.map((suggest, i) => {
+        console.log(suggest);
+        if (suggest.chatroom) {
+          return (
+            <div key={suggest._id.hashedUsername}>
+              <div>
+                <Chat key={suggest.chatroom._id} schat={suggest} />
+              </div>
+              <div>
+                <button key={suggest._id._id} onClick={() => {
+                  this.addFriend(suggest._id._id)
+                }}>Add to friends</button>
+                <button key={suggest._id.username} onClick={() => {
+                  this.ignoreUser(suggest._id._id)
+                }}>Pass</button>
+              </div>
+            </div>
+          )
+        }
       })
     }
     return (
@@ -59,9 +57,9 @@ export class Suggested extends React.Component {
         <section className="friends-list">
           <h1>Suggested List</h1>
           <button><Link to='/friends'>Friends List</Link></button>
-          <div>
+          <ul>
             {suggests}
-          </div>
+          </ul>
         </section>
       </div>
     )
@@ -70,8 +68,8 @@ export class Suggested extends React.Component {
 const mapStateToProps = state => {
   return {
     username: state.auth.currentUser.username,
-    suggested: state.user.suggested,
-    authToken: state.auth.authToken
+    authToken: state.auth.authToken,
+    schat: state.user.schat
   };
 };
 
