@@ -26,7 +26,7 @@ componentDidMount() {
 </p><br />
 <h3>January 2019 Questions</h3>
         <p>Please click on a link to polls below</p>
-     <ul>{activePolls ? activePolls : 'Loading.....'}</ul>
+     <ul className='.topic-plate'>{activePolls ? activePolls : 'Loading.....'}</ul>
       </div>
       </div>
     )
