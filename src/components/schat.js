@@ -111,7 +111,7 @@ class Schat extends React.Component {
     })
       .then(res => res.json())
       .then(res => {
-        console.log(res);
+        // console.log(res);
         this.props.dispatch(fetchSmessageSuccess(res));
         this.setState({
           messages: res.messages

@@ -366,7 +366,7 @@ export const ignoreUser = id => (dispatch, getState) => {
     dispatch(ignoreUserRequest());
     const authToken = getState().auth.authToken;
     const currentUser = getState().auth.currentUser;
-    console.log(currentUser);
+    // console.log(currentUser);
     let userId;
     if (currentUser) {
         userId = currentUser._id;

@@ -25,6 +25,7 @@ import {
 const initialState = {
   friended: [],
   schat: [],
+  currentUser: '',
   loading: false,
   error: null
 };
@@ -38,6 +39,7 @@ export default function reducer(state = initialState, action) {
   }
   else if (action.type === FETCH_CURRENT_USER_SUCCESS) {
     return Object.assign({}, state, {
+      currentUser: action.user,
       loading: false
     });
   }

@@ -15,24 +15,43 @@ export class Suggested extends React.Component {
     return (
       this.props.dispatch(addFriendToUser(id)),
       this.props.dispatch(fetchSchat()),
-      this.props.dispatch(fetchSuggested())
+      this.props.dispatch(fetchSuggested()),
+      this.props.dispatch(fetchCurrentUser())
     );
   }
   ignoreUser(id) {
     this.props.dispatch(ignoreUser(id))
       .then(() => this.props.dispatch(fetchSchat()))
-      .then(() => this.props.dispatch(fetchSuggested()));
+      .then(() => this.props.dispatch(fetchSuggested()))
+      .then(() => this.props.dispatch(fetchCurrentUser()));
   }
   render() {
 
     // let suggested = this.props.suggested;
     let suggests;
+    let suggestsChats;
     let schat = this.props.schat;
+    let ignoreList = [];
+    if (this.props.currentUser.user) {
+      ignoreList = this.props.currentUser.user.ignored;
+    }
+    console.log(ignoreList);
     // console.log(suggested);
-    // console.log(schat);
+    console.log(schat.suggested);
+
     if (schat.suggested) {
       suggests = schat.suggested.map((suggest, i) => {
-        console.log(suggest);
+        // console.log(suggest);
+        for (let i = 0; i < ignoreList.length; i++) {
+          if (suggest._id._id === ignoreList[i]) {
+            schat.suggested.splice(i, 1);
+            console.log(schat.suggested);
+          }
+        }
+      });
+    }
+    if (schat.suggested) {
+      suggestsChats = schat.suggested.map((suggest, i) => {
         if (suggest.chatroom) {
           return (
             <div key={suggest._id.hashedUsername}>
@@ -52,13 +71,14 @@ export class Suggested extends React.Component {
         }
       })
     }
+
     return (
-      <div className="dashboard">
+      <div className="dashboard" >
         <section className="friends-list">
           <h1>Suggested List</h1>
           <button><Link to='/friends'>Friends List</Link></button>
           <ul>
-            {suggests}
+            {suggestsChats}
           </ul>
         </section>
       </div>
@@ -68,6 +88,7 @@ export class Suggested extends React.Component {
 const mapStateToProps = state => {
   return {
     username: state.auth.currentUser.username,
+    currentUser: state.user.currentUser,
     authToken: state.auth.authToken,
     schat: state.user.schat
   };
