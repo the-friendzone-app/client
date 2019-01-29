@@ -49,28 +49,6 @@ export const fetchEventbriteApi = userSearchQuery => (dispatch, getState) => {
   .then(res => normalizeResponseErrors(res))
   .then(res => res.json())
   .then(res => dispatch(fetchEventbriteApiSuccess(res)))
-  // .then(events => {
-  //   console.log('res line 53', events)
-  //   console.log('res line 54', events.searchQuery.events);
-  //   events = events.searchQuery.events;
-  //   // break it down and update state here with an action call
-  //   return fetch(`${API_BASE_URL}/eventbrite-search-complete`, {
-  //     method: 'PUT',
-  //     headers: {
-  //       'Accept': 'application/json',
-  //       'Content-Type': 'application/json',
-  //       'Authorization': `Bearer ${authToken}`
-  //     },
-  //     body: JSON.stringify({
-  //       events,
-  //     })
-  //   })
-  // })
-  // .then(res => normalizeResponseErrors(res))
-  // .then(res => res.json())
-  // .then(events => {
-  //   console.log('complete results ----->', events)
-  // })
   .catch(err => dispatch(fetchEventbriteApiError(err)))
 }
 
