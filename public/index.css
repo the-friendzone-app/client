@@ -1,0 +1,137 @@
+
+/* Colors: 
+Meetups: #d80b5d
+Personality: #d84f0b
+Friends: #d8b10b
+Community: #10938b
+Intro: #5d3fca
+Font: #828282
+nite-gradient: 333-1b1a1a
+day-gradient: fff-e4e5e5
+ */
+ body{
+background: #ffffff; 
+background-image: linear-gradient(to bottom right, red, yellow); 
+background: -moz-linear-gradient(-45deg, #ffffff 0%, #e4e5e5 100%);  
+background: -webkit-linear-gradient(-45deg, #ffffff 0%,#e4e5e5 100%); 
+background: linear-gradient(135deg, #ffffff 0%,#e4e5e5 100%);  
+ }
+*{
+box-sizing: border-box;
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#e4e5e5',GradientType=1 );
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  margin: auto;
+  padding: 0;
+  color: #828282;
+}
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+a{
+  text-decoration: none;
+  color: inherit;
+}
+.app{
+  display:flex;
+}
+.nav-bar{
+  padding: 20px;
+  margin: 20px;
+  flex: 1;
+}
+.gray-logo{
+    background-image: url('./resources/FRIENDZONEGRAY.png');
+    height: 150px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    max-width: 80%;
+    margin: 0 auto;
+    background-position: center top;
+}
+.nav-menu{
+    border: #828282 dashed 2px;
+    border-radius: 5px;
+    margin: 20px auto;
+    width: 80%;
+    padding: 20px;
+    text-align: left;
+}
+.nav-menu li{
+  margin: 10px 0;
+}
+.outer-div{
+  flex:2;
+  justify-content: center;
+  text-align: center;
+  margin: auto;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.header-section{
+}
+.main-div{
+flex: 2;
+}
+.main-div h2{
+  font-size: 35px;
+}
+.main-div p{
+  font-size: 20px;
+  text-align: center;
+  width: 80%;
+  margin: 0 auto;
+}
+.foursquares dl{
+  display:flex;
+  flex-wrap: wrap;
+}
+.foursquares dt{
+  height: 20vw;
+  display: flex;
+  width: 40%;
+  margin: 10px 2.5%;
+  color: #ffffff;
+  font-size: 30px;
+}
+.sub-text{
+  color: #ffffff;
+  font-size: 15px;
+}
+
+.solar-box{
+  background-color: #d80b5d;
+width:100%;
+}
+.tiger-box{
+  background-color: #d84f0b;
+}
+.mustard-box{
+  background-color:#d8b10b;
+}
+.ocean-box{
+  background-color:#10938b;
+}
+
+@media screen and (max-width: 600px){
+  .foursquares dl {
+    flex-direction: column;
+  }
+  body{
+      flex-direction: column;
+  }
+  .foursquares dt {
+    width: 90%;
+    margin: 10px auto;
+    height: 50vw;
+  }
+}

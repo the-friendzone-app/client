@@ -15,7 +15,7 @@ componentDidMount() {
   
     const activePolls = this.props.polls.map((poll, i) => {
       return (
-    <li key={`poll-${i}`}><Link className="red-square" to={`/personality-polls/${poll.category}`}>{poll.question}</Link></li>
+    <li key={`poll-${i}`}><Link className="red-square" to={`/personality-polls/${poll.category}`}>{poll.questionText}</Link></li>
       )})
     return (
    <div className="outerdiv">
