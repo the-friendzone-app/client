@@ -140,7 +140,7 @@ export const fetchSchat = () => (dispatch, getState) => {
     })
         .then(res => res.json())
         .then(res => {
-            // console.log(res);
+            console.log(res);
             dispatch(fetchSchatSuccess(res));
         })
         .catch(err => dispatch(fetchSchatFailure(err)));

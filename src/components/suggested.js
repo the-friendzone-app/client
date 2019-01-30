@@ -2,32 +2,27 @@ import React from 'react';
 import { connect } from 'react-redux';
 import requiresLogin from './requires-login';
 import { Link } from 'react-router-dom';
-import { fetchCurrentUser, fetchSuggested, addFriendToUser, ignoreUser, fetchSchat } from '../actions/users';
+import { fetchCurrentUser, addFriendToUser, ignoreUser, fetchSchat } from '../actions/users';
 import Chat from './schat';
 export class Suggested extends React.Component {
   componentDidMount() {
-    this.props.dispatch(fetchCurrentUser());
-    this.props.dispatch(fetchSuggested());
-    this.props.dispatch(fetchSchat());
+    this.props.dispatch(fetchCurrentUser()).
+      then(() => this.props.dispatch(fetchSchat()));
   }
   addFriend(id) {
     return (
-      this.props.dispatch(addFriendToUser(id)),
-      this.props.dispatch(fetchSchat()),
-      this.props.dispatch(fetchSuggested()),
-      this.props.dispatch(fetchCurrentUser())
+      this.props.dispatch(addFriendToUser(id))
     );
   }
   ignoreUser(id) {
     this.props.dispatch(ignoreUser(id))
       .then(() => this.props.dispatch(fetchSchat()))
-      .then(() => this.props.dispatch(fetchSuggested()))
       .then(() => this.props.dispatch(fetchCurrentUser()));
   }
   render() {
 
     // let suggested = this.props.suggested;
-    let suggests;
+    // let suggests;
     let suggestsChats;
     let schat = this.props.schat;
     let ignoreList = [];
@@ -39,12 +34,14 @@ export class Suggested extends React.Component {
     // console.log(schat.suggested);
 
     if (schat.suggested) {
-      suggests = schat.suggested.map((suggest, i) => {
+      suggestsChats = schat.suggested.map((suggest, i) => {
         // console.log(suggest);
         for (let i = 0; i < ignoreList.length; i++) {
           if (suggest._id._id === ignoreList[i]) {
             schat.suggested.splice(i, 1);
             // console.log(schat.suggested);
+          } else {
+            return console.log('no ignores');
           }
         }
       });
@@ -67,6 +64,8 @@ export class Suggested extends React.Component {
               </div>
             </div>
           )
+        } else {
+          return console.log('no suggested chatrooms');
         }
       })
     }
