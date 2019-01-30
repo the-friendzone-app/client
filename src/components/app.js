@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Route, withRouter, Switch } from 'react-router-dom';
 
-import HeaderBar from './header-bar';
+// import NavBar from './nav-bar';
 import LandingPage from './landing-page';
 import Dashboard from './dashboard';
 
@@ -11,7 +11,6 @@ import Friends from './friends';
 import Suggested from './suggested';
 import Meetups from './meetups';
 
-import Chat from './chat'
 import Poll from './poll';
 import AnswerPage from './answerpage';
 
@@ -62,7 +61,7 @@ export class App extends React.Component {
     render() {
         return (
             <div className="app">
-                <Route path="/" component={HeaderBar} />
+                {/* <Route path="/" component={NavBar} /> */}
                 <Switch>
                     <Route exact path="/" component={LandingPage} />
                     <Route exact path="/dashboard" component={Dashboard} />
