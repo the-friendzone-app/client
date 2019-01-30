@@ -35,7 +35,6 @@ export class Thread extends React.Component{
   onDeleteSubmit(commentId){
     const deletionRequest = {
       _id: commentId,
-      comment: '[[  This comment has been deleted  :(  ]]',
       topic: this.props.match.params.topicId,
       community: this.props.match.params.communityId,
     }
@@ -50,8 +49,8 @@ export class Thread extends React.Component{
     const topicId = this.props.match.params.topicId;
     const topic = this.props.topics.find(topic => topic.id === topicId);
     
-    const comments = this.props.comments.map((comment, index) => {
-      return(<Comment comment={comment} commentIndex={index} communityId={communityId} topicId={topicId}/>);
+    const comments = this.props.comments.map((comment) => {
+      return(<Comment comment={comment} communityId={communityId} topicId={topicId}/>);
     });
 
 
@@ -103,7 +102,7 @@ export class Thread extends React.Component{
           <Link to={'/community/'+communityId}><button className='back-button'>Back to {community ? community.mainTitle : '...'}</button></Link>
           <div className='topic-plate'>
             <h3 className='topic-name'>{topic ? topic.topicName : '...' }</h3>
-            <p className='topic-creator'>Created by: {topic ? topic.creator.username : '...'}</p>
+            <p className='topic-creator'>Created by: {topic ? topic.creator.hashedUsername : '...'}</p>
           </div>
           <p className='topic-description'>{topic ? topic.description : '...'}</p>
           {notification}

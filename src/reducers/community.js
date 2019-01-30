@@ -9,7 +9,8 @@ const initialState = {
   editComment: '',
   error: {},
   loading: false,
-  replyTo: ''
+  replyTo: '',
+  topicAdd: false
 };
 
 export default function forumsReducer(state = initialState, action) {
