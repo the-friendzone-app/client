@@ -27,6 +27,8 @@ export class Friends extends React.Component {
         console.log(friend);
         if (friend.chatroom) {
           return (<Chat key={friend.chatroom._id} friended={friend} />);
+        } else {
+          return console.log('no chatroom');
         }
       })
     }
