@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import requiresLogin from './requires-login';
+import NavBar from './nav-bar';
 
 export class Dashboard extends React.Component {
     componentDidMount() {
@@ -9,19 +10,23 @@ export class Dashboard extends React.Component {
     render() {
         return (
             <React.Fragment>
-
-                <div className="dashboard">
-                    <div className="dashboard-username">
-                        <h1>The Friend Zone</h1>
-                        Welcome to The Friend Zone!<br />
-                        Your Username is '{this.props.username}'<br />
-                        Your Hashed Username is: {this.props.hashedUsername}!
-              <br />
-
-                        <Link to='/suggested'><div className="dashboard-friends">Friends</div></Link>
-                        <Link to='/meetups'><div className="dashboard-meetups">Meetups</div></Link>
-                        <Link to='/personality-polls'><div className="dashboard-polls">Personality Polls</div></Link>
-                        <Link to='/community'><div className="dashboard-communities">Community</div></Link>
+                <NavBar />
+                <div className="outer-div">
+                    <div className="header-section">
+                        <h1><i class="fa fa-home"></i>Home</h1>
+                        <p>Welcome to The Friend Zone!<br />
+                            Your Username is '{this.props.username}'<br />
+                            Your Hashed Username is: {this.props.hashedUsername}!</p>
+                    </div>
+                    <div className="main-div">
+                        <section className="foursquares">
+                            <dl>
+                                <dt className="solar-box"><Link to='/meetups'>Meetups<br/><span className="sub-text">A Place to Meet Friends!</span></Link></dt>
+                                <dt className="tiger-box"><Link to='/personality-polls'>Personality <br/>Polls</Link></dt>
+                                <dt className="mustard-box"><Link to='/suggested'>Friends</Link></dt>
+                                <dt className="ocean-box"><Link to='/community'>Community</Link></dt>
+                            </dl>
+                        </section>
                     </div>
 
                 </div>
