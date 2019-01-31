@@ -40,7 +40,7 @@ export class SetLocationForm extends React.Component {
     }
 
     if (currentLocation !== undefined) {
-      locationPrompt = <p>Your current location is set to:<br /><b>{currentLocation.location}</b> <br />Lat: {currentLocation.latitude} Long: {currentLocation.longitude}</p>
+      locationPrompt = <p>Your current location is set to:<br /><span className="solar-background"><b>{currentLocation.location}</b></span> <br />Lat: {currentLocation.latitude} Long: {currentLocation.longitude}</p>
     }
 
     return (
@@ -60,7 +60,7 @@ export class SetLocationForm extends React.Component {
             placeholder="Address, Landmarks, Streets, Zipcode, etc."
           />
         </div>
-        <button
+        <button className="solar-button"
           type="submit"
           disabled={this.props.pristine || this.props.submitting}>
           Set Location

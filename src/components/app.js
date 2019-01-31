@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Route, withRouter, Switch } from 'react-router-dom';
 
-// import NavBar from './nav-bar';
+import LoginPage from './login-page';
 import LandingPage from './landing-page';
 import Dashboard from './dashboard';
 
@@ -14,7 +14,7 @@ import Meetups from './meetups';
 import Poll from './poll';
 import AnswerPage from './answerpage';
 
-
+import Chat from './chat';
 import MeetupDetails from './meetup-details';
 import PersonalityPolls from './personalitypolls';
 import IntroQuiz from './intro-quiz';
@@ -65,6 +65,7 @@ export class App extends React.Component {
                 <Switch>
                     <Route exact path="/" component={LandingPage} />
                     <Route exact path="/dashboard" component={Dashboard} />
+                    <Route exact path="/login" component={LoginPage} />
                     <Route exact path="/register" component={RegistrationPage} />
                     <Route exact path="/friends" component={Friends} />
                     <Route exact path="/suggested" component={Suggested} />

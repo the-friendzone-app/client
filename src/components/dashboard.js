@@ -16,22 +16,23 @@ export class Dashboard extends React.Component {
                 <div className="outer-div">
                     <div className="header-section">
                         <h1><i class="fa fa-home"></i>Home</h1>
-                        <p>Welcome to The Friend Zone!<br />
-                            Your Username is '{this.props.username}'<br />
-                            Your Hashed Username is: {this.props.hashedUsername}!</p>
+                        <p>Welcome to your Dashboard<br />
+                            Your Username is '{this.props.username}'<span className="tooltip"> <i className="fa fa-info-circle" aria-hidden="true"></i><span class="tooltiptext">Your username will be kept private. We will provide you a Friend Zone username to use inside The Friend Zone!</span></span><br />
+                            Your Friend Zone Username is: {this.props.hashedUsername}!</p>
                     </div>
                     <div className="main-div">
                         <section className="foursquares">
-                            <dl>
-                                <dt className="solar-box"><Link to='/meetups'>Meetups<br/><span className="sub-text">A Place to Meet Friends!</span></Link></dt>
-                                <dt className="tiger-box"><Link to='/personality-polls'>Personality <br/>Polls</Link></dt>
-                                <dt className="mustard-box"><Link to='/suggested'>Friends</Link></dt>
-                                <dt className="ocean-box"><Link to='/community'>Community</Link></dt>
-                            </dl>
+                            <ul>
+                                <li className="solar-box"><Link className="a-box" to='/meetups'>Meetups<br/><span className="sub-text">A Place to Meet Friends</span></Link></li>
+                                <li className="tiger-box"><Link className="a-box" to='/personality-polls'>Personality <br/>Polls<br/><span className="sub-text">Your Opinion Counts</span></Link></li>
+                                <li className="mustard-box"><Link className="a-box" to='/suggested'>Friends<br/><span className="sub-text">Match with New Friends & Chat</span></Link></li>
+                                <li className="ocean-box"><Link className="a-box" to='/community'>Community<br/><span className="sub-text">Come Discuss Ideas</span></Link></li>
+                            </ul>
                         </section>
                     </div>
-
+                    {/* <div>button example: <button className="register-button2">Message from user 2Message from user 2Message from user 2Message from user 2Message from user 2</button><button className="register-button3">Message from user 1</button></div> */}
                 </div>
+               
             </React.Fragment>
         );
     }

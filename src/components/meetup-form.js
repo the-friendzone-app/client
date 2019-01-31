@@ -7,7 +7,7 @@ import { DateTimePicker } from 'react-widgets';
 import moment from 'moment'
 import momentLocalizer from 'react-widgets-moment';
 import { createUserMeetup } from '../actions/meetups';
-import './meetup-form.css';
+// import './meetup-form.css';
 
 momentLocalizer(moment);
 
@@ -56,7 +56,7 @@ export class MeetupForm extends React.Component {
                     />
                 </div>
                 <div>
-                    <label htmlFor="description">Description</label>
+                    <label htmlFor="description">Description</label><br/>
                     <Field
                         component="textarea"
                         type="text"
@@ -83,7 +83,7 @@ export class MeetupForm extends React.Component {
                         validate={[required]}
                     />
                 </div>
-                <button
+                <button className="solar-button"
                     type="submit"
                     disabled={this.props.pristine || this.props.submitting}>
                     Create Meetup

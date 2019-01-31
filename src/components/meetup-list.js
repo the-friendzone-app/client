@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import requiresLogin from './requires-login';
 import { fetchAllMeetups, fetchMeetupAttendence, meetupDisplayFilter, fetchUserLocation } from '../actions/meetups';
 import './meetup-list.css';
+import NavBar from './nav-bar';
 import { Link } from 'react-router-dom';
 import SetLocationForm from './set-location-form';
 let moment = require('moment');
@@ -72,8 +73,9 @@ export class MeetupsList extends React.Component {
       let minutes = (elapsed % 60);
 
       return (
+        <div className="meetup-box">
         <li key={index} id={meetup.id} className="meetup-list-results">
-          <Link className="view-details-link" to={{ pathname: `/meetups/${meetup.name}`, state: { meetup: meetup } }}>View Details!</Link>
+          <Link className="view-details-link" to={{ pathname: `/meetups/${meetup.name}`, state: { meetup: meetup } }}><b>View Details</b></Link>
           <ul>
             <Link className="meetup-name-link" to={{ pathname: `/meetups/${meetup.name}`, state: { meetup: meetup } }}><li className="meetup-name"><b>{meetup.name}</b></li></Link>
             <li><b>Location:</b> {meetup.location}</li>
@@ -81,10 +83,13 @@ export class MeetupsList extends React.Component {
             <li><b>Duration:</b> {hours} hours {minutes} minutes</li>
           </ul>
         </li>
+        </div>
       )
     })}
 
     return (
+      <React.Fragment>
+      <NavBar/>
       <section className="meetups-list-page-container">
         <h2 className="meetups-list-page-title">FriendZone Meetups!</h2>
         <h3 className="meetups-h3">Browse a list of FriendZone Meetups below created by our members!</h3>
@@ -93,7 +98,7 @@ export class MeetupsList extends React.Component {
           members know you'll be there!</p>
         <SetLocationForm userId={userId} currentLocation={currentLocation}/>
         <div className="meetups-list-dropdown">
-          <span><b>filter display: </b></span>
+          <span><b>Filter Display: </b></span>
           <select onChange={e => this.handleDisplayFilter(e)}>
             <option value="all">All Meetups</option>
             <option value="joined">Joined Meetups</option>
@@ -105,6 +110,7 @@ export class MeetupsList extends React.Component {
           {meetupsList}
         </div>
       </section>
+      </React.Fragment>
     )
   }
 }

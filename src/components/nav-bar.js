@@ -20,21 +20,21 @@ export class NavBar extends React.Component {
         }
         // Only render the log out button if we are logged in
         let logOutButton;
-        logOutButton = (<Link to='/' onClick={() => this.logOut()}><div className='navbar-logout'>Log out</div></Link>);
+        logOutButton = (<Link className="text" to='/' onClick={() => this.logOut()}>Log out</Link>);
         return (
             <div className="nav-bar">
                 <div className="gray-logo"> </div>
                 <div className="nav-menu">
                     <ul>
                         <li>Account: {this.props.currentUser.username}</li>
-                        <li><Link to='/'>Home</Link></li>
-                        <li><Link to='/suggested'>Friends List</Link></li>
-                        <li><Link to='/meetups'>My Meetups</Link></li>
-                        <li><Link to='/community'>Community Guidelines</Link></li>
+                        <li><i class="fa fa-home"></i> <Link className="text" to='/'>Home</Link></li>
+                        <li><Link className="text" to='/suggested'>Friends List</Link></li>
+                        <li><Link className="text" to='/meetups'>My Meetups</Link></li>
+                        <li><Link className="text" to='/community'>Community Guidelines</Link></li>
                         <li>Report</li>
                         <li>Settings</li>
                         <li>About Us</li>
-                        <li>{logOutButton}</li>
+                        <li><i class="fas fa-sign-out-alt"></i> {logOutButton}</li>
                     </ul>
                 </div>
             </div>

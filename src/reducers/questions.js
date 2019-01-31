@@ -27,7 +27,7 @@ const questions = (state = initialState, action) => {
     case 'FETCH_QUESTION_SUCCESS':
       return {
         ...state,
-        currentQuestion: action.question.question,
+        currentQuestion: action.question.questionText,
         questionID: action.question.id,
         options: action.question.options
       }
