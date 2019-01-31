@@ -14,12 +14,12 @@ export function LoginPage(props) {
             <div className="header">
                 <div className="header-container">
                     <div className="header-row">
-                        <Link to="/"><button className="register-button"><i class="fa fa-home" aria-hidden="true"></i> Home</button></Link>
+                        <Link to="/"><button className="register-button"><i className="fa fa-home" aria-hidden="true"></i> Home</button></Link>
                     </div>
                 </div>
             </div>
             <div className="main-div">
-                <h2><i class="fas fa-user-astronaut"></i> Login Page</h2>
+                <h2><i className="fas fa-user-astronaut"></i> Login Page</h2>
                 <LoginForm />
                 <Link className="text" to="/register">Go To Registration?</Link>
             </div>

@@ -10,15 +10,21 @@ import { sendVerification } from '../actions/questions';
 
 
 export class Feedback extends React.Component {
+
+    constructor(props){
+        super(props);
+        
+    }
+
+    componentDidMount(){
+        this.getFeedback();
+    }
     logOut() {
         this.props.dispatch(clearAuth());
         clearAuthToken();
     }
     getFeedback() {
         this.props.dispatch(fetchFeedback());
-    }
-    loadVerifiedPage(){
-        this.props.dispatch(sendVerification());
     }
     render() {
         //if fail
@@ -30,8 +36,15 @@ export class Feedback extends React.Component {
         //if succeed
         if (this.props.User.introQuizCompleted && !this.props.User.marked) {
             return (
-                <div>YOU PASSED!
-         <button onClick={() => this.loadVerifiedPage()}>Load Verification Page</button>
+                <div className="intro-div"><span className="intro-background"><h1>YOU PASSED!</h1></span>
+                <span className="About">
+                Congratulations! Thank you for taking our quiz. You may now go to your Dashboard and enjoy The Friend Zone!
+                Please remember that we have given you a unique "Friend Zone username" that way, when you are chatting with people you can remain anonymous!
+                <br/> Only people you choose to share your "real" username with will be able to add you and chat with you anytime.
+                <br/> If you experience any form of harrassment or bullying in The Friend Zone, please report it to us right away, as we want to make sure everyone in our community
+                has a safe and fun time!
+                </span>
+         <Link to="/dashboard"><button className="intro-button">Go To Dashboard</button></Link>
                 </div>
             )
         }
@@ -50,9 +63,7 @@ export class Feedback extends React.Component {
             return (
                 <div>
                     <h1>Thanks for taking the quiz!</h1>
-                    Click to see your results!
-                    
-                    <button onClick={() => this.getFeedback()}>Get Started!</button>
+                    Checking your results now....
                 </div>
             )
         }

@@ -48,17 +48,18 @@ export const fetchCurrentUserFailure = error => ({
 export const fetchCurrentUser = () => (dispatch, getState) => {
     dispatch(fetchCurrentUserRequest());
     let userId;
-    const currentUser = getState().auth.currentUser;
-    // console.log(currentUser);
-    if (currentUser) {
-        userId = currentUser._id;
-    }
+    const currentUser = getState().auth;
+    //console.log('currentuserHERE', currentUser)
     // console.log('userId', userId)
-    return fetch(`${API_BASE_URL}/users/${userId}`, {
-        method: 'GET'
+    return fetch(`${API_BASE_URL}/users/info/`, {
+        method: 'GET',
+        headers: {
+            Authorization: `Bearer ${currentUser.authToken}`
+        }
     })
         .then(res => res.json())
         .then(res => {
+            //console.log(res);
             dispatch(fetchCurrentUserSuccess(res));
         })
         .catch(err => dispatch(fetchCurrentUserFailure(err)));

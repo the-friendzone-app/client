@@ -19,7 +19,7 @@ export class Meetups extends React.Component {
           <NavBar />
   <div className="outer-div">
       <div className="header-section">
-        <h1><i class="fas fa-map-marker-alt"></i> Meetups</h1>
+        <h1><i className="fas fa-map-marker-alt"></i> Meetups</h1>
         <p className="meetups-user-info">Welcome to the FriendZone Meetup section!
         Here we have created a space for people who want to get out there and do fun stuff, meet new cool friends,
         or finally go to that new restaurant that just opened up!<br/>
