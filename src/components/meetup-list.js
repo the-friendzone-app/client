@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import requiresLogin from './requires-login';
 import { fetchAllMeetups, fetchMeetupAttendence, meetupDisplayFilter, fetchUserLocation } from '../actions/meetups';
-import './meetup-list.css';
+// import './meetup-list.css';
 import NavBar from './nav-bar';
 import { Link } from 'react-router-dom';
 import SetLocationForm from './set-location-form';
