@@ -40,11 +40,16 @@
   max-width: 900px;
   margin-bottom: 100px;
 }
-
 .view-details-link {
-  float: right;
   padding-right: 40px;
   text-decoration: none;
+  display: inline-block;
+}
+.view-details-link2 {
+  padding-right: 40px;
+  text-decoration: none;
+  float:right;
+  color:white;
 }
 
 .no-meetups-display {

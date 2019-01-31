@@ -29,14 +29,24 @@ export class Feedback extends React.Component {
     render() {
         //if fail
         if (this.props.User.introQuizCompleted && this.props.User.marked) {
+            let logOutButton;
+            logOutButton = (<Link to='/' onClick={() => this.logOut()}><button className="intro-button-inverse">Thank You</button></Link>);
             return (
-                <div>YOU FAILED</div>
+
+                    <div className="intro-div"><span className="intro-icon"><h1>Thank You For Taking The Quiz</h1></span>
+                    <span className="About">
+                     Hello! Thank you for taking our Intro Quiz. At this time it doesn't appear that you would be a good fit for our community.<br/>
+                     We take our <Link to='/community-guide'>Community Guidelines</Link> very seriously, and want to make sure that everyone who joins
+                     a part of The Friend Zone is willing to help make it a fun, safe, and caring space for all users.<br/>
+                     If you believe there has been an error, email TheFriendZoneDev@gmail.com
+                    </span>
+            {logOutButton}</div>
             )
         }
         //if succeed
         if (this.props.User.introQuizCompleted && !this.props.User.marked) {
             return (
-                <div className="intro-div"><span className="intro-background"><h1>YOU PASSED!</h1></span>
+                <div className="intro-div"><span className="intro-icon"><h1>YOU PASSED!</h1></span>
                 <span className="About">
                 Congratulations! Thank you for taking our quiz. You may now go to your Dashboard and enjoy The Friend Zone!
                 Please remember that we have given you a unique "Friend Zone username" that way, when you are chatting with people you can remain anonymous!

@@ -100,11 +100,12 @@ a.text:hover{
   background-position: center;
 }
 .eb-logo{
-  background-image: url('./resources/eb.png');
-height: 100px;
-background-repeat: no-repeat;
-display:flex;
-margin: 0 auto;
+  background-image: url(./resources/eb.png);
+  height: 18px;
+  background-repeat: no-repeat;
+  display: inline-block;
+  margin: 0 auto;
+  width: 100px;
 }
 .intro-div{
   text-align: center;
@@ -204,6 +205,7 @@ font-size:15x;
 .foursquares ul{
   display:flex;
   flex-wrap: wrap;
+  justify-content: center;
 }
 .foursquares li{
   height: 20vw;
