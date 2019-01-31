@@ -13,7 +13,7 @@ export class CreateMeetup extends React.Component {
       <NavBar/>
       <div className="outer-div">
       <div className="header-section">
-        <h2 className="solar"><i class="fas fa-paint-brush"></i> Create a FriendZone Meetup!</h2>
+        <h2 className="solar"><i className="fas fa-paint-brush"></i> Create a FriendZone Meetup!</h2>
         <ul>
         <li>Looking for people to go see a movie with?</li> 
         <li>Maybe you heard about a new band you wanted to check out.</li>

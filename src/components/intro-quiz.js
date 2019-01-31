@@ -6,9 +6,13 @@ import { clearAuthToken } from '../local-storage';
 import { fetchIntroQuestions } from '../actions/questions';
 import IntroQuizForm from './intro-quiz-form';
 import Feedback from './feedback-page';
+import { fetchCurrentUser } from '../actions/users';
 
 
 export class IntroQuiz extends React.Component {
+   componentDidMount(){
+        this.props.dispatch(fetchCurrentUser(this.props.User));
+    }
     logOut() {
         this.props.dispatch(clearAuth());
         clearAuthToken();
@@ -17,10 +21,9 @@ export class IntroQuiz extends React.Component {
         this.props.dispatch(fetchIntroQuestions());
     }
     render() {
-        //have some sort of user marked for deletion that renders 2 different
-        //pages? one that says you're not a fit and another that says thank you and that button
-        //sends off the verification code to the email?
-        if (this.props.hasOwnProperty('Questions') && this.props.Questions.length && this.props.Questions !== null && this.props.Questions.length === this.props.userAnswers.length) {
+  
+        if ((this.props.hasOwnProperty('Questions') && this.props.Questions.length && this.props.Questions !== null && this.props.Questions.length === this.props.userAnswers.length) || 
+        (this.props.User!== null && this.props.User.introQuizCompleted && this.props.loggedIn)) {
             return (
                 <div>
                     <Feedback {...this.props} />
@@ -30,11 +33,11 @@ export class IntroQuiz extends React.Component {
         if (this.props.hasOwnProperty('Questions') && this.props.Questions.length && this.props.Questions !== null) {
             return (
                 <div>
-                    <div className="card-question">
-                        <h1>Intro Quiz Page</h1>
-                        <section>Welcome to the Quiz. Please complete the quiz to use the app! If you close before finishing your
-                    answers will not be saved and you will have to start over from the beginning! :)</section>
-                        <IntroQuizForm {...this.props} />
+                     <div className="gray-logo"></div>
+                    <div className="intro-quiz-container">
+                        <h1><span className="intro-icon">Intro Quiz</span></h1>
+                        <section>Please answer truthfully :) Thank you for participating in our Intro Quiz!</section>
+                       <br/><br/> <IntroQuizForm {...this.props} />
 
                     </div>
                 </div>
@@ -43,14 +46,23 @@ export class IntroQuiz extends React.Component {
         }
         else {
             let logOutButton;
-            logOutButton = (<Link to='/' onClick={() => this.logOut()}><div className='navbar-logout'>Log out</div></Link>);
+            logOutButton = (<Link to='/' onClick={() => this.logOut()}><button className="intro-button-inverse">Log out</button></Link>);
 
 
             return (
+                
                 <div className="intro-div">
-                    <h1><i class="fas fa-user-graduate"></i> Intro Quiz</h1>
-                    <div className="About">Hello and Welcome to The Friend Zone!</div>
-                    <button onClick={() => this.handleClick()}>Get Started!</button>
+                <div className="gray-logo"></div>
+                    <h1><span className="intro-icon"><i className="fas fa-user-graduate"></i> Intro Quiz</span></h1>
+                    <div className="About">Hello and Welcome to The Friend Zone! <br/><br/>We are so happy that you've decided to join us.<br/> As part of joining we require that all our new members
+                    take our short but sweet Intro Quiz so that we can get to know you a little better, and tailor your experience at The Friend Zone.<br/>
+                    After you complete the quiz you'll be able to access the rest of the app!
+                    <br/><br/>Thank you for joining our community!<br/><br/>
+                    <span className="intro-icon">-The Friend Zone Dev Team.</span><br/><br/>
+                    <span className="side-note">Please note that by participating in our quiz and signing up for The Friend Zone, you are agreeing that
+                    you do not have any malicious or romantic intent, and are joining to seek platonic friendships. For any other information
+                    please review our <Link to='/community-guide'>Community Guidelines</Link></span></div>
+                    <button className="intro-button" onClick={() => this.handleClick()}>Get Started!</button>
                     {logOutButton}
                 </div>
                 
@@ -61,7 +73,9 @@ export class IntroQuiz extends React.Component {
 const mapStateToProps = state => ({
     loggedIn: state.auth.currentUser !== null,
     Questions: state.questions.introQuiz,
-    userAnswers: state.questions.usersIntroAnswers
+    userAnswers: state.questions.usersIntroAnswers,
+    User: state.user.currentUser,
+    authToken: state.auth.authToken
 });
 
 export default connect(mapStateToProps)(IntroQuiz);

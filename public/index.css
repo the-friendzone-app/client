@@ -108,7 +108,7 @@ margin: 0 auto;
 }
 .intro-div{
   text-align: center;
-  background-color:pink;
+  justify-content: center;
   min-width:70%;
 }
 .nav-menu{
@@ -140,6 +140,10 @@ margin: 0 auto;
 .header-section h1{
   font-size:75px;
   padding: 10px;
+}
+.intro-div h1{
+  font-size:55px;
+  padding: 20px;
 }
 .main-div{
 flex: 2;
@@ -271,7 +275,7 @@ margin-bottom: 10px;
 padding: 15px;
 }
 form input:focus{
-  outline: pink;
+
   }
 .registration-form input{
 width: 300px;
@@ -376,6 +380,40 @@ li.meetup-name{
 .outer-div-polls{
 justify-content: center;
 padding: 20px;
+}
+.intro-icon{
+  color:#5d3fca;
+}
+.intro-background{
+  background-color:#5d3fca;
+  color: white;
+  font-size:30px;
+}
+button.intro-button{
+  background-color: #5d3fca;
+  color: white;
+  display: block;
+  padding: 10px;
+  margin-top:20px;
+  border-radius: 5px;
+  font-size:20px;
+  border: none;
+}
+button.intro-button:focus{
+  outline: none !important;
+}
+button.intro-button-inverse{
+  background-color: white;
+  color: #5d3fca;;
+  display: block;
+  padding: 10px 20px;
+  margin-top:20px;
+  border-radius: 5px;
+  font-size:20px;
+  border: #5d3fca 2px solid;
+}
+button.intro-button-inverse{
+  outline: none !important;
 }
 
 button.login-button{
