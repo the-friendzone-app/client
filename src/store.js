@@ -4,7 +4,6 @@ import thunk from 'redux-thunk';
 import { loadAuthToken } from './local-storage';
 import authReducer from './reducers/auth';
 import meetupsReducer from './reducers/meetups';
-import friendsReducer from './reducers/friends';
 
 import questionReducer from './reducers/questions';
 
@@ -21,7 +20,6 @@ const store = createStore(
         auth: authReducer,
         meetups: meetupsReducer,
         user: userReducer,
-        friends: friendsReducer,
         questions: questionReducer,
         community: forumsReducer,
         event: eventsReducer,
