@@ -75,7 +75,7 @@ export class MeetupsList extends React.Component {
       return (
         <div className="meetup-box">
         <li key={index} id={meetup.id} className="meetup-list-results">
-          <Link className="view-details-link" to={{ pathname: `/meetups/${meetup.name}`, state: { meetup: meetup } }}><b>View Details</b></Link>
+          <Link className="view-details-link2" to={{ pathname: `/meetups/${meetup.name}`, state: { meetup: meetup } }}><b>View Details</b></Link>
           <ul>
             <Link className="meetup-name-link" to={{ pathname: `/meetups/${meetup.name}`, state: { meetup: meetup } }}><li className="meetup-name"><b>{meetup.name}</b></li></Link>
             <li><b>Location:</b> {meetup.location}</li>
