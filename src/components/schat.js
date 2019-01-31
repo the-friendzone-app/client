@@ -133,7 +133,6 @@ class Schat extends React.Component {
     }
     return (
       <div className="container">
-        <p>{this.state.person}</p>
         <p>{this.state.hashedUser}</p>
         <button onClick={this.openModal}>CHAT</button>
         <div className="chat-modal">
@@ -142,7 +141,7 @@ class Schat extends React.Component {
             onAfterOpen={this.afterOpenModal}
             onRequestClose={this.closeModal}
           >
-            <div className="card-title">Connected to: {this.state.person}</div>
+            <div className="card-title">Connected to: {this.state.hashedUser}</div>
             <button onClick={this.closeModal}>CLOSE CHAT</button>
             <div className="messages">
               {messages}

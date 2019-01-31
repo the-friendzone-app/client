@@ -348,9 +348,9 @@ export const ignoreUserRequest = () => ({
 });
 
 export const IGNORE_USER_SUCCESS = 'IGNORE_USER_SUCCESS';
-export const ignoreUserSuccess = matched => ({
+export const ignoreUserSuccess = suggested => ({
     type: IGNORE_USER_SUCCESS,
-    matched
+    suggested
 });
 
 export const IGNORE_USER_FAILURE = 'IGNORE_USER_FAILURE';
@@ -378,6 +378,7 @@ export const ignoreUser = id => (dispatch, getState) => {
         body: JSON.stringify({ ignoredUser: id })
     })
         .then(res => {
+            console.log(res);
             dispatch(ignoreUserSuccess(res));
         })
         .catch(err => dispatch(ignoreUserFailure(err)));

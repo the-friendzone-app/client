@@ -16,67 +16,62 @@ export class Suggested extends React.Component {
   }
   ignoreUser(id) {
     this.props.dispatch(ignoreUser(id))
-      .then(() => this.props.dispatch(fetchSchat()))
-      .then(() => this.props.dispatch(fetchCurrentUser()));
+      .then(() => this.props.dispatch(fetchCurrentUser()))
+      .then(() => this.props.dispatch(fetchSchat()));
+  }
+  resetState() {
+    // window.location.reload();
   }
   render() {
 
     // let suggested = this.props.suggested;
     // let suggests;
-    let suggestsChats;
+    // let suggestsChats;
+    let suggests;
     let schat = this.props.schat;
     let ignoreList = [];
     if (this.props.currentUser.user) {
       ignoreList = this.props.currentUser.user.ignored;
     }
-    // console.log(ignoreList);
-    // console.log(suggested);
-    // console.log(schat.suggested);
 
     if (schat.suggested) {
-      suggestsChats = schat.suggested.map((suggest, i) => {
-        // console.log(suggest);
-        for (let i = 0; i < ignoreList.length; i++) {
-          if (suggest._id._id === ignoreList[i]) {
-            schat.suggested.splice(i, 1);
-            // console.log(schat.suggested);
-          } else {
-            return console.log('no ignores');
-          }
-        }
-      });
-    }
-    if (schat.suggested) {
-      suggestsChats = schat.suggested.map((suggest, i) => {
-        if (suggest.chatroom) {
-          return (
-            <div key={suggest._id.hashedUsername}>
-              <div>
-                <Chat key={suggest.chatroom._id} schat={suggest} />
-              </div>
-              <div>
-                <button key={suggest._id._id} onClick={() => {
-                  this.addFriend(suggest._id._id)
-                }}>Add to friends</button>
-                <button key={suggest._id.username} onClick={() => {
-                  this.ignoreUser(suggest._id._id)
-                }}>Pass</button>
-              </div>
-            </div>
-          )
+      let size = 5;
+      suggests = schat.suggested.slice(0, size).map((suggest, i) => {
+        if (ignoreList.includes(suggest._id._id)) {
+          console.log('ignored user');
+          return;
         } else {
-          return console.log('no suggested chatrooms');
+          if (suggest.chatroom) {
+            return (
+              <div key={suggest._id.hashedUsername}>
+                <div>
+                  <Chat key={suggest.chatroom._id} schat={suggest} />
+                </div>
+                <div>
+                  <button key={suggest._id._id} onClick={() => {
+                    this.addFriend(suggest._id._id)
+                  }}>Add to friends</button>
+                  <button key={suggest._id.username} onClick={() => {
+                    this.ignoreUser(suggest._id._id);
+                    this.resetState();
+                  }}>Pass</button>
+                </div>
+              </div>
+            )
+          } else {
+            return console.log('no suggested chatrooms');
+          }
         }
       })
     }
-
+    console.log(suggests);
     return (
       <div className="dashboard" >
         <section className="friends-list">
           <h1>Suggested List</h1>
           <button><Link to='/friends'>Friends List</Link></button>
           <ul>
-            {suggestsChats}
+            {suggests}
           </ul>
         </section>
       </div>
