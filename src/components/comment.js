@@ -65,7 +65,7 @@ export class Comment extends React.Component{
                 this.props.dispatch(editingCommentTrue(this.props.comment._id));
               }} />
             </button>
-            <button class='comment-button'>
+            <button className='comment-button'>
               <img className='comment-img' src={process.env.PUBLIC_URL + '/resources/trash-icon.png'} alt='Delete Your Post' onClick={ e => {
                 e.preventDefault();
                 this.onDeleteSubmit(this.props.comment._id);
@@ -115,7 +115,7 @@ export class Comment extends React.Component{
     
     
     return(
-      <li id={'comment-'+this.props.comment._id} className='comment' key={this.props.commentIndex}>
+      <li id={'comment-'+this.props.comment._id} className='comment' key={this.props.comment._id}>
         <section className='comment-card'>
             <a className='commentID' href='#add-comment-form' onClick={() => this.props.dispatch(addReplyTo(this.props.comment._id))}>>>{this.props.comment._id}</a>
             <div className='user-plate'>

@@ -9,7 +9,7 @@ export class Community extends React.Component {
   componentDidMount(){
     this.props.dispatch(fetchForum());
   }
-
+  
   render() {
     const communities = this.props.community.map((community, index) => {
       let communityId = `/community/${community.id}`;
