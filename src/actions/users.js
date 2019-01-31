@@ -64,6 +64,42 @@ export const fetchCurrentUser = () => (dispatch, getState) => {
         .catch(err => dispatch(fetchCurrentUserFailure(err)));
 };
 
+export const FETCH_CURRENT_USER2_REQUEST = 'FETCH_CURRENT_USER2_REQUEST';
+export const fetchCurrentUser2Request = () => ({
+    type: FETCH_CURRENT_USER2_REQUEST
+});
+
+export const FETCH_CURRENT_USER2_SUCCESS = 'FETCH_CURRENT_USER2_SUCCESS';
+export const fetchCurrentUser2Success = user2 => ({
+    type: FETCH_CURRENT_USER2_SUCCESS,
+    user2
+});
+
+export const FETCH_CURRENT_USER2_FAILURE = 'FETCH_CURRENT_USER2_FAILURE';
+export const fetchCurrentUser2Failure = error => ({
+    type: FETCH_CURRENT_USER2_FAILURE,
+    error
+});
+
+export const fetchCurrent2User = () => (dispatch, getState) => {
+    dispatch(fetchCurrentUser2Request());
+    let userId;
+    const currentUser = getState().auth.currentUser;
+    // console.log(currentUser);
+    if (currentUser) {
+        userId = currentUser._id;
+    }
+    // console.log('userId', userId)
+    return fetch(`${API_BASE_URL}/users/${userId}`, {
+        method: 'GET'
+    })
+        .then(res => res.json())
+        .then(res => {
+            dispatch(fetchCurrentUser2Success(res));
+        })
+        .catch(err => dispatch(fetchCurrentUser2Failure(err)));
+};
+
 export const FETCH_FRIENDED_REQUEST = 'FETCH_FRIENDED_REQUEST';
 export const fetchFriendedRequest = () => ({
     type: FETCH_FRIENDED_REQUEST
