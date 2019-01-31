@@ -25,7 +25,7 @@ import {
 const initialState = {
   friended: [],
   schat: [],
-  currentUser: '',
+  currentUser: null,
   loading: false,
   error: null,
 };

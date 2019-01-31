@@ -22,7 +22,7 @@ export class PersonalityPolls extends React.Component {
       <NavBar />
       <div className="outer-div">
         <div className="header-section">
-          <h1><i class="fas fa-poll"></i> Personality Polls</h1>
+          <h1><i className="fas fa-poll"></i> Personality Polls</h1>
           <p>Welcome to the Personality Polls section<br />
             February 2019 Questions are Live! <span className="tooltip">
               <i className="fa fa-info-circle" aria-hidden="true"></i>
