@@ -14,7 +14,6 @@ import Chat from './chat';
 import Poll from './poll';
 import AnswerPage from './answerpage';
 
-import Chat from './chat';
 import MeetupDetails from './meetup-details';
 import PersonalityPolls from './personalitypolls';
 import IntroQuiz from './intro-quiz';
