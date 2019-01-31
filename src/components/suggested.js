@@ -2,11 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import requiresLogin from './requires-login';
 import { Link } from 'react-router-dom';
-import { fetchCurrentUser, addFriendToUser, ignoreUser, fetchSchat } from '../actions/users';
+import { fetchCurrentUser2, addFriendToUser, ignoreUser, fetchSchat } from '../actions/users';
 import Chat from './schat';
 export class Suggested extends React.Component {
   componentDidMount() {
-    this.props.dispatch(fetchCurrentUser()).
+    this.props.dispatch(fetchCurrentUser2()).
       then(() => this.props.dispatch(fetchSchat()));
   }
   addFriend(id) {
@@ -16,7 +16,7 @@ export class Suggested extends React.Component {
   }
   ignoreUser(id) {
     this.props.dispatch(ignoreUser(id))
-      .then(() => this.props.dispatch(fetchCurrentUser()))
+      .then(() => this.props.dispatch(fetchCurrentUser2()))
       .then(() => this.props.dispatch(fetchSchat()));
   }
   resetState() {
@@ -41,7 +41,7 @@ export class Suggested extends React.Component {
           console.log('ignored user');
           return;
         } else {
-          if (suggest.chatroom) {
+          if (suggest) {
             return (
               <div key={suggest._id.hashedUsername}>
                 <div>
@@ -64,7 +64,7 @@ export class Suggested extends React.Component {
         }
       })
     }
-    console.log(suggests);
+    // console.log(suggests);
     return (
       <div className="dashboard" >
         <section className="friends-list">
@@ -81,7 +81,7 @@ export class Suggested extends React.Component {
 const mapStateToProps = state => {
   return {
     username: state.auth.currentUser.username,
-    currentUser: state.user.currentUser,
+    currentUser: state.user.currentUser2,
     authToken: state.auth.authToken,
     schat: state.user.schat
   };

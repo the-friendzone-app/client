@@ -2,6 +2,9 @@ import {
   FETCH_CURRENT_USER_REQUEST,
   FETCH_CURRENT_USER_SUCCESS,
   FETCH_CURRENT_USER_FAILURE,
+  FETCH_CURRENT_USER2_REQUEST,
+  FETCH_CURRENT_USER2_SUCCESS,
+  FETCH_CURRENT_USER2_FAILURE,
   FETCH_FRIENDED_REQUEST,
   FETCH_FRIENDED_SUCCESS,
   FETCH_FRIENDED_FAILURE,
@@ -26,6 +29,7 @@ const initialState = {
   friended: [],
   schat: [],
   currentUser: null,
+  currentUser2: '',
   loading: false,
   error: null,
 };
@@ -39,11 +43,29 @@ export default function reducer(state = initialState, action) {
   }
   else if (action.type === FETCH_CURRENT_USER_SUCCESS) {
     return Object.assign({}, state, {
-      currentUser: action.user,
+      currentUser2: action.user,
       loading: false
     });
   }
   else if (action.type === FETCH_CURRENT_USER_FAILURE) {
+    return Object.assign({}, state, {
+      loading: false,
+      error: action.error
+    });
+  }
+  else if (action.type === FETCH_CURRENT_USER2_REQUEST) {
+    return Object.assign({}, state, {
+      loading: true,
+      error: null
+    });
+  }
+  else if (action.type === FETCH_CURRENT_USER2_SUCCESS) {
+    return Object.assign({}, state, {
+      currentUser: action.user2,
+      loading: false
+    });
+  }
+  else if (action.type === FETCH_CURRENT_USER2_FAILURE) {
     return Object.assign({}, state, {
       loading: false,
       error: action.error

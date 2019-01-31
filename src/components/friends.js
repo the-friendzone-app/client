@@ -2,12 +2,12 @@ import React from 'react';
 import { connect } from 'react-redux';
 import requiresLogin from './requires-login';
 import { withRouter } from 'react-router'
-import { fetchCurrentUser, fetchFriended, deleteFriend } from '../actions/users';
+import { fetchCurrentUser2, fetchFriended, deleteFriend } from '../actions/users';
 import Chat from './chat';
 
 export class Friends extends React.Component {
   componentDidMount() {
-    this.props.dispatch(fetchCurrentUser())
+    this.props.dispatch(fetchCurrentUser2())
       .then(() => this.props.dispatch(fetchFriended()));
   }
   render() {
