@@ -7,7 +7,7 @@ import { createStore } from 'redux';
 
 
 describe('>>> Meetups --- Shallow render React Component', () => {
-  let wrapper;
+  let wrapper; 
   beforeEach(() => {
     wrapper = shallow(<Meetups />)
   })
