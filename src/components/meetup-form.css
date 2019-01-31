@@ -1,7 +1,7 @@
 .meetup-form {
-  margin: auto;
-  max-width: 400px;
-  text-align: left;
+  margin: 0 auto; 
+  text-align: center;
+  margin-bottom: 25px;
 }
 
 #description {
@@ -10,7 +10,9 @@
   height: 50px;
   margin-bottom: 10px;
 }
-
+.set-location-form{
+  
+}
 .form-input input {
   width: 330px;
   margin-bottom: 10px;

@@ -30,8 +30,8 @@ export class Suggested extends React.Component {
     let suggests;
     let schat = this.props.schat;
     let ignoreList = [];
-    if (this.props.currentUser.user) {
-      ignoreList = this.props.currentUser.user.ignored;
+    if (this.props.currentUser.user2) {
+      ignoreList = this.props.currentUser.user2.ignored;
     }
 
     if (schat.suggested) {
