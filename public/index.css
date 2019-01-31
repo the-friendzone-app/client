@@ -15,6 +15,7 @@ background-image: linear-gradient(to bottom right, red, yellow);
 background: -moz-linear-gradient(-45deg, #ffffff 0%, #e4e5e5 100%);  
 background: -webkit-linear-gradient(-45deg, #ffffff 0%,#e4e5e5 100%); 
 background: linear-gradient(135deg, #ffffff 0%,#e4e5e5 100%);  
+color: #828282;
  }
 *{
 box-sizing: border-box;
@@ -24,9 +25,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  margin: auto;
+  margin: 0;
   padding: 0;
-  color: #828282;
 }
 ul {
   list-style: none;
@@ -36,6 +36,27 @@ ul {
 a{
   text-decoration: none;
   color: inherit;
+}
+h3.solar{
+  color:#d80b5d;
+}
+a.a-box{
+  text-align: center;
+  margin: auto;
+}
+a.a-box-2{
+  text-align: center;
+  margin: auto;
+  font-size:20px;
+}
+.fa-check-square{
+font-size: 22px;
+color: #0bd819;
+padding: 10px;
+}
+a.text:hover{
+  background-color: #4bd1f5;
+  color: white;
 }
 .app{
   display:flex;
@@ -54,6 +75,42 @@ a{
     margin: 0 auto;
     background-position: center top;
 }
+.blue-logo{
+  background-image: url('./resources/FRIENDZONECOLOR.png');
+  height:300px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  max-width: 90%;
+  padding: 20px;
+  margin: 0 auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  background-position: center;
+}
+.blue-logo-small{
+  background-image: url('./resources/FRIENDZONECOLOR.png');
+  height:100px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  max-width: 90%;
+  padding: 20px;
+  margin: 0 auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  background-position: center;
+}
+.eb-logo{
+  background-image: url('./resources/eb.png');
+height: 100px;
+background-repeat: no-repeat;
+display:flex;
+margin: 0 auto;
+}
+.intro-div{
+  text-align: center;
+  background-color:pink;
+  min-width:70%;
+}
 .nav-menu{
     border: #828282 dashed 2px;
     border-radius: 5px;
@@ -68,7 +125,6 @@ a{
 .outer-div{
   flex:2;
   justify-content: center;
-  text-align: center;
   margin: auto;
   padding: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
@@ -78,12 +134,62 @@ a{
   -moz-osx-font-smoothing: grayscale;
 }
 .header-section{
+  text-align: center;
+  font-size: 22px;
+}
+.header-section h1{
+  font-size:75px;
+  padding: 10px;
 }
 .main-div{
 flex: 2;
+text-align: center;
+}
+.question-text h1{
+  color: #d84f0b;
+  padding-bottom: 20px;
 }
 .main-div h2{
   font-size: 35px;
+}
+.main-div h3{
+ padding-bottom:20px;
+ text-align: center;
+}
+.button-box{
+  display: inline-block;
+  margin: 0 auto;
+  padding: 20px;
+}
+.About {
+  justify-content: center;
+  width: 50%;
+  text-align: justify;
+  margin: 0 auto;
+  padding: 10px;
+}
+.About-meetup {
+  justify-content: center;
+  width: 70%;
+  text-align: justify;
+  margin: 0 auto;
+  padding: 10px;
+
+}
+.warning{  
+  color:#4bd1f5;
+  text-indent: 50px;
+  text-align: justify;
+  letter-spacing: 3px;
+  padding: 10px;
+  width: 20%;
+}
+
+.side-note{  
+  color:#4bd1f5;
+font-size:15x;
+  letter-spacing: 3px;
+  padding: 10px;
 }
 .main-div p{
   font-size: 20px;
@@ -91,15 +197,15 @@ flex: 2;
   width: 80%;
   margin: 0 auto;
 }
-.foursquares dl{
+.foursquares ul{
   display:flex;
   flex-wrap: wrap;
 }
-.foursquares dt{
+.foursquares li{
   height: 20vw;
   display: flex;
-  width: 40%;
-  margin: 10px 2.5%;
+  width: 35%;
+  margin: 15px 2.5%;
   color: #ffffff;
   font-size: 30px;
 }
@@ -107,13 +213,20 @@ flex: 2;
   color: #ffffff;
   font-size: 15px;
 }
-
+.solar-background{
+  background-color: #d80b5d;
+  color: #ffffff;
+  font-size: 22px;
+}
 .solar-box{
   background-color: #d80b5d;
-width:100%;
 }
 .tiger-box{
   background-color: #d84f0b;
+}
+.tiger-box-gradient{
+  background-color: #d84f0b;
+  background-image: linear-gradient(60deg, #d84f0b, #f8ae11);
 }
 .mustard-box{
   background-color:#d8b10b;
@@ -121,17 +234,330 @@ width:100%;
 .ocean-box{
   background-color:#10938b;
 }
+/* tooltip */
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltiptext {
+  font-size: 14px;
+  visibility: hidden;
+  min-width: 200px;
+  background-color: #4bd1f5;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding:10px;
+  
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+  top: -5px;
+  left: 105%;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+
+
+/* buttons */
+form input{
+border-radius: 5px;
+border: #828282 1px dashed;
+margin-bottom: 10px;
+padding: 15px;
+}
+form input:focus{
+  outline: pink;
+  }
+.registration-form input{
+width: 300px;
+}
+.login-form input{
+  width:300px;
+}
+.registration-form .form-input input[type="radio"] {
+width: auto;
+  margin: 10px;
+}
+.personalitypollsform .form-input input[type="radio"] {
+  width: auto;
+  margin: 10px;
+}
+.set-location-form input{
+  border: #d80b5d 3px solid;
+  max-width:500px;
+  min-width:300px;
+  border-radius: 0;
+  background: repeating-linear-gradient(
+  45deg,
+  #ffedf4,
+  #ffedf4 5px,
+  #fad4e3 5px,
+  #fad4e3 10px
+);
+}
+.set-location-form input:focus{
+  outline: none !important;
+}
+.event-search-form input{
+  width: 300px;
+  border: #d80b5d 3px solid;
+  max-width:500px;
+  border-radius: 0;
+}
+
+.event-search-form input:focus{
+  outline: none !important;
+
+}
+.rw-list-option {
+  color:#d80b5d !important;
+  background-color: #ffedf4 !important;  
+}
+
+.meetup-form input{
+  width: 300px;
+  border: #d80b5d 3px solid;
+  max-width:500px;
+  border-radius: 0;
+}
+.meetup-form input:focus{
+  outline: none !important;
+}
+.meetup-form textarea{
+  min-width:50%;
+  min-height:100px;
+  border: #d80b5d 3px solid;
+}
+.meetup-form textarea:focus{
+  outline: none !important;
+}
+.meetup-box{
+  border: #d80b5d  2px dashed;
+  padding:10px;
+}
+.view-details-link{
+  color: white;
+  font-style: bold;
+}
+.meetups-list-page-container select{
+  color:#d80b5d;
+  min-width:200px;
+  font-size:16px;
+}
+.meetups-list-page-container select:focus{
+  outline: none !important;
+}
+li.meetup-name{
+  background-color: #d80b5d;
+  color: white;
+}
+.set-location-form .userSearch{
+  border: blue 3px solid;
+  width:200px;
+  border-radius: 0;
+}
+
+.header-row{
+  padding:20px;
+}
+.personalitypollsform .form-input{
+  padding: 10px;
+
+}
+.main-div2{
+  margin: 0 auto;
+  width:80%;
+}
+.outer-div-polls{
+justify-content: center;
+padding: 20px;
+}
+
+button.login-button{
+  background-color: cornflowerblue;
+  color: white;
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
+button.login-button2{
+background-color: cornflowerblue;
+color: white;
+margin-bottom: 5px;
+margin-top: 5px;
+
+  }
+  button.register-button{
+    background-color: white;
+    color: #828282;
+  }
+
+  button.tiger-button{
+    background-image: linear-gradient(60deg, #d84f0b, #f8ae11);
+    color: white;
+    display: block;
+    height: 100%;
+    padding: 10px;
+    margin-top:20px;
+    border-radius: 5px;
+    font-size:20px;
+    border: none;
+  }
+  button.solar-button{
+    background-color:#d80b5d;
+    color: white;
+    display: block;
+    height: 100%;
+    padding: 10px;
+    margin-top:20px;
+    border-radius: 5px;
+    font-size:20px;
+    border: none;
+  }
+  button.register-button2{
+    background-color: cornflowerblue;
+    color: white;
+      display: block;
+      height: 100%;
+      padding: 10px;
+      border-radius: 10px 10px 10px 0px;
+      font-size:20px;
+      border: none;
+  }
+  button.register-button3{
+    background-color: green;
+    color: white;
+      display: block;
+      height: 100%;
+      padding: 10px;
+      border-radius: 10px 10px 0px 10px;
+      font-size:20px;
+      border: none;
+      margin: 10px;
+  }
+
+/* media */
 
 @media screen and (max-width: 600px){
-  .foursquares dl {
+  .foursquares ul {
     flex-direction: column;
   }
   body{
       flex-direction: column;
   }
-  .foursquares dt {
+  .foursquares li {
     width: 90%;
     margin: 10px auto;
     height: 50vw;
   }
+  .tooltip .tooltiptext{
+    visibility: visible;
+    position: initial;
+    padding: 0;
+  }
+
+}
+/* header */
+.header {
+display: flex;
+justify-content: flex-end;
+
+}
+
+/* footer */
+.footer {
+  background-color: #146ff4;
+  border-top: 1px solid rgba(48, 51, 84, 0.11);
+  padding-top: 15px;
+  margin-top: 15px;
+}
+
+.footer-container {
+  padding-left: 50px;
+  padding-right: 50px;
+}
+
+.footer-row {
+  align-items: stretch;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+
+}
+.footer-copyright {
+  align-self: stretch;
+  flex: none;
+  color: #fff;
+  font-size: 14px;
+  margin-bottom: 15px;
+}
+.footer-copyright a {
+  font-weight: bold;
+}
+/* rainbow button */
+
+
+.login-button2{
+
+  height: 100%;
+  animation: hue-rotate 10s linear infinite;
+  padding:10px 22px;
+  border-radius: 5px;
+  font-size:20px;
+  border: none;
+  
+}
+
+.login-button{
+  display: block;
+  height: 100%;
+  animation: hue-rotate 10s linear infinite;
+  padding:10px 22px;
+  border-radius: 5px;
+  font-size:20px;
+  border: none;
+  
+}
+.register-button{
+  display: block;
+  height: 100%;
+  animation: hue-rotate 10s linear infinite;
+  padding: 10px;
+  border-radius: 5px;
+  font-size:20px;
+  border: none;
+}
+
+
+
+@keyframes hue-rotate {
+      from {
+        -webkit-filter: hue-rotate(0);
+        -moz-filter: hue-rotate(0);
+        -ms-filter: hue-rotate(0);
+        filter: hue-rotate(0);
+      }
+      to {
+        -webkit-filter: hue-rotate(360deg);
+        -moz-filter: hue-rotate(360deg);
+        -ms-filter: hue-rotate(360deg);
+        filter: hue-rotate(360deg);
+      }
+}
+
+.your-answer{
+  background-color:#f8ae11;
+  font-size:30px;
+  color:white;
+}
+
+.response{
+  font-style: italic;
+  color: #d84f0b;
+  margin:10px;
 }

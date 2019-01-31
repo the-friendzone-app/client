@@ -6,6 +6,7 @@ import SetLocationForm from './set-location-form';
 import './event-search.css';
 import { toggleShowEventSearchForm } from '../actions/event-search';
 import EventSearchResults from './event-search-results';
+import NavBar from './nav-bar';
 
 export class EventSearch extends React.Component {
 
@@ -27,19 +28,23 @@ export class EventSearch extends React.Component {
     }
 
     return (
-      <section className="event-search-page">
-        <h1 className="event-search-page-title">Event Search!</h1>
-        <p>Please use the event search form below to find available events in your area. Your search area is based off the
-          current location you have set. You can change your current location at any time.
+      <React.Fragment>
+      <NavBar/>
+      <div className="outer-div">
+      <div className="header-section">
+        <h1>Eventbrite Search</h1>
+        <p>Looking for things already set up in your Area? Or maybe you just moved somewhere? Check out our <div className="eb-logo"></div> search!<br/><span className="side-note">You can change your current location at any time.</span>
         </p>
+        </div>
         <SetLocationForm userId={this.props.userId} currentLocation={this.props.currentLocation} />
-        <button onClick={() => this.handleClick()}>{searchFormBtnDescription}</button>
+        <button className="solar-button" onClick={() => this.handleClick()}>{searchFormBtnDescription}</button>
         {eventSearchForm}
         <div>
           {this.props.loading ? 'Loading event search results...' : ''}
         </div>
         <EventSearchResults />
-      </section>
+      </div>
+      </React.Fragment>
     )
   }
 }

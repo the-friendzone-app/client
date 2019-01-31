@@ -4,7 +4,8 @@ import requiresLogin from './requires-login';
 // import MeetupForm from './meetup-form';
 // import MeetupsList from './meetup-list';
 import { Link } from 'react-router-dom';
-import './meetups.css';
+// import './meetups.css';
+import NavBar from './nav-bar'
 
 export class Meetups extends React.Component {
 
@@ -14,20 +15,25 @@ export class Meetups extends React.Component {
 
   render() {
     return (
-      <section className="meetups">
-        <h1 className="meetups-page-title">FriendZone Meetups!</h1>
-        <p className="meetups-user-hook">Schedule meetups, get lunch, plan a picnic, meet new FriendZ!</p>
-        <p className="meetups-user-info">Welcome to the FriendZone Meetup section. As a FriendZone member, you can create your 
-          own event or use our built in event search to find upcoming events in your area. The event 
-          search will return results based on your location and search criteria. Want to find FriendZ 
-          to attend the next big concert or sporting event with you? Simply run a search and hit the 
-          ‘Create Event’ button once you’ve found the result you're looking for. The event will then 
-          be made available for other FriendZone members to join and attend the event with you. Never 
-          attend another concert or event alone!</p>
-          <Link className="view-details-link" to={{ pathname: `/meetups/friendzone-meetups` }}>FriendZone Meetups</Link>
-          <Link className="view-details-link" to={{ pathname: `/meetups/create-meetup` }}>Create Meetup</Link>
-          <Link className="view-details-link" to={{ pathname: `/meetups/event-search` }}>Event Search</Link>
-      </section>
+      <React.Fragment>
+          <NavBar />
+  <div className="outer-div">
+      <div className="header-section">
+        <h1><i class="fas fa-map-marker-alt"></i> Meetups</h1>
+        <p className="meetups-user-info">Welcome to the FriendZone Meetup section!
+        Here we have created a space for people who want to get out there and do fun stuff, meet new cool friends,
+        or finally go to that new restaurant that just opened up!<br/>
+        We have partnered up with <div className="eb-logo"></div> to bring you events in your area!
+        </p>
+        <div className="link-box">
+          <Link className="view-details-link" to='/meetups/friendzone-meetups'><button className="solar-button">FriendZone Meetups</button></Link>
+          <Link className="view-details-link" to='/meetups/create-meetup'><button className="solar-button">Create Meetup</button></Link>
+          <Link className="view-details-link" to='/meetups/event-search'><button className="solar-button">Event Search</button></Link>
+        </div>
+      </div>
+      </div>
+      </React.Fragment>
+      
     )
   }
 }

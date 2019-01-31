@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import requiresLogin from './requires-login';
 import { fetchAllMeetups, joinMeetup, fetchMeetupAttendence } from '../actions/meetups';
-import './meetup-details.css';
+// import './meetup-details.css';
 import MeetupCountdownTimer from './meetup-countdown-timer';
 
 let moment = require('moment');

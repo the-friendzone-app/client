@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import requiresLogin from './requires-login';
 import MeetupsList from './meetup-list';
-import './meetups.css';
+// import './meetups.css';
 
 export class FriendZoneMeetups extends React.Component {
 

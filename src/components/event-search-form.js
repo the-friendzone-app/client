@@ -173,8 +173,8 @@ export class EventSearchForm extends React.Component {
             component={renderDateTimePicker}
           />
         </div>
-        <button type="submit" disabled={this.props.submitting}>Search Events</button>
-        <button type="button" disabled={this.props.pristine || this.props.submitting} onClick={() => this.props.reset()}>Reset Search</button>
+        <button className="solar-button" type="submit" disabled={this.props.submitting}>Search Events</button>
+        <button className="solar-button" type="button" disabled={this.props.pristine || this.props.submitting} onClick={() => this.props.reset()}>Reset Search</button>
       </form>
     );
   }

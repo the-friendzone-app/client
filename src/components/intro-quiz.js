@@ -47,20 +47,13 @@ export class IntroQuiz extends React.Component {
 
 
             return (
-                <div className="home">
-                    <h2>Hello from intro quiz</h2>
-                    <p>Hello and welcome to The Friend Zone!
-                        We are so excited to welcome you to our community.
-                        Before we get started we require all users take this short 3 question quiz to
-                        personalize your experience here!
-                        Please complete the quiz or your data won't be saved and you'll have to start over.
-                        Also, as a reminder we have a strict 'Friendz Only' Policy! Meaning that
-                        you are here to make friends! Not with any romantic or any malicious intent.
-                For more information: Check out our <Link to="/community-guide">Community Guidelines</Link>
-                    </p>
+                <div className="intro-div">
+                    <h1><i class="fas fa-user-graduate"></i> Intro Quiz</h1>
+                    <div className="About">Hello and Welcome to The Friend Zone!</div>
                     <button onClick={() => this.handleClick()}>Get Started!</button>
                     {logOutButton}
                 </div>
+                
             );
         }
     }
