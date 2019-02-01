@@ -30,8 +30,8 @@ With some many ways to connect, come join the Friend Zone today!
 Team HAMLOGS!
 - Project Manager: Alex Crowell [Github](https://github.com/talexcrowell)
 - Design Lead: Mary Conley [Github](https://github.com/mkcnly)
-- QA Lead - Logan Wang [Github](https://github.com/Logan-WangLW)
-- Product Manager - Thomas Chun [Github](https://github.com/ThomasChun)
+- QA Lead: Logan Wang [Github](https://github.com/Logan-WangLW)
+- Product Manager: Thomas Chun [Github](https://github.com/ThomasChun)
 
 ## Social Media
 - [ProductHunt]()
