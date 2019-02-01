@@ -254,6 +254,8 @@ input.message-box:focus{
 .header-section{
   text-align: center;
   font-size: 22px;
+  padding:20px;
+  width:80%;
 }
 .header-section h1{
   font-size:75px;

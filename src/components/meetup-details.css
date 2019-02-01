@@ -2,6 +2,7 @@
   max-width: 600px;
   margin:auto;
   margin-bottom: 50px;
+  padding: 50px;
 }
 
 .meetup-details-name {
@@ -51,6 +52,8 @@
   float: left;
   border: 0.5px solid lightgray;
   text-align: left;
+margin: 15px;
+padding:15px;
 }
 
 .meetup-members-list ul {
@@ -70,11 +73,11 @@
   display: inline-block;
   margin-left: 25px;
   margin-bottom: 100px;
-  border: 0.5px solid lightgray;
   height: 300px;
   width: 59%;
   min-width: 300px;
   float: right;
+  font-style: italic;
 }
 
 .meetup-chat-placeholder {

@@ -2,8 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import requiresLogin from './requires-login';
 import { fetchAllMeetups, joinMeetup, fetchMeetupAttendence } from '../actions/meetups';
-// import './meetup-details.css';
+import './meetup-details.css';
 import MeetupCountdownTimer from './meetup-countdown-timer';
+import NavBar from './nav-bar'
 
 let moment = require('moment');
 
@@ -57,7 +58,7 @@ export class MeetupsList extends React.Component {
     let membersJoinedList = meetupAttendence.filter(e => e.meetupId === meetup.id);
     membersJoinedList = membersJoinedList.map((e, index) => {
       return (
-        <li key={index}><button>Chat</button>{e.username}</li>
+        <li key={index}><button className="solar-button">Chat</button>{e.username}</li>
       )
     });
 
@@ -65,12 +66,14 @@ export class MeetupsList extends React.Component {
     joinedList = joinedList.map(e => e.username);
     let displayJoinBtn;
     if (joinedList.includes(username)) {
-      displayJoinBtn = <button className="join-meetup-button" disabled>Meetup Joined!</button>
+      displayJoinBtn = <button className="solar-button" disabled>Meetup Joined!</button>
     } else {
-      displayJoinBtn = <button className="join-meetup-button" id={meetup.id} value={username} onClick={e => this.onClick(e)}>Join Meetup</button>
+      displayJoinBtn = <button className="solar-button" id={meetup.id} value={username} onClick={e => this.onClick(e)}>Join Meetup</button>
     }
 
     return (
+      <React.Fragment>
+      <NavBar/>
       <div>
         <section className="meetups-details-container">
           <h1 className="meetup-details-name">{meetup.name}</h1>
@@ -99,6 +102,7 @@ export class MeetupsList extends React.Component {
           </section>
         </div>
       </div>
+      </React.Fragment>
     )
   }
 }
