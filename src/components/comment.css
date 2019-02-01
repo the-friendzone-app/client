@@ -6,8 +6,6 @@
   max-width: 960px;
   border: solid black 1px;
   border-radius: 4px;
-  box-shadow: 5px 5px 2.5px grey;
-  background: cornflowerblue;
   margin-top: 100px;
   margin-left: auto;
   margin-right: auto;
@@ -67,7 +65,6 @@
   top: 0;
   margin-bottom: 30px;
   width: 95%;
-  background-color: teal;
   color: white;
 }
 
@@ -247,8 +244,6 @@
   border:solid black 1px;
   border: solid black 1px;
   border-radius: 4px;
-  box-shadow: 5px 5px 2.5px grey;
-  background: cornflowerblue;
   margin-top: 100px;
   margin-left: auto;
   margin-right: auto;

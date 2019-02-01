@@ -5,6 +5,10 @@ import { Link } from 'react-router-dom';
 import { fetchCurrentUser2, addFriendToUser, ignoreUser, fetchSchat } from '../actions/users';
 import Chat from './schat';
 export class Suggested extends React.Component {
+  state = {
+    addedFriend: ''
+  }
+
   componentDidMount() {
     this.props.dispatch(fetchCurrentUser2()).
       then(() => this.props.dispatch(fetchSchat()));
@@ -28,6 +32,7 @@ export class Suggested extends React.Component {
     // let suggests;
     // let suggestsChats;
     let suggests;
+    let addedFriend = this.state.addedFriend;
     let schat = this.props.schat;
     let ignoreList = [];
     if (this.props.currentUser.user2) {
@@ -49,7 +54,8 @@ export class Suggested extends React.Component {
                 </div>
                 <div>
                   <button key={suggest._id._id} onClick={() => {
-                    this.addFriend(suggest._id._id)
+                    this.addFriend(suggest._id._id);
+                    this.setState({ addedFriend: `Sent friend request to ${suggest._id.hashedUsername}` });
                   }}>Add to friends</button>
                   <button key={suggest._id.username} onClick={() => {
                     this.ignoreUser(suggest._id._id);
@@ -69,6 +75,9 @@ export class Suggested extends React.Component {
       <div className="dashboard" >
         <section className="friends-list">
           <h1>Suggested List</h1>
+          <p>Chat to anonymous user's here! Send friend request and if they friend you back they'll be added to your friend's list!</p>
+          <p>Pass to get another user</p>
+          <h3>{addedFriend}</h3>
           <button><Link to='/friends'>Friends List</Link></button>
           <ul>
             {suggests}
