@@ -1,7 +1,7 @@
 # The Friend Zone
 ![Friend Zone Logo](https://i.imgur.com/trOsTxE.png)
 
-![Login Page](https://i.imgur.com/2dmoZ3W.png) ![Dashboard](https://i.imgur.com/qufysbl.png?1)
+![Login Page](https://i.imgur.com/2dmoZ3W.png) ![Dashboard](https://i.imgur.com/EMvWREk.png?1)
 
 ![Mobile Dashboard1](https://i.imgur.com/h5nlg3r.png?1) ![Mobile Dashboard2](https://i.imgur.com/d1IzxH4.png)
 
@@ -23,10 +23,15 @@ With some many ways to connect, come join the Friend Zone today!
 - Filtering and sorting communities.
 - User settings to allow users to change information.
 - Meetup and Community Pagination
-- Notification system
+- Notifications
 - Night Mode / Dark Screen Setting
 - Marketing (ads, sponsors, partners, etc.)
-- User reporting system
+- User Reports
+- Meetup Chats
+- Yelp! API
+- Jail-time (disciplinary system for users that don't follow community guidelines)
+- Patreon
+- Discord Channel
 
 ## Development Team
 Team HAMLOGS!
