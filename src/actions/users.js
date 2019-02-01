@@ -49,7 +49,7 @@ export const fetchCurrentUser = () => (dispatch, getState) => {
     dispatch(fetchCurrentUserRequest());
     // let userId;
     const currentUser = getState().auth;
-    //console.log('currentuserHERE', currentUser)
+    console.log('currentuserHERE', currentUser)
     // console.log('userId', userId)
     return fetch(`${API_BASE_URL}/users/info/`, {
         method: 'GET',
@@ -59,7 +59,7 @@ export const fetchCurrentUser = () => (dispatch, getState) => {
     })
         .then(res => res.json())
         .then(res => {
-            //console.log(res);
+            console.log(res);
             dispatch(fetchCurrentUserSuccess(res));
         })
         .catch(err => dispatch(fetchCurrentUserFailure(err)));

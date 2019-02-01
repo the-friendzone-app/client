@@ -61,6 +61,11 @@ a.text:hover{
 .app{
   display:flex;
 }
+  @media screen and (max-width: 700px){
+    .app {
+      flex-direction: column;
+    }
+  }
 .nav-bar{
   padding: 20px;
   margin: 20px;
@@ -204,13 +209,27 @@ padding:10px;
 }
 button.close-chat-button{
   display: inline-block;
-  float: right;
-  background-color: transparent;
-  color: white;
-  font-size:16px;
-  border: none;
+      /* float: right; */
+      background-color: transparent;
+      color: white;
+      font-size: 16px;
+      border: none;
+      position: absolute;
+      right: 32px;
+      top: 10px;
 }
-/* .chat-modal{
+  @media screen and (max-width: 700px){
+    button.close-chat-button span {
+      display: none;
+    }
+    .ReactModal__Overlay.ReactModal__Overlay--after-open {
+      top: -40px !important;
+      left: -40px !important;
+      right: -40px !important;
+      bottom: -40px !important;
+   }
+  }
+ .chat-modal{
 position: absolute;
 top: 70px;
 left: 250px;
@@ -222,7 +241,8 @@ overflow: auto;
 border-radius: 10px;
 outline: none;
 padding: 20px;
-} */
+display: none;
+} 
 .username-bubble{
   background-color: #0af192;
   color: white;
@@ -232,8 +252,20 @@ padding: 20px;
  margin-right: 20px;
  margin-left: 20px;
 }
+.userTextInput {
+  position: absolute;
+  width: 95%;
+  bottom: 10px;
+  left: 30px;
+  display: flex;
+}
+@media screen and (max-width: 700px){
+  .userTextInput {
+    left: 10px;
+  }
+}
 input.message-box{
-width: 40%;
+flex: 1;
 min-height:10%;
 padding: 10px;
 font-size: 16px;
@@ -256,11 +288,17 @@ input.message-box:focus{
   font-size: 22px;
   padding:20px;
   width:80%;
+  margin: 0 auto;
 }
 .header-section h1{
   font-size:75px;
   padding: 10px;
 }
+  @media screen and (max-width: 700px){
+    .header-section h1 {
+      font-size: 45px;
+    }
+  }
 .intro-div h1{
   font-size:55px;
   padding: 20px;
@@ -535,7 +573,8 @@ padding: 20px;
 button {
   margin-left: auto;
 	margin-right: auto;
-	margin-top: 25px;
+  margin-top: 25px;
+  cursor: pointer;
 }
 button.intro-button{
   background-color: #5d3fca;

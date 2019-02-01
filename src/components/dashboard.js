@@ -19,7 +19,7 @@ export class Dashboard extends React.Component {
                     <div className="header-section">
                         <h1><i className="fa fa-home"></i>Home</h1>
                         <p>Welcome to your Dashboard<br />
-                            Your Username is '{this.props.username}'<span className="tooltip"> <i className="fa fa-info-circle" aria-hidden="true"></i><span class="tooltiptext">Your username will be kept private. We will provide you a Friend Zone username to use inside The Friend Zone!</span></span><br />
+                            Your Username is '{this.props.username}'<span className="tooltip"> <i className="fa fa-info-circle" aria-hidden="true"></i><span className="tooltiptext">Your username will be kept private. We will provide you a Friend Zone username to use inside The Friend Zone!</span></span><br />
                             Your Friend Zone Username is: {this.props.hashedUsername}!</p>
                     </div>
                     <div className="main-div">

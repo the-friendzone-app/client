@@ -23,7 +23,7 @@ export class PollForm extends React.Component {
 
         const questionOptions = this.props.options.map((option, i) => {
             return (
-                <div>
+                <div key={`questionOptions-${i}`}>
                     <label><Field property={option.text} name="polloption" id={`${option._id}`} component={Input} type="radio" value={`${i}`} /></label>
                 </div>
             )
@@ -47,7 +47,7 @@ export class PollForm extends React.Component {
                     </div>
                 </label>
                 {questionOptions}
-                <button class="tiger-button"
+                <button className="tiger-button"
                     type="submit"
                     disabled={this.props.pristine || this.props.submitting}>
                     Submit

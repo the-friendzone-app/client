@@ -49,7 +49,7 @@ export class Community extends React.Component {
                 <br/>
                 <h3>Our February 2019 Topics are Live!<span className="tooltip"><br/><br/>
                         <i className="fa fa-info-circle" aria-hidden="true"></i>
-                        <span class="tooltiptext">
+                        <span className="tooltiptext">
                            The Friend Zone provides new Topics to discuss every even month.</span>
                     </span></h3><br />
                <span className="side-note">Please remember to follow the <Link className="text" to='/community-guide'>Community Guidelines</Link> when participating in discussions</span> 

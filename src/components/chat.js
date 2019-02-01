@@ -146,7 +146,7 @@ class Chat extends React.Component {
             <div className="messages">
               {messages}
             </div>
-            <div>
+            <div className="userTextInput">
               <input id="message" type="text" placeholder="Message" value={this.state.message} onChange={ev => this.onChange(ev)} />
               <button onClick={ev => this.onClick(ev)}>Send</button>
             </div>

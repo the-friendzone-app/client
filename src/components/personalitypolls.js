@@ -26,7 +26,7 @@ export class PersonalityPolls extends React.Component {
           <p>Welcome to the Personality Polls section<br />
             February 2019 Questions are Live! <span className="tooltip">
               <i className="fa fa-info-circle" aria-hidden="true"></i>
-              <span class="tooltiptext">We here at the Friend Zone
+              <span className="tooltiptext">We here at the Friend Zone
               wanted to give everyone an opportunity to have their
               opinions count. The questions will change every month,
                            so be sure to participate when you can!</span></span></p>

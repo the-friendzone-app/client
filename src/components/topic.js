@@ -55,7 +55,7 @@ export class Topic extends React.Component{
       topicAdd = (
         <div>
         <h4>Join in on the discussion!</h4>
-        <button class="ocean-button" onClick={() => this.props.dispatch(addTopicTrue())}>Create a Topic</button>  
+        <button className="ocean-button" onClick={() => this.props.dispatch(addTopicTrue())}>Create a Topic</button>  
         </div>)
     } else{
      topicAdd = ( <form className='add-topic-form' onSubmit={e =>{

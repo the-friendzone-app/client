@@ -141,12 +141,12 @@ class Schat extends React.Component {
             onAfterOpen={this.afterOpenModal}
             onRequestClose={this.closeModal}
           >
-            <div className="card-title">Connected to: <i className="fas fa-user-astronaut"></i> {this.state.hashedUser} <button className="close-chat-button" onClick={this.closeModal}>CLOSE CHAT <i className="far fa-window-close"></i></button></div>
+            <div className="card-title">Connected to: <i className="fas fa-user-astronaut"></i> {this.state.hashedUser} <button className="close-chat-button" onClick={this.closeModal}><span>CLOSE CHAT</span> <i className="far fa-window-close"></i></button></div>
            
             <div className="messages">
               {messages}
             </div>
-            <div>
+            <div className="userTextInput">
               <input className="message-box" id="message" type="text" placeholder="Message" value={this.state.message} onChange={ev => this.onChange(ev)} />
               <button className="send-message-button" onClick={ev => this.onClick(ev)}>Send</button>
             </div>

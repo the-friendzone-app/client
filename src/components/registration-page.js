@@ -7,8 +7,10 @@ import RegistrationForm from './registration-form';
 export function RegistrationPage(props) {
     // If we are logged in (which happens automatically when registration
     // is successful) redirect to the user's dashboard
-    if (props.loggedIn) {
+    if (props.loggedIn && props.introQuizCompleted) {
         return <Redirect to="/dashboard" />;
+    } else if (props.loggedIn) {
+        return <Redirect to="/intro-quiz" />;
     }
     return (
         <div className="outer-div">
@@ -30,7 +32,8 @@ export function RegistrationPage(props) {
 }
 
 const mapStateToProps = state => ({
-    loggedIn: state.auth.currentUser !== null
+    loggedIn: state.auth.currentUser !== null,
+    introQuizCompleted: (state.auth.currentUser !== null) ? state.auth.currentUser.introQuizCompleted : false
 });
 
 export default connect(mapStateToProps)(RegistrationPage);

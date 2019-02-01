@@ -47,7 +47,7 @@ export class Friends extends React.Component {
           <section className="About">Here is where your list of Friends are kept.
           <span className="tooltip">
                         <i className="fa fa-info-circle" aria-hidden="true"></i>
-                        <span class="tooltiptext">
+                        <span className="tooltiptext">
                             Please note: If you add Friends they will be able to see your real username
                             and can chat with you any time. </span>
                     </span></section>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { clearAuth } from '../actions/auth';
 import { clearAuthToken } from '../local-storage';
 import { fetchIntroQuestions } from '../actions/questions';
@@ -21,7 +21,11 @@ export class IntroQuiz extends React.Component {
         this.props.dispatch(fetchIntroQuestions());
     }
     render() {
-  
+        
+        if (this.props.loggedIn && this.props.introQuizCompleted) {
+            return <Redirect to="/dashboard" />;
+        }
+
         if ((this.props.hasOwnProperty('Questions') && this.props.Questions.length && this.props.Questions !== null && this.props.Questions.length === this.props.userAnswers.length) || 
         (this.props.User!== null && this.props.User.introQuizCompleted && this.props.loggedIn)) {
             return (
@@ -75,7 +79,8 @@ const mapStateToProps = state => ({
     Questions: state.questions.introQuiz,
     userAnswers: state.questions.usersIntroAnswers,
     User: state.user.currentUser,
-    authToken: state.auth.authToken
+    authToken: state.auth.authToken,
+    introQuizCompleted: (state.user.currentUser2 !== null) ? state.user.currentUser2.introQuizCompleted : false
 });
 
 export default connect(mapStateToProps)(IntroQuiz);

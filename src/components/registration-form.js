@@ -40,7 +40,7 @@ export class RegistrationForm extends React.Component {
                 <label htmlFor="username">Username
                  <span className="tooltip">
                         <i className="fa fa-info-circle" aria-hidden="true"></i>
-                        <span class="tooltiptext">
+                        <span className="tooltiptext">
                             Your username will be kept private. We will provide you a
                  Friend Zone Username to use inside The Friend Zone!</span>
                     </span>

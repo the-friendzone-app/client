@@ -5,8 +5,10 @@ import { Link, Redirect } from 'react-router-dom';
 import LoginForm from './login-form';
 
 export function LoginPage(props) {
-    if (props.loggedIn) {
+    if (props.loggedIn && props.introQuizCompleted) {
         return <Redirect to="/dashboard" />;
+    } else if (props.loggedIn) {
+        return <Redirect to="/intro-quiz" />;
     }
 
     return (
@@ -28,7 +30,8 @@ export function LoginPage(props) {
 }
 
 const mapStateToProps = state => ({
-    loggedIn: state.auth.currentUser !== null
+    loggedIn: state.auth.currentUser !== null,
+    introQuizCompleted: (state.auth.currentUser !== null) ? state.auth.currentUser.introQuizCompleted : false,
 });
 
 export default connect(mapStateToProps)(LoginPage);
