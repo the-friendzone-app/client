@@ -25,13 +25,17 @@ With some many ways to connect, come join the Friend Zone today!
 - Marketing (ads, sponsors, partners, etc.)
 
 ## Development Team
-Project Manager: Alex Crowell [Github](https://github.com/talexcrowell)
-Design Lead: Mary Conley [Github](https://github.com/mkcnly)
-QA Lead - Logan Wang [Github](https://github.com/Logan-WangLW)
-Product Manager - Thomas Chun [Github](https://github.com/ThomasChun)
+Team HAMLOGS!
+- Project Manager: Alex Crowell [Github](https://github.com/talexcrowell)
+- Design Lead: Mary Conley [Github](https://github.com/mkcnly)
+- QA Lead - Logan Wang [Github](https://github.com/Logan-WangLW)
+- Product Manager - Thomas Chun [Github](https://github.com/ThomasChun)
 
 ## Social Media
-[ProductHunt]()
-[Twitter]()
-[Patreon](https://www.patreon.com/thefriendzone)
-[Discord](https://discordapp.com/channels/540320365507772446)
+- [ProductHunt]()
+- [Twitter]()
+- [Patreon](https://www.patreon.com/thefriendzone)
+- [Discord](https://discordapp.com/channels/540320365507772446)
+
+## Wireframes
+[* Wireframes go here *]
