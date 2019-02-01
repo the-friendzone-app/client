@@ -4,7 +4,8 @@ import requiresLogin from './requires-login';
 import { fetchAllMeetups, joinMeetup, fetchMeetupAttendence } from '../actions/meetups';
 import './meetup-details.css';
 import MeetupCountdownTimer from './meetup-countdown-timer';
-import NavBar from './nav-bar'
+// import NavBar from './nav-bar'
+import { Link } from 'react-router-dom';
 
 let moment = require('moment');
 
@@ -73,7 +74,7 @@ export class MeetupsList extends React.Component {
 
     return (
       <React.Fragment>
-      <NavBar/>
+        
       <div>
         <section className="meetups-details-container">
           <h1 className="meetup-details-name">{meetup.name}</h1>
@@ -89,6 +90,7 @@ export class MeetupsList extends React.Component {
           <div className="join-meetup-button-container">
             {displayJoinBtn}
           </div>
+          <Link to="/meetups"><button className="solar-button">Back To Meetups</button></Link>
         </section>
         <div className="meetup-members-list-chat-container">
           <section className="meetup-members-list">
