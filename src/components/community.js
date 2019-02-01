@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 import { connect } from 'react-redux';
 import requiresLogin from './requires-login';
 import { fetchForum } from '../actions/community';
+import NavBar from './nav-bar';
 import './comment.css';
 
 export class Community extends React.Component {
@@ -29,6 +30,8 @@ export class Community extends React.Component {
     }); 
 
     return (
+      <React.Fragment>
+        <NavBar/>
       <section className="community-intro">
         <h1 className='community-title'>Welcome to Community!</h1>
         <div className='community-description'>
@@ -42,6 +45,7 @@ export class Community extends React.Component {
           </ul>
         </section>
       </section>
+      </React.Fragment>
     )
   }
 }

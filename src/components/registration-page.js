@@ -15,7 +15,8 @@ export function RegistrationPage(props) {
            <div className="header">
                 <div className="header-container">
                     <div className="header-row">
-                        <Link to="/"><button className="register-button"><i className="fa fa-home" aria-hidden="true"></i> Home</button></Link>
+                        <Link to="/"><button className="register-button">
+                        <i className="fa fa-home" aria-hidden="true"></i> Home</button></Link>
                     </div>
                 </div>
             </div>

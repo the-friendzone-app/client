@@ -4,6 +4,7 @@ import requiresLogin from './requires-login';
 import { Link } from 'react-router-dom';
 import { fetchCurrentUser2, addFriendToUser, ignoreUser, fetchSchat } from '../actions/users';
 import Chat from './schat';
+import NavBar from './nav-bar';
 export class Suggested extends React.Component {
   componentDidMount() {
     this.props.dispatch(fetchCurrentUser2()).
@@ -44,18 +45,24 @@ export class Suggested extends React.Component {
           if (suggest) {
             return (
               <div key={suggest._id.hashedUsername}>
-                <div>
-                  <Chat key={suggest.chatroom._id} schat={suggest} />
-                </div>
-                <div>
-                  <button key={suggest._id._id} onClick={() => {
+                <Chat key={suggest.chatroom._id} schat={suggest} />
+                <button
+                  className="add-friend-button"
+                  key={suggest._id._id} onClick={() => {
                     this.addFriend(suggest._id._id)
-                  }}>Add to friends</button>
-                  <button key={suggest._id.username} onClick={() => {
+                  }
+                  }>
+                  <i className="fas fa-plus-square"></i>
+                </button>
+                <button
+                  className="ignore-button"
+                  key={suggest._id.username} onClick={() => {
                     this.ignoreUser(suggest._id._id);
                     this.resetState();
-                  }}>Pass</button>
-                </div>
+                  }
+                  }>
+                  <i className="fas fa-user-times"></i>
+                </button>
               </div>
             )
           } else {
@@ -66,15 +73,34 @@ export class Suggested extends React.Component {
     }
     // console.log(suggests);
     return (
-      <div className="dashboard" >
-        <section className="friends-list">
-          <h1>Suggested List</h1>
-          <button><Link to='/friends'>Friends List</Link></button>
-          <ul>
-            {suggests}
-          </ul>
-        </section>
+      <React.Fragment>
+      <NavBar/>
+      <div className="outer-div">
+        <div className="header-section">
+          <h1><i className="far fa-lightbulb"></i> Suggested List</h1>
+        </div>
+        <div className="main-div">
+          <div className="friend-div">
+            <button className="friend-list-button"><Link to='/friends'><i className="fas fa-user-friends"></i> Friends List</Link></button>
+            <section className="About">
+              If we have found any users we think you're
+             compatible with they will appear here.<br />
+             <b>
+               Key:
+              <ul>
+                <li><i className="far fa-comment"></i> - Chat</li>
+                <li> <i className="fas fa-plus-square"></i> - Add Friend</li>
+               <li><i className="fas fa-user-times"></i>- Remove User</li>
+              </ul>
+              </b>
+            </section>
+            <ul>
+              {suggests}
+            </ul>
+          </div>
+        </div>
       </div>
+      </React.Fragment>
     )
   }
 }
