@@ -19,7 +19,7 @@ export class Friends extends React.Component {
       // console.log(this.props.friended.friended);
       deleteIt = this.props.friended.friended.map((friend, i) => {
         if (friend.chatroom) {
-          return <button key={friend._id._id} onClick={() => this.props.dispatch(deleteFriend(friend.chatroom._id))}>DELETE</button>
+          return <button className="chat-button" key={friend._id._id} onClick={() => this.props.dispatch(deleteFriend(friend.chatroom._id))}> <i className="fas fa-user-times"> </i> </button>
         }
         return <p key={i}>No friends :(</p>
       })
