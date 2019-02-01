@@ -26,9 +26,9 @@ export class Meetups extends React.Component {
               We have partnered up with <div className="eb-logo"></div> to bring you events in your area!
         </p>
             <div className="link-box">
-              <Link className="view-details-link" to='/meetups/friendzone-meetups'><button className="solar-button">FriendZone Meetups</button></Link>
-              <Link className="view-details-link" to='/meetups/create-meetup'><button className="solar-button">Create Meetup</button></Link>
-              <Link className="view-details-link" to='/meetups/event-search'><button className="solar-button">Event Search</button></Link>
+              <Link className="view-details-link" to='/meetups/friendzone-meetups'><button className="solar-button">FriendZone Meetups List</button></Link>
+              <Link className="view-details-link" to='/meetups/create-meetup'><button className="solar-button">Create a FriendZone Meetup</button></Link>
+              <Link className="view-details-link" to='/meetups/event-search'><button className="solar-button">Eventbrite Search</button></Link>
             </div>
           </div>
         </div>

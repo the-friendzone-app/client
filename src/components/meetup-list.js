@@ -89,8 +89,9 @@ export class MeetupsList extends React.Component {
 
     return (
       <React.Fragment>
-      <NavBar/>
+ 
       <section className="meetups-list-page-container">
+      <Link to="/meetups"><button className="solar-button">Back To Meetups</button></Link>
         <h2 className="meetups-list-page-title">FriendZone Meetups!</h2>
         <h3 className="meetups-h3">Browse a list of FriendZone Meetups below created by our members!</h3>
         <p className="meetups-list-info">Click on the meetup name to see more details about the event. If you find a

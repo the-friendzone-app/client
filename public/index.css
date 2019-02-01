@@ -620,6 +620,13 @@ height:20px;
   display:block;
   padding:10px;
 }
+.link-box{
+    display: block;
+    margin: 0 auto;
+}
+.intro-quiz-container{
+  padding:10px;
+}
 button.login-button{
   background-color: cornflowerblue;
   color: white;

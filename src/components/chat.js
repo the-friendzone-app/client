@@ -127,28 +127,46 @@ class Chat extends React.Component {
     if (this.state.messages) {
       messages = this.state.messages.map((data, i) => {
         // console.log(data);
-        return <div key={i}>{data.handle} : {data.message}</div>
+        return <React.Fragment><div
+         className="username-bubble" key={i}><b>
+         {data.handle}</b>: {data.message}
+         </div></React.Fragment>
       });
     }
     return (
-      <div className="container">
+      <div className="suggest-container">
         <p>{this.state.person}</p>
-        <p>{this.state.hashedUser}</p>
-        <button onClick={this.openModal}>CHAT</button>
+        <p>({this.state.hashedUser})</p>
+        <button className="chat-button" onClick=
+        {this.openModal}><i className="far
+         fa-comment"></i></button>
         <div className="chat-modal">
           <Modal
             isOpen={this.state.modalIsOpen}
             onAfterOpen={this.afterOpenModal}
             onRequestClose={this.closeModal}
           >
-            <div className="card-title">Connected to: {this.state.person}</div>
-            <button onClick={this.closeModal}>CLOSE CHAT</button>
+            <div className="card-title">Connected
+             to: <i className="fas
+              fa-user-astronaut"></i> 
+              {this.state.person} <button 
+              className="close-chat-button" onClick=
+              {this.closeModal}><span>CLOSE
+                 CHAT</span> <i className="far
+                  fa-window-close"></i></button></div>
+
             <div className="messages">
               {messages}
             </div>
             <div className="userTextInput">
-              <input id="message" type="text" placeholder="Message" value={this.state.message} onChange={ev => this.onChange(ev)} />
-              <button onClick={ev => this.onClick(ev)}>Send</button>
+              <input  className="message-box" 
+              id="message" type="text" 
+              placeholder="Message" value=
+              {this.state.message} onChange={ev =>
+               this.onChange(ev)} />
+              <button className="send-message-button" 
+              onClick={ev => this.onClick(ev)}>
+              Send</button>
             </div>
           </Modal>
         </div>
