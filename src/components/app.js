@@ -26,6 +26,7 @@ import { refreshAuthToken } from '../actions/auth';
 import EventSearch from './event-search';
 import CreateMeetup from './create-meetup';
 import FriendZoneMeetups from './friendzone-meetups';
+import { CommunityGuidelines } from './communityguidelines';
 
 export class App extends React.Component {
     componentDidUpdate(prevProps) {
@@ -68,6 +69,7 @@ export class App extends React.Component {
                     <Route exact path="/register" component={RegistrationPage} />
                     <Route exact path="/friends" component={Friends} />
                     <Route exact path="/suggested" component={Suggested} />
+                    <Route exact path="/communityguidelines" component={CommunityGuidelines} />
                     <Route exact path="/community" component={Community} />
                     <Route exact path="/community/:communityId" component={Topic} />
                     <Route exact path="/community/:communityId/:topicId" component={Thread} />

@@ -6,6 +6,10 @@ import { fetchCurrentUser2, addFriendToUser, ignoreUser, fetchSchat } from '../a
 import Chat from './schat';
 import NavBar from './nav-bar';
 export class Suggested extends React.Component {
+  state = {
+    addedFriend: ''
+  }
+
   componentDidMount() {
     this.props.dispatch(fetchCurrentUser2()).
       then(() => this.props.dispatch(fetchSchat()));
@@ -29,6 +33,7 @@ export class Suggested extends React.Component {
     // let suggests;
     // let suggestsChats;
     let suggests;
+    let addedFriend = this.state.addedFriend;
     let schat = this.props.schat;
     let ignoreList = [];
     if (this.props.currentUser.user2) {
@@ -45,11 +50,13 @@ export class Suggested extends React.Component {
           if (suggest) {
             return (
               <div key={suggest._id.hashedUsername}>
+
                 <Chat key={suggest.chatroom._id} schat={suggest} />
                 <button
                   className="add-friend-button"
                   key={suggest._id._id} onClick={() => {
                     this.addFriend(suggest._id._id)
+              this.setState({ addedFriend: `Sent friend request to ${suggest._id.hashedUsername}` });
                   }
                   }>
                   <i className="fas fa-plus-square"></i>
@@ -57,6 +64,8 @@ export class Suggested extends React.Component {
                 <button
                   className="ignore-button"
                   key={suggest._id.username} onClick={() => {
+
+               
                     this.ignoreUser(suggest._id._id);
                     this.resetState();
                   }
@@ -73,6 +82,7 @@ export class Suggested extends React.Component {
     }
     // console.log(suggests);
     return (
+
       <React.Fragment>
       <NavBar/>
       <div className="outer-div">
@@ -94,11 +104,13 @@ export class Suggested extends React.Component {
               </ul>
               </b>
             </section>
+      <h3>{addedFriend}</h3>
             <ul>
               {suggests}
             </ul>
           </div>
         </div>
+
       </div>
       </React.Fragment>
     )

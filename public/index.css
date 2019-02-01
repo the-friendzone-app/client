@@ -100,12 +100,16 @@ a.text:hover{
   background-position: center;
 }
 .eb-logo{
+<<<<<<< HEAD
+  background-image: url(./resources/eb.png); height: 18px; background-repeat: no-repeat; display: inline-block; margin: 0 auto; width: 100px;
+=======
   background-image: url(./resources/eb.png);
   height: 18px;
   background-repeat: no-repeat;
   display: inline-block;
   margin: 0 auto;
   width: 100px;
+>>>>>>> ff59686aa05730ce46280e492b20e9b8160c442b
 }
 .intro-div{
   text-align: center;
@@ -375,16 +379,28 @@ width: auto;
 .set-location-form input:focus{
   outline: none !important;
 }
+.event-search-form{
+  margin: 0 auto; 
+  text-align: center;
+  margin-bottom: 25px;
+}
 .event-search-form input{
   width: 300px;
   border: #d80b5d 3px solid;
   max-width:500px;
   border-radius: 0;
 }
-
+.event-search-results {
+  margin: 0 auto; 
+  text-align: center;
+  margin-bottom: 25px;
+}
 .event-search-form input:focus{
   outline: none !important;
 
+}
+.rw-widget-picker{
+  width: 100%;
 }
 .rw-list-option {
   color:#d80b5d !important;
@@ -418,7 +434,7 @@ width: auto;
 }
 .view-details-link{
   color: white;
-  font-style: bold;
+  font-size: 25px;
 }
 .meetups-list-page-container select{
   color:#d80b5d;
@@ -431,6 +447,7 @@ width: auto;
 li.meetup-name{
   background-color: #d80b5d;
   color: white;
+  font-size: 25px;
 }
 .set-location-form{
   margin: 0 auto;
@@ -465,6 +482,11 @@ padding: 20px;
   background-color:#5d3fca;
   color: white;
   font-size:30px;
+}
+button {
+  margin-left: auto;
+	margin-right: auto;
+	margin-top: 25px;
 }
 button.intro-button{
   background-color: #5d3fca;
