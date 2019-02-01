@@ -1,13 +1,9 @@
 # The Friend Zone
 ![Friend Zone Logo](https://i.imgur.com/trOsTxE.png)
 
-![Login Page](https://i.imgur.com/2dmoZ3W.png)
+![Login Page](https://i.imgur.com/2dmoZ3W.png) ![Dashboard](https://i.imgur.com/qufysbl.png?1)
 
-![Dashboard](https://i.imgur.com/qufysbl.png?1)
-
-![Mobile Dashboard1](https://i.imgur.com/h5nlg3r.png?1)
-
-![Mobile Dashboard2](https://i.imgur.com/d1IzxH4.png)
+![Mobile Dashboard1](https://i.imgur.com/h5nlg3r.png?1) ![Mobile Dashboard2](https://i.imgur.com/d1IzxH4.png)
 
 Having trouble connecting to others through social media? Do you feel nervous about making friends through an online community? Enter The Friend Zone, a place for people seeking platonic friendships and connecting with others through a comfortable and relaxed online community. Want to meet people but not sure how to open? Start a conversation with a suggested user! Want to improve your social skills? Try the Personality Polls to get some insight! Want to meet people in your local area? Join or create a Friend Zone Meetup! Not ready to Meetup but still want to interact with the Friend Zone community? Visit our Community forums and discuss fun topics!
 
@@ -46,11 +42,14 @@ Team HAMLOGS!
 - [Discord](https://discordapp.com/channels/540320365507772446)
 
 ## Wireframes
-- Initial Dashboard Concept
+Initial Dashboard Concept
+
 ![First Design](https://i.imgur.com/TzfVPIj.png)
 
-- Reworked Dashboard for Desktop
+Reworked Dashboard for Desktop
+
 ![Dashboard Design](https://i.imgur.com/CWN1upY.png?1)
 
-- Concept Design for Meetups Feature
+Concept Design for Meetups Feature
+
 ![Meetups Design](https://i.imgur.com/GIMPx31.png?1)
