@@ -6,6 +6,7 @@
 Having trouble connecting to others through social media? Do you feel nervous about making friends through an online community? Enter The Friend Zone, a place for people seeking platonic friendships and connecting with others through a comfortable and relaxed online community. Want to meet people but not sure how to open? Start a conversation with a suggested user! Want to improve your social skills? Try the Personality Polls to get some insight! Want to meet people in your local area? Join or create a Friend Zone Meetup! Not ready to Meetup but still want to interact with the Friend Zone community? Visit our Community forums and discuss fun topics!
 
 With some many ways to connect, come join the Friend Zone today!
+[The Friend Zone](https://the-friend-zone-app.herokuapp.com)
 
 ## V1 Features
 - Chat with friends and start conversations with other potential new friends.
@@ -23,15 +24,20 @@ With some many ways to connect, come join the Friend Zone today!
 - Notification system
 - Night Mode / Dark Screen Setting
 - Marketing (ads, sponsors, partners, etc.)
+- User reporting system
 
 ## Development Team
-Project Manager: Alex Crowell [Github](https://github.com/talexcrowell)
-Design Lead: Mary Conley [Github](https://github.com/mkcnly)
-QA Lead - Logan Wang [Github](https://github.com/Logan-WangLW)
-Product Manager - Thomas Chun [Github](https://github.com/ThomasChun)
+Team HAMLOGS!
+- Project Manager: Alex Crowell [Github](https://github.com/talexcrowell)
+- Design Lead: Mary Conley [Github](https://github.com/mkcnly)
+- QA Lead: Logan Wang [Github](https://github.com/Logan-WangLW)
+- Product Manager: Thomas Chun [Github](https://github.com/ThomasChun)
 
 ## Social Media
-[ProductHunt]()
-[Twitter]()
-[Patreon](https://www.patreon.com/thefriendzone)
-[Discord](https://discordapp.com/channels/540320365507772446)
+- [ProductHunt]()
+- [Twitter]()
+- [Patreon](https://www.patreon.com/thefriendzone)
+- [Discord](https://discordapp.com/channels/540320365507772446)
+
+## Wireframes
+[* Wireframes go here *]

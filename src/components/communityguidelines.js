@@ -18,7 +18,6 @@ export class CommunityGuidelines extends React.Component {
                       <li className='community-guideline'>No violent language, threats, or self-destructive behavior. Again, we're here to make friends, not to chase people away.</li>
                       <li className='community-guideline'>No unauthorized sharing of Friend Zone's members' personal information. Information can be shared between Friend Zone members AT the volition of those members.</li>
                       <li className='community-guideline'>No impersonation of an organization or another individual. Why would you want to be a catfish?</li>
-                      <li className='community-guideline'>No impersonation of an organization or another individual. Why would you want to be a catfish?</li>
                     </ul>
                     <p className='community-guidelines-text'>And the obvious rules...</p>
                     <ul className='community-guidelines'>
