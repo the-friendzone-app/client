@@ -4,6 +4,7 @@ import requiresLogin from './requires-login';
 import { withRouter } from 'react-router'
 import { fetchCurrentUser2, fetchFriended, deleteFriend } from '../actions/users';
 import Chat from './chat';
+import NavBar from './nav-bar';
 
 export class Friends extends React.Component {
   componentDidMount() {
@@ -33,17 +34,33 @@ export class Friends extends React.Component {
       })
     }
     return (
-      <div className="dashboard">
-        <section className="friends-list">
-          <h1>Friends List</h1>
-          <button onClick={() => this.props.history.go(-1)}>Suggested List</button>
+      <React.Fragment>
+        <NavBar/>
+      <div className="outer-div">
+        <div className="header-section">
+          <h1><i className="fas fa-user-friends"></i> Friends List</h1>
+          </div>
+          <div className="main-div">
+          <div className="friend-div">
+          <button className="friend-list-button" onClick={() => this.props.history.go(-1)}>
+          <i className="far fa-lightbulb"></i> Suggested List</button>
+          <section className="About">Here is where your list of Friends are kept.
+          <span className="tooltip">
+                        <i className="fa fa-info-circle" aria-hidden="true"></i>
+                        <span class="tooltiptext">
+                            Please note: If you add Friends they will be able to see your real username
+                            and can chat with you any time. </span>
+                    </span></section>
+          
+          
           <ul>
             {chats}
             {deleteIt}
           </ul>
-
-        </section>
+          </div>
+          </div>
       </div>
+      </React.Fragment>
     )
   }
 }

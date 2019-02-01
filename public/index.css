@@ -138,6 +138,72 @@ a.text:hover{
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+.friend-div{
+  background-color:#d8b10b;
+  width: 80%;
+  border-radius: 10px;
+  padding:20px;
+  justify-content: left;
+  color: white;
+  display: inline-block;
+  min-height: 500px;
+}
+.card-title{
+  background-color: #333333;
+  background-image: linear-gradient(60deg, #333333, #1b1a1a);
+  font-size: 25px;
+  color: white;
+  padding: 10px;
+}
+button.close-chat-button{
+  display: inline-block;
+  float: right;
+  background-color: transparent;
+  color: white;
+  font-size:16px;
+  border: none;
+}
+/* .chat-modal{
+position: absolute;
+top: 70px;
+left: 250px;
+right: 250px;
+bottom: 70px;
+border: 2px solid rgba(0,0,0,0.125);
+background: rgba(173, 167, 236, 0.29);
+overflow: auto;
+border-radius: 10px;
+outline: none;
+padding: 20px;
+} */
+.username-bubble{
+  background-color: #0af192;
+  color: white;
+  border-radius:10px;
+  padding:10px;
+  margin:10px;
+ margin-right: 20px;
+ margin-left: 20px;
+}
+input.message-box{
+width: 40%;
+min-height:10%;
+padding: 10px;
+font-size: 16px;
+ border: 2px solid black;
+ color:hotpink;
+}
+input.message-box:focus{
+ outline: none !important;
+  }
+.send-message-button{
+  background-color: black;
+  color: white;
+  border: 2px solid #0af192;
+  padding: 5px;
+  font-size: 20px;
+  margin-left:5px;
+}
 .header-section{
   text-align: center;
   font-size: 22px;
@@ -509,6 +575,50 @@ margin-top: 5px;
       font-size:20px;
       border: none;
       margin: 10px;
+  }
+  button.chat-button{
+    font-size:30px;
+    background-color:transparent;
+    color: white;
+border: none;
+  }
+  button.add-friend-button{
+    font-size:30px;
+    background-color:transparent;
+    color: white;
+border: none;
+padding: 3px;
+  }
+  button.ignore-button{
+    font-size:30px;
+    background-color:transparent;
+    color: white;
+border: none;
+padding: 3px;
+  }
+  button.friend-list-button{
+    font-size:30px;
+    background-color:transparent;
+    color: white;
+border: white 2px solid;
+border-radius: 5px;
+padding: 3px;
+  }
+  button.chat-button:focus{
+    outline: none !important;
+  }
+  button.add-friend-button:focus{
+    outline: none !important;
+  }
+  button.ignore-button:focus{
+    outline: none !important;
+  }
+  button.friend-list-button:focus{
+    outline: none !important;
+  }
+  .chat-name{
+    font-size:20px;
+    font-weight: bold;
   }
 
 /* media */
