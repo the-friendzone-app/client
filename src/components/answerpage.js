@@ -14,8 +14,8 @@ export class AnswerPage extends React.Component {
                 </div>
                 <section className='main-div'>
                     <div className="your-answer">Your Answer: {selectedAnswer.text}</div><br /><br />
-                    <p className="pro">😊 Pro:</p><p className="response"> {selectedAnswer.pros}</p><br />
-                    <p className="con">🤔 Con:</p><p className="response"> {selectedAnswer.cons}</p>
+                    <p className="pro"><span role="img">😊</span> Pro:</p><p className="response"> {selectedAnswer.pros}</p><br />
+                    <p className="con"><span role="img">🤔</span> Con:</p><p className="response"> {selectedAnswer.cons}</p>
                 </section>
                 <Link className="text" to="/personality-polls">Go Back To Personality Polls!</Link>
             </div>

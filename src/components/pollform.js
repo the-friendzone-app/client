@@ -1,5 +1,5 @@
 import React from 'react';
-import { Field, reduxForm, focus } from 'redux-form';
+import { Field, reduxForm } from 'redux-form';
 import { submitAnswer } from '../actions/questions';
 import Input from './input';
 

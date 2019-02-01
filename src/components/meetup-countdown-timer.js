@@ -1,7 +1,7 @@
 import React from 'react';
 
 let moment = require('moment');
-let countdown = require('moment-countdown');
+// let countdown = require('moment-countdown');
 
 export default class MeetupCountdownTimer extends React.Component {
   render() {

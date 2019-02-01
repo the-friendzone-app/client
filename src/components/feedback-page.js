@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom';
 import { clearAuth } from '../actions/auth';
 import { clearAuthToken } from '../local-storage';
 import { fetchFeedback } from '../actions/auth';
-import IntroQuizForm from './intro-quiz-form';
-import { sendVerification } from '../actions/questions';
+// import IntroQuizForm from './intro-quiz-form';
+// import { sendVerification } from '../actions/questions';
 
 
 

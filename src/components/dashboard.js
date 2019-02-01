@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import requiresLogin from './requires-login';
 import { fetchSuggested } from '../actions/users';
 import NavBar from './nav-bar';
-import Footer from './footer';
+// import Footer from './footer';
 
 
 export class Dashboard extends React.Component {

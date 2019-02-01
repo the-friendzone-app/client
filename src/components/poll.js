@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import requiresLogin from './requires-login';
 import PollForm from './pollform';
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import { fetchQuestion } from '../actions/questions';
 

@@ -47,7 +47,7 @@ export const fetchCurrentUserFailure = error => ({
 
 export const fetchCurrentUser = () => (dispatch, getState) => {
     dispatch(fetchCurrentUserRequest());
-    let userId;
+    // let userId;
     const currentUser = getState().auth;
     //console.log('currentuserHERE', currentUser)
     // console.log('userId', userId)

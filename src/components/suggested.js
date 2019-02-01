@@ -11,8 +11,8 @@ export class Suggested extends React.Component {
   }
 
   componentDidMount() {
-    this.props.dispatch(fetchCurrentUser2()).
-      then(() => this.props.dispatch(fetchSchat()));
+    this.props.dispatch(fetchCurrentUser2())
+    .then(() => this.props.dispatch(fetchSchat()));
   }
   addFriend(id) {
     return (
@@ -45,7 +45,7 @@ export class Suggested extends React.Component {
       suggests = schat.suggested.slice(0, size).map((suggest, i) => {
         if (ignoreList.includes(suggest._id._id)) {
           console.log('ignored user');
-          return;
+          return console.log;
         } else {
           if (suggest) {
             return (

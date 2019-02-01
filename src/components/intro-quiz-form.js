@@ -2,7 +2,7 @@ import React from 'react';
 import {Field, reduxForm, focus} from 'redux-form';
 import {answerQuestion} from '../actions/questions';
 import Input from './input';
-import {required} from '../validators';
+// import {required} from '../validators';
 
 
 export class IntroQuizForm extends React.Component {

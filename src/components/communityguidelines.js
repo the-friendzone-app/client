@@ -1,8 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import requiresLogin from './requires-login';
-import { fetchSuggested } from '../actions/users';
 import NavBar from './nav-bar';
 
 export class CommunityGuidelines extends React.Component {
