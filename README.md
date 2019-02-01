@@ -1,7 +1,13 @@
 # The Friend Zone
 ![Friend Zone Logo](https://i.imgur.com/trOsTxE.png)
 
-[* SCREENSHOT GOES HERE *]
+![Login Page](https://i.imgur.com/2dmoZ3W.png)
+
+![Dashboard](https://i.imgur.com/qufysbl.png?1)
+
+![Mobile Dashboard1](https://i.imgur.com/h5nlg3r.png?1)
+
+![Mobile Dashboard2](https://i.imgur.com/d1IzxH4.png)
 
 Having trouble connecting to others through social media? Do you feel nervous about making friends through an online community? Enter The Friend Zone, a place for people seeking platonic friendships and connecting with others through a comfortable and relaxed online community. Want to meet people but not sure how to open? Start a conversation with a suggested user! Want to improve your social skills? Try the Personality Polls to get some insight! Want to meet people in your local area? Join or create a Friend Zone Meetup! Not ready to Meetup but still want to interact with the Friend Zone community? Visit our Community forums and discuss fun topics!
 
@@ -34,7 +40,7 @@ Team HAMLOGS!
 - Product Manager: Thomas Chun [Github](https://github.com/ThomasChun)
 
 ## Social Media
-- [ProductHunt]()
+- [ProductHunt](https://www.producthunt.com/posts/the-friend-zone-app)
 - [Twitter](https://twitter.com/friend_app)
 - [Patreon](https://www.patreon.com/thefriendzone)
 - [Discord](https://discordapp.com/channels/540320365507772446)
