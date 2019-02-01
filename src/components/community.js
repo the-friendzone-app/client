@@ -43,12 +43,17 @@ export class Community extends React.Component {
         <div className="outer-div">
           <div className="header-section">
             <section className="community-intro" >
-              <h1 className='community-title'>Welcome to Community!</h1>
-              <p className='community-info'>
-                Looking to join an online community or take part in discussions about one of your interests?<br />
-                The Friend Zone’s Community provides members with a place to engage in discussion across a variety of topics. Find people that share similar passions and build a community together. Join in discussions across a broad range of categories or create a topic of your own to discuss! The Community will have a rotating set of featured categories that members are encouraged to check out and participate in. Stop wasting time and connect with the community!<br />
-                Please remember to follow the <Link to='/communityguidelines'>Community Guidelines</Link> when participating in discussions
-              </p>
+              <h1><i className="far fa-list-alt"></i> Community</h1>
+              <p className='main-div'>
+                The Friend Zone’s Community provides members with a place to engage in discussion across a variety of topics. Come share your ideas, rant, or lurk!
+                <br/>
+                <h3>Our February 2019 Topics are Live!<span className="tooltip"><br/><br/>
+                        <i className="fa fa-info-circle" aria-hidden="true"></i>
+                        <span class="tooltiptext">
+                           The Friend Zone provides new Topics to discuss every even month.</span>
+                    </span></h3><br />
+               <span className="side-note">Please remember to follow the <Link className="text" to='/community-guide'>Community Guidelines</Link> when participating in discussions</span> 
+              </p><br/><br/>
               <section className='communities'>
                 <ul className='communities-list'>
                   {communities}

@@ -59,17 +59,17 @@ export class Comment extends React.Component {
     else if (this.props.currentUser._id === this.props.comment.user._id && this.props.comment.user._id !== null) {
       userControls = (
         <div className='comment-controls'>
-          <button className='comment-button'>
-            <img className='comment-img' src={process.env.PUBLIC_URL + '/resources/edit-icon.png'} alt='Edit Your Post' onClick={e => {
+          <button className='comment-button'
+       alt='Edit Your Post' onClick={e => {
               e.preventDefault();
               this.props.dispatch(editingCommentTrue(this.props.comment._id));
-            }} />
+            }}>Edit Your Comment <i className="far fa-edit"> </i> 
           </button>
-          <button className='comment-button'>
-            <img className='comment-img' src={process.env.PUBLIC_URL + '/resources/trash-icon.png'} alt='Delete Your Post' onClick={e => {
+          <button className='comment-button'
+            alt='Delete Your Post' onClick={e => {
               e.preventDefault();
               this.onDeleteSubmit(this.props.comment._id);
-            }} />
+            }} >Delete Your Comment <i className="fas fa-trash-alt"> </i> 
           </button>
         </div>);
     }
@@ -115,6 +115,8 @@ export class Comment extends React.Component {
 
 
     return (
+ 
+ 
       <li id={'comment-' + this.props.comment._id} className='comment' key={this.props.comment._id}>
         <section className='comment-card'>
           <a className='commentID' href='#add-comment-form' onClick={() => this.props.dispatch(addReplyTo(this.props.comment._id))}>>>{this.props.comment._id}</a>
@@ -127,6 +129,7 @@ export class Comment extends React.Component {
           {responseList}
         </section>
       </li>
+    
     );
   };
 

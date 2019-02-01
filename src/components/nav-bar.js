@@ -30,10 +30,10 @@ export class NavBar extends React.Component {
                         <li><i className="fa fa-home"></i> <Link className="text" to='/'>Home</Link></li>
                         <li><Link className="text" to='/suggested'>Friends List</Link></li>
                         <li><Link className="text" to='/meetups'>My Meetups</Link></li>
-                        <li><Link className="text" to='/communityguidelines'>Community Guidelines</Link></li>
+                        <li><Link className="text" to='/community-guide'>Community Guidelines</Link></li>
                         <li>Report</li>
                         <li>Settings</li>
-                        <li>About Us</li>
+                        <li><Link className="text" to="/about-us">About Us</Link></li>
                         <li><i className="fas fa-sign-out-alt"></i> {logOutButton}</li>
                     </ul>
                 </div>

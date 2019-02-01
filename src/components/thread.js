@@ -81,7 +81,7 @@ export class Thread extends React.Component{
               <label htmlFor='commentInput' className='commentInput-label'>Post a Comment:</label>
               {replyingTo}
               <textarea cols='80' rows='10' name='commentInput'></textarea>
-              <button>Submit Comment</button>
+              <button className="ocean-button">Submit Comment</button>
             </section>
           </form>
       </div>);
@@ -99,10 +99,10 @@ export class Thread extends React.Component{
     return (
       <section className="thread">
         <div className='topic'>
-          <Link to={'/community/'+communityId}><button className='back-button'>Back to {community ? community.mainTitle : '...'}</button></Link>
+          <Link to={'/community/'+communityId}><button className='ocean-button-inverse'>Back to {community ? community.mainTitle : '...'}</button></Link>
           <div className='topic-plate'>
             <h3 className='topic-name'>{topic ? topic.topicName : '...' }</h3>
-            <p className='topic-creator'>Created by: {topic ? topic.creator.hashedUsername : '...'}</p>
+            <p className='topic-creator'>Topic Created by: {topic ? topic.creator.hashedUsername : '...'}</p>
           </div>
           <p className='topic-description'>{topic ? topic.description : '...'}</p>
           {notification}

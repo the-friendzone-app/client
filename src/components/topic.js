@@ -34,7 +34,7 @@ export class Topic extends React.Component{
           <Link to={topicId}>
             <section className= 'topic-card'>
               <h4>{topic.topicName}</h4>
-              <div>Created By: {topic.creator ? topic.creator.hashedUsername : 'Loading...'}</div>
+              <div>Topic Created By: {topic.creator ? topic.creator.hashedUsername : 'Loading...'}</div>
               <p>{topic ? topic.description: 'Loading...'}</p>
               <div>Total Comments:{topic.comments ? topic.comments.length: 'Loading'}</div>
             </section>
@@ -54,8 +54,8 @@ export class Topic extends React.Component{
     if(this.props.topicAdd === false){
       topicAdd = (
         <div>
-        <h4>Is there something you'd like to discuss but don't see it on the topic list?</h4>
-        <button onClick={() => this.props.dispatch(addTopicTrue())}>Want to add a topic?</button>  
+        <h4>Join in on the discussion!</h4>
+        <button class="ocean-button" onClick={() => this.props.dispatch(addTopicTrue())}>Create a Topic</button>  
         </div>)
     } else{
      topicAdd = ( <form className='add-topic-form' onSubmit={e =>{
@@ -70,14 +70,14 @@ export class Topic extends React.Component{
           <label htmlFor='topicDescription'>Description:  </label>
           <textarea name='topicDescription' className='topicDescription' placeholder='Describe your topic!'></textarea>
         </div>
-        <button>Submit Topic</button>
-        <button onClick={() => this.props.dispatch(addTopicFalse())}>Cancel</button> 
+        <button className="ocean-button-inverse">Submit Topic</button>
+        <button className="ocean-button-inverse" onClick={() => this.props.dispatch(addTopicFalse())}>Cancel</button> 
       </form>)
     }
 
     return (
       <section className="topics">
-        <Link to='/community'><button> Back to Communities</button></Link>
+        <Link to='/community'><button className="ocean-button-inverse"> Back to Communities</button></Link>
         <h3 className='community-title'>{community ? community.mainTitle : 'Loading...'}</h3>
         <div className='community-description'>
           <p>{community ? community.description : 'Loading...'}</p>

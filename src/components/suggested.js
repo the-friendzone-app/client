@@ -50,7 +50,6 @@ export class Suggested extends React.Component {
           if (suggest) {
             return (
               <div key={suggest._id.hashedUsername}>
-
                 <Chat key={suggest.chatroom._id} schat={suggest} />
                 <button
                   className="add-friend-button"
@@ -104,7 +103,7 @@ export class Suggested extends React.Component {
               </ul>
               </b>
             </section>
-      <h3>{addedFriend}</h3>
+            <div className="rainbow-div">{addedFriend}</div>
             <ul>
               {suggests}
             </ul>

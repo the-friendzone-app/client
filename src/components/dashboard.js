@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import requiresLogin from './requires-login';
 import { fetchSuggested } from '../actions/users';
 import NavBar from './nav-bar';
+import Footer from './footer';
+
 
 export class Dashboard extends React.Component {
     componentDidMount() {
@@ -30,9 +32,7 @@ export class Dashboard extends React.Component {
                             </ul>
                         </section>
                     </div>
-                    {/* <div>button example: <button className="register-button2">Message from user 2Message from user 2Message from user 2Message from user 2Message from user 2</button><button className="register-button3">Message from user 1</button></div> */}
                 </div>
-               
             </React.Fragment>
         );
     }

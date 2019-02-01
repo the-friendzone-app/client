@@ -13,6 +13,7 @@ import Meetups from './meetups';
 import Chat from './chat';
 import Poll from './poll';
 import AnswerPage from './answerpage';
+import AboutUs from './about-us';
 
 import MeetupDetails from './meetup-details';
 import PersonalityPolls from './personalitypolls';
@@ -26,7 +27,7 @@ import { refreshAuthToken } from '../actions/auth';
 import EventSearch from './event-search';
 import CreateMeetup from './create-meetup';
 import FriendZoneMeetups from './friendzone-meetups';
-import { CommunityGuidelines } from './communityguidelines';
+import CommunityGuidelines from './communityguidelines';
 
 export class App extends React.Component {
     componentDidUpdate(prevProps) {
@@ -69,7 +70,7 @@ export class App extends React.Component {
                     <Route exact path="/register" component={RegistrationPage} />
                     <Route exact path="/friends" component={Friends} />
                     <Route exact path="/suggested" component={Suggested} />
-                    <Route exact path="/communityguidelines" component={CommunityGuidelines} />
+                    <Route exact path="/community-guide" component={CommunityGuidelines} />
                     <Route exact path="/community" component={Community} />
                     <Route exact path="/community/:communityId" component={Topic} />
                     <Route exact path="/community/:communityId/:topicId" component={Thread} />
@@ -83,6 +84,7 @@ export class App extends React.Component {
                     <Route exact path="/chat" component={Chat} />
                     <Route exact path="/answerpage" component={AnswerPage} />
                     <Route exact path="/intro-quiz" component={IntroQuiz} />
+                    <Route exact path="/about-us" component={AboutUs} />
                 </Switch>
             </div>
         );
