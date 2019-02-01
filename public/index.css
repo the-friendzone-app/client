@@ -100,7 +100,16 @@ a.text:hover{
   background-position: center;
 }
 .eb-logo{
+<<<<<<< HEAD
   background-image: url(./resources/eb.png); height: 18px; background-repeat: no-repeat; display: inline-block; margin: 0 auto; width: 100px;
+=======
+  background-image: url(./resources/eb.png);
+  height: 18px;
+  background-repeat: no-repeat;
+  display: inline-block;
+  margin: 0 auto;
+  width: 100px;
+>>>>>>> ff59686aa05730ce46280e492b20e9b8160c442b
 }
 .intro-div{
   text-align: center;
@@ -200,6 +209,7 @@ font-size:15x;
 .foursquares ul{
   display:flex;
   flex-wrap: wrap;
+  justify-content: center;
 }
 .foursquares li{
   height: 20vw;

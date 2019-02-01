@@ -41,7 +41,7 @@ export class Community extends React.Component {
           <div className="header-section">
             <section className="community-intro" >
               <h1 className='community-title'>Welcome to Community!</h1>
-              <p className='"meetups-user-info"'>
+              <p className='community-info'>
                 Looking to join an online community or take part in discussions about one of your interests?<br />
                 The Friend Zone’s Community provides members with a place to engage in discussion across a variety of topics. Find people that share similar passions and build a community together. Join in discussions across a broad range of categories or create a topic of your own to discuss! The Community will have a rotating set of featured categories that members are encouraged to check out and participate in. Stop wasting time and connect with the community!<br />
                 Please remember to follow the <Link to='/communityguidelines'>Community Guidelines</Link> when participating in discussions
