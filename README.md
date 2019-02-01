@@ -35,9 +35,16 @@ Team HAMLOGS!
 
 ## Social Media
 - [ProductHunt]()
-- [Twitter]()
+- [Twitter](https://twitter.com/friend_app)
 - [Patreon](https://www.patreon.com/thefriendzone)
 - [Discord](https://discordapp.com/channels/540320365507772446)
 
 ## Wireframes
-[* Wireframes go here *]
+- Initial Dashboard Concept
+![First Design](https://i.imgur.com/TzfVPIj.png)
+
+- Reworked Dashboard for Desktop
+![Dashboard Design](https://i.imgur.com/CWN1upY.png?1)
+
+- Concept Design for Meetups Feature
+![Meetups Design](https://i.imgur.com/GIMPx31.png?1)

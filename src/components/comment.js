@@ -63,13 +63,13 @@ export class Comment extends React.Component {
        alt='Edit Your Post' onClick={e => {
               e.preventDefault();
               this.props.dispatch(editingCommentTrue(this.props.comment._id));
-            }}>Edit Your Comment <i className="far fa-edit"> </i> 
+            }}>Edit <i className="far fa-edit"> </i> 
           </button>
           <button className='comment-button'
             alt='Delete Your Post' onClick={e => {
               e.preventDefault();
               this.onDeleteSubmit(this.props.comment._id);
-            }} >Delete Your Comment <i className="fas fa-trash-alt"> </i> 
+            }} >Delete <i className="fas fa-trash-alt"> </i> 
           </button>
         </div>);
     }
@@ -122,11 +122,11 @@ export class Comment extends React.Component {
           <a className='commentID' href='#add-comment-form' onClick={() => this.props.dispatch(addReplyTo(this.props.comment._id))}>>>{this.props.comment._id}</a>
           <div className='user-plate'>
             User: {userName}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Posted At: {fixedTimestamp}&nbsp;&nbsp;&nbsp;{edited}
-            {userControls}
           </div>
           {replyTo}
           {commentText}
           {responseList}
+          {userControls}
         </section>
       </li>
     

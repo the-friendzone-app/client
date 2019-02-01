@@ -169,17 +169,17 @@
 .comment-controls{
   display: inline-block;
   float: right;
-  widows: 10%;
+  width: 10%;
   height: auto;
 }
 
 
 .comment-controls{
-background: transparent;
+  background: transparent;
   width: auto;
   border-radius: 6px;
   border: none;
-  padding:25px;
+  padding:10px;
   color: white;
 
 }
