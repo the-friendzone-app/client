@@ -34,6 +34,7 @@ With some many ways to connect, come join the Friend Zone today!
 - Discord Channel
 
 ## Tech Stack
+### Client
 - React - The web framework used
 - Redux
 - Socket.io - Websocket
@@ -41,6 +42,16 @@ With some many ways to connect, come join the Friend Zone today!
 - Eventbrite API - Event API
 - Jest - Testing
 - Enzyme - Testing
+
+### Server
+- Node
+- Express - Web application framework
+- MongoDB - Database
+- Mongoose - Data modeling
+- Passport - Authentication
+- JWT - Authentication
+- Socket.io - Websocket
+- Mocha/Chai - Testing
 
 ## Development Team
 Team HAMLOGS!
