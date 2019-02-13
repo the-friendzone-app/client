@@ -33,6 +33,15 @@ With some many ways to connect, come join the Friend Zone today!
 - Patreon
 - Discord Channel
 
+## Tech Stack
+- React - The web framework used
+- Redux
+- Socket.io - Websocket
+- Google Geolocation API - Location API
+- Eventbrite API - Styling
+- Jest - Testing
+- Enzyme - Testing
+
 ## Development Team
 Team HAMLOGS!
 - Project Manager: Alex Crowell [Github](https://github.com/talexcrowell)
