@@ -29,7 +29,7 @@ export class MeetupsList extends React.Component {
     if (meetups.length === 0) {
       return (
         <div>
-          <p>There are currently no FriendZone Meetups!</p>
+          <p>There are currently no Friend Zone Meetups!</p>
           <p>This is a great opportunity for you to create a meetup for others to join!</p>
         </div>
       )
@@ -57,60 +57,61 @@ export class MeetupsList extends React.Component {
       meetupsList = <p className="no-meetups-display">No meetups meet your selected display criteria!</p>
     } else {
       meetupsList = filteredMeetups.map((meetup, index) => {
-      // convert time to users local time
-      let startTime = meetup.startTime;
-      startTime = moment(startTime);
-      let formattedStartTime = startTime.format('llll');
+        // convert time to users local time
+        let startTime = meetup.startTime;
+        startTime = moment(startTime);
+        let formattedStartTime = startTime.format('llll');
 
-      let endTime = meetup.endTime;
-      endTime = moment(endTime);
-      // let formattedEndTime = endTime.format('llll');
+        let endTime = meetup.endTime;
+        endTime = moment(endTime);
+        // let formattedEndTime = endTime.format('llll');
 
-      // duration - diff between start and end times
-      let elapsed = endTime.diff(startTime, 'minutes');
-      // breakdown into hours and minutes for display e.g. 1 hour 30 mins
-      let hours = Math.floor(elapsed / 60);
-      let minutes = (elapsed % 60);
+        // duration - diff between start and end times
+        let elapsed = endTime.diff(startTime, 'minutes');
+        // breakdown into hours and minutes for display e.g. 1 hour 30 mins
+        let hours = Math.floor(elapsed / 60);
+        let minutes = (elapsed % 60);
 
-      return (
-        <div className="meetup-box">
-        <li key={index} id={meetup.id} className="meetup-list-results">
-          <Link className="view-details-link2" to={{ pathname: `/meetups/${meetup.name}`, state: { meetup: meetup } }}><b>View Details</b></Link>
-          <ul>
-            <Link className="meetup-name-link" to={{ pathname: `/meetups/${meetup.name}`, state: { meetup: meetup } }}><li className="meetup-name"><b>{meetup.name}</b></li></Link>
-            <li><b>Location:</b> {meetup.location}</li>
-            <li><b>Start Time:</b> {formattedStartTime}</li>
-            <li><b>Duration:</b> {hours} hours {minutes} minutes</li>
-          </ul>
-        </li>
-        </div>
-      )
-    })}
+        return (
+          <div className="meetup-box">
+            <li key={index} id={meetup.id} className="meetup-list-results">
+              <Link className="view-details-link2" to={{ pathname: `/meetups/${meetup.name}`, state: { meetup: meetup } }}><b>View Details</b></Link>
+              <ul>
+                <Link className="meetup-name-link" to={{ pathname: `/meetups/${meetup.name}`, state: { meetup: meetup } }}><li className="meetup-name"><b>{meetup.name}</b></li></Link>
+                <li><b>Location:</b> {meetup.location}</li>
+                <li><b>Start Time:</b> {formattedStartTime}</li>
+                <li><b>Duration:</b> {hours} hours {minutes} minutes</li>
+              </ul>
+            </li>
+          </div>
+        )
+      })
+    }
 
     return (
       <React.Fragment>
- 
-      <section className="meetups-list-page-container">
-      <Link to="/meetups"><button className="solar-button">Back To Meetups</button></Link>
-        <h2 className="meetups-list-page-title">FriendZone Meetups!</h2>
-        <h3 className="meetups-h3">Browse a list of FriendZone Meetups below created by our members!</h3>
-        <p className="meetups-list-info">Click on the meetup name to see more details about the event. If you find a
-          event that you would like to attend click the 'Join Meetup' button to let other
+
+        <section className="meetups-list-page-container">
+          <Link to="/meetups"><button className="solar-button">Back To Meetups</button></Link>
+          <h2 className="meetups-list-page-title">Friend Zone Meetups!</h2>
+          <h3 className="meetups-h3">Browse a list of Friend Zone Meetups below created by our members!</h3>
+          <p className="meetups-list-info">Click on the meetup name to see more details about the event. If you find a
+            event that you would like to attend click the 'Join Meetup' button to let other
           members know you'll be there!</p>
-        <SetLocationForm userId={userId} currentLocation={currentLocation}/>
-        <div className="meetups-list-dropdown">
-          <span><b>Filter Display: </b></span>
-          <select onChange={e => this.handleDisplayFilter(e)}>
-            <option value="all">All Meetups</option>
-            <option value="joined">Joined Meetups</option>
-            <option value="unjoined">Unjoined Meetups</option>
-            <option value="created">Created Meetups</option>
-          </select>
-        </div>
-        <div className="meetups-list-container">
-          {meetupsList}
-        </div>
-      </section>
+          <SetLocationForm userId={userId} currentLocation={currentLocation} />
+          <div className="meetups-list-dropdown">
+            <span><b>Filter Display: </b></span>
+            <select onChange={e => this.handleDisplayFilter(e)}>
+              <option value="all">All Meetups</option>
+              <option value="joined">Joined Meetups</option>
+              <option value="unjoined">Unjoined Meetups</option>
+              <option value="created">Created Meetups</option>
+            </select>
+          </div>
+          <div className="meetups-list-container">
+            {meetupsList}
+          </div>
+        </section>
       </React.Fragment>
     )
   }

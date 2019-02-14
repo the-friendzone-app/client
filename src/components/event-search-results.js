@@ -8,7 +8,7 @@ export class EventSearchResults extends React.Component {
 
   onClick(eventInfo) {
     // console.log('eventInfo ---> ', eventInfo);
-    
+
     let createdBy = this.props.username;
     const { name, venueData, description, startTime, endTime } = eventInfo;
     // add url, lat, long to meetup model
@@ -17,7 +17,7 @@ export class EventSearchResults extends React.Component {
     const newMeetup = { name, location, description, startTime, endTime, createdBy };
     this.props.dispatch(createUserMeetup(newMeetup));
     // console.log('new meetup ---> ', newMeetup);
-    alert('FriendZone meetup created!');
+    alert('Friend Zone meetup created!');
 
   }
 
@@ -31,21 +31,21 @@ export class EventSearchResults extends React.Component {
     if (events !== null) {
       searchResults = events.events.map((event, index) => {
 
-      let startTime = event.start;
-      startTime = moment(startTime);
-      let formattedStartTime = startTime.format('llll');
+        let startTime = event.start;
+        startTime = moment(startTime);
+        let formattedStartTime = startTime.format('llll');
 
-      let endTime = event.end;
-      endTime = moment(endTime);
-      // let formattedEndTime = endTime.format('llll');
+        let endTime = event.end;
+        endTime = moment(endTime);
+        // let formattedEndTime = endTime.format('llll');
 
-      // duration - diff between start and end times
-      let elapsed = endTime.diff(startTime, 'minutes');
-      // breakdown into hours and minutes for display e.g. 1 hour 30 mins
-      let hours = Math.floor(elapsed / 60);
-      let minutes = (elapsed % 60);
+        // duration - diff between start and end times
+        let elapsed = endTime.diff(startTime, 'minutes');
+        // breakdown into hours and minutes for display e.g. 1 hour 30 mins
+        let hours = Math.floor(elapsed / 60);
+        let minutes = (elapsed % 60);
 
-      let eventInfo = { name: event.name, startTime: event.start, endTime: event.end, description: event.description, url: event.url, venueData: event.venueData };
+        let eventInfo = { name: event.name, startTime: event.start, endTime: event.end, description: event.description, url: event.url, venueData: event.venueData };
         return (
           <div key={index}>
             <ul>

@@ -20,14 +20,14 @@ export class Meetups extends React.Component {
         <div className="outer-div">
           <div className="header-section">
             <h1><i className="fas fa-map-marker-alt"></i> Meetups</h1>
-            <p className="community-welcome">Welcome to the FriendZone Meetup section!
+            <p className="community-welcome">Welcome to the Friend Zone Meetup section!
             Here we have created a space for people who want to get out there and do fun stuff, meet new cool friends,
         or finally go to that new restaurant that just opened up!<br />
               We have partnered up with <div className="eb-logo"></div> to bring you events in your area!
         </p>
             <div className="link-box">
-              <Link className="view-details-link" to='/meetups/friendzone-meetups'><button className="solar-button">FriendZone Meetups List</button></Link>
-              <Link className="view-details-link" to='/meetups/create-meetup'><button className="solar-button">Create a FriendZone Meetup</button></Link>
+              <Link className="view-details-link" to='/meetups/friendzone-meetups'><button className="solar-button">Friend Zone Meetups List</button></Link>
+              <Link className="view-details-link" to='/meetups/create-meetup'><button className="solar-button">Create a Friend Zone Meetup</button></Link>
               <Link className="view-details-link" to='/meetups/event-search'><button className="solar-button">Eventbrite Search</button></Link>
             </div>
           </div>
