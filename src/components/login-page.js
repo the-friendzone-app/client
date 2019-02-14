@@ -22,6 +22,9 @@ export function LoginPage(props) {
             </div>
             <div className="main-div">
                 <h2><i className="fas fa-user-astronaut"></i> Login Page</h2>
+                <h3>Demo account:</h3>
+                <h3>Username: frodo</h3>
+                <h3>Password: qwerty54321</h3>
                 <LoginForm />
                 <Link className="text" to="/register">Go To Registration?</Link>
             </div>

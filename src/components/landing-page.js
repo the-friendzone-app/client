@@ -30,6 +30,10 @@ export function LandingPage(props) {
           <h3>We Got You.</h3> The Friend Zone is here to help you connect with online, in-person, down the street, or from all over the world on a much deeper level!
           We allow you to be anonymous, and have a safe and friendly environment to connect with others.
                   <p className="warning">*Please be aware: We are very strict with our community guidelines, and moderate all user activity to make sure all users have a private, safe, & fun experience.</p>
+
+          <h3>Demo account:</h3>
+          <h3>Username: frodo</h3>
+          <h3>Password: qwerty54321</h3>
         </div>
         <div className="button-box">
           <Link to="/login"><button className="login-button">Log In</button></Link>
