@@ -28,11 +28,11 @@ export class IntroQuizForm extends React.Component {
                 <section>
                     <label htmlFor={`${question.id}`}><strong><span className="intro-background">Question: {question.questionText}</span></strong></label>
                     <div>
-                        <label><Field name={`${question.id}`} property={question.option1} id={question.id} component={Input} type="radio" value={` ${question.option1}`} /></label>
-                        <label><Field name={`${question.id}`} property={question.option2} id={question.id} component={Input} type="radio" value={` ${question.option2}`} /></label>
-                        <label><Field name={`${question.id}`} property={question.option3} id={question.id} component={Input} type="radio" value={` ${question.option3}`} /></label>
-                        <label><Field name={`${question.id}`} property={question.option4} id={question.id} component={Input} type="radio" value={` ${question.option4}`} /></label>
-                        <label><Field name={`${question.id}`} property={question.option5} id={question.id} component={Input} type="radio" value={` ${question.option5}`} /></label>
+                        <label><Field name={`${question.id}`} property={question.option1} id={question.id} component={Input} type="radio" value={`  ${question.option1}`} /></label>
+                        <label><Field name={`${question.id}`} property={question.option2} id={question.id} component={Input} type="radio" value={`  ${question.option2}`} /></label>
+                        <label><Field name={`${question.id}`} property={question.option3} id={question.id} component={Input} type="radio" value={`  ${question.option3}`} /></label>
+                        <label><Field name={`${question.id}`} property={question.option4} id={question.id} component={Input} type="radio" value={`  ${question.option4}`} /></label>
+                        <label><Field name={`${question.id}`} property={question.option5} id={question.id} component={Input} type="radio" value={`  ${question.option5}`} /></label>
                     </div>
                 </section>
                 <button className="intro-button-inverse"
